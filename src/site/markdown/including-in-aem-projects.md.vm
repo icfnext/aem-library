@@ -1,0 +1,70 @@
+#set($symbol_pound = '#')
+
+$symbol_pound$symbol_pound Including in AEM Projects
+
+Define Bedrock as the parent of a Maven project to inherit dependency and plugin management.
+
+    <parent>
+        <groupId>com.icfolson.aem.library</groupId>
+        <artifactId>aem-library</artifactId>
+        <version>${project.version}</version>
+    </parent>
+
+The including project's Core module POM must also include the Bedrock API and Core modules as a compile-scoped dependency.
+
+    <dependencies>
+        ...
+        <dependency>
+            <groupId>com.icfolson.aem.library</groupId>
+            <artifactId>aem-library-api</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.icfolson.aem.library</groupId>
+            <artifactId>aem-library-core</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.icfolson.aem.library</groupId>
+            <artifactId>aem-library-models</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+    </dependencies>
+
+Additionally, the project's UI module POM must include the Bedrock UI dependency.
+
+    <dependencies>
+        ...
+        <dependency>
+            <groupId>com.icfolson.aem.library</groupId>
+            <artifactId>aem-library-ui</artifactId>
+            <version>${project.version}</version>
+            <type>zip</type>
+        </dependency>
+    </dependencies>
+
+The UI dependency is used by the Maven Assembly Plugin to include the Bedrock zip artifact in the package created by the including project's build process.
+
+The project's assembly descriptor (typically src/main/assembly/zip.xml in the UI module) must define a dependency set to include and unpack the Bedrock UI artifact.
+
+    <dependencySets>
+        ...
+        <dependencySet>
+            <outputDirectory>/</outputDirectory>
+            <useProjectArtifact>false</useProjectArtifact>
+            <scope>compile</scope>
+            <includes>
+                <include>com.icfolson.aem.library:aem-library-ui:zip</include>
+            </includes>
+            <unpack>true</unpack>
+            <unpackOptions>
+                <includes>
+                    <include>jcr_root/apps/aem-library/**/*</include>
+                    <include>jcr_root/etc/clientlibs/aem-library/**/*</include>
+                </includes>
+            </unpackOptions>
+            <useStrictFiltering>true</useStrictFiltering>
+        </dependencySet>
+    </dependencySets>
+
+Including Bedrock in this manner eliminates the need to build and install the project package separately and/or activate additional Maven profiles.

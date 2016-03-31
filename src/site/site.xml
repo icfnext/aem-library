@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/DECORATION/1.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/DECORATION/1.0.0 http://maven.apache.org/xsd/decoration-1.0.0.xsd">
+
+    <skin>
+        <groupId>com.citytechinc.maven</groupId>
+        <artifactId>citytech-maven-skin</artifactId>
+        <version>1.0.0</version>
+    </skin>
+
+    <bannerRight>
+        <name>${project.name}</name>
+        <href>http://code.citytechinc.com/aem-library</href>
+    </bannerRight>
+
+    <custom>
+        <reflowSkin>
+            <skinAttribution>false</skinAttribution>
+            <protocolRelativeURLs>false</protocolRelativeURLs>
+            <smoothScroll>true</smoothScroll>
+            <titleTemplate>%2$s | %1$s</titleTemplate>
+            <breadcrumbs>false</breadcrumbs>
+            <markPageHeader>false</markPageHeader>
+            <toc>false</toc>
+            <highlightJs>true</highlightJs>
+            <highlightJsTheme>github</highlightJsTheme>
+            <topNav>User Guide|reports</topNav>
+            <brand>
+                <name>${project.name}</name>
+                <href>http://code.citytechinc.com/aem-library</href>
+            </brand>
+            <slogan></slogan>
+            <body />
+            <bottomNav>
+                <column>User Guide</column>
+                <column>reports</column>
+            </bottomNav>
+        </reflowSkin>
+    </custom>
+
+    <body>
+        <links>
+            <item name="GitHub" href="https://github.com/Citytechinc/aem-library" />
+            <item name="Overview" href="index.html" />
+        </links>
+        <menu name="User Guide">
+            <item name="Adapters" href="adapters.html"/>
+            <item name="Component Framework" href="component-framework.html"/>
+            <item name="Constants" href="constants.html"/>
+            <item name="Image Rendering" href="image-rendering.html"/>
+            <item name="Including in AEM Projects" href="including-in-aem-projects.html"/>
+            <item name="JavaScript" href="javascript.html"/>
+            <item name="Links" href="links.html"/>
+            <item name="Optionals" href="optionals.html"/>
+            <item name="Predicates" href="predicates.html"/>
+            <item name="Services" href="services.html"/>
+            <item name="Servlets" href="servlets.html"/>
+            <item name="Sling Models Injectors" href="injectors.html"/>
+            <item name="Tag Library" href="tag-library.html"/>
+        </menu>
+        <menu ref="reports"/>
+    </body>
+</project>
