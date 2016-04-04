@@ -2,11 +2,11 @@
 
 ### Overview
 
-The introduction of the Sightly templating language has eliminated the need for custom JSP tags, scriptlets, and other unpleasantries when separating a component's view from it's supporting business logic.  The [Sling Models](https://sling.apache.org/documentation/bundles/models.html) framework offers a robust, POJO-based development pattern that AEM Library augments to greatly simplify AEM component development.
+The introduction of the Sightly templating language has eliminated the need for custom JSP tags, scriptlets, and other unpleasantries when separating a component's view from it's supporting business logic.  The [Sling Models](https://sling.apache.org/documentation/bundles/models.html) framework offers a robust, POJO-based development pattern that the AEM Library augments to greatly simplify AEM component development.
 
-For projects with JSP-based components, AEM Library maintains a custom JSP tag to mimic Sightly's "use" functionality for associating a Java/Groovy class with a component JSP.
+For projects with JSP-based components, the AEM Library maintains a custom JSP tag to mimic Sightly's "use" functionality for associating a Java/Groovy class with a component JSP.
 
-### Abstract Component Java Class
+### Abstract Component Class
 
 Model classes may extend the `com.icfolson.aem.library.core.components.AbstractComponent` class to expose numerous convenience methods for retrieving/transforming property values, traversing the content repository, and generally reducing the amount of boilerplate code needed to perform common node- and property-based operations for a component.
 
@@ -54,11 +54,11 @@ See the `ComponentNode` [Javadoc](http://code.citytechinc.com/aem-library/apidoc
 
 ### Sling Models Injectors
 
-In addition to AEM Library's component API, the framework also supplies a set of custom Sling Models injectors to support injection of common Sling and AEM objects for the current component.  See the [Injectors](/aem-library/injectors.html) page for additional information.
+In addition to the AEM Library's component API, the framework also supplies a set of custom Sling Models injectors to support injection of common Sling and AEM objects for the current component.  See the [Injectors](/aem-library/injectors.html) page for additional information.
 
 ### Sightly Integration
 
-Sling Models-based components (i.e. POJOs with the `@org.apache.sling.models.annotations.Model` annotation) can be instantiated in Sightly templates with a [data-sly-use](https://github.com/Adobe-Marketing-Cloud/sightly-spec/blob/master/SPECIFICATION.md#221-use) block statement.  Since AEM Library components are just "decorated" Sling Models, nothing additional is required.
+Sling Models-based components (i.e. POJOs with the `@org.apache.sling.models.annotations.Model` annotation) can be instantiated in Sightly templates with a [data-sly-use](https://github.com/Adobe-Marketing-Cloud/sightly-spec/blob/master/SPECIFICATION.md#221-use) block statement.  Since the AEM Library components are just "decorated" Sling Models, nothing additional is required.
 
 The Sightly template for the preceding `Navigation` component would be implemented as follows:
 
@@ -72,7 +72,7 @@ The Sightly template for the preceding `Navigation` component would be implement
 
 ### JSP Support
 
-AEM Library includes legacy JSP support for projects where Sightly templates are not feasible.  The component JSP needs to include the AEM Library `global.jsp` to define the tag namespace and ensure that required variables are set in the page context.
+The AEM Library includes legacy JSP support for projects where Sightly templates are not feasible.  The component JSP needs to include the AEM Library `global.jsp` to define the tag namespace and ensure that required variables are set in the page context.
 
 Component model classes can be instantiated in one of two ways:
 

@@ -10,13 +10,13 @@
     <groupId>com.icfolson.aem.library</groupId>
     <artifactId>aem-library</artifactId>
     <packaging>pom</packaging>
-    <version>6.0.0-SNAPSHOT</version>
+    <version>6.0.0</version>
     <name>AEM Library</name>
     <description>The AEM Library provides a sturdy foundation for bootstrapping and simplifying AEM (Adobe CQ) projects.</description>
 
     <organization>
-        <name>CITYTECH, Inc.</name>
-        <url>http://www.citytechinc.com</url>
+        <name>ICF Olson</name>
+        <url>http://www.icfolson.com</url>
     </organization>
 
     <url>http://code.citytechinc.com/aem-library</url>
