@@ -102,7 +102,7 @@ AEM.Library.Utilities.Dialog = {
 
     /**
      * Validate a dialog field.  This requires the component being validated to have a validation servlet configured as
-     * outlined by the <a href="http://code.citytechinc.com/cq-library/servlets.html">User Guide</a>.
+     * outlined by the <a href="http://code.citytechinc.com/aem-library/servlets.html">User Guide</a>.
      *
      * @param field dialog field being validated (i.e. 'this' if calling function within a validator)
      * @param value field value
