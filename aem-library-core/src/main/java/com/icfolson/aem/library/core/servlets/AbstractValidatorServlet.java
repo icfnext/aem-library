@@ -26,7 +26,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * {@code
  * <name jcr:primaryType="cq:Widget" fieldLabel="Name" name="./name" xtype="textfield"
  *     validator="function(value) {
- *         return Bedrock.Utilities.Dialog.validateField(this, value, 'Name is invalid');
+ *         return AEM.Library.Utilities.Dialog.validateField(this, value, 'Name is invalid');
  *     }" />
  * }
  * </pre>
