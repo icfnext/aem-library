@@ -2,7 +2,7 @@
 
 ### Utilities
 
-Bedrock utility functions can be included in a client project using the `<cq:includeClientLib/>` tag.
+AEM Library utility functions can be included in a client project using the `<cq:includeClientLib/>` tag.
 
     <cq:includeClientLib js="aem-library.utilities"/>
 

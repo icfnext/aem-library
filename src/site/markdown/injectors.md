@@ -1,6 +1,6 @@
 ## Sling Models Injectors
 
-Bedrock provides several custom Sling Models injectors to facilitate injection of Bedrock-specific context objects.  Injector services are registered by default when the Bedrock Models bundle is installed, so `@Inject` annotated fields in model classes will be handled by the injectors below in addition to the default set of injectors provided by Sling. 
+The AEM Library provides several custom Sling Models injectors to facilitate injection of AEM Library-specific context objects.  Injector services are registered by default when the AEM Library Models bundle is installed, so `@Inject` annotated fields in model classes will be handled by the injectors below in addition to the default set of injectors provided by Sling. 
 
 ### Available Injectors
 
