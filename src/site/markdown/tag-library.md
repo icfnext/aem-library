@@ -6,7 +6,7 @@ Add to and/or override attributes set in page context for use in JSPs.
 
     <aem-library:defineObjects/>
 
-This tag is already defined in the Bedrock `global.jsp`, so most projects should just include this file in component JSPs rather than using the tag directly.
+This tag is already defined in the AEM Library `global.jsp`, so most projects should just include this file in component JSPs rather than using the tag directly.
 
     <%@include file="/apps/aem-library/components/global.jsp"%>
 
@@ -151,7 +151,7 @@ title | false | Image title.
 
 ### Image Source
 
-Render an image source path for the current component.  The resulting URL triggers the Bedrock Image Servlet rather than referencing the DAM asset path directly.
+Render an image source path for the current component.  The resulting URL triggers the AEM Library Image Servlet rather than referencing the DAM asset path directly.
 
 Attribute | Required | Description
 :---------|:---------|:-----------
