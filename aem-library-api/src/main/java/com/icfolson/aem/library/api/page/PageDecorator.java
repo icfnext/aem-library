@@ -1,5 +1,8 @@
 package com.icfolson.aem.library.api.page;
 
+import com.day.cq.wcm.api.Page;
+import com.google.common.base.Optional;
+import com.google.common.base.Predicate;
 import com.icfolson.aem.library.api.Accessible;
 import com.icfolson.aem.library.api.ImageSource;
 import com.icfolson.aem.library.api.Inheritable;
@@ -11,10 +14,8 @@ import com.icfolson.aem.library.api.link.NavigationLink;
 import com.icfolson.aem.library.api.link.builders.LinkBuilder;
 import com.icfolson.aem.library.api.node.ComponentNode;
 import com.icfolson.aem.library.api.page.enums.TitleType;
-import com.day.cq.wcm.api.Page;
-import com.google.common.base.Optional;
-import com.google.common.base.Predicate;
 
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -45,6 +46,12 @@ public interface PageDecorator extends Page, Accessible, Inheritable, Linkable, 
      * @return filtered list of child pages or empty list if none exist
      */
     List<PageDecorator> getChildren(Predicate<PageDecorator> predicate);
+
+    Iterator<PageDecorator> listChildrenPages();
+
+    Iterator<PageDecorator> listChildrenPages(Predicate<PageDecorator> predicate);
+
+    Iterator<PageDecorator> listChildrenPages(Predicate<PageDecorator> predicate, boolean deep);
 
     /**
      * Get the component node for the "jcr:content" node for this page.  If the page does not have a content node, an
