@@ -335,17 +335,17 @@ final class DefaultPageDecorator implements PageDecorator {
     }
 
     @Override
-    Iterator<PageDecorator> listChildrenPages() {
-        listChildrenPages(Predicates.alwaysTrue())
+    Iterator<PageDecorator> listChildPages() {
+        listChildPages(Predicates.alwaysTrue())
     }
 
     @Override
-    Iterator<PageDecorator> listChildrenPages(Predicate<PageDecorator> predicate) {
-        listChildrenPages(predicate, false)
+    Iterator<PageDecorator> listChildPages(Predicate<PageDecorator> predicate) {
+        listChildPages(predicate, false)
     }
 
     @Override
-    Iterator<PageDecorator> listChildrenPages(Predicate<PageDecorator> predicate, boolean deep) {
+    Iterator<PageDecorator> listChildPages(Predicate<PageDecorator> predicate, boolean deep) {
         def iterator
 
         if (deep) {

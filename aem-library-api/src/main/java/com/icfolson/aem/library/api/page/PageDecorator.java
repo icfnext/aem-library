@@ -52,7 +52,7 @@ public interface PageDecorator extends Page, Accessible, Inheritable, Linkable, 
      *
      * @return iterator of child pages
      */
-    Iterator<PageDecorator> listChildrenPages();
+    Iterator<PageDecorator> listChildPages();
 
     /**
      * List child pages of the current page filtered using the given predicate.
@@ -60,7 +60,7 @@ public interface PageDecorator extends Page, Accessible, Inheritable, Linkable, 
      * @param predicate predicate to filter pages
      * @return filtered iterator of child pages
      */
-    Iterator<PageDecorator> listChildrenPages(Predicate<PageDecorator> predicate);
+    Iterator<PageDecorator> listChildPages(Predicate<PageDecorator> predicate);
 
     /**
      * List child pages of the current page filtered using the given predicate.
@@ -69,7 +69,7 @@ public interface PageDecorator extends Page, Accessible, Inheritable, Linkable, 
      * @param deep if true, recursively iterate over all descendant pages
      * @return filtered iterator of child pages
      */
-    Iterator<PageDecorator> listChildrenPages(Predicate<PageDecorator> predicate, boolean deep);
+    Iterator<PageDecorator> listChildPages(Predicate<PageDecorator> predicate, boolean deep);
 
     /**
      * Get the component node for the "jcr:content" node for this page.  If the page does not have a content node, an
