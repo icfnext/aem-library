@@ -1,7 +1,7 @@
 package com.icfolson.aem.library.core.tags
 
 import com.icfolson.aem.library.core.specs.AemLibrarySpec
-import com.citytechinc.aem.prosper.traits.JspTagTrait
+import com.icfolson.aem.prosper.traits.JspTagTrait
 import spock.lang.Unroll
 
 import javax.servlet.jsp.PageContext

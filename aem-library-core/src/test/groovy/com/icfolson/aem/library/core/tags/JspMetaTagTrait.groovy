@@ -1,7 +1,7 @@
 package com.icfolson.aem.library.core.tags
 
-import com.citytechinc.aem.prosper.tag.JspTagProxy
-import com.citytechinc.aem.prosper.traits.JspTagTrait
+import com.icfolson.aem.prosper.tag.JspTagProxy
+import com.icfolson.aem.prosper.traits.JspTagTrait
 
 import javax.servlet.jsp.tagext.TagSupport
 

@@ -121,7 +121,7 @@
                     <version>1.7.5</version>
                 </dependency>
                 <dependency>
-                    <groupId>com.citytechinc.aem.groovy.extension</groupId>
+                    <groupId>com.icfolson.aem.groovy.extension</groupId>
                     <artifactId>aem-groovy-extension-bundle</artifactId>
                     <exclusions>
                         <exclusion>
@@ -131,7 +131,7 @@
                     </exclusions>
                 </dependency>
                 <dependency>
-                    <groupId>com.citytechinc.aem.prosper</groupId>
+                    <groupId>com.icfolson.aem.prosper</groupId>
                     <artifactId>prosper</artifactId>
                     <exclusions>
                         <exclusion>
