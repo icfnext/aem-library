@@ -1,5 +1,6 @@
 package com.icfolson.aem.library.core.page.impl
 
+import com.day.cq.wcm.commons.DeepResourceIterator
 import com.icfolson.aem.library.api.link.ImageLink
 import com.icfolson.aem.library.api.link.Link
 import com.icfolson.aem.library.api.link.NavigationLink
@@ -331,6 +332,29 @@ final class DefaultPageDecorator implements PageDecorator {
     @Override
     List<PageDecorator> getChildren(Predicate<PageDecorator> predicate) {
         filterChildren(checkNotNull(predicate), false)
+    }
+
+    @Override
+    Iterator<PageDecorator> listChildrenPages() {
+        listChildrenPages(Predicates.alwaysTrue())
+    }
+
+    @Override
+    Iterator<PageDecorator> listChildrenPages(Predicate<PageDecorator> predicate) {
+        listChildrenPages(predicate, false)
+    }
+
+    @Override
+    Iterator<PageDecorator> listChildrenPages(Predicate<PageDecorator> predicate, boolean deep) {
+        def iterator
+
+        if (deep) {
+            iterator = new PageDecoratorIterator(new DeepResourceIterator(delegate.adaptTo(Resource)), predicate)
+        } else {
+            iterator = new PageDecoratorIterator(delegate.adaptTo(Resource).listChildren(), predicate)
+        }
+
+        iterator
     }
 
     @Override
