@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>com.icfolson.aem.library</groupId>
 		<artifactId>aem-library</artifactId>
-		<version>7.0.0-SNAPSHOT</version>
+		<version>7.0.0</version>
 	</parent>
 
 	<modelVersion>4.0.0</modelVersion>
@@ -248,10 +248,6 @@
 			<groupId>org.apache.sling</groupId>
 			<artifactId>org.apache.sling.event</artifactId>
 		</dependency>
-        <dependency>
-	        <groupId>com.adobe.granite</groupId>
-	        <artifactId>com.adobe.granite.xssprotection</artifactId>
-        </dependency>
         <dependency>
             <groupId>org.apache.sling</groupId>
             <artifactId>org.apache.sling.models.api</artifactId>
