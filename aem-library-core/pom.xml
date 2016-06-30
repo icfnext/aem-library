@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>com.icfolson.aem.library</groupId>
 		<artifactId>aem-library</artifactId>
-		<version>6.0.2</version>
+		<version>7.0.0</version>
 	</parent>
 
 	<modelVersion>4.0.0</modelVersion>
@@ -169,7 +169,7 @@
 					<version>1.7.5</version>
 				</dependency>
 				<dependency>
-					<groupId>com.citytechinc.aem.groovy.extension</groupId>
+					<groupId>com.icfolson.aem.groovy.extension</groupId>
 					<artifactId>aem-groovy-extension-bundle</artifactId>
 					<exclusions>
 						<exclusion>
@@ -179,7 +179,7 @@
 					</exclusions>
 				</dependency>
 				<dependency>
-					<groupId>com.citytechinc.aem.prosper</groupId>
+					<groupId>com.icfolson.aem.prosper</groupId>
 					<artifactId>prosper</artifactId>
 					<exclusions>
 						<exclusion>
@@ -229,7 +229,7 @@
 			<artifactId>org.apache.sling.jcr.api</artifactId>
 		</dependency>
         <dependency>
-            <groupId>org.apache.sling</groupId>
+	        <groupId>com.adobe.granite.sling</groupId>
             <artifactId>org.apache.sling.jcr.resource</artifactId>
         </dependency>
 		<dependency>
@@ -248,10 +248,6 @@
 			<groupId>org.apache.sling</groupId>
 			<artifactId>org.apache.sling.event</artifactId>
 		</dependency>
-        <dependency>
-            <groupId>org.apache.sling</groupId>
-            <artifactId>org.apache.sling.xss</artifactId>
-        </dependency>
         <dependency>
             <groupId>org.apache.sling</groupId>
             <artifactId>org.apache.sling.models.api</artifactId>
@@ -310,6 +306,10 @@
 		</dependency>
 		<dependency>
 			<groupId>com.adobe.granite</groupId>
+			<artifactId>com.adobe.granite.xssprotection</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.adobe.granite</groupId>
 			<artifactId>com.adobe.granite.jmx</artifactId>
 		</dependency>
 		<dependency>
@@ -327,10 +327,6 @@
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>commons-lang</groupId>
-			<artifactId>commons-lang</artifactId>
 		</dependency>
         <dependency>
             <groupId>com.adobe.granite.osgi.wrapper</groupId>
@@ -364,7 +360,7 @@
 
 		<!-- test -->
 		<dependency>
-			<groupId>com.citytechinc.aem.prosper</groupId>
+			<groupId>com.icfolson.aem.prosper</groupId>
 			<artifactId>prosper</artifactId>
 		</dependency>
         <dependency>

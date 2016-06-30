@@ -10,6 +10,7 @@ import org.apache.sling.api.servlets.SlingAllMethodsServlet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.servlet.ServletException;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
@@ -41,7 +42,7 @@ public abstract class AbstractJsonResponseServlet extends SlingAllMethodsServlet
      * @throws IOException if error occurs writing JSON response
      */
     protected final void writeJsonResponse(final SlingHttpServletResponse response, final Object object)
-        throws IOException {
+        throws IOException, ServletException {
         writeJsonResponse(response, object, DEFAULT_DATE_FORMAT, Locale.US);
     }
 
@@ -54,7 +55,7 @@ public abstract class AbstractJsonResponseServlet extends SlingAllMethodsServlet
      * @throws IOException if error occurs writing JSON response
      */
     protected final void writeJsonResponse(final SlingHttpServletResponse response, final Object object,
-        final String dateFormat) throws IOException {
+        final String dateFormat) throws IOException, ServletException {
         writeJsonResponse(response, object, dateFormat, Locale.US);
     }
 
@@ -68,7 +69,7 @@ public abstract class AbstractJsonResponseServlet extends SlingAllMethodsServlet
      * @throws IOException if error occurs writing JSON response
      */
     protected final void writeJsonResponse(final SlingHttpServletResponse response, final Object object,
-        final String dateFormat, final Locale locale) throws IOException {
+        final String dateFormat, final Locale locale) throws IOException, ServletException {
         final SimpleDateFormat format = new SimpleDateFormat(dateFormat, locale);
 
         writeJsonResponse(response, new ObjectMapper().setDateFormat(format), object);
@@ -82,8 +83,8 @@ public abstract class AbstractJsonResponseServlet extends SlingAllMethodsServlet
      * @param object object to be written as JSON
      * @throws IOException if error occurs writing JSON response
      */
-    protected void writeJsonResponse(final SlingHttpServletResponse response, final ObjectMapper mapper,
-        final Object object) throws IOException {
+    private void writeJsonResponse(final SlingHttpServletResponse response, final ObjectMapper mapper,
+        final Object object) throws IOException, ServletException {
         response.setContentType(CONTENT_TYPE);
         response.setCharacterEncoding(ENCODING);
 
@@ -94,7 +95,7 @@ public abstract class AbstractJsonResponseServlet extends SlingAllMethodsServlet
         } catch (IOException e) {
             LOG.error("error writing JSON response", e);
 
-            throw e;
+            throw new ServletException(e);
         }
     }
 }

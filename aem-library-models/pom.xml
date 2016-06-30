@@ -4,7 +4,7 @@
     <parent>
         <groupId>com.icfolson.aem.library</groupId>
         <artifactId>aem-library</artifactId>
-        <version>6.0.2</version>
+        <version>7.0.0</version>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
@@ -121,7 +121,7 @@
                     <version>1.7.5</version>
                 </dependency>
                 <dependency>
-                    <groupId>com.citytechinc.aem.groovy.extension</groupId>
+                    <groupId>com.icfolson.aem.groovy.extension</groupId>
                     <artifactId>aem-groovy-extension-bundle</artifactId>
                     <exclusions>
                         <exclusion>
@@ -131,7 +131,7 @@
                     </exclusions>
                 </dependency>
                 <dependency>
-                    <groupId>com.citytechinc.aem.prosper</groupId>
+                    <groupId>com.icfolson.aem.prosper</groupId>
                     <artifactId>prosper</artifactId>
                     <exclusions>
                         <exclusion>
@@ -154,6 +154,18 @@
             <groupId>${project.groupId}</groupId>
             <artifactId>aem-library-core</artifactId>
             <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.day.cq.wcm</groupId>
+            <artifactId>cq-wcm-foundation</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.adobe.granite</groupId>
+            <artifactId>com.adobe.granite.ui.commons</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.day.commons</groupId>
+            <artifactId>day-commons-gfx</artifactId>
         </dependency>
         <dependency>
             <groupId>org.apache.sling</groupId>

@@ -1,13 +1,13 @@
 package com.icfolson.aem.library.core.page.impl
 
+import com.day.cq.wcm.api.NameConstants
+import com.google.common.base.Predicate
+import com.google.common.base.Predicates
 import com.icfolson.aem.library.api.node.BasicNode
 import com.icfolson.aem.library.api.node.ComponentNode
 import com.icfolson.aem.library.api.page.PageDecorator
 import com.icfolson.aem.library.api.page.enums.TitleType
 import com.icfolson.aem.library.core.page.predicates.TemplatePredicate
-import com.day.cq.wcm.api.NameConstants
-import com.google.common.base.Predicate
-import com.google.common.base.Predicates
 import com.icfolson.aem.library.core.specs.AemLibrarySpec
 import spock.lang.Unroll
 
@@ -414,6 +414,14 @@ class DefaultPageDecoratorSpec extends AemLibrarySpec {
         page.children.size() == 3
     }
 
+    def "list children"() {
+        setup:
+        def page = getPage("/content/citytechinc")
+
+        expect:
+        page.listChildPages().size() == 3
+    }
+
     def "get displayable children"() {
         setup:
         def page = getPage("/content/citytechinc")
@@ -429,6 +437,28 @@ class DefaultPageDecoratorSpec extends AemLibrarySpec {
 
         expect:
         page.getChildren(predicate).size() == 1
+    }
+
+    def "list children filtered for predicate"() {
+        setup:
+        def page = getPage("/content/citytechinc")
+        def predicate = new TemplatePredicate("template")
+
+        expect:
+        page.listChildPages(predicate).size() == 1
+    }
+
+    def "list children recursively, filtered for predicate"() {
+        setup:
+        def page = getPage("/content/citytechinc")
+
+        expect:
+        page.listChildPages(predicate, true).size() == size
+
+        where:
+        predicate                         | size
+        new TemplatePredicate("template") | 1
+        Predicates.alwaysTrue()           | 4
     }
 
     def "find descendants"() {

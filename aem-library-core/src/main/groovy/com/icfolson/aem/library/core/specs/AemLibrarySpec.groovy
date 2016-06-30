@@ -3,8 +3,8 @@ package com.icfolson.aem.library.core.specs
 import com.icfolson.aem.library.api.node.ComponentNode
 import com.icfolson.aem.library.api.page.PageDecorator
 import com.icfolson.aem.library.api.page.PageManagerDecorator
-import com.citytechinc.aem.prosper.specs.ProsperSpec
 import com.icfolson.aem.library.core.adapter.AemLibraryAdapterFactory
+import com.icfolson.aem.prosper.specs.ProsperSpec
 
 /**
  * Spock specification for testing AEM Library-based components and services.
