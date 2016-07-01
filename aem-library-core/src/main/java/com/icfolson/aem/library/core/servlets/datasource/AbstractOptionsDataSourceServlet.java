@@ -3,19 +3,18 @@ package com.icfolson.aem.library.core.servlets.datasource;
 import com.adobe.granite.ui.components.ds.DataSource;
 import com.adobe.granite.ui.components.ds.SimpleDataSource;
 import com.adobe.granite.ui.components.ds.ValueMapResource;
-import com.icfolson.aem.library.api.request.ComponentServletRequest;
-import com.icfolson.aem.library.core.servlets.AbstractComponentServlet;
-import com.icfolson.aem.library.core.servlets.optionsprovider.Option;
 import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.icfolson.aem.library.api.request.ComponentServletRequest;
+import com.icfolson.aem.library.core.servlets.AbstractComponentServlet;
+import com.icfolson.aem.library.core.servlets.optionsprovider.Option;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.api.resource.ResourceMetadata;
 import org.apache.sling.api.resource.ResourceResolver;
 import org.apache.sling.api.resource.ValueMap;
 import org.apache.sling.api.wrappers.ValueMapDecorator;
 
-import javax.annotation.Nullable;
 import javax.servlet.ServletException;
 import java.io.IOException;
 import java.util.List;
@@ -52,7 +51,6 @@ public abstract class AbstractOptionsDataSourceServlet extends AbstractComponent
 
         // transform the list of options into a list of synthetic resources
         final List<Resource> resources = Lists.transform(options, new Function<Option, Resource>() {
-            @Nullable
             @Override
             public Resource apply(final Option option) {
                 final Map<String, Object> map = Maps.newHashMapWithExpectedSize(options.size());
