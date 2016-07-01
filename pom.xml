@@ -3,7 +3,7 @@
     <parent>
         <groupId>com.icfolson.aem</groupId>
         <artifactId>parent</artifactId>
-        <version>6.2.1-SNAPSHOT</version>
+        <version>6.2.1</version>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
@@ -367,10 +367,10 @@
                     <links>
                         <link>http://docs.oracle.com/javase/7/docs/api/</link>
                         <link>http://docs.oracle.com/javaee/7/api/</link>
-                        <link>http://docs.guava-libraries.googlecode.com/git-history/release/javadoc</link>
+                        <link>http://google.github.io/guava/releases/15.0/api/docs/</link>
                         <link>http://www.day.com/maven/jsr170/javadocs/jcr-2.0</link>
                         <link>http://sling.apache.org/apidocs/sling7</link>
-                        <link>https://docs.adobe.com/docs/en/aem/6-1/ref/javadoc</link>
+                        <link>https://docs.adobe.com/docs/en/aem/6-2/develop/ref/javadoc</link>
                         <link>http://fasterxml.github.io/jackson-databind/javadoc/2.3.0</link>
                     </links>
                     <quiet>true</quiet>
@@ -451,12 +451,6 @@
             </dependency>
 
             <!-- provided -->
-            <dependency>
-                <groupId>javax.inject</groupId>
-                <artifactId>javax.inject</artifactId>
-                <version>1</version>
-                <scope>provided</scope>
-            </dependency>
             <dependency>
                 <groupId>org.apache.sling</groupId>
                 <artifactId>org.apache.sling.models.api</artifactId>

@@ -26,7 +26,7 @@
                         <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
                         <Bundle-Name>${project.name}</Bundle-Name>
                         <Bundle-Vendor>${project.parent.organization.name}</Bundle-Vendor>
-                        <Export-Package>!*.impl,!*.specs,com.icfolson.aem.library.models.*</Export-Package>
+                        <Export-Package>!*.impl,com.icfolson.aem.library.models.*</Export-Package>
                         <Import-Package>!*</Import-Package>
                         <DynamicImport-Package>*</DynamicImport-Package>
                         <Require-Bundle>org.apache.sling.models.api</Require-Bundle>
@@ -65,11 +65,12 @@
                         <configuration>
                             <excludePackageNames>*.impl</excludePackageNames>
                             <links>
-                                <link>http://docs.oracle.com/javaee/6/api/</link>
-                                <link>http://docs.guava-libraries.googlecode.com/git-history/v15.0/javadoc</link>
+                                <link>http://docs.oracle.com/javase/7/docs/api/</link>
+                                <link>http://docs.oracle.com/javaee/7/api/</link>
+                                <link>http://google.github.io/guava/releases/15.0/api/docs/</link>
                                 <link>http://www.day.com/maven/jsr170/javadocs/jcr-2.0/</link>
-                                <link>http://sling.apache.org/apidocs/sling5</link>
-                                <link>http://dev.day.com/docs/en/cq/current/javadoc</link>
+                                <link>http://sling.apache.org/apidocs/sling7</link>
+                                <link>https://docs.adobe.com/docs/en/aem/6-2/develop/ref/javadoc</link>
                             </links>
                         </configuration>
                     </execution>

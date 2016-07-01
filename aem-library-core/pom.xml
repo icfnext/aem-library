@@ -112,11 +112,12 @@
 								com.icfolson.aem.library.core.bindings.*
 							</excludePackageNames>
 							<links>
-								<link>http://docs.oracle.com/javaee/6/api/</link>
-								<link>http://docs.guava-libraries.googlecode.com/git-history/v15.0/javadoc</link>
+                                <link>http://docs.oracle.com/javase/7/docs/api/</link>
+                                <link>http://docs.oracle.com/javaee/7/api/</link>
+                                <link>http://google.github.io/guava/releases/15.0/api/docs/</link>
 								<link>http://www.day.com/maven/jsr170/javadocs/jcr-2.0/</link>
-								<link>http://sling.apache.org/apidocs/sling5</link>
-								<link>http://dev.day.com/docs/en/cq/current/javadoc</link>
+								<link>http://sling.apache.org/apidocs/sling7</link>
+                                <link>https://docs.adobe.com/docs/en/aem/6-2/develop/ref/javadoc</link>
 							</links>
 						</configuration>
 					</execution>
@@ -218,6 +219,10 @@
 			<groupId>javax.servlet</groupId>
 			<artifactId>jsp-api</artifactId>
 		</dependency>
+        <dependency>
+            <groupId>javax.inject</groupId>
+            <artifactId>javax.inject</artifactId>
+        </dependency>
 		<dependency>
 			<groupId>javax.jcr</groupId>
 			<artifactId>jcr</artifactId>
@@ -246,6 +251,10 @@
 			<groupId>org.apache.sling</groupId>
 			<artifactId>org.apache.sling.commons.osgi</artifactId>
 		</dependency>
+        <dependency>
+            <groupId>org.apache.sling</groupId>
+            <artifactId>org.apache.sling.commons.json</artifactId>
+        </dependency>
 		<dependency>
 			<groupId>org.apache.sling</groupId>
 			<artifactId>org.apache.sling.scripting.api</artifactId>
