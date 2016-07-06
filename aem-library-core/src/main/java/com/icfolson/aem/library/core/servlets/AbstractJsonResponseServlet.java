@@ -83,7 +83,7 @@ public abstract class AbstractJsonResponseServlet extends SlingAllMethodsServlet
      * @param object object to be written as JSON
      * @throws IOException if error occurs writing JSON response
      */
-    private void writeJsonResponse(final SlingHttpServletResponse response, final ObjectMapper mapper,
+    protected final void writeJsonResponse(final SlingHttpServletResponse response, final ObjectMapper mapper,
         final Object object) throws IOException, ServletException {
         response.setContentType(CONTENT_TYPE);
         response.setCharacterEncoding(ENCODING);
