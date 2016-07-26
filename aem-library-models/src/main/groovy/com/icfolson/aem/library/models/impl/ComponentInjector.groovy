@@ -50,7 +50,7 @@ class ComponentInjector implements Injector, ModelTrait {
         com.day.cq.wcm.api.components.Component, ComponentContext, EditContext, Designer]
 
     private static final def RESOURCE_INJECTABLES = [Resource, ResourceResolver, ValueMap, Node, Session, BasicNode,
-         ComponentNode, PageDecorator, PageManagerDecorator]
+         ComponentNode, Page, PageDecorator, PageManager, PageManagerDecorator]
 
     @Override
     String getName() {
