@@ -50,7 +50,7 @@ Alternatively, model classes may inject an instance of the `com.icfolson.aem.lib
         }
     }
 
-See the `ComponentNode` [Javadoc](http://code.citytechinc.com/aem-library/apidocs/com/icfolson/aem/library/api/node/ComponentNode.html) for details of the available methods.
+See the `ComponentNode` [Javadoc](http://code.digitalatolson.com/aem-library/apidocs/com/icfolson/aem/library/api/node/ComponentNode.html) for details of the available methods.
 
 ### Sling Models Injectors
 
