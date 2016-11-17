@@ -10,7 +10,7 @@
     <groupId>com.icfolson.aem.library</groupId>
     <artifactId>aem-library</artifactId>
     <packaging>pom</packaging>
-    <version>7.0.2-SNAPSHOT</version>
+    <version>8.0.0-SNAPSHOT</version>
     <name>AEM Library</name>
     <description>The AEM Library provides a sturdy foundation for bootstrapping and simplifying AEM (Adobe CQ) projects.</description>
 
@@ -450,6 +450,15 @@
                 <version>1.9.12</version>
             </dependency>
 
+            <!-- uber jar -->
+            <dependency>
+                <groupId>com.adobe.aem</groupId>
+                <artifactId>uber-jar</artifactId>
+                <version>6.2.0</version>
+                <classifier>apis</classifier>
+                <scope>provided</scope>
+            </dependency>
+
             <!-- provided -->
             <dependency>
                 <groupId>org.apache.sling</groupId>
@@ -504,7 +513,7 @@
             <dependency>
                 <groupId>com.icfolson.aem.prosper</groupId>
                 <artifactId>prosper</artifactId>
-                <version>8.0.0</version>
+                <version>9.0.0-SNAPSHOT</version>
                 <scope>test</scope>
             </dependency>
             <dependency>

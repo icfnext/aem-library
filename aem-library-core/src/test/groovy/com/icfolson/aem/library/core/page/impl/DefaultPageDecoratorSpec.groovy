@@ -65,7 +65,13 @@ class DefaultPageDecoratorSpec extends AemLibrarySpec {
             }
             dam("sling:Folder") {
                 image("dam:Asset") {
-                    "jcr:content"("jcr:data": "data")
+                    "jcr:content" {
+                        renditions("nt:folder") {
+                            original("nt:file") {
+                                "jcr:content"("nt:resource", "jcr:data": "data")
+                            }
+                        }
+                    }
                 }
             }
         }
@@ -492,14 +498,6 @@ class DefaultPageDecoratorSpec extends AemLibrarySpec {
 
         expect:
         page.getProperties("component/one").containsKey("sling:resourceType")
-    }
-
-    def "get properties at non-existent relative path"() {
-        setup:
-        def page = getPage("/content/citytechinc")
-
-        expect:
-        page.getProperties("component/three").isEmpty()
     }
 
     def "get title"() {

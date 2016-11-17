@@ -4,7 +4,7 @@
     <parent>
         <groupId>com.icfolson.aem.library</groupId>
         <artifactId>aem-library</artifactId>
-        <version>7.0.2-SNAPSHOT</version>
+        <version>8.0.0-SNAPSHOT</version>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
@@ -158,6 +158,11 @@
     <dependencies>
         <!-- provided -->
         <dependency>
+            <groupId>com.adobe.aem</groupId>
+            <artifactId>uber-jar</artifactId>
+            <classifier>apis</classifier>
+        </dependency>
+        <dependency>
             <groupId>javax.inject</groupId>
             <artifactId>javax.inject</artifactId>
         </dependency>
@@ -189,6 +194,8 @@
             <groupId>org.apache.sling</groupId>
             <artifactId>org.apache.sling.models.impl</artifactId>
         </dependency>
+
+        <!--
         <dependency>
             <groupId>com.day.cq.wcm</groupId>
             <artifactId>cq-wcm-api</artifactId>
@@ -225,6 +232,7 @@
             <groupId>com.adobe.cq.sightly</groupId>
             <artifactId>cq-wcm-sightly-extension</artifactId>
         </dependency>
+        -->
 
         <!-- third party -->
         <dependency>
