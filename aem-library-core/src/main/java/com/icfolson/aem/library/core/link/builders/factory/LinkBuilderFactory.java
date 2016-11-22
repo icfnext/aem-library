@@ -7,6 +7,7 @@ import com.icfolson.aem.library.api.page.enums.TitleType;
 import com.icfolson.aem.library.core.constants.PropertyConstants;
 import com.icfolson.aem.library.core.link.builders.impl.DefaultLinkBuilder;
 import org.apache.sling.api.resource.Resource;
+import org.apache.sling.api.resource.ResourceResolver;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -79,7 +80,9 @@ public final class LinkBuilderFactory {
         final String redirect = page.getProperties().get(PropertyConstants.REDIRECT_TARGET, "");
         final String path = redirect.isEmpty() ? page.getPath() : redirect;
 
-        return new DefaultLinkBuilder(path, mapped ? page.getContentResource().getResourceResolver() : null)
+        final Resource resource = page.getContentResource();
+
+        return new DefaultLinkBuilder(path, (mapped && resource != null) ? resource.getResourceResolver() : null)
             .setTitle(title);
     }
 
