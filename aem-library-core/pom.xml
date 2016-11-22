@@ -216,14 +216,14 @@
 			<artifactId>uber-jar</artifactId>
             <classifier>apis</classifier>
 		</dependency>
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>servlet-api</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>javax.servlet</groupId>
-			<artifactId>jsp-api</artifactId>
-		</dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>servlet-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jsp-api</artifactId>
+        </dependency>
         <dependency>
             <groupId>javax.inject</groupId>
             <artifactId>javax.inject</artifactId>
@@ -252,83 +252,6 @@
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
         </dependency>
-
-        <!--
-		<dependency>
-			<groupId>com.day.commons</groupId>
-			<artifactId>day-commons-text</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.day.cq.wcm</groupId>
-			<artifactId>cq-wcm-api</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.day.cq.wcm</groupId>
-			<artifactId>cq-wcm-core</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.day.cq</groupId>
-			<artifactId>cq-commons</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.day.commons</groupId>
-			<artifactId>day-commons-gfx</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.day.cq.wcm</groupId>
-			<artifactId>cq-wcm-foundation</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.day.cq.wcm</groupId>
-			<artifactId>cq-wcm-commons</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.day.cq</groupId>
-			<artifactId>cq-tagging</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.day.cq.dam</groupId>
-			<artifactId>cq-dam-api</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.day.cq.wcm</groupId>
-			<artifactId>cq-wcm-taglib</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.day.cq</groupId>
-			<artifactId>cq-search</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.adobe.granite</groupId>
-			<artifactId>com.adobe.granite.replication.core</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.adobe.granite</groupId>
-			<artifactId>com.adobe.granite.ui.commons</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.adobe.granite</groupId>
-			<artifactId>com.adobe.granite.xssprotection</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.adobe.granite</groupId>
-			<artifactId>com.adobe.granite.jmx</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.adobe.cq.wcm</groupId>
-			<artifactId>cq-wcm-launches-core</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.adobe.cq</groupId>
-			<artifactId>cq-launches-api</artifactId>
-		</dependency>
-
-
-        <dependency>
-            <groupId>com.adobe.granite.osgi.wrapper</groupId>
-            <artifactId>com.adobe.granite.osgi.wrapper.guava</artifactId>
-        </dependency>
-        -->
 
         <!-- third party -->
         <dependency>
