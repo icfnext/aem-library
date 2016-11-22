@@ -1,10 +1,10 @@
 package com.icfolson.aem.library.core.link.builders.impl
 
+import com.day.cq.wcm.api.NameConstants
+import com.day.cq.wcm.api.Page
 import com.icfolson.aem.library.api.page.PageManagerDecorator
 import com.icfolson.aem.library.api.page.enums.TitleType
 import com.icfolson.aem.library.core.link.builders.factory.LinkBuilderFactory
-import com.day.cq.wcm.api.NameConstants
-import com.day.cq.wcm.api.Page
 import com.icfolson.aem.library.core.specs.AemLibrarySpec
 import org.apache.sling.api.resource.Resource
 import org.apache.sling.api.resource.ResourceResolver
@@ -16,7 +16,7 @@ class DefaultLinkBuilderSpec extends AemLibrarySpec {
 
     class MappingResourceResolver implements ResourceResolver {
 
-        static final def MAP = ["/content/us": "/content/us/home"]
+        static final def MAP = ["/content/us.html": "/content/us/home.html"]
 
         @Delegate
         ResourceResolver resourceResolver
@@ -123,23 +123,23 @@ class DefaultLinkBuilderSpec extends AemLibrarySpec {
         resource.resourceResolver >> new MappingResourceResolver(resourceResolver)
 
         def page = [
-            adaptTo      : { resource },
+            getContentResource: { resource },
             getProperties: { ValueMap.EMPTY },
-            getTitle     : { "" },
-            getPath      : { path }
+            getTitle: { "" },
+            getPath: { path }
         ] as Page
 
         def link = LinkBuilderFactory.forPage(page, mapped).build()
 
         expect:
-        link.path == mappedPath
+        link.href == mappedHref
 
         where:
-        path              | mappedPath         | mapped
-        "/content/us"     | "/content/us/home" | true
-        "/content/us"     | "/content/us"      | false
-        "/content/global" | "/content/global"  | true
-        "/content/global" | "/content/global"  | false
+        path              | mappedHref              | mapped
+        "/content/us"     | "/content/us/home.html" | true
+        "/content/us"     | "/content/us.html"      | false
+        "/content/global" | "/content/global.html"  | true
+        "/content/global" | "/content/global.html"  | false
     }
 
     def "build link for resource"() {
