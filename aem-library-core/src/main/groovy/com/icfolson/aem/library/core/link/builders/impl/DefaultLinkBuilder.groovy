@@ -15,6 +15,7 @@ import com.icfolson.aem.library.core.link.impl.DefaultImageLink
 import com.icfolson.aem.library.core.link.impl.DefaultLink
 import com.icfolson.aem.library.core.link.impl.DefaultNavigationLink
 import groovy.util.logging.Slf4j
+import org.apache.sling.api.resource.ResourceResolver
 
 import static com.google.common.base.Preconditions.checkNotNull
 
@@ -25,7 +26,9 @@ final class DefaultLinkBuilder implements LinkBuilder {
 
     private SetMultimap<String, String> parameters = LinkedHashMultimap.create()
 
-    private String path
+    private final String path
+
+    private final ResourceResolver resourceResolver
 
     private Map<String, String> properties = [:]
 
@@ -55,8 +58,9 @@ final class DefaultLinkBuilder implements LinkBuilder {
 
     private String title = ""
 
-    DefaultLinkBuilder(String path) {
+    DefaultLinkBuilder(String path, ResourceResolver resourceResolver) {
         this.path = path
+        this.resourceResolver = resourceResolver
 
         isExternal = PathUtils.isExternal(path)
     }
@@ -119,11 +123,11 @@ final class DefaultLinkBuilder implements LinkBuilder {
 
     @Override
     Link build() {
-        def builder = new StringBuilder()
+        def builder = new StringBuilder().append(buildHost())
 
-        builder.append(buildHost())
-        builder.append(path)
-        builder.append(buildSelectors())
+        def mappable = new StringBuilder()
+            .append(path)
+            .append(buildSelectors())
 
         def extension
 
@@ -136,10 +140,15 @@ final class DefaultLinkBuilder implements LinkBuilder {
                 extension = this.extension == null ? PathConstants.EXTENSION_HTML : this.extension
 
                 if (extension) {
-                    builder.append('.')
-                    builder.append(extension)
+                    mappable.append('.').append(extension)
                 }
             }
+        }
+
+        if (resourceResolver) {
+            builder.append(resourceResolver.map(mappable.toString()))
+        } else {
+            builder.append(mappable.toString())
         }
 
         builder.append(suffix)

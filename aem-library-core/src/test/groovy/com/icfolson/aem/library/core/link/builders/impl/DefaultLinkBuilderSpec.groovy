@@ -16,7 +16,7 @@ class DefaultLinkBuilderSpec extends AemLibrarySpec {
 
     class MappingResourceResolver implements ResourceResolver {
 
-        static final def MAP = ["/content/us": "/content/us/home"]
+        static final def MAP = ["/content/us.html": "/content/us/home.html"]
 
         @Delegate
         ResourceResolver resourceResolver
@@ -123,7 +123,7 @@ class DefaultLinkBuilderSpec extends AemLibrarySpec {
         resource.resourceResolver >> new MappingResourceResolver(resourceResolver)
 
         def page = [
-            adaptTo      : { resource },
+            getContentResource: { resource },
             getProperties: { ValueMap.EMPTY },
             getTitle     : { "" },
             getPath      : { path }
@@ -132,14 +132,14 @@ class DefaultLinkBuilderSpec extends AemLibrarySpec {
         def link = LinkBuilderFactory.forPage(page, mapped).build()
 
         expect:
-        link.path == mappedPath
+        link.href == mappedHref
 
         where:
-        path              | mappedPath         | mapped
-        "/content/us"     | "/content/us/home" | true
-        "/content/us"     | "/content/us"      | false
-        "/content/global" | "/content/global"  | true
-        "/content/global" | "/content/global"  | false
+        path              | mappedHref              | mapped
+        "/content/us"     | "/content/us/home.html" | true
+        "/content/us"     | "/content/us.html"      | false
+        "/content/global" | "/content/global.html"  | true
+        "/content/global" | "/content/global.html"  | false
     }
 
     def "build link for resource"() {
