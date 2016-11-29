@@ -354,7 +354,7 @@
                         <link>http://docs.oracle.com/javase/7/docs/api/</link>
                         <link>http://docs.oracle.com/javaee/7/api/</link>
                         <link>http://google.github.io/guava/releases/15.0/api/docs/</link>
-                        <link>http://www.day.com/maven/jsr170/javadocs/jcr-2.0</link>
+                        <link>https://docs.adobe.com/content/docs/en/spec/jsr170/javadocs/jcr-2.0</link>
                         <link>http://sling.apache.org/apidocs/sling7</link>
                         <link>https://docs.adobe.com/docs/en/aem/6-2/develop/ref/javadoc</link>
                         <link>http://fasterxml.github.io/jackson-databind/javadoc/2.3.0</link>
@@ -476,7 +476,7 @@
             <dependency>
                 <groupId>com.icfolson.aem.groovy.extension</groupId>
                 <artifactId>aem-groovy-extension-bundle</artifactId>
-                <version>3.0.0-SNAPSHOT</version>
+                <version>3.0.0</version>
                 <scope>provided</scope>
             </dependency>
 
@@ -490,7 +490,7 @@
             <dependency>
                 <groupId>com.icfolson.aem.prosper</groupId>
                 <artifactId>prosper</artifactId>
-                <version>9.0.0-SNAPSHOT</version>
+                <version>9.0.0</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
