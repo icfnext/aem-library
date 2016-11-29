@@ -10,7 +10,7 @@
 
     <bannerRight>
         <name>${project.name}</name>
-        <href>http://code.citytechinc.com/aem-library</href>
+        <href>http://code.digitalatolson.com/aem-library</href>
     </bannerRight>
 
     <custom>
@@ -40,7 +40,7 @@
 
     <body>
         <links>
-            <item name="GitHub" href="https://github.com/Citytechinc/aem-library" />
+            <item name="GitHub" href="https://github.com/OlsonDigital/aem-library" />
             <item name="Overview" href="index.html" />
         </links>
         <menu name="User Guide">

@@ -2,8 +2,8 @@
 
     <parent>
         <groupId>com.icfolson.aem</groupId>
-        <artifactId>parent</artifactId>
-        <version>6.2.1</version>
+        <artifactId>aem-parent-uber-jar</artifactId>
+        <version>6.2.0</version>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
@@ -29,24 +29,10 @@
     </modules>
 
     <scm>
-        <connection>scm:git:git@github.com:Citytechinc/aem-library.git</connection>
-        <url>https://github.com/Citytechinc/aem-library</url>
-        <developerConnection>scm:git:git@github.com:Citytechinc/aem-library.git</developerConnection>
+        <connection>scm:git:git@github.com:OlsonDigital/aem-library.git</connection>
+        <url>https://github.com/OlsonDigital/aem-library</url>
+        <developerConnection>scm:git:git@github.com:OlsonDigital/aem-library.git</developerConnection>
     </scm>
-
-    <repositories>
-        <repository>
-            <id>citytech-public</id>
-            <url>http://nexus.citytech.ctmsp.com/content/groups/public</url>
-        </repository>
-    </repositories>
-
-    <pluginRepositories>
-        <pluginRepository>
-            <id>citytech-public</id>
-            <url>http://nexus.citytech.ctmsp.com/content/groups/public</url>
-        </pluginRepository>
-    </pluginRepositories>
 
     <distributionManagement>
         <snapshotRepository>
@@ -452,13 +438,6 @@
 
             <!-- provided -->
             <dependency>
-                <groupId>com.adobe.aem</groupId>
-                <artifactId>uber-jar</artifactId>
-                <version>6.2.0</version>
-                <classifier>apis</classifier>
-                <scope>provided</scope>
-            </dependency>
-            <dependency>
                 <groupId>org.apache.sling</groupId>
                 <artifactId>org.apache.sling.models.api</artifactId>
                 <version>1.2.0</version>
@@ -497,7 +476,7 @@
             <dependency>
                 <groupId>com.icfolson.aem.groovy.extension</groupId>
                 <artifactId>aem-groovy-extension-bundle</artifactId>
-                <version>2.0.0</version>
+                <version>3.0.0-SNAPSHOT</version>
                 <scope>provided</scope>
             </dependency>
 
