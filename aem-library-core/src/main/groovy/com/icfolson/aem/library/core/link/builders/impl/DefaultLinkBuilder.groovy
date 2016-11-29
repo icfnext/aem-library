@@ -157,8 +157,6 @@ final class DefaultLinkBuilder implements LinkBuilder {
 
         builder.append(queryString)
 
-        // TODO map here instead
-
         def href = builder.toString()
 
         LOG.debug("building href = {}", href)
