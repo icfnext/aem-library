@@ -2,12 +2,10 @@ package com.icfolson.aem.library.core.node.impl
 
 import com.icfolson.aem.library.api.node.ComponentNode
 import com.day.cq.dam.api.Asset
-import com.day.cq.dam.api.Rendition
 import com.google.common.base.Predicates
 import com.icfolson.aem.library.core.node.predicates.PropertyNamePredicate
 import com.icfolson.aem.library.core.specs.AemLibrarySpec
 import org.apache.sling.api.resource.NonExistingResource
-import org.apache.sling.api.resource.Resource
 import spock.lang.Unroll
 
 @Unroll
@@ -55,26 +53,29 @@ class DefaultBasicNodeSpec extends AemLibrarySpec {
 
         nodeBuilder.content {
             dam("sling:Folder") {
-                image("dam:Asset") { "jcr:content"("jcr:data": "data") }
-                "image-renditions"("dam:Asset") { "jcr:content"("jcr:data": "data") }
+                image("dam:Asset") {
+                    "jcr:content" {
+                        renditions("nt:folder") {
+                            original("nt:file") {
+                                "jcr:content"("nt:resource", "jcr:data": "data")
+                            }
+                        }
+                    }
+                }
+                "image-renditions"("dam:Asset") {
+                    "jcr:content"("jcr:data": "data") {
+                        renditions("nt:folder") {
+                            original("nt:file") {
+                                "jcr:content"("nt:resource", "jcr:data": "data")
+                            }
+                            one("nt:file") {
+                                "jcr:content"("nt:resource", "jcr:data": "data")
+                            }
+                        }
+                    }
+                }
             }
         }
-
-        slingContext.registerResourceAdapter(Asset, { Resource resource ->
-            def asset = null
-
-            if (resource.path == "/content/dam/image-renditions") {
-                asset = [getRenditions: {
-                    ["one", "two", "three"].collect { renditionName ->
-                        [getName: { renditionName }, getPath: {
-                            "/content/dam/image-renditions/" + renditionName
-                        }] as Rendition
-                    }
-                }] as Asset
-            }
-
-            asset
-        })
     }
 
     def "to string"() {

@@ -94,7 +94,15 @@ class DefaultComponentNodeSpec extends AemLibrarySpec {
 
         nodeBuilder.content {
             dam("sling:Folder") {
-                image("dam:Asset") { "jcr:content"("jcr:data": "data") }
+                image("dam:Asset") {
+                    "jcr:content"("jcr:data": "data") {
+                        renditions("nt:folder") {
+                            original("nt:file") {
+                                "jcr:content"("nt:resource", "jcr:data": "data")
+                            }
+                        }
+                    }
+                }
             }
         }
     }

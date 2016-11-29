@@ -22,7 +22,13 @@ class ImageTagSpec extends AemLibrarySpec implements JspTagTrait {
         nodeBuilder.content {
             dam("sling:Folder") {
                 image("dam:Asset") {
-                    "jcr:content"("jcr:data": "data")
+                    "jcr:content" {
+                        renditions("nt:folder") {
+                            original("nt:file") {
+                                "jcr:content"("nt:resource", "jcr:data": "data")
+                            }
+                        }
+                    }
                 }
             }
         }
