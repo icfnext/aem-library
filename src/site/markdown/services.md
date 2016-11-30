@@ -18,4 +18,4 @@ The `com.icfolson.aem.library.services.AbstractSlingService` class can be used a
 
 Service providing "selective" replication to activate/deactivate content to a subset of replication agents (rather than all agents, which is the AEM default behavior).
 
-This service can be called directly but is also exposed by the corresponding Selective Replication Servlet as described on the [Servlets](https://github.com/Citytechinc/aem-library/wiki/servlets) page.
+This service can be called directly but is also exposed by the corresponding Selective Replication Servlet as described on the [Servlets](https://github.com/OlsonDigital/aem-library/wiki/servlets) page.
