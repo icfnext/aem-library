@@ -490,7 +490,7 @@
             <dependency>
                 <groupId>com.icfolson.aem.prosper</groupId>
                 <artifactId>prosper</artifactId>
-                <version>9.0.0</version>
+                <version>9.0.1</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
