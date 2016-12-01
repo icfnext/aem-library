@@ -212,11 +212,7 @@ final class DefaultComponentNode extends AbstractNode implements ComponentNode {
         def predicate = new Predicate<ComponentNode>() {
             @Override
             boolean apply(ComponentNode componentNode) {
-                if (name) {
-                    componentNode.isHasImage(name)
-                } else {
-                    componentNode.isHasImage()
-                }
+                name ? componentNode.isHasImage(name) : componentNode.hasImage
             }
         }
 

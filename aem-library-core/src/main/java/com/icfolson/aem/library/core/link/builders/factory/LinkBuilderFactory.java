@@ -1,12 +1,13 @@
 package com.icfolson.aem.library.core.link.builders.factory;
 
+import com.day.cq.wcm.api.Page;
 import com.icfolson.aem.library.api.link.Link;
 import com.icfolson.aem.library.api.link.builders.LinkBuilder;
 import com.icfolson.aem.library.api.page.enums.TitleType;
-import com.icfolson.aem.library.core.link.builders.impl.DefaultLinkBuilder;
-import com.day.cq.wcm.api.Page;
 import com.icfolson.aem.library.core.constants.PropertyConstants;
+import com.icfolson.aem.library.core.link.builders.impl.DefaultLinkBuilder;
 import org.apache.sling.api.resource.Resource;
+import org.apache.sling.api.resource.ResourceResolver;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -25,7 +26,9 @@ public final class LinkBuilderFactory {
     public static LinkBuilder forLink(final Link link) {
         checkNotNull(link);
 
-        return new DefaultLinkBuilder(link.getPath()).setExtension(link.getExtension()).setTitle(link.getTitle())
+        return new DefaultLinkBuilder(link.getPath(), null)
+            .setExtension(link.getExtension())
+            .setTitle(link.getTitle())
             .setTarget(link.getTarget());
     }
 
@@ -74,7 +77,13 @@ public final class LinkBuilderFactory {
     public static LinkBuilder forPage(final Page page, final boolean mapped, final TitleType titleType) {
         final String title = checkNotNull(page).getProperties().get(titleType.getPropertyName(), page.getTitle());
 
-        return new DefaultLinkBuilder(getPagePath(page, mapped)).setTitle(title);
+        final String redirect = page.getProperties().get(PropertyConstants.REDIRECT_TARGET, "");
+        final String path = redirect.isEmpty() ? page.getPath() : redirect;
+
+        final Resource resource = page.getContentResource();
+
+        return new DefaultLinkBuilder(path, (mapped && resource != null) ? resource.getResourceResolver() : null)
+            .setTitle(title);
     }
 
     /**
@@ -84,7 +93,7 @@ public final class LinkBuilderFactory {
      * @return builder containing the given path
      */
     public static LinkBuilder forPath(final String path) {
-        return new DefaultLinkBuilder(checkNotNull(path));
+        return new DefaultLinkBuilder(checkNotNull(path), null);
     }
 
     /**
@@ -110,22 +119,7 @@ public final class LinkBuilderFactory {
         final String path = resource.getPath();
         final String mappedPath = mapped ? resource.getResourceResolver().map(path) : path;
 
-        return new DefaultLinkBuilder(mappedPath);
-    }
-
-    private static String getPagePath(final Page page, final boolean mapped) {
-        final String redirect = page.getProperties().get(PropertyConstants.REDIRECT_TARGET, "");
-        final String path = redirect.isEmpty() ? page.getPath() : redirect;
-
-        final String result;
-
-        if (mapped) {
-            result = page.adaptTo(Resource.class).getResourceResolver().map(path);
-        } else {
-            result = path;
-        }
-
-        return result;
+        return new DefaultLinkBuilder(mappedPath, mapped ? resource.getResourceResolver() : null);
     }
 
     private LinkBuilderFactory() {

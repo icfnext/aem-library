@@ -51,11 +51,11 @@ class TagInjectorSpec extends AemLibraryModelSpec {
         }
         nodeBuilder.etc {
             tags {
-                beers("sling:resourceType": "cq/tagging/components/tag", title: "Beers") {
-                    lager("sling:resourceType": "cq/tagging/components/tag", title: "Lager")
-                    stout("sling:resourceType": "cq/tagging/components/tag", title: "Stout")
-                    porter("sling:resourceType": "cq/tagging/components/tag", title: "Porter")
-                    ale("sling:resourceType": "cq/tagging/components/tag", title: "Ale")
+                beers("cq:Tag", "sling:resourceType": "cq/tagging/components/tag", title: "Beers") {
+                    lager("cq:Tag", "sling:resourceType": "cq/tagging/components/tag", title: "Lager")
+                    stout("cq:Tag", "sling:resourceType": "cq/tagging/components/tag", title: "Stout")
+                    porter("cq:Tag", "sling:resourceType": "cq/tagging/components/tag", title: "Porter")
+                    ale("cq:Tag", "sling:resourceType": "cq/tagging/components/tag", title: "Ale")
                 }
             }
         }
@@ -74,7 +74,7 @@ class TagInjectorSpec extends AemLibraryModelSpec {
         component.tagList[1].path == "/etc/tags/beers/stout"
         component.tagList[2].path == "/etc/tags/beers/ale"
 
-        component.tagListInherit.size == 3
+        component.tagListInherit.size() == 3
         component.tagListInherit[0].path == "/etc/tags/beers/ale"
         component.tagListInherit[1].path == "/etc/tags/beers/porter"
         component.tagListInherit[2].path == "/etc/tags/beers/lager"

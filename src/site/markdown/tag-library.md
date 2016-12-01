@@ -45,7 +45,7 @@ propertyName | false | Name of property containing the title to display.  Defaul
 suffix | false | Value to append after the title property value.
 
     <head>
-        <aem-library:title propertyName="pageTitle" suffix=" | CITYTECH, Inc."/>
+        <aem-library:title propertyName="pageTitle" suffix=" | ICF Olson"/>
     </head>
 
 ### Keywords

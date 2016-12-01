@@ -2,15 +2,15 @@
 
     <parent>
         <groupId>com.icfolson.aem</groupId>
-        <artifactId>parent</artifactId>
-        <version>6.2.1</version>
+        <artifactId>aem-parent-uber-jar</artifactId>
+        <version>6.2.0</version>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.icfolson.aem.library</groupId>
     <artifactId>aem-library</artifactId>
     <packaging>pom</packaging>
-    <version>7.0.1</version>
+    <version>8.0.0</version>
     <name>AEM Library</name>
     <description>The AEM Library provides a sturdy foundation for bootstrapping and simplifying AEM (Adobe CQ) projects.</description>
 
@@ -19,7 +19,7 @@
         <url>http://www.icfolson.com</url>
     </organization>
 
-    <url>http://code.citytechinc.com/aem-library</url>
+    <url>http://code.digitalatolson.com/aem-library</url>
 
     <modules>
         <module>aem-library-api</module>
@@ -29,24 +29,10 @@
     </modules>
 
     <scm>
-        <connection>scm:git:git@github.com:Citytechinc/aem-library.git</connection>
-        <url>https://github.com/Citytechinc/aem-library</url>
-        <developerConnection>scm:git:git@github.com:Citytechinc/aem-library.git</developerConnection>
+        <connection>scm:git:git@github.com:OlsonDigital/aem-library.git</connection>
+        <url>https://github.com/OlsonDigital/aem-library</url>
+        <developerConnection>scm:git:git@github.com:OlsonDigital/aem-library.git</developerConnection>
     </scm>
-
-    <repositories>
-        <repository>
-            <id>citytech-public</id>
-            <url>http://nexus.citytech.ctmsp.com/content/groups/public</url>
-        </repository>
-    </repositories>
-
-    <pluginRepositories>
-        <pluginRepository>
-            <id>citytech-public</id>
-            <url>http://nexus.citytech.ctmsp.com/content/groups/public</url>
-        </pluginRepository>
-    </pluginRepositories>
 
     <distributionManagement>
         <snapshotRepository>
@@ -368,7 +354,7 @@
                         <link>http://docs.oracle.com/javase/7/docs/api/</link>
                         <link>http://docs.oracle.com/javaee/7/api/</link>
                         <link>http://google.github.io/guava/releases/15.0/api/docs/</link>
-                        <link>http://www.day.com/maven/jsr170/javadocs/jcr-2.0</link>
+                        <link>https://docs.adobe.com/content/docs/en/spec/jsr170/javadocs/jcr-2.0</link>
                         <link>http://sling.apache.org/apidocs/sling7</link>
                         <link>https://docs.adobe.com/docs/en/aem/6-2/develop/ref/javadoc</link>
                         <link>http://fasterxml.github.io/jackson-databind/javadoc/2.3.0</link>
@@ -490,7 +476,7 @@
             <dependency>
                 <groupId>com.icfolson.aem.groovy.extension</groupId>
                 <artifactId>aem-groovy-extension-bundle</artifactId>
-                <version>2.0.0</version>
+                <version>3.0.0</version>
                 <scope>provided</scope>
             </dependency>
 
@@ -504,7 +490,7 @@
             <dependency>
                 <groupId>com.icfolson.aem.prosper</groupId>
                 <artifactId>prosper</artifactId>
-                <version>8.0.0</version>
+                <version>9.0.1</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
