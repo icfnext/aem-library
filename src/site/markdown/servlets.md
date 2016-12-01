@@ -35,7 +35,7 @@ The component `dialog.xml` can call the the validator for a dialog field by defi
 
 The image servlet overrides AEM's default image rendering servlets to provide image resizing and the ability to associate additional named images to a page or component.
 
-For additional details, see the [Image Rendering](https://github.com/Citytechinc/aem-library/wiki/image-rendering) page.
+For additional details, see the [Image Rendering](https://github.com/OlsonDigital/aem-library/wiki/image-rendering) page.
 
 ### Paragraph JSON Servlet
 
