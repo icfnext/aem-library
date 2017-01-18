@@ -3,7 +3,6 @@ package com.icfolson.aem.library.core.servlets.datasource;
 import com.adobe.granite.ui.components.ds.DataSource;
 import com.adobe.granite.ui.components.ds.SimpleDataSource;
 import com.adobe.granite.ui.components.ds.ValueMapResource;
-import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.icfolson.aem.library.api.request.ComponentServletRequest;
@@ -50,18 +49,15 @@ public abstract class AbstractOptionsDataSourceServlet extends AbstractComponent
         final List<Option> options = getOptions(request);
 
         // transform the list of options into a list of synthetic resources
-        final List<Resource> resources = Lists.transform(options, new Function<Option, Resource>() {
-            @Override
-            public Resource apply(final Option option) {
-                final Map<String, Object> map = Maps.newHashMapWithExpectedSize(options.size());
+        final List<Resource> resources = Lists.transform(options, option -> {
+            final Map<String, Object> map = Maps.newHashMapWithExpectedSize(options.size());
 
-                map.put("value", option.getValue());
-                map.put("text", option.getText());
+            map.put("value", option.getValue());
+            map.put("text", option.getText());
 
-                final ValueMap valueMap = new ValueMapDecorator(map);
+            final ValueMap valueMap = new ValueMapDecorator(map);
 
-                return new ValueMapResource(resourceResolver, new ResourceMetadata(), NT_UNSTRUCTURED, valueMap);
-            }
+            return new ValueMapResource(resourceResolver, new ResourceMetadata(), NT_UNSTRUCTURED, valueMap);
         });
 
         final DataSource dataSource = new SimpleDataSource(resources.iterator());

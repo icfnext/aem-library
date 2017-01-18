@@ -117,8 +117,8 @@
                     <version>3.5</version>
                     <configuration>
                         <compilerId>groovy-eclipse-compiler</compilerId>
-                        <source>1.7</source>
-                        <target>1.7</target>
+                        <source>1.8</source>
+                        <target>1.8</target>
                     </configuration>
                     <dependencies>
                         <dependency>
@@ -360,6 +360,7 @@
                         <link>http://fasterxml.github.io/jackson-databind/javadoc/2.3.0</link>
                     </links>
                     <quiet>true</quiet>
+                    <failOnError>false</failOnError>
                 </configuration>
             </plugin>
             <plugin>

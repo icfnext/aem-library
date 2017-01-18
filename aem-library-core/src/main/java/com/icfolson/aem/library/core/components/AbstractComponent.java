@@ -20,8 +20,7 @@ import java.util.List;
 import static com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility.NONE;
 
 /**
- * Base class for AEM component classes instantiated by the {@link com.icfolson.aem.library.core.tags.ComponentTag}
- * or implemented with Sightly.
+ * Base class for AEM component classes.
  */
 @JsonAutoDetect(fieldVisibility = NONE, getterVisibility = NONE, isGetterVisibility = NONE)
 public abstract class AbstractComponent implements ComponentNode {
