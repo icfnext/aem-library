@@ -83,6 +83,7 @@ public interface PageDecorator extends Page, Accessible, Inheritable, Linkable, 
      * Get the component node for the node at the given path relative to the "jcr:content" node for this page.  If the
      * node does not exist, an "absent" Optional is returned.
      *
+     * @param relativePath relative path to resource
      * @return optional component node for resource relative to page content
      */
     Optional<ComponentNode> getComponentNode(String relativePath);

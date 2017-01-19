@@ -40,6 +40,7 @@ public abstract class AbstractJsonResponseServlet extends SlingAllMethodsServlet
      * @param response sling response
      * @param object object to be written as JSON
      * @throws IOException if error occurs writing JSON response
+     * @throws ServletException if other error occurs
      */
     protected final void writeJsonResponse(final SlingHttpServletResponse response, final Object object)
         throws IOException, ServletException {
@@ -53,6 +54,7 @@ public abstract class AbstractJsonResponseServlet extends SlingAllMethodsServlet
      * @param object object to be written as JSON
      * @param dateFormat SimpleDateFormat pattern for formatting Date objects using US locale
      * @throws IOException if error occurs writing JSON response
+     * @throws ServletException if other error occurs
      */
     protected final void writeJsonResponse(final SlingHttpServletResponse response, final Object object,
         final String dateFormat) throws IOException, ServletException {
@@ -67,6 +69,7 @@ public abstract class AbstractJsonResponseServlet extends SlingAllMethodsServlet
      * @param dateFormat SimpleDateFormat pattern for formatting Date objects
      * @param locale locale for date format
      * @throws IOException if error occurs writing JSON response
+     * @throws ServletException if other error occurs
      */
     protected final void writeJsonResponse(final SlingHttpServletResponse response, final Object object,
         final String dateFormat, final Locale locale) throws IOException, ServletException {
@@ -82,6 +85,7 @@ public abstract class AbstractJsonResponseServlet extends SlingAllMethodsServlet
      * @param mapper object mapper with a custom configuration
      * @param object object to be written as JSON
      * @throws IOException if error occurs writing JSON response
+     * @throws ServletException if other error occurs
      */
     protected final void writeJsonResponse(final SlingHttpServletResponse response, final ObjectMapper mapper,
         final Object object) throws IOException, ServletException {

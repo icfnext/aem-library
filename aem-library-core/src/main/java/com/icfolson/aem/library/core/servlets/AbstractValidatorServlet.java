@@ -13,15 +13,15 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
  * Validators extending this class need to add the following SCR annotation to register the servlet:
- * <p>
+ *
  * <pre>
  * {@literal @}SlingServlet(resourceTypes = "aem-library/components/content/example", selectors = "validator",
  * extensions = "json", methods = "GET")
  * </pre>
- * <p>
+ *
  * The "resourceTypes" annotation will need to be updated to match the resource type of the component being validated.
  * The component dialog.xml can call the the validator for a given dialog field using the following function:
- * <p>
+ *
  * <pre>
  * {@code
  * <name jcr:primaryType="cq:Widget" fieldLabel="Name" name="./name" xtype="textfield"

@@ -1,129 +1,129 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
-	<parent>
-		<groupId>com.icfolson.aem.library</groupId>
-		<artifactId>aem-library</artifactId>
-		<version>8.0.0</version>
-	</parent>
+    <parent>
+        <groupId>com.icfolson.aem.library</groupId>
+        <artifactId>aem-library</artifactId>
+        <version>8.0.1</version>
+    </parent>
 
-	<modelVersion>4.0.0</modelVersion>
-	<artifactId>aem-library-core</artifactId>
-	<packaging>bundle</packaging>
-	<name>AEM Library Core</name>
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>aem-library-core</artifactId>
+    <packaging>bundle</packaging>
+    <name>AEM Library Core</name>
 
-	<build>
-		<resources>
-			<resource>
-				<directory>src/main/resources/META-INF</directory>
-				<targetPath>META-INF</targetPath>
-				<filtering>true</filtering>
-			</resource>
-		</resources>
-		<plugins>
-			<plugin>
-				<artifactId>maven-compiler-plugin</artifactId>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.felix</groupId>
-				<artifactId>maven-bundle-plugin</artifactId>
-				<extensions>true</extensions>
-				<configuration>
-					<instructions>
-						<Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
-						<Bundle-Name>${project.name}</Bundle-Name>
-						<Bundle-Vendor>${project.parent.organization.name}</Bundle-Vendor>
-						<Export-Package>!*.impl,com.icfolson.aem.library.core.*</Export-Package>
-						<Import-Package>!*</Import-Package>
-						<DynamicImport-Package>*</DynamicImport-Package>
-						<Require-Bundle>org.apache.sling.models.api</Require-Bundle>
-					</instructions>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.felix</groupId>
-				<artifactId>maven-scr-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>generate-scr-scrdescriptor</id>
-						<goals>
-							<goal>scr</goal>
-						</goals>
-						<configuration>
-							<scanClasses>true</scanClasses>
-							<properties>
-								<service.vendor>${project.parent.organization.name}</service.vendor>
-							</properties>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<artifactId>maven-surefire-plugin</artifactId>
-			</plugin>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>cobertura-maven-plugin</artifactId>
-				<configuration>
-					<quiet>true</quiet>
-					<outputDirectory>${project.parent.reporting.outputDirectory}/cobertura</outputDirectory>
-					<instrumentation>
-						<excludes>
-							<exclude>com/icfolson/aem/library/core/bindings/*</exclude>
-							<exclude>com/icfolson/aem/library/core/components/annotations/*</exclude>
-							<exclude>com/icfolson/aem/library/core/constants/*</exclude>
-							<exclude>com/icfolson/aem/library/core/filters/*</exclude>
-							<exclude>com/icfolson/aem/library/core/jmx/**/*</exclude>
-						</excludes>
-						<ignoreTrivial>true</ignoreTrivial>
-					</instrumentation>
-					<check>
-						<branchRate>85</branchRate>
-						<lineRate>85</lineRate>
-						<haltOnFailure>false</haltOnFailure>
-						<totalBranchRate>85</totalBranchRate>
-						<totalLineRate>85</totalLineRate>
-						<packageLineRate>85</packageLineRate>
-						<packageBranchRate>85</packageBranchRate>
-					</check>
-				</configuration>
-				<executions>
-					<execution>
-						<phase>site</phase>
-						<goals>
-							<goal>cobertura</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<artifactId>maven-javadoc-plugin</artifactId>
-				<executions>
-					<execution>
-						<phase>deploy</phase>
-						<goals>
-							<goal>jar</goal>
-						</goals>
-						<configuration>
-							<excludePackageNames>
-								*.impl,
-								*.predicates,
-								com.icfolson.aem.library.core.adapter.*,
-								com.icfolson.aem.library.core.bindings.*
-							</excludePackageNames>
-							<links>
+    <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources/META-INF</directory>
+                <targetPath>META-INF</targetPath>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+        <plugins>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <extensions>true</extensions>
+                <configuration>
+                    <instructions>
+                        <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
+                        <Bundle-Name>${project.name}</Bundle-Name>
+                        <Bundle-Vendor>${project.parent.organization.name}</Bundle-Vendor>
+                        <Export-Package>!*.impl,com.icfolson.aem.library.core.*</Export-Package>
+                        <Import-Package>!*</Import-Package>
+                        <DynamicImport-Package>*</DynamicImport-Package>
+                        <Require-Bundle>org.apache.sling.models.api</Require-Bundle>
+                    </instructions>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-scr-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>generate-scr-scrdescriptor</id>
+                        <goals>
+                            <goal>scr</goal>
+                        </goals>
+                        <configuration>
+                            <scanClasses>true</scanClasses>
+                            <properties>
+                                <service.vendor>${project.parent.organization.name}</service.vendor>
+                            </properties>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-surefire-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>cobertura-maven-plugin</artifactId>
+                <configuration>
+                    <quiet>true</quiet>
+                    <outputDirectory>${project.parent.reporting.outputDirectory}/cobertura</outputDirectory>
+                    <instrumentation>
+                        <excludes>
+                            <exclude>com/icfolson/aem/library/core/bindings/*</exclude>
+                            <exclude>com/icfolson/aem/library/core/components/annotations/*</exclude>
+                            <exclude>com/icfolson/aem/library/core/constants/*</exclude>
+                            <exclude>com/icfolson/aem/library/core/filters/*</exclude>
+                            <exclude>com/icfolson/aem/library/core/jmx/**/*</exclude>
+                        </excludes>
+                        <ignoreTrivial>true</ignoreTrivial>
+                    </instrumentation>
+                    <check>
+                        <branchRate>85</branchRate>
+                        <lineRate>85</lineRate>
+                        <haltOnFailure>false</haltOnFailure>
+                        <totalBranchRate>85</totalBranchRate>
+                        <totalLineRate>85</totalLineRate>
+                        <packageLineRate>85</packageLineRate>
+                        <packageBranchRate>85</packageBranchRate>
+                    </check>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>site</phase>
+                        <goals>
+                            <goal>cobertura</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>deploy</phase>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                        <configuration>
+                            <excludePackageNames>
+                                *.impl,
+                                *.predicates,
+                                com.icfolson.aem.library.core.adapter.*,
+                                com.icfolson.aem.library.core.bindings.*
+                            </excludePackageNames>
+                            <links>
                                 <link>http://docs.oracle.com/javase/7/docs/api/</link>
                                 <link>http://docs.oracle.com/javaee/7/api/</link>
                                 <link>http://google.github.io/guava/releases/15.0/api/docs/</link>
-								<link>http://www.day.com/maven/jsr170/javadocs/jcr-2.0/</link>
-								<link>http://sling.apache.org/apidocs/sling7</link>
+                                <link>http://www.day.com/maven/jsr170/javadocs/jcr-2.0/</link>
+                                <link>http://sling.apache.org/apidocs/sling7</link>
                                 <link>https://docs.adobe.com/docs/en/aem/6-2/develop/ref/javadoc</link>
-							</links>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
+                            </links>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
                 <artifactId>maven-jar-plugin</artifactId>
                 <executions>
                     <execution>
@@ -132,90 +132,90 @@
                         </goals>
                     </execution>
                 </executions>
-			</plugin>
-			<plugin>
-				<artifactId>maven-source-plugin</artifactId>
-				<executions>
-					<execution>
-						<phase>deploy</phase>
-						<goals>
-							<goal>jar</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<artifactId>maven-deploy-plugin</artifactId>
-				<executions>
-					<execution>
-						<phase>deploy</phase>
-						<goals>
-							<goal>deploy</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<artifactId>maven-site-plugin</artifactId>
-				<configuration>
-					<generateReports>false</generateReports>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
+            </plugin>
+            <plugin>
+                <artifactId>maven-source-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>deploy</phase>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>deploy</phase>
+                        <goals>
+                            <goal>deploy</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-site-plugin</artifactId>
+                <configuration>
+                    <generateReports>false</generateReports>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
-	<profiles>
-		<!-- activate this profile to enable logging of test executions -->
-		<profile>
-			<id>test-logging</id>
-			<activation>
-				<property>
-					<name>test-logging</name>
-				</property>
-			</activation>
-			<dependencies>
-				<dependency>
-					<groupId>org.slf4j</groupId>
-					<artifactId>slf4j-simple</artifactId>
-					<version>1.7.5</version>
-				</dependency>
-				<dependency>
-					<groupId>com.icfolson.aem.groovy.extension</groupId>
-					<artifactId>aem-groovy-extension-bundle</artifactId>
-					<exclusions>
-						<exclusion>
-							<groupId>org.slf4j</groupId>
-							<artifactId>slf4j-nop</artifactId>
-						</exclusion>
-					</exclusions>
-				</dependency>
-				<dependency>
-					<groupId>com.icfolson.aem.prosper</groupId>
-					<artifactId>prosper</artifactId>
-					<exclusions>
-						<exclusion>
-							<groupId>org.slf4j</groupId>
-							<artifactId>slf4j-nop</artifactId>
-						</exclusion>
-					</exclusions>
-				</dependency>
-			</dependencies>
-		</profile>
-	</profiles>
+    <profiles>
+        <!-- activate this profile to enable logging of test executions -->
+        <profile>
+            <id>test-logging</id>
+            <activation>
+                <property>
+                    <name>test-logging</name>
+                </property>
+            </activation>
+            <dependencies>
+                <dependency>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-simple</artifactId>
+                    <version>1.7.5</version>
+                </dependency>
+                <dependency>
+                    <groupId>com.icfolson.aem.groovy.extension</groupId>
+                    <artifactId>aem-groovy-extension-bundle</artifactId>
+                    <exclusions>
+                        <exclusion>
+                            <groupId>org.slf4j</groupId>
+                            <artifactId>slf4j-nop</artifactId>
+                        </exclusion>
+                    </exclusions>
+                </dependency>
+                <dependency>
+                    <groupId>com.icfolson.aem.prosper</groupId>
+                    <artifactId>prosper</artifactId>
+                    <exclusions>
+                        <exclusion>
+                            <groupId>org.slf4j</groupId>
+                            <artifactId>slf4j-nop</artifactId>
+                        </exclusion>
+                    </exclusions>
+                </dependency>
+            </dependencies>
+        </profile>
+    </profiles>
 
-	<dependencies>
-		<!-- compile -->
-		<dependency>
-			<groupId>org.apache.felix</groupId>
-			<artifactId>org.apache.felix.scr.annotations</artifactId>
-		</dependency>
+    <dependencies>
+        <!-- compile -->
+        <dependency>
+            <groupId>org.apache.felix</groupId>
+            <artifactId>org.apache.felix.scr.annotations</artifactId>
+        </dependency>
 
-		<!-- provided -->
-		<dependency>
-			<groupId>com.adobe.aem</groupId>
-			<artifactId>uber-jar</artifactId>
+        <!-- provided -->
+        <dependency>
+            <groupId>com.adobe.aem</groupId>
+            <artifactId>uber-jar</artifactId>
             <classifier>apis</classifier>
-		</dependency>
+        </dependency>
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>servlet-api</artifactId>
@@ -228,18 +228,18 @@
             <groupId>javax.inject</groupId>
             <artifactId>javax.inject</artifactId>
         </dependency>
-		<dependency>
-			<groupId>javax.jcr</groupId>
-			<artifactId>jcr</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.osgi</groupId>
-			<artifactId>org.osgi.compendium</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.osgi</groupId>
-			<artifactId>org.osgi.core</artifactId>
-		</dependency>
+        <dependency>
+            <groupId>javax.jcr</groupId>
+            <artifactId>jcr</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.osgi</groupId>
+            <artifactId>org.osgi.compendium</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.osgi</groupId>
+            <artifactId>org.osgi.core</artifactId>
+        </dependency>
         <dependency>
             <groupId>org.apache.sling</groupId>
             <artifactId>org.apache.sling.models.api</artifactId>
@@ -272,17 +272,17 @@
         </dependency>
 
         <!-- aem-library -->
-		<dependency>
-			<groupId>com.icfolson.aem.library</groupId>
-			<artifactId>aem-library-api</artifactId>
-			<version>${project.parent.version}</version>
-		</dependency>
+        <dependency>
+            <groupId>com.icfolson.aem.library</groupId>
+            <artifactId>aem-library-api</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
 
-		<!-- test -->
-		<dependency>
-			<groupId>com.icfolson.aem.prosper</groupId>
-			<artifactId>prosper</artifactId>
-		</dependency>
+        <!-- test -->
+        <dependency>
+            <groupId>com.icfolson.aem.prosper</groupId>
+            <artifactId>prosper</artifactId>
+        </dependency>
         <dependency>
             <groupId>cglib</groupId>
             <artifactId>cglib-nodep</artifactId>
@@ -291,5 +291,5 @@
             <groupId>org.objenesis</groupId>
             <artifactId>objenesis</artifactId>
         </dependency>
-	</dependencies>
+    </dependencies>
 </project>
