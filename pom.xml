@@ -10,7 +10,7 @@
     <groupId>com.icfolson.aem.library</groupId>
     <artifactId>aem-library</artifactId>
     <packaging>pom</packaging>
-    <version>8.0.1-SNAPSHOT</version>
+    <version>8.0.1</version>
     <name>AEM Library</name>
     <description>The AEM Library provides a sturdy foundation for bootstrapping and simplifying AEM (Adobe CQ) projects.</description>
 
@@ -117,8 +117,8 @@
                     <version>3.5</version>
                     <configuration>
                         <compilerId>groovy-eclipse-compiler</compilerId>
-                        <source>1.7</source>
-                        <target>1.7</target>
+                        <source>1.8</source>
+                        <target>1.8</target>
                     </configuration>
                     <dependencies>
                         <dependency>
@@ -360,6 +360,7 @@
                         <link>http://fasterxml.github.io/jackson-databind/javadoc/2.3.0</link>
                     </links>
                     <quiet>true</quiet>
+                    <failOnError>false</failOnError>
                 </configuration>
             </plugin>
             <plugin>
