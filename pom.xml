@@ -10,7 +10,7 @@
     <groupId>com.icfolson.aem.library</groupId>
     <artifactId>aem-library</artifactId>
     <packaging>pom</packaging>
-    <version>8.0.2</version>
+    <version>8.0.3</version>
     <name>AEM Library</name>
     <description>The AEM Library provides a sturdy foundation for bootstrapping and simplifying AEM (Adobe CQ) projects.</description>
 
@@ -207,16 +207,6 @@
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>exec-maven-plugin</artifactId>
                     <version>1.4.0</version>
-                </plugin>
-                <plugin>
-                    <groupId>com.icfolson.maven.plugins</groupId>
-                    <artifactId>aem-package-maven-plugin</artifactId>
-                    <version>0.6.0</version>
-                </plugin>
-                <plugin>
-                    <groupId>com.icfolson.maven.plugins</groupId>
-                    <artifactId>osgi-bundle-status-maven-plugin</artifactId>
-                    <version>2.0.2</version>
                 </plugin>
                 <plugin>
                     <artifactId>maven-site-plugin</artifactId>

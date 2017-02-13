@@ -3,16 +3,15 @@
 <properties>
     <comment>FileVault Package Properties</comment>
     <entry key="createdBy">${aem.username}</entry>
-    <entry key="name">${project.artifactId}-${project.parent.version}</entry>
+    <entry key="name">${project.parent.artifactId}</entry>
     <entry key="lastModified">${timestamp}</entry>
     <entry key="lastModifiedBy">${aem.username}</entry>
     <entry key="created">${timestamp}</entry>
     <entry key="buildCount">1</entry>
+    <entry key="dependencies"/>
+    <entry key="group"/>
     <entry key="version">${project.version}</entry>
-    <entry key="dependencies" />
     <entry key="packageFormatVersion">2</entry>
     <entry key="lastWrapped">${timestamp}</entry>
-    <entry key="group" />
     <entry key="lastWrappedBy">${aem.username}</entry>
-    <entry key="path">/etc/packages/${project.artifactId}-${project.parent.version}</entry>
 </properties>
