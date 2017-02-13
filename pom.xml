@@ -10,7 +10,7 @@
     <groupId>com.icfolson.aem.library</groupId>
     <artifactId>aem-library</artifactId>
     <packaging>pom</packaging>
-    <version>8.0.3</version>
+    <version>8.0.4-SNAPSHOT</version>
     <name>AEM Library</name>
     <description>The AEM Library provides a sturdy foundation for bootstrapping and simplifying AEM (Adobe CQ) projects.</description>
 
