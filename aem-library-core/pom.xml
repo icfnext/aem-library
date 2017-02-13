@@ -4,7 +4,7 @@
     <parent>
         <groupId>com.icfolson.aem.library</groupId>
         <artifactId>aem-library</artifactId>
-        <version>8.0.3-SNAPSHOT</version>
+        <version>8.0.3</version>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
@@ -70,10 +70,14 @@
                     <instrumentation>
                         <excludes>
                             <exclude>com/icfolson/aem/library/core/bindings/*</exclude>
+                            <exclude>com/icfolson/aem/library/core/components/*</exclude>
                             <exclude>com/icfolson/aem/library/core/components/annotations/*</exclude>
                             <exclude>com/icfolson/aem/library/core/constants/*</exclude>
                             <exclude>com/icfolson/aem/library/core/filters/*</exclude>
                             <exclude>com/icfolson/aem/library/core/jmx/**/*</exclude>
+                            <exclude>com/icfolson/aem/library/core/node/*</exclude>
+                            <exclude>com/icfolson/aem/library/core/servlets/AbstractComponentServlet.class</exclude>
+                            <exclude>com/icfolson/aem/library/core/servlets/paragraphs/*</exclude>
                         </excludes>
                         <ignoreTrivial>true</ignoreTrivial>
                     </instrumentation>
