@@ -298,40 +298,51 @@ class DefaultPageDecoratorSpec extends AemLibrarySpec {
         }
 
         expect:
-        page.findAncestor(predicate).present == isPresent
+        page.findAncestor(predicate, excludeCurrentResource).present == isPresent
 
         where:
-        path                          | isPresent
-        "/content/citytechinc"        | true
-        "/content/citytechinc/child1" | true
-        "/content/other"              | false
+        path                          | excludeCurrentResource | isPresent
+        "/content/citytechinc"        | false                  | true
+        "/content/citytechinc/child1" | false                  | true
+        "/content/other"              | false                  | false
+        "/content/citytechinc"        | true                   | false
+        "/content/citytechinc/child1" | true                   | true
+        "/content/other"              | true                   | false
     }
 
     def "find ancestor with property"() {
         setup:
         def page = getPage(path)
-        def ancestorPageOptional = page.findAncestorWithProperty("jcr:title")
+        def ancestorPageOptional = page.findAncestorWithProperty("jcr:title", excludeCurrentResource)
 
         expect:
         ancestorPageOptional.get().path == ancestorPath
 
         where:
-        path                             | ancestorPath
-        "/content/inheritance"           | "/content/inheritance"
-        "/content/inheritance/child"     | "/content/inheritance"
-        "/content/inheritance/child/sub" | "/content/inheritance"
+        path                             | excludeCurrentResource | ancestorPath
+        "/content/inheritance"           | false                  | "/content/inheritance"
+        "/content/inheritance/child"     | false                  | "/content/inheritance"
+        "/content/inheritance/child/sub" | false                  | "/content/inheritance"
+        "/content/inheritance/child"     | true                   | "/content/inheritance"
+        "/content/inheritance/child/sub" | true                   | "/content/inheritance"
     }
 
     def "find ancestor returns absent"() {
         setup:
         def page = getPage(path)
-        def ancestorPageOptional = page.findAncestorWithProperty("jcr:description")
+        def ancestorPageOptional = page.findAncestorWithProperty("jcr:description", excludeCurrentResource)
 
         expect:
         !ancestorPageOptional.present
 
         where:
-        path << ["/content/inheritance", "/content/inheritance/child", "/content/inheritance/child/sub"]
+        path                             | excludeCurrentResource
+        "/content/inheritance"           | false
+        "/content/inheritance/child"     | false
+        "/content/inheritance/child/sub" | false
+        "/content/inheritance"           | true
+        "/content/inheritance/child"     | true
+        "/content/inheritance/child/sub" | true
     }
 
     def "find ancestor with property value"() {
@@ -340,6 +351,9 @@ class DefaultPageDecoratorSpec extends AemLibrarySpec {
 
         expect:
         page.findAncestorWithPropertyValue("jcr:title", "Inheritance").get().path == "/content/inheritance"
+
+        and:
+        page.findAncestorWithPropertyValue("jcr:title", "Inheritance", true).get().path == "/content/inheritance"
     }
 
     def "find ancestor with property value returns absent"() {
