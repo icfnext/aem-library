@@ -1,8 +1,8 @@
 package com.icfolson.aem.library.core.node.impl
 
+import com.google.common.base.Predicate
 import com.icfolson.aem.library.api.node.ComponentNode
 import com.icfolson.aem.library.core.node.predicates.ComponentNodePropertyExistsPredicate
-import com.google.common.base.Predicate
 import com.icfolson.aem.library.core.specs.AemLibrarySpec
 import spock.lang.Unroll
 
@@ -131,16 +131,27 @@ class DefaultComponentNodeSpec extends AemLibrarySpec {
     def "find ancestor with property"() {
         setup:
         def node = getComponentNode(path)
-        def ancestorNodeOptional = node.findAncestorWithProperty("jcr:title")
+        def ancestorNodeOptional = node.findAncestorWithProperty("jcr:title", excludeCurrentResource)
 
         expect:
         ancestorNodeOptional.get().path == ancestorPath
 
         where:
-        path                                               | ancestorPath
-        "/content/inheritance/jcr:content"                 | "/content/inheritance/jcr:content"
-        "/content/inheritance/child/jcr:content"           | "/content/inheritance/jcr:content"
-        "/content/inheritance/child/jcr:content/component" | "/content/inheritance/jcr:content/component"
+        path                                               | excludeCurrentResource | ancestorPath
+        "/content/inheritance/jcr:content"                 | false                  | "/content/inheritance/jcr:content"
+        "/content/inheritance/child/jcr:content"           | false                  | "/content/inheritance/jcr:content"
+        "/content/inheritance/child/jcr:content/component" | false                  | "/content/inheritance/jcr:content/component"
+        "/content/inheritance/child/jcr:content"           | true                   | "/content/inheritance/jcr:content"
+        "/content/inheritance/child/jcr:content/component" | true                   | "/content/inheritance/jcr:content/component"
+    }
+
+    def "find ancestor with property returns absent when current resource excluded"() {
+        setup:
+        def node = getComponentNode("/content/inheritance/jcr:content")
+        def ancestorNodeOptional = node.findAncestorWithProperty("jcr:title", true)
+
+        expect:
+        !ancestorNodeOptional.present
     }
 
     def "find ancestor returns absent"() {

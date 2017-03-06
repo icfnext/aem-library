@@ -17,7 +17,7 @@ class ValueMapFromRequestInjector implements Injector, ModelTrait {
 
     @Override
     String getName() {
-        "valuemap"
+        "valuemap-request"
     }
 
     @Override

@@ -1,13 +1,13 @@
 package com.icfolson.aem.library.core.node;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.google.common.base.Optional;
+import com.google.common.base.Predicate;
 import com.icfolson.aem.library.api.link.Link;
 import com.icfolson.aem.library.api.link.builders.LinkBuilder;
 import com.icfolson.aem.library.api.node.BasicNode;
 import com.icfolson.aem.library.api.node.ComponentNode;
 import com.icfolson.aem.library.api.page.PageDecorator;
-import com.fasterxml.jackson.annotation.JsonAutoDetect;
-import com.google.common.base.Optional;
-import com.google.common.base.Predicate;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.api.resource.ValueMap;
 
@@ -42,14 +42,32 @@ public abstract class DelegateComponentNode implements ComponentNode {
     }
 
     @Override
+    public Optional<ComponentNode> findAncestor(final Predicate<ComponentNode> predicate,
+        final boolean excludeCurrentResource) {
+        return componentNode.findAncestor(predicate, excludeCurrentResource);
+    }
+
+    @Override
     public final Optional<ComponentNode> findAncestorWithProperty(final String propertyName) {
         return componentNode.findAncestorWithProperty(propertyName);
+    }
+
+    @Override
+    public Optional<ComponentNode> findAncestorWithProperty(final String propertyName,
+        final boolean excludeCurrentResource) {
+        return componentNode.findAncestorWithProperty(propertyName, excludeCurrentResource);
     }
 
     @Override
     public final <T> Optional<ComponentNode> findAncestorWithPropertyValue(final String propertyName,
         final T propertyValue) {
         return componentNode.findAncestorWithPropertyValue(propertyName, propertyValue);
+    }
+
+    @Override
+    public <V> Optional<ComponentNode> findAncestorWithPropertyValue(final String propertyName, final V propertyValue,
+        final boolean excludeCurrentResource) {
+        return componentNode.findAncestorWithPropertyValue(propertyName, propertyValue, excludeCurrentResource);
     }
 
     @Override

@@ -326,7 +326,10 @@ final class DefaultBasicNode extends AbstractNode implements BasicNode {
 
     @Override
     String toString() {
-        Objects.toStringHelper(this).add("path", path).add("properties", Maps.newHashMap(asMap())).toString()
+        Objects.toStringHelper(this)
+            .add("path", path)
+            .add("properties", Maps.newHashMap(asMap()))
+            .toString()
     }
 
     private int getIndexForPredicate(Predicate<Resource> resourceTypePredicate) {

@@ -347,13 +347,31 @@ public abstract class AbstractComponent implements ComponentNode {
     }
 
     @Override
+    public Optional<ComponentNode> findAncestor(final Predicate<ComponentNode> predicate,
+        final boolean excludeCurrentResource) {
+        return componentNode.findAncestor(predicate, excludeCurrentResource);
+    }
+
+    @Override
     public Optional<ComponentNode> findAncestorWithProperty(final String propertyName) {
         return componentNode.findAncestorWithProperty(propertyName);
     }
 
     @Override
+    public Optional<ComponentNode> findAncestorWithProperty(final String propertyName,
+        final boolean excludeCurrentResource) {
+        return componentNode.findAncestorWithProperty(propertyName, excludeCurrentResource);
+    }
+
+    @Override
     public <V> Optional<ComponentNode> findAncestorWithPropertyValue(final String propertyName, final V propertyValue) {
         return componentNode.findAncestorWithPropertyValue(propertyName, propertyValue);
+    }
+
+    @Override
+    public <V> Optional<ComponentNode> findAncestorWithPropertyValue(final String propertyName, final V propertyValue,
+        final boolean excludeCurrentResource) {
+        return componentNode.findAncestorWithPropertyValue(propertyName, propertyValue, excludeCurrentResource);
     }
 
     @Override

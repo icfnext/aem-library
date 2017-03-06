@@ -1,13 +1,5 @@
 package com.icfolson.aem.library.core.node.impl
 
-import com.icfolson.aem.library.api.link.Link
-import com.icfolson.aem.library.api.node.BasicNode
-import com.icfolson.aem.library.api.node.ComponentNode
-import com.icfolson.aem.library.api.page.PageDecorator
-import com.icfolson.aem.library.api.page.PageManagerDecorator
-import com.icfolson.aem.library.core.node.predicates.ComponentNodePropertyExistsPredicate
-import com.icfolson.aem.library.core.node.predicates.ComponentNodePropertyValuePredicate
-import com.icfolson.aem.library.core.node.predicates.ComponentNodeResourceTypePredicate
 import com.day.cq.commons.DownloadResource
 import com.day.cq.commons.inherit.HierarchyNodeInheritanceValueMap
 import com.day.cq.commons.inherit.InheritanceValueMap
@@ -19,20 +11,26 @@ import com.google.common.base.Optional
 import com.google.common.base.Predicate
 import com.google.common.collect.FluentIterable
 import com.google.common.collect.Maps
-import groovy.util.logging.Slf4j
+import com.icfolson.aem.library.api.link.Link
+import com.icfolson.aem.library.api.node.BasicNode
+import com.icfolson.aem.library.api.node.ComponentNode
+import com.icfolson.aem.library.api.page.PageDecorator
+import com.icfolson.aem.library.api.page.PageManagerDecorator
+import com.icfolson.aem.library.core.node.predicates.ComponentNodePropertyExistsPredicate
+import com.icfolson.aem.library.core.node.predicates.ComponentNodePropertyValuePredicate
+import com.icfolson.aem.library.core.node.predicates.ComponentNodeResourceTypePredicate
 import org.apache.commons.lang3.builder.EqualsBuilder
 import org.apache.commons.lang3.builder.HashCodeBuilder
 import org.apache.sling.api.resource.Resource
 
 import java.lang.reflect.Array
 
-import static com.icfolson.aem.library.core.constants.ComponentConstants.DEFAULT_IMAGE_NAME
-import static com.icfolson.aem.library.core.link.impl.LinkFunctions.LINK_TO_HREF
 import static NodeFunctions.RESOURCE_TO_BASIC_NODE
 import static NodeFunctions.RESOURCE_TO_COMPONENT_NODE
 import static com.google.common.base.Preconditions.checkNotNull
+import static com.icfolson.aem.library.core.constants.ComponentConstants.DEFAULT_IMAGE_NAME
+import static com.icfolson.aem.library.core.link.impl.LinkFunctions.LINK_TO_HREF
 
-@Slf4j("LOG")
 final class DefaultComponentNode extends AbstractNode implements ComponentNode {
 
     @Delegate
@@ -59,7 +57,12 @@ final class DefaultComponentNode extends AbstractNode implements ComponentNode {
 
     @Override
     Optional<ComponentNode> findAncestor(Predicate<ComponentNode> predicate) {
-        findAncestorForPredicate(predicate)
+        findAncestorForPredicate(predicate, false)
+    }
+
+    @Override
+    Optional<ComponentNode> findAncestor(Predicate<ComponentNode> predicate, boolean excludeCurrentResource) {
+        findAncestorForPredicate(predicate, excludeCurrentResource)
     }
 
     @Override
@@ -79,12 +82,24 @@ final class DefaultComponentNode extends AbstractNode implements ComponentNode {
 
     @Override
     Optional<ComponentNode> findAncestorWithProperty(String propertyName) {
-        findAncestorForPredicate(new ComponentNodePropertyExistsPredicate(propertyName))
+        findAncestorForPredicate(new ComponentNodePropertyExistsPredicate(propertyName), false)
+    }
+
+    @Override
+    Optional<ComponentNode> findAncestorWithProperty(String propertyName, boolean excludeCurrentResource) {
+        findAncestorForPredicate(new ComponentNodePropertyExistsPredicate(propertyName), excludeCurrentResource)
     }
 
     @Override
     <V> Optional<ComponentNode> findAncestorWithPropertyValue(String propertyName, V propertyValue) {
-        findAncestorForPredicate(new ComponentNodePropertyValuePredicate<V>(propertyName, propertyValue))
+        findAncestorForPredicate(new ComponentNodePropertyValuePredicate<V>(propertyName, propertyValue), false)
+    }
+
+    @Override
+    <V> Optional<ComponentNode> findAncestorWithPropertyValue(String propertyName, V propertyValue,
+        boolean excludeCurrentResource) {
+        findAncestorForPredicate(new ComponentNodePropertyValuePredicate<V>(propertyName, propertyValue),
+            excludeCurrentResource)
     }
 
     @Override
@@ -261,26 +276,25 @@ final class DefaultComponentNode extends AbstractNode implements ComponentNode {
 
     @Override
     String toString() {
-        Objects.toStringHelper(this).add("path", getPath()).add("properties", Maps.newHashMap(asMap())).toString()
+        Objects.toStringHelper(this)
+            .add("path", getPath())
+            .add("properties", Maps.newHashMap(asMap()))
+            .toString()
     }
 
     // internals
 
-    private Optional<ComponentNode> findAncestorForPredicate(Predicate<ComponentNode> predicate) {
-        def pageManager = resource.resourceResolver.adaptTo(PageManagerDecorator)
-        def containingPage = pageManager.getContainingPage(resource)
+    private Optional<ComponentNode> findAncestorForPredicate(Predicate<ComponentNode> predicate,
+        boolean excludeCurrentResource) {
+        def containingPage = resource.resourceResolver.adaptTo(PageManagerDecorator).getContainingPage(resource)
 
-        def path = resource.path
-
-        def relativePath = resource.name.equals(JcrConstants.JCR_CONTENT) ? "" : path.substring(
+        def relativePath = resource.name == JcrConstants.JCR_CONTENT ? "" : resource.path.substring(
             containingPage.contentResource.path.length() + 1)
-
-        LOG.debug("relative path = {}", relativePath)
 
         def componentNodeFunction = new Function<PageDecorator, Optional<ComponentNode>>() {
             @Override
             Optional<ComponentNode> apply(PageDecorator page) {
-                relativePath.isEmpty() ? page.componentNode : page.getComponentNode(relativePath)
+                relativePath.empty ? page.componentNode : page.getComponentNode(relativePath)
             }
         }
 
@@ -293,7 +307,8 @@ final class DefaultComponentNode extends AbstractNode implements ComponentNode {
             }
         }
 
-        containingPage.findAncestor(pagePredicate).transform(new Function<PageDecorator, ComponentNode>() {
+        containingPage.findAncestor(pagePredicate, excludeCurrentResource)
+            .transform(new Function<PageDecorator, ComponentNode>() {
             @Override
             ComponentNode apply(PageDecorator page) {
                 componentNodeFunction.apply(page).get()
@@ -302,8 +317,7 @@ final class DefaultComponentNode extends AbstractNode implements ComponentNode {
     }
 
     private Optional<Resource> findChildResourceInherited(String relativePath) {
-        def pageManager = resource.resourceResolver.adaptTo(PageManagerDecorator)
-        def containingPage = pageManager.getContainingPage(resource)
+        def containingPage = resource.resourceResolver.adaptTo(PageManagerDecorator).getContainingPage(resource)
 
         def builder = new StringBuilder()
 
@@ -317,8 +331,6 @@ final class DefaultComponentNode extends AbstractNode implements ComponentNode {
 
         // path relative to jcr:content
         def resourcePath = builder.toString()
-
-        LOG.debug("child resource relative path = {}", resourcePath)
 
         def predicate = new Predicate<PageDecorator>() {
             @Override
