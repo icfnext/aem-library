@@ -114,7 +114,7 @@
             <plugins>
                 <plugin>
                     <artifactId>maven-compiler-plugin</artifactId>
-                    <version>3.5</version>
+                    <version>3.6.1</version>
                     <configuration>
                         <compilerId>groovy-eclipse-compiler</compilerId>
                         <source>1.8</source>
@@ -341,8 +341,8 @@
                         com.icfolson.aem.library.core.bindings.*
                     </excludePackageNames>
                     <links>
-                        <link>http://docs.oracle.com/javase/7/docs/api/</link>
-                        <link>http://docs.oracle.com/javaee/7/api/</link>
+                        <link>http://docs.oracle.com/javase/8/docs/api/</link>
+                        <link>http://docs.oracle.com/javaee/8/api/</link>
                         <link>http://google.github.io/guava/releases/15.0/api/docs/</link>
                         <link>https://docs.adobe.com/content/docs/en/spec/jsr170/javadocs/jcr-2.0</link>
                         <link>http://sling.apache.org/apidocs/sling7</link>
@@ -428,18 +428,6 @@
             </dependency>
 
             <!-- provided -->
-            <dependency>
-                <groupId>org.apache.sling</groupId>
-                <artifactId>org.apache.sling.models.api</artifactId>
-                <version>1.2.0</version>
-                <scope>provided</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.apache.sling</groupId>
-                <artifactId>org.apache.sling.models.impl</artifactId>
-                <version>1.2.0</version>
-                <scope>provided</scope>
-            </dependency>
             <dependency>
                 <groupId>com.fasterxml.jackson.core</groupId>
                 <artifactId>jackson-annotations</artifactId>
