@@ -12,8 +12,7 @@ import com.icfolson.aem.prosper.specs.ProsperSpec
 abstract class AemLibrarySpec extends ProsperSpec {
 
     def setupSpec() {
-        slingContext.registerAdapterFactory(new AemLibraryAdapterFactory(), AemLibraryAdapterFactory.ADAPTABLE_CLASSES,
-            AemLibraryAdapterFactory.ADAPTER_CLASSES)
+        slingContext.registerAdapterFactory(new AemLibraryAdapterFactory())
     }
 
     ComponentNode getComponentNode(String path) {

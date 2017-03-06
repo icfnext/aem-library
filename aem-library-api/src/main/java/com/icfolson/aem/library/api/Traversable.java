@@ -21,12 +21,32 @@ public interface Traversable<T> {
     Optional<T> findAncestor(Predicate<T> predicate);
 
     /**
+     * Find the first ancestor resource that matches the given predicate condition.
+     *
+     * @param predicate predicate to match ancestor resources against
+     * @param excludeCurrentResource if true, the current resource will be excluded (i.e. even if the current resource
+     * matches the predicate criteria, it will not be returned)
+     * @return <code>Optional</code> resource that matches the predicate condition
+     */
+    Optional<T> findAncestor(Predicate<T> predicate, boolean excludeCurrentResource);
+
+    /**
      * Find the first ancestor resource containing the given property name.
      *
      * @param propertyName property name to find on ancestor resources
      * @return <code>Optional</code> resource that contains the property
      */
     Optional<T> findAncestorWithProperty(String propertyName);
+
+    /**
+     * Find the first ancestor resource containing the given property name.
+     *
+     * @param propertyName property name to find on ancestor resources
+     * @param excludeCurrentResource if true, the current resource will be excluded (i.e. even if the current resource
+     * matches the predicate criteria, it will not be returned)
+     * @return <code>Optional</code> resource that contains the property
+     */
+    Optional<T> findAncestorWithProperty(String propertyName, boolean excludeCurrentResource);
 
     /**
      * Find the first ancestor resource where the given property name has the specified value.
@@ -38,6 +58,17 @@ public interface Traversable<T> {
      */
     <V> Optional<T> findAncestorWithPropertyValue(String propertyName, V propertyValue);
 
+    /**
+     * Find the first ancestor resource where the given property name has the specified value.
+     *
+     * @param propertyName property name to find on ancestor resources
+     * @param propertyValue value of named property to match
+     * @param excludeCurrentResource if true, the current resource will be excluded (i.e. even if the current resource
+     * matches the predicate criteria, it will not be returned)
+     * @param <V> type of value
+     * @return <code>Optional</code> resource that contains the property value
+     */
+    <V> Optional<T> findAncestorWithPropertyValue(String propertyName, V propertyValue, boolean excludeCurrentResource);
 
     /**
      * Get a list of descendant resources that match the given predicate condition.

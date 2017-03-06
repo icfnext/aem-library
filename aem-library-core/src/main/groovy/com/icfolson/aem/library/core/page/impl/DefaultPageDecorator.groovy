@@ -1,6 +1,13 @@
 package com.icfolson.aem.library.core.page.impl
 
+import com.day.cq.commons.Filter
+import com.day.cq.wcm.api.NameConstants
+import com.day.cq.wcm.api.Page
 import com.day.cq.wcm.commons.DeepResourceIterator
+import com.google.common.base.Objects
+import com.google.common.base.Optional
+import com.google.common.base.Predicate
+import com.google.common.base.Predicates
 import com.icfolson.aem.library.api.link.ImageLink
 import com.icfolson.aem.library.api.link.Link
 import com.icfolson.aem.library.api.link.NavigationLink
@@ -12,34 +19,27 @@ import com.icfolson.aem.library.api.page.PageManagerDecorator
 import com.icfolson.aem.library.api.page.enums.TitleType
 import com.icfolson.aem.library.core.link.builders.factory.LinkBuilderFactory
 import com.icfolson.aem.library.core.node.predicates.ComponentNodePropertyExistsPredicate
-import com.day.cq.commons.Filter
-import com.day.cq.wcm.api.NameConstants
-import com.day.cq.wcm.api.Page
-import com.google.common.base.Objects
-import com.google.common.base.Optional
-import com.google.common.base.Predicate
-import com.google.common.base.Predicates
 import com.icfolson.aem.library.core.node.predicates.ComponentNodePropertyValuePredicate
 import org.apache.commons.lang3.builder.EqualsBuilder
 import org.apache.commons.lang3.builder.HashCodeBuilder
 import org.apache.sling.api.resource.Resource
 import org.apache.sling.api.resource.ValueMap
 
-import static com.icfolson.aem.library.core.node.impl.NodeFunctions.RESOURCE_TO_COMPONENT_NODE
 import static com.google.common.base.Preconditions.checkNotNull
+import static com.icfolson.aem.library.core.node.impl.NodeFunctions.RESOURCE_TO_COMPONENT_NODE
 
 final class DefaultPageDecorator implements PageDecorator {
 
     private static final Predicate<PageDecorator> ALL = Predicates.alwaysTrue()
 
-    private static final def ALL_PAGES = new Filter<Page>() {
+    private static final Filter<Page> ALL_PAGES = new Filter<Page>() {
         @Override
         boolean includes(Page page) {
             true
         }
     }
 
-    private static final def DISPLAYABLE_ONLY = new Predicate<PageDecorator>() {
+    private static final Predicate<PageDecorator> DISPLAYABLE_ONLY = new Predicate<PageDecorator>() {
         @Override
         boolean apply(PageDecorator page) {
             page.contentResource && !page.hideInNav
@@ -213,7 +213,8 @@ final class DefaultPageDecorator implements PageDecorator {
 
     @Override
     Optional<String> getAsHrefInherited(String propertyName, boolean strict, boolean mapped) {
-        getInternal({ componentNode -> componentNode.getAsHrefInherited(propertyName, strict, mapped) }, Optional.absent())
+        getInternal({ componentNode -> componentNode.getAsHrefInherited(propertyName, strict, mapped) },
+            Optional.absent())
     }
 
     @Override
@@ -228,7 +229,8 @@ final class DefaultPageDecorator implements PageDecorator {
 
     @Override
     Optional<Link> getAsLinkInherited(String propertyName, boolean strict, boolean mapped) {
-        getInternal({ componentNode -> componentNode.getAsLinkInherited(propertyName, strict, mapped) }, Optional.absent())
+        getInternal({ componentNode -> componentNode.getAsLinkInherited(propertyName, strict, mapped) },
+            Optional.absent())
     }
 
     @Override
@@ -278,7 +280,12 @@ final class DefaultPageDecorator implements PageDecorator {
 
     @Override
     Optional<PageDecorator> findAncestor(Predicate<PageDecorator> predicate) {
-        PageDecorator page = this
+        findAncestor(predicate, false)
+    }
+
+    @Override
+    Optional<PageDecorator> findAncestor(Predicate<PageDecorator> predicate, boolean excludeCurrentResource) {
+        PageDecorator page = excludeCurrentResource ? parent : this
         PageDecorator ancestorPage = null
 
         while (page) {
@@ -295,12 +302,24 @@ final class DefaultPageDecorator implements PageDecorator {
 
     @Override
     Optional<PageDecorator> findAncestorWithProperty(String propertyName) {
-        findAncestorForPredicate(new ComponentNodePropertyExistsPredicate(propertyName))
+        findAncestorForPredicate(new ComponentNodePropertyExistsPredicate(propertyName), false)
+    }
+
+    @Override
+    Optional<PageDecorator> findAncestorWithProperty(String propertyName, boolean excludeCurrentResource) {
+        findAncestorForPredicate(new ComponentNodePropertyExistsPredicate(propertyName), excludeCurrentResource)
     }
 
     @Override
     <V> Optional<PageDecorator> findAncestorWithPropertyValue(String propertyName, V propertyValue) {
-        findAncestorForPredicate(new ComponentNodePropertyValuePredicate<V>(propertyName, propertyValue))
+        findAncestorForPredicate(new ComponentNodePropertyValuePredicate<V>(propertyName, propertyValue), false)
+    }
+
+    @Override
+    <V> Optional<PageDecorator> findAncestorWithPropertyValue(String propertyName, V propertyValue,
+        boolean excludeCurrentResource) {
+        findAncestorForPredicate(new ComponentNodePropertyValuePredicate<V>(propertyName, propertyValue),
+            excludeCurrentResource)
     }
 
     @Override
@@ -490,8 +509,9 @@ final class DefaultPageDecorator implements PageDecorator {
         componentNodeOptional.present ? closure.call(componentNodeOptional.get()) : defaultValue
     }
 
-    private Optional<PageDecorator> findAncestorForPredicate(Predicate<ComponentNode> predicate) {
-        PageDecorator page = this
+    private Optional<PageDecorator> findAncestorForPredicate(Predicate<ComponentNode> predicate,
+        boolean excludeCurrentResource) {
+        PageDecorator page = excludeCurrentResource ? parent : this
         PageDecorator ancestorPage = null
 
         while (page) {
