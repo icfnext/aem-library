@@ -1,6 +1,6 @@
 package com.icfolson.aem.library.core.tags
 
-import com.day.cq.widget.HtmlLibraryManager
+import com.adobe.granite.ui.clientlibs.HtmlLibraryManager
 import groovy.util.logging.Slf4j
 import org.apache.sling.api.SlingHttpServletRequest
 import org.apache.sling.api.scripting.SlingScriptHelper
