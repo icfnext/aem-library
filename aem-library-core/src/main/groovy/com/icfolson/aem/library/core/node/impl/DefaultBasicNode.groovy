@@ -153,6 +153,10 @@ final class DefaultBasicNode extends AbstractNode implements BasicNode {
         path.substring(1).replaceAll("/", "-")
     }
 
+    Optional<String> getImageReference(boolean isSelf) {
+        Optional.fromNullable(properties.get(DownloadResource.PN_REFERENCE, String))
+    }
+
     @Override
     Optional<String> getImageReference() {
         getImageReference(DEFAULT_IMAGE_NAME)

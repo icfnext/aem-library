@@ -11,6 +11,8 @@ import java.util.stream.Collectors;
  */
 public final class Option {
 
+    public static final Option EMPTY = new Option("", "");
+
     public static final Comparator<Option> ALPHA = Comparator.comparing(Option:: getText);
 
     public static final Comparator<Option> ALPHA_IGNORE_CASE = (option1, option2) -> option1.getText()

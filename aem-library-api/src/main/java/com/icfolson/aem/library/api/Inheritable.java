@@ -125,6 +125,11 @@ public interface Inheritable {
     /**
      * @return <code>Optional</code> inherited image reference
      */
+    Optional<String> getImageReferenceInherited(boolean isSelf);
+
+    /**
+     * @return <code>Optional</code> inherited image reference
+     */
     Optional<String> getImageReferenceInherited();
 
     /**
