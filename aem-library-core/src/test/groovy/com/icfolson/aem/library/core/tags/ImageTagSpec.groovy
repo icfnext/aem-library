@@ -2,6 +2,7 @@ package com.icfolson.aem.library.core.tags
 
 import com.icfolson.aem.library.core.specs.AemLibrarySpec
 import com.icfolson.aem.prosper.traits.JspTagTrait
+import org.apache.sling.xss.XSSAPI
 import spock.lang.Unroll
 
 @Unroll
@@ -32,6 +33,10 @@ class ImageTagSpec extends AemLibrarySpec implements JspTagTrait {
                 }
             }
         }
+
+        slingContext.registerResourceResolverAdapter(XSSAPI, { resourceResolver ->
+            [getValidHref: { href -> href }, encodeForHTMLAttr: { value -> value }] as XSSAPI
+        })
     }
 
     def "draw image for current resource"() {
