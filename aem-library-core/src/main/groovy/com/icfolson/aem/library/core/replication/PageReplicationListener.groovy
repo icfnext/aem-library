@@ -1,7 +1,5 @@
 package com.icfolson.aem.library.core.replication
 
-import com.icfolson.aem.library.core.services.OsgiConfiguration
-import com.day.cq.replication.ReplicationAction
 import com.day.cq.replication.ReplicationActionType
 import com.day.cq.replication.ReplicationException
 import com.day.cq.replication.ReplicationStatus
@@ -9,16 +7,13 @@ import com.day.cq.replication.Replicator
 import com.day.cq.wcm.api.Page
 import com.day.cq.wcm.api.PageManager
 import groovy.util.logging.Slf4j
-import org.apache.felix.scr.annotations.Activate
-import org.apache.felix.scr.annotations.Component
-import org.apache.felix.scr.annotations.Deactivate
-import org.apache.felix.scr.annotations.Modified
-import org.apache.felix.scr.annotations.Property
-import org.apache.felix.scr.annotations.Reference
-import org.apache.felix.scr.annotations.Service
 import org.apache.sling.api.resource.ResourceResolver
 import org.apache.sling.api.resource.ResourceResolverFactory
-import org.osgi.service.event.EventConstants
+import org.osgi.service.component.annotations.Activate
+import org.osgi.service.component.annotations.Component
+import org.osgi.service.component.annotations.Deactivate
+import org.osgi.service.component.annotations.Modified
+import org.osgi.service.component.annotations.Reference
 import org.osgi.service.event.EventHandler
 
 import javax.jcr.Session
@@ -26,30 +21,27 @@ import javax.jcr.Session
 /**
  * Replication listener that ensures ancestor pages are activated when any page receives an activation request.
  */
-@Component(immediate = true, metatype = true, label = "AEM Library Page Replication Listener")
-@Service(EventHandler)
-@Property(name = EventConstants.EVENT_TOPIC, value = ReplicationAction.EVENT_TOPIC, propertyPrivate = true)
+@Component(immediate = true, service = EventHandler, property = [
+    "event.topics=com/day/cq/replication"
+])
 @Slf4j("LOG")
 class PageReplicationListener extends AbstractReplicationListener {
 
-    @Property(label = "Enabled?", description = "Enable this replication listener.", boolValue = false)
-    public static final String ENABLED = "enabled"
+    @Reference
+    protected ResourceResolverFactory resourceResolverFactory
 
     @Reference
-    ResourceResolverFactory resourceResolverFactory
-
-    @Reference
-    Replicator replicator
+    protected Replicator replicator
 
     private Session session
 
     private ResourceResolver resourceResolver
 
-    private boolean enabled
+    private PageReplicationListenerConfiguration configuration
 
     @Override
     protected void handleActivate(String path) {
-        if (enabled) {
+        if (configuration.enabled()) {
             def page = resourceResolver.adaptTo(PageManager).getPage(path)
 
             if (page) {
@@ -65,7 +57,7 @@ class PageReplicationListener extends AbstractReplicationListener {
                     parent = parent.parent
                 }
             } else {
-                LOG.debug "activated path is not a page = {}", path
+                LOG.debug("activated path is not a page = {}", path)
             }
         }
     }
@@ -82,16 +74,16 @@ class PageReplicationListener extends AbstractReplicationListener {
 
     @SuppressWarnings("deprecation")
     @Activate
-    void activate(Map<String, Object> properties) {
+    void activate(PageReplicationListenerConfiguration configuration) {
         resourceResolver = resourceResolverFactory.getAdministrativeResourceResolver(null)
         session = resourceResolver.adaptTo(Session)
 
-        modified(properties)
+        modified(configuration)
     }
 
     @Modified
-    void modified(Map<String, Object> properties) {
-        enabled = new OsgiConfiguration(properties).getAsBoolean(ENABLED, false)
+    void modified(PageReplicationListenerConfiguration configuration) {
+        this.configuration = configuration
     }
 
     @Deactivate
@@ -103,12 +95,12 @@ class PageReplicationListener extends AbstractReplicationListener {
     private void activatePage(Page page) {
         def path = page.path
 
-        LOG.info "activating page = {}", path
+        LOG.info("activating page = {}", path)
 
         try {
             replicator.replicate(session, ReplicationActionType.ACTIVATE, path)
         } catch (ReplicationException e) {
-            LOG.error "error replicating page = $path", e
+            LOG.error("error replicating page = $path", e)
         }
     }
 }

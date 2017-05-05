@@ -31,7 +31,7 @@ public abstract class AbstractPageEventListener implements EventListener {
 
     @Override
     public final void onEvent(final EventIterator events) {
-        final Set<String> pagePaths = new HashSet<String>();
+        final Set<String> pagePaths = new HashSet<>();
 
         while (events.hasNext()) {
             final Event event = events.nextEvent();

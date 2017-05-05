@@ -6,10 +6,10 @@ import com.day.cq.replication.ReplicationException
 import com.day.cq.replication.Replicator
 import com.icfolson.aem.library.core.services.SelectiveReplicationService
 import com.icfolson.aem.library.core.servlets.AbstractJsonResponseServlet
-import org.apache.felix.scr.annotations.Reference
 import org.apache.felix.scr.annotations.sling.SlingServlet
 import org.apache.sling.api.SlingHttpServletRequest
 import org.apache.sling.api.SlingHttpServletResponse
+import org.osgi.service.component.annotations.Reference
 
 import javax.jcr.Session
 import javax.servlet.ServletException
@@ -26,13 +26,13 @@ class SelectiveReplicationServlet extends AbstractJsonResponseServlet {
     private static final String PARAMETER_PATHS = "paths"
 
     @Reference
-    AgentManager agentManager
+    protected AgentManager agentManager
 
     @Reference
-    Replicator replicator
+    protected Replicator replicator
 
     @Reference
-    SelectiveReplicationService replicationService
+    protected SelectiveReplicationService replicationService
 
     @Override
     protected void doPost(SlingHttpServletRequest request, SlingHttpServletResponse response) throws

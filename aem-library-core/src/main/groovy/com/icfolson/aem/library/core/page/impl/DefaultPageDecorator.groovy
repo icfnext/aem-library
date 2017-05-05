@@ -375,15 +375,10 @@ final class DefaultPageDecorator implements PageDecorator {
 
     @Override
     Iterator<PageDecorator> listChildPages(Predicate<PageDecorator> predicate, boolean deep) {
-        def iterator
+        def resource = delegate.adaptTo(Resource)
+        def iterator = deep ? new DeepResourceIterator(resource) : resource.listChildren()
 
-        if (deep) {
-            iterator = new PageDecoratorIterator(new DeepResourceIterator(delegate.adaptTo(Resource)), predicate)
-        } else {
-            iterator = new PageDecoratorIterator(delegate.adaptTo(Resource).listChildren(), predicate)
-        }
-
-        iterator
+        new PageDecoratorIterator(iterator, predicate)
     }
 
     @Override

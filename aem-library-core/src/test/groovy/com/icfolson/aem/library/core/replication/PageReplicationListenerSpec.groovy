@@ -1,14 +1,15 @@
 package com.icfolson.aem.library.core.replication
 
-import com.icfolson.aem.library.core.utils.PathUtils
 import com.day.cq.replication.ReplicationActionType
 import com.day.cq.replication.ReplicationStatus
 import com.day.cq.replication.Replicator
 import com.icfolson.aem.library.core.specs.AemLibrarySpec
+import com.icfolson.aem.library.core.utils.PathUtils
 import org.apache.sling.api.resource.Resource
 import org.apache.sling.api.resource.ResourceResolverFactory
 import spock.lang.Shared
 
+@PageReplicationListenerConfiguration(enabled = true)
 class PageReplicationListenerSpec extends AemLibrarySpec {
 
     static final def STATUS_ACTIVE = [isActivated: { true }] as ReplicationStatus
@@ -52,7 +53,10 @@ class PageReplicationListenerSpec extends AemLibrarySpec {
                 this.resourceResolver
             }] as ResourceResolverFactory
             replicator = Mock(Replicator)
-            activate([(ENABLED): true])
+
+            def configuration = this.class.getAnnotation(PageReplicationListenerConfiguration)
+
+            activate(configuration)
         }
     }
 
