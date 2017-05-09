@@ -34,7 +34,6 @@
                         <Bundle-Name>${project.name}</Bundle-Name>
                         <Bundle-Vendor>${project.parent.organization.name}</Bundle-Vendor>
                         <Export-Package>!*.impl,com.icfolson.aem.library.core.*</Export-Package>
-                        <!--<Import-Package>!*</Import-Package>-->
                         <DynamicImport-Package>*</DynamicImport-Package>
                         <Require-Bundle>org.apache.sling.models.api</Require-Bundle>
                         <_plugin>org.apache.felix.scrplugin.bnd.SCRDescriptorBndPlugin;destdir=${project.build.outputDirectory};</_plugin>
