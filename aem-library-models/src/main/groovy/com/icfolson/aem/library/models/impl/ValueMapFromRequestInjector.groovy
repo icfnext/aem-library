@@ -1,18 +1,15 @@
 package com.icfolson.aem.library.models.impl
 
-import org.apache.felix.scr.annotations.Component
-import org.apache.felix.scr.annotations.Property
-import org.apache.felix.scr.annotations.Service
 import org.apache.sling.models.spi.DisposalCallbackRegistry
 import org.apache.sling.models.spi.Injector
-import org.osgi.framework.Constants
+import org.osgi.service.component.annotations.Component
 
 import java.lang.reflect.AnnotatedElement
 import java.lang.reflect.Type
 
-@Component
-@Service(Injector)
-@Property(name = Constants.SERVICE_RANKING, intValue = 2500)
+@Component(service = Injector, property = [
+    "service.ranking:Integer=2500"
+])
 class ValueMapFromRequestInjector implements Injector, ModelTrait {
 
     @Override

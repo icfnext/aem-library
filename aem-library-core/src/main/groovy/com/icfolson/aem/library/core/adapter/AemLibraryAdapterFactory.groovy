@@ -1,43 +1,29 @@
 package com.icfolson.aem.library.core.adapter
 
+import com.day.cq.wcm.api.Page
 import com.icfolson.aem.library.api.node.BasicNode
 import com.icfolson.aem.library.api.node.ComponentNode
 import com.icfolson.aem.library.api.page.PageDecorator
 import com.icfolson.aem.library.api.page.PageManagerDecorator
 import com.icfolson.aem.library.core.node.impl.DefaultBasicNode
+import com.icfolson.aem.library.core.node.impl.DefaultComponentNode
 import com.icfolson.aem.library.core.page.impl.DefaultPageDecorator
 import com.icfolson.aem.library.core.page.impl.DefaultPageManagerDecorator
-import com.day.cq.wcm.api.Page
-import com.icfolson.aem.library.core.node.impl.DefaultComponentNode
-import org.apache.felix.scr.annotations.Component
-import org.apache.felix.scr.annotations.Properties
-import org.apache.felix.scr.annotations.Property
-import org.apache.felix.scr.annotations.Service
 import org.apache.sling.api.adapter.AdapterFactory
 import org.apache.sling.api.resource.Resource
 import org.apache.sling.api.resource.ResourceResolver
-import org.osgi.framework.Constants
+import org.osgi.service.component.annotations.Component
 
-@Component
-@Service(AdapterFactory)
-@Properties([
-    @Property(name = Constants.SERVICE_DESCRIPTION, value = "AEM Library Adapter Factory")
+@Component(service = AdapterFactory, property = [
+    "service.description=AEM Library Adapter Factory",
+    "adaptables=org.apache.sling.api.resource.Resource",
+    "adaptables=org.apache.sling.api.resource.ResourceResolver",
+    "adapters=com.icfolson.aem.library.api.page.PageManagerDecorator",
+    "adapters=com.icfolson.aem.library.api.page.PageDecorator",
+    "adapters=com.icfolson.aem.library.api.node.ComponentNode",
+    "adapters=com.icfolson.aem.library.api.node.BasicNode"
 ])
 final class AemLibraryAdapterFactory implements AdapterFactory {
-
-    @Property(name = AdapterFactory.ADAPTABLE_CLASSES)
-    public static final String[] ADAPTABLE_CLASSES = [
-        "org.apache.sling.api.resource.Resource",
-        "org.apache.sling.api.resource.ResourceResolver"
-    ]
-
-    @Property(name = AdapterFactory.ADAPTER_CLASSES)
-    public static final String[] ADAPTER_CLASSES = [
-        "com.icfolson.aem.library.api.page.PageManagerDecorator",
-        "com.icfolson.aem.library.api.page.PageDecorator",
-        "com.icfolson.aem.library.api.node.ComponentNode",
-        "com.icfolson.aem.library.api.node.BasicNode"
-    ]
 
     @Override
     <AdapterType> AdapterType getAdapter(Object adaptable, Class<AdapterType> type) {

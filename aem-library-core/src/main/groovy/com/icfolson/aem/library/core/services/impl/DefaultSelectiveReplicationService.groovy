@@ -8,25 +8,23 @@ import com.day.cq.replication.ReplicationOptions
 import com.day.cq.replication.Replicator
 import com.icfolson.aem.library.core.services.SelectiveReplicationService
 import groovy.util.logging.Slf4j
-import org.apache.felix.scr.annotations.Component
-import org.apache.felix.scr.annotations.Reference
-import org.apache.felix.scr.annotations.Service
+import org.osgi.service.component.annotations.Component
+import org.osgi.service.component.annotations.Reference
 
 import javax.jcr.Session
 
 import static com.google.common.base.Preconditions.checkArgument
 import static com.google.common.base.Preconditions.checkNotNull
 
-@Component
-@Service(SelectiveReplicationService)
+@Component(service = SelectiveReplicationService)
 @Slf4j("LOG")
 class DefaultSelectiveReplicationService implements SelectiveReplicationService {
 
     @Reference
-    Replicator replicator
+    protected Replicator replicator
 
     @Reference
-    AgentManager agentManager
+    protected AgentManager agentManager
 
     @Override
     void replicate(Session session, ReplicationActionType actionType, String path, Set<String> agentIds) {

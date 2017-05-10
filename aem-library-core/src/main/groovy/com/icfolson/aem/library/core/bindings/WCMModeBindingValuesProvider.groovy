@@ -1,23 +1,17 @@
 package com.icfolson.aem.library.core.bindings
 
-import org.apache.felix.scr.annotations.Component
-import org.apache.felix.scr.annotations.Properties
-import org.apache.felix.scr.annotations.Property
-import org.apache.felix.scr.annotations.PropertyUnbounded
-import org.apache.felix.scr.annotations.Service
 import org.apache.sling.api.SlingHttpServletRequest
 import org.apache.sling.scripting.api.BindingsValuesProvider
-import org.osgi.framework.Constants
+import org.osgi.service.component.annotations.Component
 
 import javax.script.Bindings
 
 import static org.apache.sling.api.scripting.SlingBindings.REQUEST
 
-@Component(immediate = true)
-@Service(BindingsValuesProvider)
-@Properties([
-    @Property(name = "javax.script.name", value = ["sightly", "jsp"], unbounded = PropertyUnbounded.ARRAY),
-    @Property(name = Constants.SERVICE_RANKING, intValue = Integer.MAX_VALUE)
+@Component(service = BindingsValuesProvider, immediate = true, property = [
+    "javax.script.name=sightly",
+    "javax.script.name=jsp",
+    "service.ranking:Integer=9999"
 ])
 final class WCMModeBindingValuesProvider implements BindingsValuesProvider {
 

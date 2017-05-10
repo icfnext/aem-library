@@ -1,17 +1,15 @@
 package com.icfolson.aem.library.core.jmx.impl
 
 import com.adobe.granite.jmx.annotation.AnnotatedStandardMBean
-import com.icfolson.aem.library.core.services.cache.CacheService
 import com.google.common.collect.Lists
 import com.icfolson.aem.library.core.jmx.GoogleGuavaCacheReportingAndMaintenanceMBean
+import com.icfolson.aem.library.core.services.cache.CacheService
 import groovy.util.logging.Slf4j
 import org.apache.commons.lang3.StringUtils
-import org.apache.felix.scr.annotations.Component
-import org.apache.felix.scr.annotations.Property
-import org.apache.felix.scr.annotations.Reference
-import org.apache.felix.scr.annotations.ReferenceCardinality
-import org.apache.felix.scr.annotations.ReferencePolicy
-import org.apache.felix.scr.annotations.Service
+import org.osgi.service.component.annotations.Component
+import org.osgi.service.component.annotations.Reference
+import org.osgi.service.component.annotations.ReferenceCardinality
+import org.osgi.service.component.annotations.ReferencePolicy
 
 import javax.management.NotCompliantMBeanException
 import javax.management.openmbean.CompositeDataSupport
@@ -23,18 +21,18 @@ import javax.management.openmbean.TabularType
 import java.math.RoundingMode
 import java.util.concurrent.TimeUnit
 
-@Component
-@Property(name = "jmx.objectname", value = "com.icfolson.aem.library:type=Google Guava Cache Reporting and Maintenance")
-@Service(GoogleGuavaCacheReportingAndMaintenanceMBean)
+@Component(service = GoogleGuavaCacheReportingAndMaintenanceMBean, property = [
+    "jmx.objectname=com.icfolson.aem.library:type=Google Guava Cache Reporting and Maintenance"
+])
 @Slf4j("LOG")
 class DefaultGoogleGuavaCacheReportingAndMaintenanceMBean extends AnnotatedStandardMBean implements
     GoogleGuavaCacheReportingAndMaintenanceMBean {
 
-    @Reference(cardinality = ReferenceCardinality.OPTIONAL_MULTIPLE, policy = ReferencePolicy.DYNAMIC,
-        referenceInterface = CacheService, bind = "bindCacheService", unbind = "unbindCacheService")
+    @Reference(cardinality = ReferenceCardinality.MULTIPLE, policy = ReferencePolicy.DYNAMIC,
+        service = CacheService, bind = "bindCacheService", unbind = "unbindCacheService")
     private final List<CacheService> cacheServices = Lists.newCopyOnWriteArrayList()
 
-    public DefaultGoogleGuavaCacheReportingAndMaintenanceMBean() throws NotCompliantMBeanException {
+    DefaultGoogleGuavaCacheReportingAndMaintenanceMBean() throws NotCompliantMBeanException {
         super(GoogleGuavaCacheReportingAndMaintenanceMBean)
     }
 

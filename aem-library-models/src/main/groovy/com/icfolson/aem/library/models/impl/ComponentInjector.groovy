@@ -1,9 +1,5 @@
 package com.icfolson.aem.library.models.impl
 
-import com.icfolson.aem.library.api.node.BasicNode
-import com.icfolson.aem.library.api.node.ComponentNode
-import com.icfolson.aem.library.api.page.PageDecorator
-import com.icfolson.aem.library.api.page.PageManagerDecorator
 import com.day.cq.wcm.api.Page
 import com.day.cq.wcm.api.PageManager
 import com.day.cq.wcm.api.WCMMode
@@ -12,10 +8,11 @@ import com.day.cq.wcm.api.components.EditContext
 import com.day.cq.wcm.api.designer.Design
 import com.day.cq.wcm.api.designer.Designer
 import com.day.cq.wcm.api.designer.Style
+import com.icfolson.aem.library.api.node.BasicNode
+import com.icfolson.aem.library.api.node.ComponentNode
+import com.icfolson.aem.library.api.page.PageDecorator
+import com.icfolson.aem.library.api.page.PageManagerDecorator
 import groovy.util.logging.Slf4j
-import org.apache.felix.scr.annotations.Component
-import org.apache.felix.scr.annotations.Property
-import org.apache.felix.scr.annotations.Service
 import org.apache.sling.api.SlingHttpServletRequest
 import org.apache.sling.api.resource.Resource
 import org.apache.sling.api.resource.ResourceResolver
@@ -23,7 +20,7 @@ import org.apache.sling.api.resource.ValueMap
 import org.apache.sling.api.scripting.SlingBindings
 import org.apache.sling.models.spi.DisposalCallbackRegistry
 import org.apache.sling.models.spi.Injector
-import org.osgi.framework.Constants
+import org.osgi.service.component.annotations.Component
 
 import javax.jcr.Node
 import javax.jcr.Session
@@ -40,9 +37,9 @@ import static com.adobe.cq.sightly.WCMBindings.EDIT_CONTEXT
 /**
  * Injector for objects derived from the current component context.
  */
-@Component
-@Service(Injector)
-@Property(name = Constants.SERVICE_RANKING, intValue = Integer.MAX_VALUE)
+@Component(service = Injector, property = [
+    "service.ranking:Integer=9999"
+])
 @Slf4j("LOG")
 class ComponentInjector implements Injector, ModelTrait {
 

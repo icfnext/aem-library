@@ -1,8 +1,8 @@
 package com.icfolson.aem.library.api;
 
+import com.google.common.base.Optional;
 import com.icfolson.aem.library.api.link.Link;
 import com.icfolson.aem.library.api.page.PageDecorator;
-import com.google.common.base.Optional;
 import org.apache.sling.api.resource.ValueMap;
 
 import java.util.List;
@@ -144,6 +144,14 @@ public interface Accessible {
      * the resource does not adapt to the provided type
      */
     <AdapterType> Optional<AdapterType> getAsType(String propertyName, Class<AdapterType> type);
+
+    /**
+     * Get the referenced DAM asset path for the default image (named "image") for this component.
+     *
+     * @param isSelf if true, image reference property will be accessed from the current resource rather than a child
+     * @return <code>Optional</code> image reference path
+     */
+    Optional<String> getImageReference(boolean isSelf);
 
     /**
      * Get the referenced DAM asset path for the default image (named "image") for this component.

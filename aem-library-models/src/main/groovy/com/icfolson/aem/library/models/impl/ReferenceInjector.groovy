@@ -4,9 +4,6 @@ import com.icfolson.aem.library.api.node.ComponentNode
 import com.icfolson.aem.library.models.annotations.ReferenceInject
 import groovy.transform.TupleConstructor
 import groovy.util.logging.Slf4j
-import org.apache.felix.scr.annotations.Component
-import org.apache.felix.scr.annotations.Property
-import org.apache.felix.scr.annotations.Service
 import org.apache.sling.api.resource.Resource
 import org.apache.sling.models.annotations.injectorspecific.InjectionStrategy
 import org.apache.sling.models.spi.DisposalCallbackRegistry
@@ -14,14 +11,14 @@ import org.apache.sling.models.spi.Injector
 import org.apache.sling.models.spi.injectorspecific.AbstractInjectAnnotationProcessor2
 import org.apache.sling.models.spi.injectorspecific.InjectAnnotationProcessor2
 import org.apache.sling.models.spi.injectorspecific.InjectAnnotationProcessorFactory2
-import org.osgi.framework.Constants
+import org.osgi.service.component.annotations.Component
 
 import java.lang.reflect.AnnotatedElement
 import java.lang.reflect.Type
 
-@Component
-@Service(Injector)
-@Property(name = Constants.SERVICE_RANKING, intValue = 4000)
+@Component(service = Injector, property = [
+    "service.ranking:Integer=4000"
+])
 @Slf4j("LOG")
 class ReferenceInjector extends AbstractComponentNodeInjector implements InjectAnnotationProcessorFactory2, ModelTrait {
 
@@ -32,12 +29,14 @@ class ReferenceInjector extends AbstractComponentNodeInjector implements InjectA
         def declaredClass = getDeclaredClassForDeclaredType(declaredType)
 
         if (annotation) {
-            def references = annotation.inherit() ? componentNode.getAsListInherited(name, String) : componentNode.getAsList(name, String)
+            def references = annotation.inherit() ? componentNode.getAsListInherited(name,
+                String) : componentNode.getAsList(name, String)
 
             def resourceResolver = componentNode.resource.resourceResolver
 
             def referencedObjects = references.collect {
-                def referencedResource = it.startsWith("/") ? resourceResolver.getResource(it) : resourceResolver.getResource(componentNode.resource, it)
+                def referencedResource = it.startsWith("/") ? resourceResolver.getResource(
+                    it) : resourceResolver.getResource(componentNode.resource, it)
 
                 if (!referencedResource) {
                     LOG.warn("Reference {} did not resolve to an accessible Resource", it)

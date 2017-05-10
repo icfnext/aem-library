@@ -272,6 +272,11 @@ public abstract class AbstractComponent implements ComponentNode {
     }
 
     @Override
+    public Optional<String> getImageReferenceInherited(final boolean isSelf) {
+        return componentNode.getImageReferenceInherited(isSelf);
+    }
+
+    @Override
     public Optional<PageDecorator> getAsPage(final String propertyName) {
         return componentNode.getAsPage(propertyName);
     }
@@ -294,6 +299,11 @@ public abstract class AbstractComponent implements ComponentNode {
     @Override
     public <AdapterType> Optional<AdapterType> getAsType(final String propertyName, final Class<AdapterType> type) {
         return componentNode.getAsType(propertyName, type);
+    }
+
+    @Override
+    public Optional<String> getImageReference(final boolean isSelf) {
+        return componentNode.getImageReference(isSelf);
     }
 
     @Override

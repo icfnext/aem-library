@@ -169,6 +169,11 @@ public abstract class DelegateComponentNode implements ComponentNode {
     }
 
     @Override
+    public final Optional<String> getImageReference(final boolean isSelf) {
+        return componentNode.getImageReference(isSelf);
+    }
+
+    @Override
     public final Optional<PageDecorator> getAsPageInherited(final String propertyName) {
         return componentNode.getAsPageInherited(propertyName);
     }
@@ -177,6 +182,11 @@ public abstract class DelegateComponentNode implements ComponentNode {
     public final <AdapterType> Optional<AdapterType> getAsTypeInherited(final String propertyName,
         final Class<AdapterType> type) {
         return componentNode.getAsTypeInherited(propertyName, type);
+    }
+
+    @Override
+    public final Optional<String> getImageReferenceInherited(final boolean isSelf) {
+        return componentNode.getImageReferenceInherited(isSelf);
     }
 
     @Override

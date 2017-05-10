@@ -4,7 +4,7 @@
     <parent>
         <groupId>com.icfolson.aem.library</groupId>
         <artifactId>aem-library</artifactId>
-        <version>8.1.0</version>
+        <version>9.0.0</version>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
@@ -27,36 +27,18 @@
             <plugin>
                 <groupId>org.apache.felix</groupId>
                 <artifactId>maven-bundle-plugin</artifactId>
-                <extensions>true</extensions>
                 <configuration>
+                    <exportScr>true</exportScr>
                     <instructions>
                         <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
                         <Bundle-Name>${project.name}</Bundle-Name>
                         <Bundle-Vendor>${project.parent.organization.name}</Bundle-Vendor>
                         <Export-Package>!*.impl,com.icfolson.aem.library.core.*</Export-Package>
-                        <Import-Package>!*</Import-Package>
                         <DynamicImport-Package>*</DynamicImport-Package>
                         <Require-Bundle>org.apache.sling.models.api</Require-Bundle>
+                        <_plugin>org.apache.felix.scrplugin.bnd.SCRDescriptorBndPlugin;destdir=${project.build.outputDirectory};</_plugin>
                     </instructions>
                 </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.felix</groupId>
-                <artifactId>maven-scr-plugin</artifactId>
-                <executions>
-                    <execution>
-                        <id>generate-scr-scrdescriptor</id>
-                        <goals>
-                            <goal>scr</goal>
-                        </goals>
-                        <configuration>
-                            <scanClasses>true</scanClasses>
-                            <properties>
-                                <service.vendor>${project.parent.organization.name}</service.vendor>
-                            </properties>
-                        </configuration>
-                    </execution>
-                </executions>
             </plugin>
             <plugin>
                 <artifactId>maven-surefire-plugin</artifactId>
@@ -184,16 +166,6 @@
                     <version>1.7.5</version>
                 </dependency>
                 <dependency>
-                    <groupId>com.icfolson.aem.groovy.extension</groupId>
-                    <artifactId>aem-groovy-extension-bundle</artifactId>
-                    <exclusions>
-                        <exclusion>
-                            <groupId>org.slf4j</groupId>
-                            <artifactId>slf4j-nop</artifactId>
-                        </exclusion>
-                    </exclusions>
-                </dependency>
-                <dependency>
                     <groupId>com.icfolson.aem.prosper</groupId>
                     <artifactId>prosper</artifactId>
                     <exclusions>
@@ -209,6 +181,14 @@
 
     <dependencies>
         <!-- compile -->
+        <dependency>
+            <groupId>org.osgi</groupId>
+            <artifactId>org.osgi.service.component.annotations</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.osgi</groupId>
+            <artifactId>org.osgi.service.metatype.annotations</artifactId>
+        </dependency>
         <dependency>
             <groupId>org.apache.felix</groupId>
             <artifactId>org.apache.felix.scr.annotations</artifactId>

@@ -152,6 +152,11 @@ final class DefaultPageDecorator implements PageDecorator {
     }
 
     @Override
+    Optional<String> getImageReference(boolean isSelf) {
+        getInternal({ componentNode -> componentNode.getImageReference(isSelf) }, Optional.absent())
+    }
+
+    @Override
     Optional<String> getImageReference() {
         getInternal({ componentNode -> componentNode.imageReference }, Optional.absent())
     }
@@ -246,6 +251,11 @@ final class DefaultPageDecorator implements PageDecorator {
     @Override
     <AdapterType> Optional<AdapterType> getAsTypeInherited(String propertyName, Class<AdapterType> type) {
         getInternal({ componentNode -> componentNode.getAsTypeInherited(propertyName, type) }, Optional.absent())
+    }
+
+    @Override
+    Optional<String> getImageReferenceInherited(boolean isSelf) {
+        getInternal({ componentNode -> componentNode.getImageReferenceInherited(isSelf) }, Optional.absent())
     }
 
     @Override
@@ -365,15 +375,10 @@ final class DefaultPageDecorator implements PageDecorator {
 
     @Override
     Iterator<PageDecorator> listChildPages(Predicate<PageDecorator> predicate, boolean deep) {
-        def iterator
+        def resource = delegate.adaptTo(Resource)
+        def iterator = deep ? new DeepResourceIterator(resource) : resource.listChildren()
 
-        if (deep) {
-            iterator = new PageDecoratorIterator(new DeepResourceIterator(delegate.adaptTo(Resource)), predicate)
-        } else {
-            iterator = new PageDecoratorIterator(delegate.adaptTo(Resource).listChildren(), predicate)
-        }
-
-        iterator
+        new PageDecoratorIterator(iterator, predicate)
     }
 
     @Override
