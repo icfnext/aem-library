@@ -15,6 +15,7 @@ import org.osgi.service.component.annotations.Deactivate
 import org.osgi.service.component.annotations.Modified
 import org.osgi.service.component.annotations.Reference
 import org.osgi.service.event.EventHandler
+import org.osgi.service.metatype.annotations.Designate
 
 import javax.jcr.Session
 
@@ -24,6 +25,7 @@ import javax.jcr.Session
 @Component(immediate = true, service = EventHandler, property = [
     "event.topics=com/day/cq/replication"
 ])
+@Designate(ocd = PageReplicationListenerConfiguration)
 @Slf4j("LOG")
 class PageReplicationListener extends AbstractReplicationListener {
 
