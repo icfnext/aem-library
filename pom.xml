@@ -10,7 +10,7 @@
     <groupId>com.icfolson.aem.library</groupId>
     <artifactId>aem-library</artifactId>
     <packaging>pom</packaging>
-    <version>9.0.1-SNAPSHOT</version>
+    <version>9.1.0-SNAPSHOT</version>
     <name>AEM Library</name>
     <description>The AEM Library provides a sturdy foundation for bootstrapping and simplifying AEM (Adobe CQ) projects.</description>
 
@@ -504,7 +504,7 @@
             <dependency>
                 <groupId>com.icfolson.aem.prosper</groupId>
                 <artifactId>prosper</artifactId>
-                <version>11.0.0</version>
+                <version>11.1.0</version>
                 <scope>test</scope>
             </dependency>
             <dependency>
