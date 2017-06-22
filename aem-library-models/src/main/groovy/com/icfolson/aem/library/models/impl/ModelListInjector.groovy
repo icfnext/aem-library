@@ -25,15 +25,15 @@ class ModelListInjector implements Injector, ModelTrait {
 
         def resource = getResource(adaptable)
 
-        if (resource && declaredType instanceof ParameterizedType && (((ParameterizedType) declaredType).rawType) as
-	        Class == List) {
+        if (resource && isParameterizedListType(declaredType)) {
             def typeClass = getActualType((ParameterizedType) declaredType)
 
             def childResource = resource.getChild(name)
 
             if (childResource) {
-                value = childResource.children.collect { grandChildResource -> grandChildResource.adaptTo(typeClass)
-                } - null
+                value = childResource.children.collect {
+                    grandChildResource -> grandChildResource.adaptTo(typeClass)
+                }.findAll()
 
                 if (!value) {
                     value = null
@@ -42,11 +42,5 @@ class ModelListInjector implements Injector, ModelTrait {
         }
 
         value
-    }
-
-    private static Class<?> getActualType(ParameterizedType declaredType) {
-        def types = declaredType.actualTypeArguments
-
-        types ? (Class<?>) types[0] : null
     }
 }
