@@ -11,11 +11,18 @@ import static org.apache.sling.models.annotations.DefaultInjectionStrategy.OPTIO
 
 class InheritInjectorSpec extends AemLibraryModelSpec {
 
+    enum Option {
+        ONE, TWO
+    }
+
     @Model(adaptables = Resource, defaultInjectionStrategy = OPTIONAL)
     static class InheritModel {
 
         @InheritInject
         String title
+
+        @InheritInject
+        Option option
 
         @InheritInject
         String[] items
@@ -31,7 +38,8 @@ class InheritInjectorSpec extends AemLibraryModelSpec {
         pageBuilder.content {
             citytechinc {
                 "jcr:content" {
-                    component("title": "Testing Component", "items": ["item1", "item2"], "text": "Not Inherited") {
+                    component("title": "Testing Component", "items": ["item1", "item2"], "text": "Not Inherited",
+                        "option": "TWO") {
                         models {
                             item1("title": "Item 1")
                             item2("title": "Item 2")
@@ -57,6 +65,15 @@ class InheritInjectorSpec extends AemLibraryModelSpec {
 
         and:
         component.text == null
+    }
+
+    def "enum inheritance"() {
+        setup:
+        def resource = resourceResolver.resolve("/content/citytechinc/page1/jcr:content/component")
+        def component = resource.adaptTo(InheritModel)
+
+        expect:
+        component.option == Option.TWO
     }
 
     def "model list inheritance"() {
