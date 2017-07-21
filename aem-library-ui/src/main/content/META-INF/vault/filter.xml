@@ -3,5 +3,4 @@
     <filter root="/apps/aem-library/components" />
     <filter root="/apps/aem-library/install" />
     <filter root="/etc/clientlibs/aem-library" />
-    <filter root="/libs/cq/gui/components/authoring/dialog/fileuploadfield/clientlibs/fileuploadfield/js" />
 </workspaceFilter>
