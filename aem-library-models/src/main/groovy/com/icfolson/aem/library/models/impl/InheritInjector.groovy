@@ -3,7 +3,6 @@ package com.icfolson.aem.library.models.impl
 import com.icfolson.aem.library.api.node.ComponentNode
 import com.icfolson.aem.library.models.annotations.InheritInject
 import groovy.transform.TupleConstructor
-import groovy.util.logging.Slf4j
 import org.apache.sling.models.annotations.injectorspecific.InjectionStrategy
 import org.apache.sling.models.spi.DisposalCallbackRegistry
 import org.apache.sling.models.spi.Injector
@@ -13,12 +12,12 @@ import org.apache.sling.models.spi.injectorspecific.InjectAnnotationProcessorFac
 import org.osgi.service.component.annotations.Component
 
 import java.lang.reflect.AnnotatedElement
+import java.lang.reflect.ParameterizedType
 import java.lang.reflect.Type
 
 @Component(service = Injector, property = [
     "service.ranking:Integer=4000"
 ])
-@Slf4j("LOG")
 class InheritInjector extends AbstractComponentNodeInjector implements InjectAnnotationProcessorFactory2 {
 
     @Override
@@ -32,16 +31,18 @@ class InheritInjector extends AbstractComponentNodeInjector implements InjectAnn
         def value = null
 
         if (element.getAnnotation(InheritInject)) {
-            if (declaredType instanceof Class && declaredType.enum) {
+            if (isParameterizedListType(declaredType)) {
+                def typeClass = getActualType((ParameterizedType) declaredType)
+
+                value = componentNode.getNodesInherited(name).collect { node ->
+                    node.resource.adaptTo(typeClass)
+                }
+            } else if (declaredType instanceof Class && declaredType.enum) {
                 def enumString = componentNode.getInherited(name, String)
 
                 value = enumString.present ? declaredType[enumString.get()] : null
-            }
-
-            try {
+            } else {
                 value = componentNode.getInherited(name, declaredType as Class).orNull()
-            } catch (Exception e) {
-                LOG.debug("Error getting object inherited", e)
             }
         }
 

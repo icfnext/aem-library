@@ -30,6 +30,10 @@ trait ModelTrait {
         resource
     }
 
+    boolean isParameterizedListType(Type declaredType) {
+        declaredType instanceof ParameterizedType && (((ParameterizedType) declaredType).rawType) as Class == List
+    }
+
     boolean isDeclaredTypeCollection(Type declaredType) {
         def result = false
 
@@ -53,5 +57,11 @@ trait ModelTrait {
         }
 
         clazz
+    }
+
+    Class<?> getActualType(ParameterizedType declaredType) {
+        def types = declaredType.actualTypeArguments
+
+        types ? (Class<?>) types[0] : null
     }
 }
