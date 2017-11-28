@@ -12,9 +12,9 @@ See the [project site](http://code.digitalatolson.com/aem-library) for the User 
 
 AEM Library Version(s) | AEM Version
 ------------ | -------------
-`9.x.x` | `6.3` 
-`8.x.x`, `7.x.x.` | `6.2`
-`6.x.x` | `6.1`
+9.x.x | 6.3 
+8.x.x, 7.x.x. | 6.2
+6.x.x | 6.1
 
 ## Versioning
 
