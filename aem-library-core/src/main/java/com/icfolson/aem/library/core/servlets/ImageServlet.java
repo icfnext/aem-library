@@ -1,6 +1,5 @@
 package com.icfolson.aem.library.core.servlets;
 
-import com.icfolson.aem.library.core.constants.ComponentConstants;
 import com.day.cq.commons.ImageHelper;
 import com.day.cq.commons.jcr.JcrConstants;
 import com.day.cq.wcm.api.NameConstants;
@@ -12,6 +11,7 @@ import com.google.common.io.ByteStreams;
 import com.google.common.io.Closeables;
 import com.google.common.net.HttpHeaders;
 import com.google.common.net.MediaType;
+import com.icfolson.aem.library.core.constants.ComponentConstants;
 import org.apache.felix.scr.annotations.sling.SlingServlet;
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.SlingHttpServletResponse;
@@ -42,7 +42,7 @@ public final class ImageServlet extends AbstractImageServlet {
     private static final long serialVersionUID = 1L;
 
     @Override
-    protected Layer createLayer(final ImageContext context) throws RepositoryException, IOException {
+    protected Layer createLayer(final ImageContext context) {
         return null;
     }
 
