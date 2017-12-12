@@ -204,7 +204,7 @@ final class DefaultComponentNode extends AbstractNode implements ComponentNode {
 
     @Override
     Optional<String> getImageReferenceInherited(boolean isSelf) {
-        Optional.fromNullable(properties.getInherited(DownloadResource.PN_REFERENCE, String))
+        isSelf ? Optional.fromNullable(properties.getInherited(DownloadResource.PN_REFERENCE, String)) : imageReferenceInherited
     }
 
     @Override
