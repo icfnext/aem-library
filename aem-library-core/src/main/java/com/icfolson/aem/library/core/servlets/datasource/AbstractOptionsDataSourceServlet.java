@@ -18,6 +18,7 @@ import javax.servlet.ServletException;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import static com.day.cq.commons.jcr.JcrConstants.NT_UNSTRUCTURED;
 
@@ -49,7 +50,7 @@ public abstract class AbstractOptionsDataSourceServlet extends AbstractComponent
         final List<Option> options = getOptions(request);
 
         // transform the list of options into a list of synthetic resources
-        final List<Resource> resources = Lists.transform(options, option -> {
+        final List<Resource> resources = options.stream().map(option -> {
             final Map<String, Object> map = Maps.newHashMapWithExpectedSize(options.size());
 
             map.put("value", option.getValue());
@@ -58,7 +59,7 @@ public abstract class AbstractOptionsDataSourceServlet extends AbstractComponent
             final ValueMap valueMap = new ValueMapDecorator(map);
 
             return new ValueMapResource(resourceResolver, new ResourceMetadata(), NT_UNSTRUCTURED, valueMap);
-        });
+        }).collect(Collectors.toList());
 
         final DataSource dataSource = new SimpleDataSource(resources.iterator());
 

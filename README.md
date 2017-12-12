@@ -8,6 +8,14 @@ The AEM Library contains common utilities, decorators, abstract classes, tag lib
 
 See the [project site](http://code.digitalatolson.com/aem-library) for the User Guide and project details.
 
+## Compatibility
+
+AEM Library Version(s) | AEM Version
+------------ | -------------
+9.x.x | 6.3 
+8.x.x, 7.x.x. | 6.2
+6.x.x | 6.1
+
 ## Versioning
 
 Follows [Semantic Versioning](http://semver.org/) guidelines.

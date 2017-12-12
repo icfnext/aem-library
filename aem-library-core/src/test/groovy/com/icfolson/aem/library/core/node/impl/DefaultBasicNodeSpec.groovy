@@ -1,8 +1,8 @@
 package com.icfolson.aem.library.core.node.impl
 
-import com.icfolson.aem.library.api.node.ComponentNode
 import com.day.cq.dam.api.Asset
 import com.google.common.base.Predicates
+import com.icfolson.aem.library.api.node.ComponentNode
 import com.icfolson.aem.library.core.node.predicates.PropertyNamePredicate
 import com.icfolson.aem.library.core.specs.AemLibrarySpec
 import org.apache.sling.api.resource.NonExistingResource
@@ -15,7 +15,8 @@ class DefaultBasicNodeSpec extends AemLibrarySpec {
         pageBuilder.content {
             citytechinc("CITYTECH, Inc.") {
                 "jcr:content"(otherPagePath: "/content/ales/esb", nonExistentPagePath: "/content/home",
-                    externalPath: "http://www.reddit.com", multiValue: ["one", "two"]) {
+                    externalPath: "http://www.reddit.com", multiValue: ["one", "two"],
+                    fileReference: "/content/dam/image") {
                     image(fileReference: "/content/dam/image")
                     secondimage(fileReference: "/content/dam/image")
                     thirdimage()
@@ -38,7 +39,9 @@ class DefaultBasicNodeSpec extends AemLibrarySpec {
                     "jcr:content"(otherPagePath: "/content/citytechinc") {
                         fullers("sling:resourceType": "bitter")
                         morland("sling:resourceType": "bitter")
-                        greeneking("sling:resourceType": "bitter")
+                        greeneking("sling:resourceType": "bitter") {
+                            image(fileReference: "/content/dam/image")
+                        }
                     }
                 }
             }
@@ -306,6 +309,23 @@ class DefaultBasicNodeSpec extends AemLibrarySpec {
         path                               | isPresent
         "/content/citytechinc/jcr:content" | true
         "/content/ales/esb/jcr:content"    | false
+    }
+
+    def "get self image reference"() {
+        setup:
+        def node = getBasicNode(path)
+
+        expect:
+        node.getImageReference(isSelf).present == isPresent
+
+        where:
+        path                                       | isSelf | isPresent
+        "/content/citytechinc/jcr:content"         | false  | true
+        "/content/citytechinc/jcr:content"         | true   | true
+        "/content/ales/esb/jcr:content"            | false  | false
+        "/content/ales/esb/jcr:content"            | true   | false
+        "/content/ales/esb/jcr:content/greeneking" | true   | false
+        "/content/ales/esb/jcr:content/greeneking" | false  | true
     }
 
     def "get image source optional"() {

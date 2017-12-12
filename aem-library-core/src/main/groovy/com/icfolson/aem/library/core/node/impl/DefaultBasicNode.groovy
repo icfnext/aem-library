@@ -154,7 +154,7 @@ final class DefaultBasicNode extends AbstractNode implements BasicNode {
     }
 
     Optional<String> getImageReference(boolean isSelf) {
-        Optional.fromNullable(properties.get(DownloadResource.PN_REFERENCE, String))
+        isSelf ? Optional.fromNullable(properties.get(DownloadResource.PN_REFERENCE, String)) : imageReference
     }
 
     @Override
