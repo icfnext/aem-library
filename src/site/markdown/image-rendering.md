@@ -76,9 +76,3 @@ URL                                                                | Image Name 
 /content/home/jcr:content/par/component.img.secondimage.100.png | "secondimage"     | 100   | `getImageSource("secondimage", 100)`
 
 As with pages, we specify "image" as the default image name to align with the page-level convention.
-
-### Tag Library
-
-As detailed on the [Tag Library](https://github.com/OlsonDigital/aem-library/wiki/tag-library) wiki page, the Image Source tag can be used to render URLs directly in JSPs without calling the above methods in a component Java class.
-
-    <img src="<aem-library:imageSource name="secondimage" width="100"/>">

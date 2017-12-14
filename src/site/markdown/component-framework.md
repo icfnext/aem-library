@@ -2,9 +2,9 @@
 
 ### Overview
 
-The introduction of the Sightly templating language has eliminated the need for custom JSP tags, scriptlets, and other unpleasantries when separating a component's view from it's supporting business logic.  The [Sling Models](https://sling.apache.org/documentation/bundles/models.html) framework offers a robust, POJO-based development pattern that the AEM Library augments to greatly simplify AEM component development.
+The introduction of the HTL templating language has eliminated the need for custom JSP tags, scriptlets, and other unpleasantries when separating a component's view from it's supporting business logic.  The [Sling Models](https://sling.apache.org/documentation/bundles/models.html) framework offers a robust, POJO-based development pattern that the AEM Library augments to greatly simplify AEM component development.
 
-For projects with JSP-based components, the AEM Library maintains a custom JSP tag to mimic Sightly's "use" functionality for associating a Java/Groovy class with a component JSP.
+For projects with JSP-based components, the AEM Library maintains a custom JSP tag to mimic HTL's "use" functionality for associating a Java/Groovy class with a component JSP.
 
 ### Abstract Component Class
 
@@ -56,11 +56,11 @@ See the `ComponentNode` [Javadoc](http://code.digitalatolson.com/aem-library/api
 
 In addition to the AEM Library's component API, the framework also supplies a set of custom Sling Models injectors to support injection of common Sling and AEM objects for the current component.  See the [Injectors](/aem-library/injectors.html) page for additional information.
 
-### Sightly Integration
+### HTL Integration
 
-Sling Models-based components (i.e. POJOs with the `@org.apache.sling.models.annotations.Model` annotation) can be instantiated in Sightly templates with a [data-sly-use](https://github.com/Adobe-Marketing-Cloud/sightly-spec/blob/master/SPECIFICATION.md#221-use) block statement.  Since the AEM Library components are just "decorated" Sling Models, nothing additional is required.
+Sling Models-based components (i.e. POJOs with the `@org.apache.sling.models.annotations.Model` annotation) can be instantiated in HTL templates with a [data-sly-use](https://github.com/Adobe-Marketing-Cloud/sightly-spec/blob/master/SPECIFICATION.md#221-use) block statement.  Since the AEM Library components are just "decorated" Sling Models, nothing additional is required.
 
-The Sightly template for the preceding `Navigation` component would be implemented as follows:
+The HTL template for the preceding `Navigation` component would be implemented as follows:
 
     <sly data-sly-use.navigation="com.projectname.components.content.Navigation">
         <h1>${navigation.title}</h1>
@@ -69,31 +69,6 @@ The Sightly template for the preceding `Navigation` component would be implement
             <li><a href="${page.href}">${page.title}</a></li>
         </ul>
     </sly>
-
-### JSP Support
-
-The AEM Library includes legacy JSP support for projects where Sightly templates are not feasible.  The component JSP needs to include the AEM Library `global.jsp` to define the tag namespace and ensure that required variables are set in the page context.
-
-Component model classes can be instantiated in one of two ways:
-
-* Include the `<aem-library:component/>` tag in the JSP as shown below.
-* Define a `className` attribute in the `.content.xml` descriptor file for the component and annotate the Java class with the `com.icfolson.aem.library.api.components.annotations.AutoInstantiate` annotation.
-
-In the latter case, the `global.jsp` will instantiate the model class via the `<aem-library:defineObjects/>` tag included therein.
-
-    <%@include file="/apps/aem-library/components/global.jsp"%>
-
-    <aem-library:component className="com.projectname.components.content.Navigation" name="navigation"/>
-
-    <h1>${navigation.title}</h1>
-
-    <ul>
-        <c:forEach items="${navigation.pages}" var="page">
-            <li><a href="${page.href}">${page.title}</a></li>
-        </c:forEach>
-    </ul>
-
-Component JSPs should contain only the HTML markup and JSTL tags necessary to render the component and it's view permutations, rather than Java "scriptlet" blocks containing business logic.
 
 ### Component Development Guidelines
 

@@ -10,9 +10,11 @@ import javax.jcr.observation.EventIterator
 
 class AbstractPageEventListenerSpec extends AemLibrarySpec {
 
-    static final def EVENT_PATHS = ["/content/home",
+    static final def EVENT_PATHS = [
+        "/content/home",
         "/content/home/jcr:content",
-        "/content/about/jcr:content"]
+        "/content/about/jcr:content"
+    ]
 
     class TestPageEventListener extends AbstractPageEventListener {
 
