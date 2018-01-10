@@ -17,7 +17,7 @@ class TagDataSourceServletSpec extends AemLibrarySpec {
 
         @Override
         protected String getNamespace() {
-            return "beers:"
+            "beers:"
         }
     }
 
@@ -25,7 +25,7 @@ class TagDataSourceServletSpec extends AemLibrarySpec {
 
         @Override
         protected String getNamespace() {
-            return "beers:"
+            "beers:"
         }
 
         @Override
@@ -77,7 +77,7 @@ class TagDataSourceServletSpec extends AemLibrarySpec {
     }
 
     void assertDataSourceOptions(SlingHttpServletRequest request, List<Option> options) {
-        def dataSource = request.getAttribute(DataSource.class.name) as DataSource
+        def dataSource = request.getAttribute(DataSource.name) as DataSource
         def resources = dataSource.iterator()
 
         assert resources.size() == options.size()

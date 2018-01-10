@@ -18,7 +18,7 @@ abstract class AbstractTagDataSourceServlet extends AbstractOptionsDataSourceSer
     public static final Filter<Tag> TAG_FILTER_INCLUDE_ALL = new Filter<Tag>() {
         @Override
         boolean includes(Tag tag) {
-            return true
+            true
         }
     }
 
