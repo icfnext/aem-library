@@ -18,6 +18,12 @@ Base class for providing a list of "options" to a component dialog widget.  An o
 
 Base class for supplying a data source to component dialogs using the Touch UI.  Implementing classes will provide a list of options that will be made available as text/value pairs to selection dialog elements.  Servlets must be annotated with the `@SlingServlet(resourceTypes = "projectname/datasources/colors")` annotation.  The resource type attribute is an arbitrary relative path that can be referenced by dialog elements using the data source.  The implementing class determines how these options are retrieved from the repository (or external provider, such as a web service).
 
+### Abstract Tag Data Source Servlet
+
+`com.icfolson.aem.library.core.servlets.datasource.AbstractTagDataSourceServlet`
+
+Extends the AbstractOptionsDataSourceServlet and solely focuses on building options from tags within the repository. A basic extension is to provide just the namespace of the tags and the servlet will build a list of options from all direct descendants of that namespace tag. Extending classes may optionally provide a more granular tag path and a custom filter.
+
 ### Abstract Validation Servlet
 
 `com.icfolson.aem.library.core.servlets.AbstractValidationServlet`
