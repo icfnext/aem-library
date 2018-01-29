@@ -16,19 +16,24 @@ import org.apache.sling.settings.SlingSettingsService
 
 import javax.jcr.RepositoryException
 import javax.jcr.Session
+import javax.jcr.Value
 import javax.jcr.observation.Event
 import javax.jcr.observation.EventIterator
+import javax.jcr.observation.EventListener
 import javax.jcr.observation.ObservationManager
 
-@Component(immediate = true)
+@Component(metatype = true, immediate = true)
 @Service
 @Slf4j('LOG')
 class RolloutInheritanceEventListener implements EventListener {
 
-	static final String PROPERTY_INHERITANCE_CANCELLED = '/cq:propertyInheritanceCancelled'
+	static final String PROPERTY_INHERITANCE_CANCELLED = 'cq:propertyInheritanceCancelled'
 	static final String PROPERTY_INHERITANCE_CANCELLED_PATH = "/$PROPERTY_INHERITANCE_CANCELLED"
 
 	static final String PROPERTY_INHERITANCE_CANCELLED_JOB_TOPIC = 'com/icfolson/aem/library/core/services/job'
+
+	static final String EVENT_BEFORE_VALUE = 'beforeValue'
+	static final String EVENT_AFTER_VALUE = 'afterValue'
 
 	@Reference
 	private ResourceResolverFactory resourceResolverFactory
@@ -50,6 +55,7 @@ class RolloutInheritanceEventListener implements EventListener {
 
 	private ObservationManager observationManager
 
+	@Override
 	void onEvent(EventIterator eventIterator) {
 		if (slingSettings.runModes.contains('author')) {
 			while (eventIterator.hasNext()) {
@@ -64,14 +70,16 @@ class RolloutInheritanceEventListener implements EventListener {
 	@Activate
 	@Modified
 	void activate(final Map<String, Object> properties) {
-		pathRoot = properties.get(PATH_ROOT) ?: '/content'
-		resourceResolver = resourceResolverFactory.getAdministrativeResourceResolver(null)
-		session = resourceResolver.adaptTo(Session)
-		observationManager = session.workspace.observationManager
+		pathRoot = properties.get(PATH_ROOT)
+		if (pathRoot) {
+			resourceResolver = resourceResolverFactory.getAdministrativeResourceResolver(null)
+			session = resourceResolver.adaptTo(Session)
+			observationManager = session.workspace.observationManager
 
-		int eventTypes = Event.PROPERTY_ADDED | Event.PROPERTY_CHANGED | Event.PROPERTY_REMOVED
-		String[] nodeTypeNames = ['cq:PageContent']
-		observationManager.addEventListener(this, eventTypes, pathRoot, true, null, nodeTypeNames, true)
+			int eventTypes = Event.PROPERTY_ADDED | Event.PROPERTY_CHANGED | Event.PROPERTY_REMOVED
+			String[] nodeTypeNames = ['cq:PageContent']
+			observationManager.addEventListener(this, eventTypes, pathRoot, true, null, nodeTypeNames, true)
+		}
 	}
 
 	@Deactivate
@@ -92,7 +100,8 @@ class RolloutInheritanceEventListener implements EventListener {
 	private Map<String, Object> createPayload(Event event) {
 		final Map<String, Object> payload = new HashMap<String, Object>()
 		payload.put(OffloadingJobProperties.INPUT_PAYLOAD.propertyName(), event.path)
-		payload.putAll(event.info)
+		payload.put(EVENT_BEFORE_VALUE, ((Value[]) event.info.get(EVENT_BEFORE_VALUE)).join(','))
+		payload.put(EVENT_AFTER_VALUE, ((Value[]) event.info.get(EVENT_AFTER_VALUE)).join(','))
 		payload
 	}
 

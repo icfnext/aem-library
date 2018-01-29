@@ -13,6 +13,7 @@ import org.apache.sling.event.jobs.Job
 import org.apache.sling.event.jobs.consumer.JobConsumer
 
 import javax.jcr.Node
+import javax.jcr.PropertyIterator
 import javax.jcr.RepositoryException
 import javax.jcr.Session
 import javax.jcr.Value
@@ -38,30 +39,31 @@ class RolloutInheritanceJobConsumer implements JobConsumer {
 			resourceResolver = resourceResolverFactory.getAdministrativeResourceResolver(null)
 			session = resourceResolver.adaptTo(Session)
 
-			Set<String> beforeValues = getDeepProperties((Value[]) job.getProperty('beforeValue'))
-			Set<String> afterValues = getDeepProperties((Value[]) job.getProperty('afterValue'))
+			String jcrContentPath
 
-			// remove duplicates
-			afterValues.each { afterValue ->
-				if (beforeValues.contains(afterValue)) {
-					beforeValues.remove(afterValue)
-					afterValues.remove(afterValue)
+			jcrContentPath = path[0..(-1 * RolloutInheritanceEventListener.PROPERTY_INHERITANCE_CANCELLED_PATH.length())]
+			if (jcrContentPath) {
+				session.refresh(true)
+				Node pageContentNode = session.getNode(jcrContentPath)
+
+				Set<String> beforeValues = getDeepProperties(job.getProperty(RolloutInheritanceEventListener.EVENT_BEFORE_VALUE).split(','), pageContentNode)
+				Set<String> afterValues = getDeepProperties(job.getProperty(RolloutInheritanceEventListener.EVENT_AFTER_VALUE).split(','), pageContentNode)
+
+				// remove common values
+				Set<String> commonValues = beforeValues.intersect(afterValues)
+				Set<String> uniqueBeforeValues = beforeValues - commonValues
+				Set<String> uniqueAfterValues = afterValues - commonValues
+
+				uniqueAfterValues.each { afterValue ->
+					addOrRemoveProp(pageContentNode, afterValue, true)
 				}
+
+				uniqueBeforeValues.each { beforeValue ->
+					addOrRemoveProp(pageContentNode, beforeValue, false)
+				}
+
+				result = JobConsumer.JobResult.OK
 			}
-
-			String parentPath = path[0..(-1 * RolloutInheritanceEventListener.PROPERTY_INHERITANCE_CANCELLED_PATH.length())]
-			session.refresh(true)
-			Node pageContentNode = session.getNode(parentPath)
-
-			afterValues.each { afterValue ->
-				addOrRemoveProp(pageContentNode, afterValue, true)
-			}
-
-			beforeValues.each { beforeValue ->
-				addOrRemoveProp(pageContentNode, beforeValue, false)
-			}
-
-			result = JobConsumer.JobResult.OK
 		} catch (Throwable t) {
 			LOG.error('Failed to rollout deep inheritance {}', path, t)
 		} finally {
@@ -76,13 +78,26 @@ class RolloutInheritanceJobConsumer implements JobConsumer {
 		return result
 	}
 
-	private Set<String> getDeepProperties(Value[] values) throws RepositoryException {
+	private Set<String> getDeepProperties(String[] values, Node pageContentNode) throws RepositoryException {
 		Set<String> deepProps = new HashSet<String>()
 		if (values != null) {
 			values.each { value ->
-				String property = value.string
-				if (!property.startsWith('/') && property.lastIndexOf('/') > 0) {
-					deepProps.add(property)
+				if (!value.startsWith('/') && value.lastIndexOf('/') > 0) {
+					deepProps.add(value)
+				} else if (pageContentNode.hasNode(value)) {
+					Node propertyNode = pageContentNode.getNode(value)
+					propertyNode.recurse { Node childNode ->
+						String childNodePath = childNode.path.substring(pageContentNode.path.length() + 1)
+						PropertyIterator propertyIterator = childNode.properties
+						while (propertyIterator.hasNext()) {
+							javax.jcr.Property property = propertyIterator.nextProperty()
+							String propertyName = property.name
+							if (!propertyName.startsWith('jcr:') && !propertyName.startsWith('cq:')) {
+								String deepPropertyPath = "${childNodePath}/${propertyName}"
+								deepProps.add(deepPropertyPath)
+							}
+						}
+					}
 				}
 			}
 		}
@@ -109,17 +124,21 @@ class RolloutInheritanceJobConsumer implements JobConsumer {
 		String childNodePath = propertyValue.substring(0, propertyIndex)
 		String childPropName = propertyValue.substring(propertyIndex + 1)
 
-		LOG.debug("{} property '{}' for {} on child node '{}'", (addToCancel ? "Adding" : "Removing"), childPropName, RolloutInheritanceEventListener.PROPERTY_INHERITANCE_CANCELLED, childNodePath)
+		LOG.debug("${(addToCancel ? 'Adding' : 'Removing')} property ${childPropName} for ${RolloutInheritanceEventListener.PROPERTY_INHERITANCE_CANCELLED} on child node ${childNodePath}")
 
-		// Create the child node if necessary
-		Node childNode = JcrUtil.createPath(pageContentNode, childNodePath, false, 'nt:unstructured', 'nt:unstructured', session, false)
+		Node childNode
+		if (pageContentNode.hasNode(childNodePath)) {
+			childNode = pageContentNode.getNode(childNodePath)
+		} else {
+			childNode = JcrUtil.createPath(pageContentNode, childNodePath, false, 'nt:unstructured', 'nt:unstructured', session, true)
+		}
 
 		Value[] existingChildCancelInheritanceValues = getPropertyValues(childNode, RolloutInheritanceEventListener.PROPERTY_INHERITANCE_CANCELLED)
 
 		List<String> updatedChildCancelInheritanceValues = new ArrayList<String>()
 		existingChildCancelInheritanceValues.each { Value existingCancelInheritanceValue ->
 			String existingCancelInheritanceString = existingCancelInheritanceValue.string
-			if (!existingCancelInheritanceString == childPropName) {
+			if (existingCancelInheritanceString != childPropName) {
 				updatedChildCancelInheritanceValues.add(existingCancelInheritanceString)
 			}
 		}
@@ -128,7 +147,7 @@ class RolloutInheritanceJobConsumer implements JobConsumer {
 			updatedChildCancelInheritanceValues.add(childPropName)
 		}
 
-		if (updatedChildCancelInheritanceValues.size() != existingChildCancelInheritanceValues.length) {
+		if (updatedChildCancelInheritanceValues.sort() != existingChildCancelInheritanceValues.sort()) {
 			if (updatedChildCancelInheritanceValues.size() > 0) {
 				childNode.setProperty(RolloutInheritanceEventListener.PROPERTY_INHERITANCE_CANCELLED, updatedChildCancelInheritanceValues.toArray(new String[updatedChildCancelInheritanceValues.size()]))
 			} else {
