@@ -2,17 +2,16 @@ package com.icfolson.aem.library.core.rollout.impl
 
 import com.adobe.granite.offloading.api.OffloadingJobProperties
 import groovy.util.logging.Slf4j
-import org.apache.felix.scr.annotations.Activate
-import org.apache.felix.scr.annotations.Component
-import org.apache.felix.scr.annotations.Deactivate
-import org.apache.felix.scr.annotations.Modified
-import org.apache.felix.scr.annotations.Property
-import org.apache.felix.scr.annotations.Reference
-import org.apache.felix.scr.annotations.Service
 import org.apache.sling.api.resource.ResourceResolver
 import org.apache.sling.api.resource.ResourceResolverFactory
 import org.apache.sling.event.jobs.JobManager
 import org.apache.sling.settings.SlingSettingsService
+import org.osgi.service.component.annotations.Activate
+import org.osgi.service.component.annotations.Component
+import org.osgi.service.component.annotations.Deactivate
+import org.osgi.service.component.annotations.Modified
+import org.osgi.service.component.annotations.Reference
+import org.osgi.service.metatype.annotations.Designate
 
 import javax.jcr.RepositoryException
 import javax.jcr.Session
@@ -22,8 +21,8 @@ import javax.jcr.observation.EventIterator
 import javax.jcr.observation.EventListener
 import javax.jcr.observation.ObservationManager
 
-@Component(metatype = true, immediate = true)
-@Service
+@Component(service = EventListener)
+@Designate(ocd = RolloutInheritanceEventListenerConfiguration)
 @Slf4j("LOG")
 class RolloutInheritanceEventListener implements EventListener {
 
@@ -47,11 +46,6 @@ class RolloutInheritanceEventListener implements EventListener {
     @Reference
     private JobManager jobManager
 
-    @Property(label = "Path root")
-    private static final String PATH_ROOT = "pathRoot"
-
-    private String pathRoot
-
     private ResourceResolver resourceResolver
 
     private Session session
@@ -72,34 +66,30 @@ class RolloutInheritanceEventListener implements EventListener {
 
     @Activate
     @Modified
-    void activate(final Map<String, Object> properties) {
-        pathRoot = properties.get(PATH_ROOT)
-
-        if (pathRoot) {
+    void activate(RolloutInheritanceEventListenerConfiguration configuration) {
+        if (configuration.pathRoot()) {
             resourceResolver = resourceResolverFactory.getAdministrativeResourceResolver(null)
             session = resourceResolver.adaptTo(Session)
+
             observationManager = session.workspace.observationManager
-            observationManager.addEventListener(this, EVENT_TYPES, pathRoot, true, null, NODE_TYPE_NAMES, true)
+            observationManager.addEventListener(this, EVENT_TYPES, configuration.pathRoot(), true, null,
+                NODE_TYPE_NAMES, true)
         }
     }
 
     @Deactivate
     void deactivate() {
         try {
-            if (observationManager != null) {
-                observationManager.removeEventListener(this)
-            }
+            observationManager?.removeEventListener(this)
         } catch (RepositoryException re) {
             LOG.error("Error deactivating RolloutInheritanceEventListener", re)
         } finally {
-            if (session) {
-                session.logout()
-            }
+            resourceResolver?.close()
         }
     }
 
     private Map<String, Object> createPayload(Event event) {
-        final Map<String, Object> payload = new HashMap<String, Object>()
+        def payload = [:]
 
         payload.put(OffloadingJobProperties.INPUT_PAYLOAD.propertyName(), event.path)
         payload.put(EVENT_BEFORE_VALUE, ((Value[]) event.info.get(EVENT_BEFORE_VALUE)).join(","))

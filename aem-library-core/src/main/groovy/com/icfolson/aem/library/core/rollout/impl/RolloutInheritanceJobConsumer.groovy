@@ -3,17 +3,13 @@ package com.icfolson.aem.library.core.rollout.impl
 import com.adobe.granite.offloading.api.OffloadingJobProperties
 import com.day.cq.commons.jcr.JcrUtil
 import groovy.util.logging.Slf4j
-import org.apache.felix.scr.annotations.Component
-import org.apache.felix.scr.annotations.Property
-import org.apache.felix.scr.annotations.Reference
-import org.apache.felix.scr.annotations.Service
-import org.apache.sling.api.resource.ResourceResolver
 import org.apache.sling.api.resource.ResourceResolverFactory
 import org.apache.sling.event.jobs.Job
 import org.apache.sling.event.jobs.consumer.JobConsumer
+import org.osgi.service.component.annotations.Component
+import org.osgi.service.component.annotations.Reference
 
 import javax.jcr.Node
-import javax.jcr.PropertyIterator
 import javax.jcr.RepositoryException
 import javax.jcr.Session
 import javax.jcr.Value
@@ -23,10 +19,9 @@ import static com.day.cq.commons.jcr.JcrConstants.NT_UNSTRUCTURED
 import static com.icfolson.aem.library.core.rollout.impl.RolloutInheritanceEventListener.EVENT_AFTER_VALUE
 import static com.icfolson.aem.library.core.rollout.impl.RolloutInheritanceEventListener.EVENT_BEFORE_VALUE
 
-@Component
-@Service(value = JobConsumer)
-@Property(name = JobConsumer.PROPERTY_TOPICS,
-    value = RolloutInheritanceEventListener.PROPERTY_INHERITANCE_CANCELLED_JOB_TOPIC)
+@Component(service = JobConsumer, property = [
+    "job.topics=com/icfolson/aem/library/core/services/job"
+])
 @Slf4j("LOG")
 class RolloutInheritanceJobConsumer implements JobConsumer {
 
@@ -37,11 +32,11 @@ class RolloutInheritanceJobConsumer implements JobConsumer {
 
     @Override
     JobConsumer.JobResult process(Job job) {
-        JobConsumer.JobResult result = JobConsumer.JobResult.FAILED
+        def result = JobConsumer.JobResult.FAILED
 
-        String path = (String) job.getProperty(OffloadingJobProperties.INPUT_PAYLOAD.propertyName())
+        def path = (String) job.getProperty(OffloadingJobProperties.INPUT_PAYLOAD.propertyName())
 
-        ResourceResolver resourceResolver
+        def resourceResolver
 
         try {
             resourceResolver = resourceResolverFactory.getAdministrativeResourceResolver(null)
@@ -53,12 +48,10 @@ class RolloutInheritanceJobConsumer implements JobConsumer {
             if (jcrContentPath) {
                 session.refresh(true)
 
-                Node pageContentNode = session.getNode(jcrContentPath)
+                def pageContentNode = session.getNode(jcrContentPath)
 
-                Set<String> beforeValues = getDeepProperties(job.getProperty(EVENT_BEFORE_VALUE).split(","),
-                    pageContentNode)
-                Set<String> afterValues = getDeepProperties(job.getProperty(EVENT_AFTER_VALUE).split(","),
-                    pageContentNode)
+                def beforeValues = getDeepProperties(job.getProperty(EVENT_BEFORE_VALUE).split(","), pageContentNode)
+                def afterValues = getDeepProperties(job.getProperty(EVENT_AFTER_VALUE).split(","), pageContentNode)
 
                 // remove common values
                 Set<String> commonValues = beforeValues.intersect(afterValues as Iterable)
@@ -76,18 +69,16 @@ class RolloutInheritanceJobConsumer implements JobConsumer {
                 result = JobConsumer.JobResult.OK
             }
         } catch (Throwable t) {
-            LOG.error("Failed to rollout deep inheritance {}", path, t)
+            LOG.error("Failed to rollout deep inheritance ${path}", t)
         } finally {
-            if (session) {
-                session.logout()
-            }
+            session?.logout()
 
             if (resourceResolver && resourceResolver.live) {
                 resourceResolver.close()
             }
         }
 
-        return result
+        result
     }
 
     private Set<String> getDeepProperties(String[] values, Node pageContentNode) throws RepositoryException {
