@@ -17,144 +17,175 @@ import javax.jcr.PropertyIterator
 import javax.jcr.RepositoryException
 import javax.jcr.Session
 import javax.jcr.Value
+import javax.jcr.util.TraversingItemVisitor
+
+import static com.day.cq.commons.jcr.JcrConstants.NT_UNSTRUCTURED
+import static com.icfolson.aem.library.core.rollout.impl.RolloutInheritanceEventListener.EVENT_AFTER_VALUE
+import static com.icfolson.aem.library.core.rollout.impl.RolloutInheritanceEventListener.EVENT_BEFORE_VALUE
 
 @Component
-@Service(value = JobConsumer.class)
-@Property(name = JobConsumer.PROPERTY_TOPICS, value = RolloutInheritanceEventListener.PROPERTY_INHERITANCE_CANCELLED_JOB_TOPIC)
-@Slf4j('LOG')
+@Service(value = JobConsumer)
+@Property(name = JobConsumer.PROPERTY_TOPICS,
+    value = RolloutInheritanceEventListener.PROPERTY_INHERITANCE_CANCELLED_JOB_TOPIC)
+@Slf4j("LOG")
 class RolloutInheritanceJobConsumer implements JobConsumer {
 
-	@Reference
-	private ResourceResolverFactory resourceResolverFactory
+    @Reference
+    private ResourceResolverFactory resourceResolverFactory
 
-	private Session session
+    private Session session
 
-	@Override
-	JobConsumer.JobResult process(Job job) {
-		JobConsumer.JobResult result = JobConsumer.JobResult.FAILED
+    @Override
+    JobConsumer.JobResult process(Job job) {
+        JobConsumer.JobResult result = JobConsumer.JobResult.FAILED
 
-		String path = (String) job.getProperty(OffloadingJobProperties.INPUT_PAYLOAD.propertyName())
-		ResourceResolver resourceResolver
-		try {
-			resourceResolver = resourceResolverFactory.getAdministrativeResourceResolver(null)
-			session = resourceResolver.adaptTo(Session)
+        String path = (String) job.getProperty(OffloadingJobProperties.INPUT_PAYLOAD.propertyName())
 
-			String jcrContentPath
+        ResourceResolver resourceResolver
 
-			jcrContentPath = path[0..(-1 * RolloutInheritanceEventListener.PROPERTY_INHERITANCE_CANCELLED_PATH.length())]
-			if (jcrContentPath) {
-				session.refresh(true)
-				Node pageContentNode = session.getNode(jcrContentPath)
+        try {
+            resourceResolver = resourceResolverFactory.getAdministrativeResourceResolver(null)
 
-				Set<String> beforeValues = getDeepProperties(job.getProperty(RolloutInheritanceEventListener.EVENT_BEFORE_VALUE).split(','), pageContentNode)
-				Set<String> afterValues = getDeepProperties(job.getProperty(RolloutInheritanceEventListener.EVENT_AFTER_VALUE).split(','), pageContentNode)
+            session = resourceResolver.adaptTo(Session)
 
-				// remove common values
-				Set<String> commonValues = beforeValues.intersect(afterValues)
-				Set<String> uniqueBeforeValues = beforeValues - commonValues
-				Set<String> uniqueAfterValues = afterValues - commonValues
+            def jcrContentPath = path[0..(-1 * RolloutInheritanceEventListener.PROPERTY_INHERITANCE_CANCELLED_PATH.length())]
 
-				uniqueAfterValues.each { afterValue ->
-					addOrRemoveProp(pageContentNode, afterValue, true)
-				}
+            if (jcrContentPath) {
+                session.refresh(true)
 
-				uniqueBeforeValues.each { beforeValue ->
-					addOrRemoveProp(pageContentNode, beforeValue, false)
-				}
+                Node pageContentNode = session.getNode(jcrContentPath)
 
-				result = JobConsumer.JobResult.OK
-			}
-		} catch (Throwable t) {
-			LOG.error('Failed to rollout deep inheritance {}', path, t)
-		} finally {
-			if (session != null) {
-				session.logout()
-			}
-			if (resourceResolver && resourceResolver.live) {
-				resourceResolver.close()
-			}
-		}
+                Set<String> beforeValues = getDeepProperties(job.getProperty(EVENT_BEFORE_VALUE).split(","),
+                    pageContentNode)
+                Set<String> afterValues = getDeepProperties(job.getProperty(EVENT_AFTER_VALUE).split(","),
+                    pageContentNode)
 
-		return result
-	}
+                // remove common values
+                Set<String> commonValues = beforeValues.intersect(afterValues as Iterable)
+                Set<String> uniqueBeforeValues = beforeValues - commonValues
+                Set<String> uniqueAfterValues = afterValues - commonValues
 
-	private Set<String> getDeepProperties(String[] values, Node pageContentNode) throws RepositoryException {
-		Set<String> deepProps = new HashSet<String>()
-		if (values != null) {
-			values.each { value ->
-				if (!value.startsWith('/') && value.lastIndexOf('/') > 0) {
-					deepProps.add(value)
-				} else if (pageContentNode.hasNode(value)) {
-					Node propertyNode = pageContentNode.getNode(value)
-					propertyNode.recurse { Node childNode ->
-						String childNodePath = childNode.path.substring(pageContentNode.path.length() + 1)
-						PropertyIterator propertyIterator = childNode.properties
-						while (propertyIterator.hasNext()) {
-							javax.jcr.Property property = propertyIterator.nextProperty()
-							String propertyName = property.name
-							if (!propertyName.startsWith('jcr:') && !propertyName.startsWith('cq:')) {
-								String deepPropertyPath = "${childNodePath}/${propertyName}"
-								deepProps.add(deepPropertyPath)
-							}
-						}
-					}
-				}
-			}
-		}
-		return deepProps
-	}
+                uniqueAfterValues.each { afterValue ->
+                    addOrRemoveProp(pageContentNode, afterValue, true)
+                }
 
-	private Value[] getPropertyValues(Node node, String propertyName) throws RepositoryException {
-		Value[] values = []
-		if (node.hasProperty(propertyName)) {
-			javax.jcr.Property prop = node.getProperty(propertyName)
+                uniqueBeforeValues.each { beforeValue ->
+                    addOrRemoveProp(pageContentNode, beforeValue, false)
+                }
 
-			if (prop.isMultiple()) {
-				values = prop.values
-			} else {
-				values = [prop.value]
-			}
-		}
+                result = JobConsumer.JobResult.OK
+            }
+        } catch (Throwable t) {
+            LOG.error("Failed to rollout deep inheritance {}", path, t)
+        } finally {
+            if (session) {
+                session.logout()
+            }
 
-		return values
-	}
+            if (resourceResolver && resourceResolver.live) {
+                resourceResolver.close()
+            }
+        }
 
-	private void addOrRemoveProp(Node pageContentNode, String propertyValue, boolean addToCancel) throws RepositoryException {
-		int propertyIndex = propertyValue.lastIndexOf('/')
-		String childNodePath = propertyValue.substring(0, propertyIndex)
-		String childPropName = propertyValue.substring(propertyIndex + 1)
+        return result
+    }
 
-		LOG.debug("${(addToCancel ? 'Adding' : 'Removing')} property ${childPropName} for ${RolloutInheritanceEventListener.PROPERTY_INHERITANCE_CANCELLED} on child node ${childNodePath}")
+    private Set<String> getDeepProperties(String[] values, Node pageContentNode) throws RepositoryException {
+        def deepProps = new HashSet<String>()
 
-		Node childNode
-		if (pageContentNode.hasNode(childNodePath)) {
-			childNode = pageContentNode.getNode(childNodePath)
-		} else {
-			childNode = JcrUtil.createPath(pageContentNode, childNodePath, false, 'nt:unstructured', 'nt:unstructured', session, true)
-		}
+        if (values) {
+            values.each { value ->
+                if (!value.startsWith("/") && value.lastIndexOf("/") > 0) {
+                    deepProps.add(value)
+                } else if (pageContentNode.hasNode(value)) {
+                    def propertyNode = pageContentNode.getNode(value)
 
-		Value[] existingChildCancelInheritanceValues = getPropertyValues(childNode, RolloutInheritanceEventListener.PROPERTY_INHERITANCE_CANCELLED)
+                    def visitor = new TraversingItemVisitor.Default(false) {
+                        @Override
+                        protected void entering(Node node, int level) throws RepositoryException {
+                            def childNodePath = node.path.substring(pageContentNode.path.length() + 1)
+                            def propertyIterator = node.properties
 
-		List<String> updatedChildCancelInheritanceValues = new ArrayList<String>()
-		existingChildCancelInheritanceValues.each { Value existingCancelInheritanceValue ->
-			String existingCancelInheritanceString = existingCancelInheritanceValue.string
-			if (existingCancelInheritanceString != childPropName) {
-				updatedChildCancelInheritanceValues.add(existingCancelInheritanceString)
-			}
-		}
+                            while (propertyIterator.hasNext()) {
+                                def property = propertyIterator.nextProperty()
+                                def propertyName = property.name
 
-		if (addToCancel) {
-			updatedChildCancelInheritanceValues.add(childPropName)
-		}
+                                if (!propertyName.startsWith("jcr:") && !propertyName.startsWith("cq:")) {
+                                    String deepPropertyPath = "${childNodePath}/${propertyName}"
+                                    deepProps.add(deepPropertyPath)
+                                }
+                            }
+                        }
+                    }
 
-		if (updatedChildCancelInheritanceValues.sort() != existingChildCancelInheritanceValues.sort()) {
-			if (updatedChildCancelInheritanceValues.size() > 0) {
-				childNode.setProperty(RolloutInheritanceEventListener.PROPERTY_INHERITANCE_CANCELLED, updatedChildCancelInheritanceValues.toArray(new String[updatedChildCancelInheritanceValues.size()]))
-			} else {
-				childNode.setProperty(RolloutInheritanceEventListener.PROPERTY_INHERITANCE_CANCELLED, (String[]) null)
-			}
-			session.save()
-		}
-	}
+                    visitor.visit(propertyNode)
+                }
+            }
+        }
 
+        deepProps
+    }
+
+    private Value[] getPropertyValues(Node node, String propertyName) throws RepositoryException {
+        Value[] values = []
+
+        if (node.hasProperty(propertyName)) {
+            def prop = node.getProperty(propertyName)
+
+            if (prop.multiple) {
+                values = prop.values
+            } else {
+                values = [prop.value]
+            }
+        }
+
+        values
+    }
+
+    private void addOrRemoveProp(Node pageContentNode, String propertyValue, boolean addToCancel)
+        throws RepositoryException {
+        int propertyIndex = propertyValue.lastIndexOf("/")
+        String childNodePath = propertyValue.substring(0, propertyIndex)
+        String childPropName = propertyValue.substring(propertyIndex + 1)
+
+        LOG.debug("${(addToCancel ? "Adding" : "Removing")} property ${childPropName} " +
+            "for ${RolloutInheritanceEventListener.PROPERTY_INHERITANCE_CANCELLED} on child node ${childNodePath}")
+
+        Node childNode
+
+        if (pageContentNode.hasNode(childNodePath)) {
+            childNode = pageContentNode.getNode(childNodePath)
+        } else {
+            childNode = JcrUtil.createPath(pageContentNode, childNodePath, false, NT_UNSTRUCTURED, NT_UNSTRUCTURED,
+                session, true)
+        }
+
+        Value[] existingChildCancelInheritanceValues = getPropertyValues(childNode,
+            RolloutInheritanceEventListener.PROPERTY_INHERITANCE_CANCELLED)
+
+        List<String> updatedChildCancelInheritanceValues = []
+
+        existingChildCancelInheritanceValues.each { Value existingCancelInheritanceValue ->
+            String existingCancelInheritanceString = existingCancelInheritanceValue.string
+
+            if (existingCancelInheritanceString != childPropName) {
+                updatedChildCancelInheritanceValues.add(existingCancelInheritanceString)
+            }
+        }
+
+        if (addToCancel) {
+            updatedChildCancelInheritanceValues.add(childPropName)
+        }
+
+        if (updatedChildCancelInheritanceValues.sort() != existingChildCancelInheritanceValues.sort()) {
+            if (updatedChildCancelInheritanceValues.size() > 0) {
+                childNode.setProperty(RolloutInheritanceEventListener.PROPERTY_INHERITANCE_CANCELLED,
+                    updatedChildCancelInheritanceValues.toArray(new String[updatedChildCancelInheritanceValues.size()]))
+            } else {
+                childNode.setProperty(RolloutInheritanceEventListener.PROPERTY_INHERITANCE_CANCELLED, (String[]) null)
+            }
+
+            session.save()
+        }
+    }
 }

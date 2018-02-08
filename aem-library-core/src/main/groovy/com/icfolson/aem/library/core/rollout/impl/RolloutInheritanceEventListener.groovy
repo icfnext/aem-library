@@ -24,85 +24,87 @@ import javax.jcr.observation.ObservationManager
 
 @Component(metatype = true, immediate = true)
 @Service
-@Slf4j('LOG')
+@Slf4j("LOG")
 class RolloutInheritanceEventListener implements EventListener {
 
-	static final String PROPERTY_INHERITANCE_CANCELLED = 'cq:propertyInheritanceCancelled'
-	static final String PROPERTY_INHERITANCE_CANCELLED_PATH = "/$PROPERTY_INHERITANCE_CANCELLED"
+    static final String PROPERTY_INHERITANCE_CANCELLED = "cq:propertyInheritanceCancelled"
+    static final String PROPERTY_INHERITANCE_CANCELLED_PATH = "/$PROPERTY_INHERITANCE_CANCELLED"
 
-	static final String PROPERTY_INHERITANCE_CANCELLED_JOB_TOPIC = 'com/icfolson/aem/library/core/services/job'
+    static final String PROPERTY_INHERITANCE_CANCELLED_JOB_TOPIC = "com/icfolson/aem/library/core/services/job"
 
-	static final String EVENT_BEFORE_VALUE = 'beforeValue'
-	static final String EVENT_AFTER_VALUE = 'afterValue'
+    static final String EVENT_BEFORE_VALUE = "beforeValue"
+    static final String EVENT_AFTER_VALUE = "afterValue"
 
-	@Reference
-	private ResourceResolverFactory resourceResolverFactory
+    static final Integer EVENT_TYPES = Event.PROPERTY_ADDED | Event.PROPERTY_CHANGED | Event.PROPERTY_REMOVED
+    static final String[] NODE_TYPE_NAMES = ["cq:PageContent"]
 
-	@Reference
-	private SlingSettingsService slingSettings
+    @Reference
+    private ResourceResolverFactory resourceResolverFactory
 
-	@Reference
-	private JobManager jobManager
+    @Reference
+    private SlingSettingsService slingSettings
 
-	@Property(label = 'Path root')
-	private static final String PATH_ROOT = 'pathRoot'
+    @Reference
+    private JobManager jobManager
 
-	private String pathRoot
+    @Property(label = "Path root")
+    private static final String PATH_ROOT = "pathRoot"
 
-	private ResourceResolver resourceResolver
+    private String pathRoot
 
-	private Session session
+    private ResourceResolver resourceResolver
 
-	private ObservationManager observationManager
+    private Session session
 
-	@Override
-	void onEvent(EventIterator eventIterator) {
-		if (slingSettings.runModes.contains('author')) {
-			while (eventIterator.hasNext()) {
-				Event event = eventIterator.nextEvent()
-				if (event.path.endsWith(PROPERTY_INHERITANCE_CANCELLED_PATH)) {
-					jobManager.addJob(PROPERTY_INHERITANCE_CANCELLED_JOB_TOPIC, createPayload(event))
-				}
-			}
-		}
-	}
+    private ObservationManager observationManager
 
-	@Activate
-	@Modified
-	void activate(final Map<String, Object> properties) {
-		pathRoot = properties.get(PATH_ROOT)
-		if (pathRoot) {
-			resourceResolver = resourceResolverFactory.getAdministrativeResourceResolver(null)
-			session = resourceResolver.adaptTo(Session)
-			observationManager = session.workspace.observationManager
+    @Override
+    void onEvent(EventIterator eventIterator) {
+        if (slingSettings.runModes.contains("author")) {
+            while (eventIterator.hasNext()) {
+                Event event = eventIterator.nextEvent()
+                if (event.path.endsWith(PROPERTY_INHERITANCE_CANCELLED_PATH)) {
+                    jobManager.addJob(PROPERTY_INHERITANCE_CANCELLED_JOB_TOPIC, createPayload(event))
+                }
+            }
+        }
+    }
 
-			int eventTypes = Event.PROPERTY_ADDED | Event.PROPERTY_CHANGED | Event.PROPERTY_REMOVED
-			String[] nodeTypeNames = ['cq:PageContent']
-			observationManager.addEventListener(this, eventTypes, pathRoot, true, null, nodeTypeNames, true)
-		}
-	}
+    @Activate
+    @Modified
+    void activate(final Map<String, Object> properties) {
+        pathRoot = properties.get(PATH_ROOT)
 
-	@Deactivate
-	void deactivate() {
-		try {
-			if (observationManager != null) {
-				observationManager.removeEventListener(this)
-			}
-		} catch (RepositoryException re) {
-			LOG.error('Error deactivating RolloutInheritanceEventListener', re)
-		} finally {
-			if (session != null) {
-				session.logout()
-			}
-		}
-	}
+        if (pathRoot) {
+            resourceResolver = resourceResolverFactory.getAdministrativeResourceResolver(null)
+            session = resourceResolver.adaptTo(Session)
+            observationManager = session.workspace.observationManager
+            observationManager.addEventListener(this, EVENT_TYPES, pathRoot, true, null, NODE_TYPE_NAMES, true)
+        }
+    }
 
-	private Map<String, Object> createPayload(Event event) {
-		final Map<String, Object> payload = new HashMap<String, Object>()
-		payload.put(OffloadingJobProperties.INPUT_PAYLOAD.propertyName(), event.path)
-		payload.put(EVENT_BEFORE_VALUE, ((Value[]) event.info.get(EVENT_BEFORE_VALUE)).join(','))
-		payload.put(EVENT_AFTER_VALUE, ((Value[]) event.info.get(EVENT_AFTER_VALUE)).join(','))
-		payload
-	}
+    @Deactivate
+    void deactivate() {
+        try {
+            if (observationManager != null) {
+                observationManager.removeEventListener(this)
+            }
+        } catch (RepositoryException re) {
+            LOG.error("Error deactivating RolloutInheritanceEventListener", re)
+        } finally {
+            if (session) {
+                session.logout()
+            }
+        }
+    }
 
+    private Map<String, Object> createPayload(Event event) {
+        final Map<String, Object> payload = new HashMap<String, Object>()
+
+        payload.put(OffloadingJobProperties.INPUT_PAYLOAD.propertyName(), event.path)
+        payload.put(EVENT_BEFORE_VALUE, ((Value[]) event.info.get(EVENT_BEFORE_VALUE)).join(","))
+        payload.put(EVENT_AFTER_VALUE, ((Value[]) event.info.get(EVENT_AFTER_VALUE)).join(","))
+
+        payload
+    }
 }
