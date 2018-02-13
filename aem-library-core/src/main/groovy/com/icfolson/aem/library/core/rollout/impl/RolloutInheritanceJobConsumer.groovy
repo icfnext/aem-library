@@ -96,7 +96,7 @@ class RolloutInheritanceJobConsumer implements JobConsumer {
             values.each { value ->
                 if (!value.startsWith("/") && value.lastIndexOf("/") > 0) {
                     deepProps.add(value)
-                } else if (pageContentNode.hasNode(value)) {
+                } else if (value && pageContentNode.hasNode(value)) {
                     def propertyNode = pageContentNode.getNode(value)
 
                     def visitor = new TraversingItemVisitor.Default(false) {

@@ -102,8 +102,8 @@ class RolloutInheritanceEventListener implements EventListener {
         final Map<String, Object> payload = new HashMap<String, Object>()
 
         payload.put(OffloadingJobProperties.INPUT_PAYLOAD.propertyName(), event.path)
-        payload.put(EVENT_BEFORE_VALUE, ((Value[]) event.info.get(EVENT_BEFORE_VALUE)).join(","))
-        payload.put(EVENT_AFTER_VALUE, ((Value[]) event.info.get(EVENT_AFTER_VALUE)).join(","))
+        payload.put(EVENT_BEFORE_VALUE, ((Value[]) event.info.get(EVENT_BEFORE_VALUE))?.join(",") ?: "")
+        payload.put(EVENT_AFTER_VALUE, ((Value[]) event.info.get(EVENT_AFTER_VALUE))?.join(",") ?: "")
 
         payload
     }
