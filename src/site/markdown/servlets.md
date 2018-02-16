@@ -22,7 +22,7 @@ Base class for supplying a data source to component dialogs using the Touch UI. 
 
 `com.icfolson.aem.library.core.servlets.datasource.AbstractTagDataSourceServlet`
 
-Extends the AbstractOptionsDataSourceServlet and solely focuses on building options from tags within the repository. A basic extension is to provide just the namespace of the tags and the servlet will build a list of options from all direct descendants of that namespace tag. Extending classes may optionally provide a more granular tag path and a custom filter.
+Extends the `AbstractOptionsDataSourceServlet` and solely focuses on building options from tags within the repository. A basic extension is to provide just the namespace of the tags and the servlet will build a list of options from all direct descendants of that namespace tag. Extending classes may optionally provide a more granular tag path and a custom filter.
 
 ### Abstract Validation Servlet
 
