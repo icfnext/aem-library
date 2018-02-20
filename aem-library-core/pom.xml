@@ -4,7 +4,7 @@
     <parent>
         <groupId>com.icfolson.aem.library</groupId>
         <artifactId>aem-library</artifactId>
-        <version>10.0.0-SNAPSHOT</version>
+        <version>10.0.0</version>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
