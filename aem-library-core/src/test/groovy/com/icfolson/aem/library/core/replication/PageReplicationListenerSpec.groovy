@@ -48,16 +48,12 @@ class PageReplicationListenerSpec extends AemLibrarySpec {
     def setup() {
         listener = new PageReplicationListener()
 
-        listener.with {
-            resourceResolverFactory = [getAdministrativeResourceResolver: {
-                this.resourceResolver
-            }] as ResourceResolverFactory
-            replicator = Mock(Replicator)
+        listener.resourceResolverFactory = slingContext.getService(ResourceResolverFactory)
+        listener.replicator = Mock(Replicator)
 
-            def configuration = this.class.getAnnotation(PageReplicationListenerConfiguration)
+        def configuration = this.class.getAnnotation(PageReplicationListenerConfiguration)
 
-            activate(configuration)
-        }
+        listener.activate(configuration)
     }
 
     def "handle activate for invalid path does nothing"() {
@@ -82,8 +78,8 @@ class PageReplicationListenerSpec extends AemLibrarySpec {
 
         then:
         with(listener.replicator) {
-            1 * replicate(session, ReplicationActionType.ACTIVATE, "/content/home/inactive1")
-            1 * replicate(session, ReplicationActionType.ACTIVATE, "/content/home")
+            1 * replicate(_, ReplicationActionType.ACTIVATE, "/content/home/inactive1")
+            1 * replicate(_, ReplicationActionType.ACTIVATE, "/content/home")
         }
     }
 
@@ -92,6 +88,6 @@ class PageReplicationListenerSpec extends AemLibrarySpec {
         listener.handleActivate("/content/home/active1/active2")
 
         then:
-        1 * listener.replicator.replicate(session, ReplicationActionType.ACTIVATE, "/content/home")
+        1 * listener.replicator.replicate(_, ReplicationActionType.ACTIVATE, "/content/home")
     }
 }

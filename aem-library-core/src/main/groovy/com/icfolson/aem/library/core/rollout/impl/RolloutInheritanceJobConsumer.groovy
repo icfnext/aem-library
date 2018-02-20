@@ -28,19 +28,17 @@ class RolloutInheritanceJobConsumer implements JobConsumer {
     @Reference
     private ResourceResolverFactory resourceResolverFactory
 
-    private Session session
-
     @Override
     JobConsumer.JobResult process(Job job) {
         def result = JobConsumer.JobResult.FAILED
 
         def path = (String) job.getProperty(OffloadingJobProperties.INPUT_PAYLOAD.propertyName())
 
-        def resourceResolver
+        def resourceResolver = null
+        def session = null
 
         try {
-            resourceResolver = resourceResolverFactory.getAdministrativeResourceResolver(null)
-
+            resourceResolver = resourceResolverFactory.getServiceResourceResolver(null)
             session = resourceResolver.adaptTo(Session)
 
             def jcrContentPath = path[0..(-1 * RolloutInheritanceEventListener.PROPERTY_INHERITANCE_CANCELLED_PATH.length())]
@@ -50,8 +48,8 @@ class RolloutInheritanceJobConsumer implements JobConsumer {
 
                 def pageContentNode = session.getNode(jcrContentPath)
 
-                def beforeValues = getDeepProperties(job.getProperty(EVENT_BEFORE_VALUE).split(","), pageContentNode)
-                def afterValues = getDeepProperties(job.getProperty(EVENT_AFTER_VALUE).split(","), pageContentNode)
+                def beforeValues = getDeepProperties(getPropertyValues(job, EVENT_BEFORE_VALUE), pageContentNode)
+                def afterValues = getDeepProperties(getPropertyValues(job, EVENT_AFTER_VALUE), pageContentNode)
 
                 // remove common values
                 Set<String> commonValues = beforeValues.intersect(afterValues as Iterable)
@@ -59,11 +57,11 @@ class RolloutInheritanceJobConsumer implements JobConsumer {
                 Set<String> uniqueAfterValues = afterValues - commonValues
 
                 uniqueAfterValues.each { afterValue ->
-                    addOrRemoveProp(pageContentNode, afterValue, true)
+                    addOrRemoveProp(session, pageContentNode, afterValue, true)
                 }
 
                 uniqueBeforeValues.each { beforeValue ->
-                    addOrRemoveProp(pageContentNode, beforeValue, false)
+                    addOrRemoveProp(session, pageContentNode, beforeValue, false)
                 }
 
                 result = JobConsumer.JobResult.OK
@@ -102,8 +100,7 @@ class RolloutInheritanceJobConsumer implements JobConsumer {
                                 def propertyName = property.name
 
                                 if (!propertyName.startsWith("jcr:") && !propertyName.startsWith("cq:")) {
-                                    String deepPropertyPath = "${childNodePath}/${propertyName}"
-                                    deepProps.add(deepPropertyPath)
+                                    deepProps.add("${childNodePath}/${propertyName}")
                                 }
                             }
                         }
@@ -115,6 +112,10 @@ class RolloutInheritanceJobConsumer implements JobConsumer {
         }
 
         deepProps
+    }
+
+    private String[] getPropertyValues(Job job, String propertyName) {
+        (job.getProperty(propertyName) as String).split(",")
     }
 
     private Value[] getPropertyValues(Node node, String propertyName) throws RepositoryException {
@@ -133,7 +134,7 @@ class RolloutInheritanceJobConsumer implements JobConsumer {
         values
     }
 
-    private void addOrRemoveProp(Node pageContentNode, String propertyValue, boolean addToCancel)
+    private void addOrRemoveProp(Session session, Node pageContentNode, String propertyValue, boolean addToCancel)
         throws RepositoryException {
         int propertyIndex = propertyValue.lastIndexOf("/")
         String childNodePath = propertyValue.substring(0, propertyIndex)
@@ -151,7 +152,7 @@ class RolloutInheritanceJobConsumer implements JobConsumer {
                 session, true)
         }
 
-        Value[] existingChildCancelInheritanceValues = getPropertyValues(childNode,
+        def existingChildCancelInheritanceValues = getPropertyValues(childNode,
             RolloutInheritanceEventListener.PROPERTY_INHERITANCE_CANCELLED)
 
         List<String> updatedChildCancelInheritanceValues = []

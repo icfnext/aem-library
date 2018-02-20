@@ -68,7 +68,7 @@ class RolloutInheritanceEventListener implements EventListener {
     @Modified
     void activate(RolloutInheritanceEventListenerConfiguration configuration) {
         if (configuration.pathRoot()) {
-            resourceResolver = resourceResolverFactory.getAdministrativeResourceResolver(null)
+            resourceResolver = resourceResolverFactory.getServiceResourceResolver(null)
             session = resourceResolver.adaptTo(Session)
 
             observationManager = session.workspace.observationManager

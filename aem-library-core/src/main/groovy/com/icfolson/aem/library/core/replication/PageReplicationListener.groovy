@@ -7,11 +7,9 @@ import com.day.cq.replication.Replicator
 import com.day.cq.wcm.api.Page
 import com.day.cq.wcm.api.PageManager
 import groovy.util.logging.Slf4j
-import org.apache.sling.api.resource.ResourceResolver
 import org.apache.sling.api.resource.ResourceResolverFactory
 import org.osgi.service.component.annotations.Activate
 import org.osgi.service.component.annotations.Component
-import org.osgi.service.component.annotations.Deactivate
 import org.osgi.service.component.annotations.Modified
 import org.osgi.service.component.annotations.Reference
 import org.osgi.service.event.EventHandler
@@ -35,15 +33,14 @@ class PageReplicationListener extends AbstractReplicationListener {
     @Reference
     protected Replicator replicator
 
-    private Session session
-
-    private ResourceResolver resourceResolver
-
     private PageReplicationListenerConfiguration configuration
 
     @Override
     protected void handleActivate(String path) {
         if (configuration.enabled()) {
+            def resourceResolver = resourceResolverFactory.getServiceResourceResolver(null)
+            def session = resourceResolver.adaptTo(Session)
+
             def page = resourceResolver.adaptTo(PageManager).getPage(path)
 
             if (page) {
@@ -53,7 +50,7 @@ class PageReplicationListener extends AbstractReplicationListener {
                     def status = parent.contentResource.adaptTo(ReplicationStatus)
 
                     if (!status.activated) {
-                        activatePage(parent)
+                        activatePage(session, parent)
                     }
 
                     parent = parent.parent
@@ -61,6 +58,8 @@ class PageReplicationListener extends AbstractReplicationListener {
             } else {
                 LOG.debug("activated path is not a page = {}", path)
             }
+
+            resourceResolver.close()
         }
     }
 
@@ -74,27 +73,13 @@ class PageReplicationListener extends AbstractReplicationListener {
         // nothing to do
     }
 
-    @SuppressWarnings("deprecation")
     @Activate
-    void activate(PageReplicationListenerConfiguration configuration) {
-        resourceResolver = resourceResolverFactory.getAdministrativeResourceResolver(null)
-        session = resourceResolver.adaptTo(Session)
-
-        modified(configuration)
-    }
-
     @Modified
-    void modified(PageReplicationListenerConfiguration configuration) {
+    void activate(PageReplicationListenerConfiguration configuration) {
         this.configuration = configuration
     }
 
-    @Deactivate
-    void deactivate() {
-        resourceResolver?.close()
-        session?.logout()
-    }
-
-    private void activatePage(Page page) {
+    private void activatePage(Session session, Page page) {
         def path = page.path
 
         LOG.info("activating page = {}", path)
