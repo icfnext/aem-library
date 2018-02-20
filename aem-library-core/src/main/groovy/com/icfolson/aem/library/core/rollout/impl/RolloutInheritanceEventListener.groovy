@@ -92,8 +92,8 @@ class RolloutInheritanceEventListener implements EventListener {
         def payload = [:]
 
         payload.put(OffloadingJobProperties.INPUT_PAYLOAD.propertyName(), event.path)
-        payload.put(EVENT_BEFORE_VALUE, ((Value[]) event.info.get(EVENT_BEFORE_VALUE)).join(","))
-        payload.put(EVENT_AFTER_VALUE, ((Value[]) event.info.get(EVENT_AFTER_VALUE)).join(","))
+        payload.put(EVENT_BEFORE_VALUE, ((Value[]) event.info.get(EVENT_BEFORE_VALUE))?.join(",") ?: "")
+        payload.put(EVENT_AFTER_VALUE, ((Value[]) event.info.get(EVENT_AFTER_VALUE))?.join(",") ?: "")
 
         payload
     }
