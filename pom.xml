@@ -259,11 +259,6 @@
                         <generateBackupPoms>false</generateBackupPoms>
                     </configuration>
                 </plugin>
-                <plugin>
-                    <groupId>com.github.phasebash</groupId>
-                    <artifactId>jsdoc3-maven-plugin</artifactId>
-                    <version>1.0.7</version>
-                </plugin>
             </plugins>
         </pluginManagement>
         <plugins>
@@ -421,21 +416,6 @@
                         </reports>
                     </reportSet>
                 </reportSets>
-            </plugin>
-            <plugin>
-                <groupId>com.github.phasebash</groupId>
-                <artifactId>jsdoc3-maven-plugin</artifactId>
-                <configuration>
-                    <recursive>true</recursive>
-                    <directoryRoots>
-                        <directoryRoot>
-                            ${basedir}/aem-library-ui/src/main/content/jcr_root/etc/clientlibs/aem-library/utilities
-                        </directoryRoot>
-                        <directoryRoot>
-                            ${basedir}/aem-library-ui/src/main/content/jcr_root/etc/clientlibs/aem-library/widgets
-                        </directoryRoot>
-                    </directoryRoots>
-                </configuration>
             </plugin>
         </plugins>
     </reporting>
