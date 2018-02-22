@@ -1,4 +1,0 @@
-#base=js
-
-utilities.js
-dialogutils.js

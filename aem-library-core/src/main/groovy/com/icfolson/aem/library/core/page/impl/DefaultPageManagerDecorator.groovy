@@ -1,9 +1,5 @@
 package com.icfolson.aem.library.core.page.impl
 
-import com.icfolson.aem.library.api.page.PageDecorator
-import com.icfolson.aem.library.api.page.PageManagerDecorator
-import com.icfolson.aem.library.core.page.predicates.TemplatePredicate
-import com.icfolson.aem.library.core.utils.PathUtils
 import com.day.cq.commons.jcr.JcrConstants
 import com.day.cq.tagging.TagManager
 import com.day.cq.wcm.api.Page
@@ -11,6 +7,10 @@ import com.day.cq.wcm.api.PageManager
 import com.day.cq.wcm.api.WCMException
 import com.google.common.base.Predicate
 import com.google.common.base.Stopwatch
+import com.icfolson.aem.library.api.page.PageDecorator
+import com.icfolson.aem.library.api.page.PageManagerDecorator
+import com.icfolson.aem.library.core.page.predicates.TemplatePredicate
+import com.icfolson.aem.library.core.utils.PathUtils
 import groovy.util.logging.Slf4j
 import org.apache.sling.api.resource.Resource
 import org.apache.sling.api.resource.ResourceResolver
@@ -187,6 +187,12 @@ class DefaultPageManagerDecorator implements PageManagerDecorator {
     PageDecorator move(Page page, String destination, String beforeName, boolean shallow,
         boolean resolveConflict, String[] adjustRefs) throws WCMException {
         decorate(pageManager.move(page, destination, beforeName, shallow, resolveConflict, adjustRefs))
+    }
+
+    @Override
+    PageDecorator move(Page page, String destination, String beforeName, boolean shallow,
+        boolean resolveConflict, String[] adjustRefs, String[] publishRefs) throws WCMException {
+        decorate(pageManager.move(page, destination, beforeName, shallow, resolveConflict, adjustRefs, publishRefs))
     }
 
     @Override

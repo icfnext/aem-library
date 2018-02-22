@@ -1,7 +1,7 @@
 package com.icfolson.aem.library.core.node.predicates;
 
-import com.icfolson.aem.library.api.node.ComponentNode;
 import com.google.common.base.Predicate;
+import com.icfolson.aem.library.api.node.ComponentNode;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -18,6 +18,6 @@ public final class ComponentNodeResourceTypePredicate implements Predicate<Compo
 
     @Override
     public boolean apply(final ComponentNode componentNode) {
-        return resourceType.equals(checkNotNull(componentNode).getResource().getResourceType());
+        return checkNotNull(componentNode).getResource().isResourceType(resourceType);
     }
 }

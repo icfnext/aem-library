@@ -161,6 +161,23 @@ public interface PageManagerDecorator extends PageManager {
         String[] adjustRefs) throws WCMException;
 
     /**
+     * Moves the given page to the new destination. If source and destination are equals the page is just ordered.
+     *
+     * @param page the page to move
+     * @param destination the path of the new destination
+     * @param beforeName the name of the next page. if <code>null</code> the page is ordered at the end.
+     * @param shallow if <code>true</code> only the page content is moved
+     * @param resolveConflict if <code>true</code> resolves name conflict if destination already exists.
+     * @param adjustRefs list of paths to pages that refer to the moved one. those references will be adjusted.
+     * @param publishRefs list of paths to publish in addition to the moved page
+     * @return the new page at the new location
+     * @throws WCMException if an error during this operation occurs.
+     */
+    @Override
+    PageDecorator move(Page page, String destination, String beforeName, boolean shallow, boolean resolveConflict,
+        String[] adjustRefs, String[] publishRefs) throws WCMException;
+
+    /**
      * Restore a revision of some page.
      *
      * @param path path to the page or to the parent page

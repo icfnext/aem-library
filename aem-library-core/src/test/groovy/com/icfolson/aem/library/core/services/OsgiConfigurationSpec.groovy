@@ -46,7 +46,7 @@ class OsgiConfigurationSpec extends Specification {
 
     def "get as double"() {
         expect:
-        configuration.getAsDouble(propertyName, 0.0) == result
+        configuration.getAsDouble(propertyName, 0.0 as Double) == result as Double
 
         where:
         propertyName          | result

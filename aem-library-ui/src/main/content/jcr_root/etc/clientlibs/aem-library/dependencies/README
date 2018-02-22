@@ -1,5 +1,0 @@
-The JavaScript libraries included in this module are not explicitly embedded when including the "aem-library.utilities"
-client library due to the likelihood that client AEM projects will want to define specific versions of these dependencies
-(jQuery, etc) without being bound to the versions included here.  Client projects will be required to either include
-this "aem-library.dependencies" category or define their own versions of these libraries before including the
-"aem-library.utilities" category.
