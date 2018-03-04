@@ -7,15 +7,14 @@ import org.apache.sling.api.resource.Resource
 
 final class NodeFunctions {
 
-    static final Function<Resource, BasicNode> RESOURCE_TO_BASIC_NODE = new Function<Resource, BasicNode>() {
+    public static final Function<Resource, BasicNode> RESOURCE_TO_BASIC_NODE = new Function<Resource, BasicNode>() {
         @Override
         BasicNode apply(Resource resource) {
             new DefaultBasicNode(resource)
         }
     }
 
-    static
-    final Function<Resource, ComponentNode> RESOURCE_TO_COMPONENT_NODE = new Function<Resource, ComponentNode>() {
+    public static final Function<Resource, ComponentNode> RESOURCE_TO_COMPONENT_NODE = new Function<Resource, ComponentNode>() {
         @Override
         ComponentNode apply(Resource resource) {
             new DefaultComponentNode(resource)
