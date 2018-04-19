@@ -16,54 +16,58 @@ import java.lang.reflect.ParameterizedType
 import java.lang.reflect.Type
 
 @Component(service = Injector, property = [
-    "service.ranking:Integer=4000"
+	"service.ranking:Integer=4000"
 ])
 class InheritInjector extends AbstractComponentNodeInjector implements InjectAnnotationProcessorFactory2 {
 
-    @Override
-    String getName() {
-        InheritInject.NAME
-    }
+	@Override
+	String getName() {
+		InheritInject.NAME
+	}
 
-    @Override
-    Object getValue(ComponentNode componentNode, String name, Type declaredType, AnnotatedElement element,
-        DisposalCallbackRegistry callbackRegistry) {
-        def value = null
+	@Override
+	Object getValue(ComponentNode componentNode, String name, Type declaredType, AnnotatedElement element,
+			DisposalCallbackRegistry callbackRegistry) {
+		def value = null
 
-        if (element.getAnnotation(InheritInject)) {
-            if (isParameterizedListType(declaredType)) {
-                def typeClass = getActualType((ParameterizedType) declaredType)
+		if (element.getAnnotation(InheritInject)) {
+			if (isParameterizedListType(declaredType)) {
+				def typeClass = getActualType((ParameterizedType) declaredType)
 
-                value = componentNode.getNodesInherited(name).collect { node ->
-                    node.resource.adaptTo(typeClass)
-                }
-            } else if (declaredType instanceof Class && declaredType.enum) {
-                def enumString = componentNode.getInherited(name, String)
+				value = componentNode.getNodesInherited(name).collect { node ->
+					node.resource.adaptTo(typeClass)
+				}
+			} else if (declaredType instanceof Class && declaredType.enum) {
+				def enumString = componentNode.getInherited(name, String)
 
-                value = enumString.present ? declaredType[enumString.get()] : null
-            } else {
-                value = componentNode.getInherited(name, declaredType as Class).orNull()
-            }
-        }
+				value = enumString.present ? declaredType[enumString.get()] : null
+			} else {
+				value = componentNode.getInherited(name, declaredType as Class).orNull()
 
-        value
-    }
+				if(!value){
+					value = componentNode.getNodeInherited(name).orNull()?.resource?.adaptTo(declaredType as Class)
+				}
+			}
+		}
 
-    @Override
-    InjectAnnotationProcessor2 createAnnotationProcessor(Object adaptable, AnnotatedElement element) {
-        def annotation = element.getAnnotation(InheritInject)
+		value
+	}
 
-        annotation ? new InheritAnnotationProcessor(annotation) : null
-    }
+	@Override
+	InjectAnnotationProcessor2 createAnnotationProcessor(Object adaptable, AnnotatedElement element) {
+		def annotation = element.getAnnotation(InheritInject)
 
-    @TupleConstructor
-    private static class InheritAnnotationProcessor extends AbstractInjectAnnotationProcessor2 {
+		annotation ? new InheritAnnotationProcessor(annotation) : null
+	}
 
-        InheritInject annotation
+	@TupleConstructor
+	private static class InheritAnnotationProcessor extends AbstractInjectAnnotationProcessor2 {
 
-        @Override
-        InjectionStrategy getInjectionStrategy() {
-            annotation.injectionStrategy()
-        }
-    }
+		InheritInject annotation
+
+		@Override
+		InjectionStrategy getInjectionStrategy() {
+			annotation.injectionStrategy()
+		}
+	}
 }
