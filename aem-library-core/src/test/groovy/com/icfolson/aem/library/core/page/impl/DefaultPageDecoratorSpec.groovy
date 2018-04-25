@@ -26,8 +26,7 @@ class DefaultPageDecoratorSpec extends AemLibrarySpec {
                 }
                 child1 {
                     "jcr:content"(hideInNav: true, "cq:template": "template")
-                    grandchild {
-                    }
+                    grandchild()
                 }
                 child2 {
                     "jcr:content"(pageTitle: "Child 2", "jcr:title": "Also Child 2") {
@@ -36,8 +35,7 @@ class DefaultPageDecoratorSpec extends AemLibrarySpec {
                     }
                 }
             }
-            other {
-            }
+            other()
             inheritance {
                 "jcr:content"("jcr:title": "Inheritance") {
                     component("jcr:title": "Component", "number": 5, "boolean": false) {
@@ -50,8 +48,7 @@ class DefaultPageDecoratorSpec extends AemLibrarySpec {
                         component()
                         other()
                     }
-                    sub {
-                    }
+                    sub()
                 }
             }
         }

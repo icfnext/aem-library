@@ -24,6 +24,7 @@ import com.icfolson.aem.library.core.node.predicates.ComponentNodePropertyValueP
 import org.apache.commons.lang3.builder.EqualsBuilder
 import org.apache.commons.lang3.builder.HashCodeBuilder
 import org.apache.sling.api.resource.Resource
+import org.apache.sling.api.resource.ResourceResolver
 import org.apache.sling.api.resource.ValueMap
 
 import static com.google.common.base.Preconditions.checkNotNull
@@ -384,10 +385,13 @@ final class DefaultPageDecorator implements PageDecorator {
 
     @Override
     Optional<PageDecorator> getChild(String name) {
+        def child = Optional.absent()
+
         if (hasChild(name)) {
-            return Optional.of(delegate.resource.getChild(name).adaptTo(PageDecorator))
+            child = Optional.of(delegate.adaptTo(Resource).getChild(name).adaptTo(PageDecorator))
         }
-        return Optional.absent()
+
+        child
     }
 
     @Override
