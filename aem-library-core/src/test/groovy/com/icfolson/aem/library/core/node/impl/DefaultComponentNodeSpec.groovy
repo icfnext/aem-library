@@ -271,12 +271,12 @@ class DefaultComponentNodeSpec extends AemLibrarySpec {
         !node.getAsPageInherited("nonExistentPagePath").present
     }
 
-    def "get node inherited"() {
+    def "get component node inherited"() {
         setup:
         def node = getComponentNode(path)
 
         expect:
-        node.getNodeInherited("child1").get().path == inheritedNodePath
+        node.getComponentNodeInherited("child1").get().path == inheritedNodePath
 
         where:
         path                                                       | inheritedNodePath
@@ -284,17 +284,17 @@ class DefaultComponentNodeSpec extends AemLibrarySpec {
         "/content/ales/esb/suds/pint/barrel/jcr:content/container" | "/content/ales/esb/suds/pint/barrel/jcr:content/container/child1"
     }
 
-    def "get node inherited is absent when ancestor not found"() {
+    def "get component node inherited is absent when ancestor not found"() {
         expect:
-        !getComponentNode("/content/ales/esb/jcr:content").getNodeInherited("child1").present
+        !getComponentNode("/content/ales/esb/jcr:content").getComponentNodeInherited("child1").present
     }
 
-    def "get nodes inherited"() {
+    def "get component nodes inherited"() {
         setup:
         def node = getComponentNode(path)
 
         expect:
-        node.getNodesInherited("container").size() == size
+        node.getComponentNodesInherited("container").size() == size
 
         where:
         path                                             | size

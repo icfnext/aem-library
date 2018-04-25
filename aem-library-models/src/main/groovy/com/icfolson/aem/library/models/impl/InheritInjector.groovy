@@ -34,7 +34,7 @@ class InheritInjector extends AbstractComponentNodeInjector implements InjectAnn
             if (isParameterizedListType(declaredType)) {
                 def typeClass = getActualType((ParameterizedType) declaredType)
 
-                value = componentNode.getNodesInherited(name).collect { node ->
+                value = componentNode.getComponentNodesInherited(name).collect { node ->
                     node.resource.adaptTo(typeClass)
                 }
             } else if (declaredType instanceof Class && declaredType.enum) {

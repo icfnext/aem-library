@@ -81,7 +81,7 @@ public interface ComponentNode extends BasicNode, Inheritable, Traversable<Compo
      * @param relativePath path relative to current node
      * @return direct child node if it exists, otherwise the child node at this relative path for an ancestor page
      */
-    Optional<BasicNode> getNodeInherited(String relativePath);
+    Optional<ComponentNode> getComponentNodeInherited(String relativePath);
 
     /**
      * Get the children of a node relative to the current node. If node does not exist relative to current page, inherit
@@ -91,7 +91,7 @@ public interface ComponentNode extends BasicNode, Inheritable, Traversable<Compo
      * @return list of nodes representing children of the addressed node or inherited from a parent page (or empty list
      * if none exist)
      */
-    List<BasicNode> getNodesInherited(String relativePath);
+    List<ComponentNode> getComponentNodesInherited(String relativePath);
 
     /**
      * Get the parent of this node.
