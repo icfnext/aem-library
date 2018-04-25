@@ -8,6 +8,7 @@ import com.day.cq.wcm.api.WCMMode;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
+
 import org.apache.commons.lang3.StringUtils;
 import org.apache.felix.scr.annotations.sling.SlingServlet;
 import org.apache.sling.api.SlingHttpServletRequest;
@@ -27,7 +28,9 @@ import javax.jcr.query.QueryResult;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
+import javax.servlet.WriteListener;
 import javax.servlet.http.HttpServletResponse;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -39,14 +42,17 @@ import static com.icfolson.aem.library.core.constants.PathConstants.EXTENSION_HT
 import static com.icfolson.aem.library.core.constants.PathConstants.EXTENSION_JSON;
 
 /**
- * Retrieves HTML for all contained components on a Page.  This differs from the OOB Paragraph servlet,
- * com.day.cq.wcm.foundation.ParagraphServlet, in that the OOB servlet only pulls content from top level containers
- * while this servlet will pull content from any container on the Page regardless of depth of nesting.  Concretely, if
- * your page has nested paragraph systems, the OOB paragraph servlet will not recognize and collect components within
- * the nested paragraph systems while this servlet will.
+ * Retrieves HTML for all contained components on a Page. This differs from the
+ * OOB Paragraph servlet, com.day.cq.wcm.foundation.ParagraphServlet, in that
+ * the OOB servlet only pulls content from top level containers while this
+ * servlet will pull content from any container on the Page regardless of depth
+ * of nesting. Concretely, if your page has nested paragraph systems, the OOB
+ * paragraph servlet will not recognize and collect components within the nested
+ * paragraph systems while this servlet will.
  * <p>
- * This Servlet is suitable for overriding the OOB behavior of xtypes such as paragraphreference, causing it to pull all
- * components on a page as opposed to the top level components.
+ * This Servlet is suitable for overriding the OOB behavior of xtypes such as
+ * paragraphreference, causing it to pull all components on a page as opposed to
+ * the top level components.
  */
 @SlingServlet(resourceTypes = { NameConstants.NT_PAGE }, selectors = { "ctparagraphs" },
     extensions = { EXTENSION_JSON }, methods = { "GET" })
@@ -54,9 +60,11 @@ public final class ParagraphJsonServlet extends AbstractComponentServlet {
 
     private static final long serialVersionUID = 1L;
 
-    private static final String CONTAINER_COMPONENTS_FROM_LIBS_XPATH_QUERY = "/jcr:root/libs//element(*,cq:Component)[@cq:isContainer='true']";
+    private static final String CONTAINER_COMPONENTS_FROM_LIBS_XPATH_QUERY =
+        "/jcr:root/libs//element(*,cq:Component)[@cq:isContainer='true']";
 
-    private static final String CONTAINER_COMPONENTS_FROM_APPS_XPATH_QUERY = "/jcr:root/apps//element(*,cq:Component)[@cq:isContainer='true']";
+    private static final String CONTAINER_COMPONENTS_FROM_APPS_XPATH_QUERY =
+        "/jcr:root/apps//element(*,cq:Component)[@cq:isContainer='true']";
 
     private static final String LIBS_PATH_STRING = "/libs/";
 
@@ -97,14 +105,15 @@ public final class ParagraphJsonServlet extends AbstractComponentServlet {
 
     /**
      * @param request component servlet request
-     * @return A List of Paragraphs representing all components which exist within containers under a given Page
+     * @return A List of Paragraphs representing all components which exist
+     * within containers under a given Page
      * @throws RepositoryException
      * @throws ServletException
      * @throws IOException
      */
     @SuppressWarnings("deprecation")
-    private List<Paragraph> getParagraphs(final ComponentServletRequest request)
-        throws RepositoryException, ServletException, IOException {
+    private List<Paragraph> getParagraphs(final ComponentServletRequest request) throws RepositoryException,
+        ServletException, IOException {
         // Request the current page
         final PageDecorator currentPage = request.getCurrentPage();
 
@@ -128,15 +137,17 @@ public final class ParagraphJsonServlet extends AbstractComponentServlet {
 
         final QueryManager queryManager = session.getWorkspace().getQueryManager();
 
-        // Find all container components which are children of the requested resources content node
+        // Find all container components which are children of the requested
+        // resources content node
         final Set<String> containerComponentResourceTypes = getContainerComponents(queryManager);
 
         /*
-         * Construct a query which will request all resources under the current page's content
-         * node which are of a type indicated to be a container via the cq:isContainer property.
+         * Construct a query which will request all resources under the current
+         * page's content node which are of a type indicated to be a container
+         * via the cq:isContainer property.
          */
-        final List<String> resourceTypeAttributeQueryStrings = Lists.newArrayListWithExpectedSize(
-            containerComponentResourceTypes.size());
+        final List<String> resourceTypeAttributeQueryStrings =
+            Lists.newArrayListWithExpectedSize(containerComponentResourceTypes.size());
 
         for (final String curContainerResourceType : containerComponentResourceTypes) {
             resourceTypeAttributeQueryStrings.add("@sling:resourceType='" + curContainerResourceType + "'");
@@ -144,8 +155,9 @@ public final class ParagraphJsonServlet extends AbstractComponentServlet {
 
         final String resourceTypeAttributeQueryString = StringUtils.join(resourceTypeAttributeQueryStrings, " or ");
 
-        final String resourceQueryString = "/jcr:root" + pageContentResource
-            .getPath() + "//element(*,nt:unstructured)[" + resourceTypeAttributeQueryString + "]";
+        final String resourceQueryString =
+            "/jcr:root" + pageContentResource.getPath() + "//element(*,nt:unstructured)["
+                + resourceTypeAttributeQueryString + "]";
 
         LOG.debug("resource query string = {}", resourceQueryString);
 
@@ -158,8 +170,8 @@ public final class ParagraphJsonServlet extends AbstractComponentServlet {
         final List<Paragraph> paragraphs = Lists.newArrayList();
 
         /*
-         * Go through the direct children of each container resource, adding them to the
-         * final list of Paragraphs
+         * Go through the direct children of each container resource, adding
+         * them to the final list of Paragraphs
          */
         while (resourceQueryResultIterator.hasNext()) {
             paragraphs.addAll(getChildParagraphs(request, resourceQueryResultIterator.nextNode().getPath(),
@@ -174,8 +186,9 @@ public final class ParagraphJsonServlet extends AbstractComponentServlet {
      * @param request
      * @param parentPath
      * @param containerResourceTypes
-     * @return A list of Paragraphs representing the non-container resources which are direct children of the resource
-     *         indicated by the parentPath
+     * @return A list of Paragraphs representing the non-container resources
+     * which are direct children of the resource indicated by the
+     * parentPath
      * @throws ServletException
      * @throws IOException
      */
@@ -201,18 +214,18 @@ public final class ParagraphJsonServlet extends AbstractComponentServlet {
     private Set<String> getContainerComponents(final QueryManager queryManager) throws RepositoryException {
         final Set<String> containerComponentSet = Sets.newHashSet();
 
-        final Query containerComponentsFromLibsQuery = queryManager.createQuery(
-            CONTAINER_COMPONENTS_FROM_LIBS_XPATH_QUERY, Query.XPATH);
-        final Query containerComponentsFromAppsQuery = queryManager.createQuery(
-            CONTAINER_COMPONENTS_FROM_APPS_XPATH_QUERY, Query.XPATH);
+        final Query containerComponentsFromLibsQuery =
+            queryManager.createQuery(CONTAINER_COMPONENTS_FROM_LIBS_XPATH_QUERY, Query.XPATH);
+        final Query containerComponentsFromAppsQuery =
+            queryManager.createQuery(CONTAINER_COMPONENTS_FROM_APPS_XPATH_QUERY, Query.XPATH);
 
         final QueryResult containerComponentsFromLibsQueryResult = containerComponentsFromLibsQuery.execute();
         final QueryResult containerComponentsFromAppsQueryResult = containerComponentsFromAppsQuery.execute();
 
-        final NodeIterator containerComponentsFromLibsQueryResultIterator = containerComponentsFromLibsQueryResult
-            .getNodes();
-        final NodeIterator containerComponentsFromAppsQueryResultIterator = containerComponentsFromAppsQueryResult
-            .getNodes();
+        final NodeIterator containerComponentsFromLibsQueryResultIterator =
+            containerComponentsFromLibsQueryResult.getNodes();
+        final NodeIterator containerComponentsFromAppsQueryResultIterator =
+            containerComponentsFromAppsQueryResult.getNodes();
 
         LOG.debug("query execution complete");
 
@@ -256,6 +269,16 @@ public final class ParagraphJsonServlet extends AbstractComponentServlet {
             public void write(final int b) throws IOException {
                 outputBuffer.append((char) b);
             }
+
+            @Override
+            public boolean isReady() {
+                return true;
+            }
+
+            @Override
+            public void setWriteListener(WriteListener paramWriteListener) {
+
+            }
         };
 
         final SlingHttpServletResponseWrapper responseWrapper = new SlingHttpServletResponseWrapper(response) {
@@ -270,8 +293,8 @@ public final class ParagraphJsonServlet extends AbstractComponentServlet {
             }
         };
 
-        final RequestDispatcher requestDispatcher = request.getRequestDispatcher(
-            resource.getPath() + "." + EXTENSION_HTML);
+        final RequestDispatcher requestDispatcher =
+            request.getRequestDispatcher(resource.getPath() + "." + EXTENSION_HTML);
 
         requestDispatcher.include(request, responseWrapper);
 
