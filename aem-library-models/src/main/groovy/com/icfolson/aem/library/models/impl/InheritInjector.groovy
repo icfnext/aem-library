@@ -45,7 +45,8 @@ class InheritInjector extends AbstractComponentNodeInjector implements InjectAnn
                 value = componentNode.getInherited(name, declaredType as Class).orNull()
 
                 if (!value) {
-                    value = componentNode.getNodeInherited(name).orNull()?.resource?.adaptTo(declaredType as Class)
+                    value = componentNode.getComponentNodeInherited(name).orNull()?.resource?.adaptTo(
+                        declaredType as Class)
                 }
             }
         }
