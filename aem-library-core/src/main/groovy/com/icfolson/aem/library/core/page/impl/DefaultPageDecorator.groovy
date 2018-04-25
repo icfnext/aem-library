@@ -20,9 +20,11 @@ import com.icfolson.aem.library.api.page.enums.TitleType
 import com.icfolson.aem.library.core.link.builders.factory.LinkBuilderFactory
 import com.icfolson.aem.library.core.node.predicates.ComponentNodePropertyExistsPredicate
 import com.icfolson.aem.library.core.node.predicates.ComponentNodePropertyValuePredicate
+
 import org.apache.commons.lang3.builder.EqualsBuilder
 import org.apache.commons.lang3.builder.HashCodeBuilder
 import org.apache.sling.api.resource.Resource
+import org.apache.sling.api.resource.ResourceResolver
 import org.apache.sling.api.resource.ValueMap
 
 import static com.google.common.base.Preconditions.checkNotNull
@@ -379,6 +381,17 @@ final class DefaultPageDecorator implements PageDecorator {
         def iterator = deep ? new DeepResourceIterator(resource) : resource.listChildren()
 
         new PageDecoratorIterator(iterator, predicate)
+    }
+
+    @Override
+    Optional<PageDecorator> getChild(String name) {
+        def child = Optional.absent()
+
+        if (hasChild(name)) {
+            child = Optional.of(delegate.adaptTo(Resource).getChild(name).adaptTo(PageDecorator))
+        }
+
+        child
     }
 
     @Override
