@@ -108,7 +108,7 @@ final class DefaultBasicNode extends AbstractNode implements BasicNode {
 
     @Override
     Optional<Link> getAsLink(String propertyName, boolean strict, boolean mapped) {
-        getLinkOptional(get(propertyName, String.class), strict, mapped)
+        getLinkOptional(get(propertyName, String), strict, mapped)
     }
 
     @Override
