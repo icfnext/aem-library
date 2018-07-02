@@ -9,14 +9,14 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * Enumeration of link target values.
  */
 public enum LinkTarget {
+    SELF("_self"),
     BLANK("_blank"),
     PARENT("_parent"),
-    SELF("_self"),
     TOP("_top");
 
     private final String target;
 
-    private LinkTarget(final String target) {
+    LinkTarget(final String target) {
         this.target = target;
     }
 

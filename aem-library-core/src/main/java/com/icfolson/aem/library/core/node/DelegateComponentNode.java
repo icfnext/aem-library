@@ -356,13 +356,13 @@ public abstract class DelegateComponentNode implements ComponentNode {
     }
 
     @Override
-    public final Optional<BasicNode> getNodeInherited(final String relativePath) {
-        return componentNode.getNodeInherited(relativePath);
+    public final Optional<ComponentNode> getComponentNodeInherited(final String relativePath) {
+        return componentNode.getComponentNodeInherited(relativePath);
     }
 
     @Override
-    public final List<BasicNode> getNodesInherited(final String relativePath) {
-        return componentNode.getNodesInherited(relativePath);
+    public final List<ComponentNode> getComponentNodesInherited(final String relativePath) {
+        return componentNode.getComponentNodesInherited(relativePath);
     }
 
     @Override

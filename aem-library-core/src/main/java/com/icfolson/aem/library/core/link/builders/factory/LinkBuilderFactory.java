@@ -7,7 +7,6 @@ import com.icfolson.aem.library.api.page.enums.TitleType;
 import com.icfolson.aem.library.core.constants.PropertyConstants;
 import com.icfolson.aem.library.core.link.builders.impl.DefaultLinkBuilder;
 import org.apache.sling.api.resource.Resource;
-import org.apache.sling.api.resource.ResourceResolver;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 

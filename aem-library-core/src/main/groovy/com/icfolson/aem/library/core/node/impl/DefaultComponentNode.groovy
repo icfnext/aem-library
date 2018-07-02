@@ -255,18 +255,18 @@ final class DefaultComponentNode extends AbstractNode implements ComponentNode {
     }
 
     @Override
-    Optional<BasicNode> getNodeInherited(String relativePath) {
-        findChildResourceInherited(relativePath).transform(RESOURCE_TO_BASIC_NODE)
+    Optional<BasicNode> getComponentNodeInherited(String relativePath) {
+        findChildResourceInherited(relativePath).transform(RESOURCE_TO_COMPONENT_NODE)
     }
 
     @Override
-    List<BasicNode> getNodesInherited(String relativePath) {
+    List<BasicNode> getComponentNodesInherited(String relativePath) {
         def childOptional = findChildResourceInherited(relativePath)
 
         def nodes
 
         if (childOptional.present) {
-            nodes = FluentIterable.from(childOptional.get().children).transform(RESOURCE_TO_BASIC_NODE).toList()
+            nodes = FluentIterable.from(childOptional.get().children).transform(RESOURCE_TO_COMPONENT_NODE).toList()
         } else {
             nodes = Collections.emptyList()
         }

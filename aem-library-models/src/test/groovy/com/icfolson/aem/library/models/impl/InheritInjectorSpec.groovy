@@ -32,6 +32,9 @@ class InheritInjectorSpec extends AemLibraryModelSpec {
 
         @InheritInject
         List<InheritModel> models
+
+        @InheritInject
+        InheritModel resourceModel
     }
 
     def setupSpec() {
@@ -45,6 +48,7 @@ class InheritInjectorSpec extends AemLibraryModelSpec {
                             item2("title": "Item 2")
                             item3("title": "Item 3")
                         }
+                        resourceModel("title": "Resource Model Title")
                     }
                 }
                 page1()
@@ -86,5 +90,14 @@ class InheritInjectorSpec extends AemLibraryModelSpec {
 
         and:
         component.models*.title == ["Item 1", "Item 2", "Item 3"]
+    }
+
+    def "model child resource inheritance"() {
+        setup:
+        def resource = resourceResolver.resolve("/content/citytechinc/page1/jcr:content/component")
+        def component = resource.adaptTo(InheritModel)
+
+        expect:
+        component.resourceModel.title == "Resource Model Title"
     }
 }

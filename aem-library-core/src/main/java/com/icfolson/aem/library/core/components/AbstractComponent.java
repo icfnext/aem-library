@@ -206,8 +206,8 @@ public abstract class AbstractComponent implements ComponentNode {
     }
 
     @Override
-    public Optional<BasicNode> getNodeInherited(final String relativePath) {
-        return componentNode.getNodeInherited(relativePath);
+    public Optional<ComponentNode> getComponentNodeInherited(final String relativePath) {
+        return componentNode.getComponentNodeInherited(relativePath);
     }
 
     @Override
@@ -221,8 +221,8 @@ public abstract class AbstractComponent implements ComponentNode {
     }
 
     @Override
-    public List<BasicNode> getNodesInherited(final String relativePath) {
-        return componentNode.getNodesInherited(relativePath);
+    public List<ComponentNode> getComponentNodesInherited(final String relativePath) {
+        return componentNode.getComponentNodesInherited(relativePath);
     }
 
     @Override

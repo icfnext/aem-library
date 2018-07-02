@@ -31,12 +31,22 @@ abstract class AbstractNode {
             @Override
             Link apply(String path) {
                 def resourceResolver = resourceInternal.resourceResolver
-                def mappedPath = mapped ? resourceResolver.map(path) : path
+                def resource = resourceResolver.getResource(path)
 
-                def builder = LinkBuilderFactory.forPath(mappedPath)
+                def builder
 
-                if (strict) {
-                    builder.external = PathUtils.isExternal(mappedPath, resourceResolver)
+                if (resource) {
+                    // internal link
+                    builder = LinkBuilderFactory.forResource(resource, mapped)
+                } else {
+                    // external link
+                    def mappedPath = mapped ? resourceResolver.map(path) : path
+
+                    builder = LinkBuilderFactory.forPath(mappedPath)
+
+                    if (strict) {
+                        builder.external = PathUtils.isExternal(mappedPath, resourceResolver)
+                    }
                 }
 
                 builder.build()

@@ -26,20 +26,16 @@ class DefaultPageDecoratorSpec extends AemLibrarySpec {
                 }
                 child1 {
                     "jcr:content"(hideInNav: true, "cq:template": "template")
-                    grandchild {
-
-                    }
+                    grandchild()
                 }
                 child2 {
-                    "jcr:content"(pageTitle: "Child 2") {
+                    "jcr:content"(pageTitle: "Child 2", "jcr:title": "Also Child 2") {
                         image(fileReference: "/content/dam/image")
                         secondimage(fileReference: "/content/dam/image")
                     }
                 }
             }
-            other {
-
-            }
+            other()
             inheritance {
                 "jcr:content"("jcr:title": "Inheritance") {
                     component("jcr:title": "Component", "number": 5, "boolean": false) {
@@ -52,17 +48,13 @@ class DefaultPageDecoratorSpec extends AemLibrarySpec {
                         component()
                         other()
                     }
-                    sub {
-
-                    }
+                    sub()
                 }
             }
         }
 
         nodeBuilder.content {
-            citytechinc {
-                empty(NameConstants.NT_PAGE)
-            }
+            citytechinc { empty(NameConstants.NT_PAGE) }
             dam("sling:Folder") {
                 image("dam:Asset") {
                     "jcr:content" {
@@ -426,6 +418,14 @@ class DefaultPageDecoratorSpec extends AemLibrarySpec {
         !page.adaptTo(ComponentNode)
     }
 
+    def "get child"() {
+        setup:
+        def page = getPage("/content/citytechinc")
+
+        expect:
+        page.getChild("child2").get().title == "Also Child 2"
+    }
+
     def "get children"() {
         setup:
         def page = getPage("/content/citytechinc")
@@ -536,7 +536,10 @@ class DefaultPageDecoratorSpec extends AemLibrarySpec {
         !page.getTitle(titleType).present
 
         where:
-        titleType << [TitleType.NAVIGATION_TITLE, TitleType.PAGE_TITLE]
+        titleType << [
+            TitleType.NAVIGATION_TITLE,
+            TitleType.PAGE_TITLE
+        ]
     }
 
     def "get image link"() {

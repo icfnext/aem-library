@@ -2,32 +2,34 @@ package com.icfolson.aem.library.core.link.impl
 
 import com.icfolson.aem.library.api.link.Link
 import groovy.transform.Immutable
+import groovy.transform.ToString
 
 @Immutable
+@ToString(includeNames = true, includePackage = false)
 class DefaultLink implements Link {
 
-	String path
+    String path
 
-	String extension
+    String extension
 
-	String suffix
+    String suffix
 
-	String href
+    String href
 
-	List<String> selectors
+    List<String> selectors
 
-	String queryString
+    String queryString
 
-	boolean external
+    boolean external
 
-	String target
+    String target
 
-	String title
+    String title
 
-	Map<String, String> properties
+    Map<String, String> properties
 
-	@Override
-	boolean isEmpty() {
-		!href
-	}
+    @Override
+    boolean isEmpty() {
+        !href
+    }
 }
