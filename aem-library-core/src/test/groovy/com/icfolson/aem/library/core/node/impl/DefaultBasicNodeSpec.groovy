@@ -6,6 +6,7 @@ import com.icfolson.aem.library.api.node.ComponentNode
 import com.icfolson.aem.library.core.node.predicates.PropertyNamePredicate
 import com.icfolson.aem.library.core.specs.AemLibrarySpec
 import org.apache.sling.api.resource.NonExistingResource
+import spock.lang.IgnoreRest
 import spock.lang.Unroll
 
 @Unroll
@@ -234,12 +235,14 @@ class DefaultBasicNodeSpec extends AemLibrarySpec {
         link.extension == ""
     }
 
+    @IgnoreRest
     def "get as mapped link"() {
         setup:
         def link = getBasicNode("/content/citytechinc/jcr:content").getAsLink("otherPagePath", false, true).get()
 
         expect:
         link.path == "/ales/esb"
+        link.href == "/ales/esb.html"
     }
 
     def "get as mapped link strict"() {
