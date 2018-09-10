@@ -116,9 +116,9 @@ public final class LinkBuilderFactory {
         checkNotNull(resource);
 
         final String path = resource.getPath();
-        final String mappedPath = mapped ? resource.getResourceResolver().map(path) : path;
+        // final String mappedPath = mapped ? resource.getResourceResolver().map(path) : path;
 
-        return new DefaultLinkBuilder(mappedPath, mapped ? resource.getResourceResolver() : null);
+        return new DefaultLinkBuilder(path, mapped ? resource.getResourceResolver() : null);
     }
 
     private LinkBuilderFactory() {
