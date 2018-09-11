@@ -241,7 +241,7 @@ class DefaultBasicNodeSpec extends AemLibrarySpec {
         def link = getBasicNode("/content/citytechinc/jcr:content").getAsLink("otherPagePath", false, true).get()
 
         expect:
-        link.path == "/ales/esb"
+        link.path == "/content/ales/esb"
         link.href == "/ales/esb.html"
     }
 
