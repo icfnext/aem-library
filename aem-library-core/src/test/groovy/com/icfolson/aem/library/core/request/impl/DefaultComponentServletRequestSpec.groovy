@@ -34,7 +34,7 @@ class DefaultComponentServletRequestSpec extends AemLibrarySpec {
     def "get request parameter optional"() {
         setup:
         def slingRequest = requestBuilder.build {
-            parameters = ["a": ["1", "2"], "b": [""]]
+            parameterMap = ["a": ["1", "2"], "b": [""]]
         }
         def slingResponse = responseBuilder.build()
         def request = new DefaultComponentServletRequest(slingRequest, slingResponse)
@@ -52,7 +52,7 @@ class DefaultComponentServletRequestSpec extends AemLibrarySpec {
     def "get request parameter"() {
         setup:
         def slingRequest = requestBuilder.build {
-            parameters = ["a": ["1", "2"], "b": [""]]
+            parameterMap = ["a": ["1", "2"], "b": [""]]
         }
         def slingResponse = responseBuilder.build()
         def request = new DefaultComponentServletRequest(slingRequest, slingResponse)
@@ -69,7 +69,7 @@ class DefaultComponentServletRequestSpec extends AemLibrarySpec {
     def "get request parameter with default value"() {
         setup:
         def slingRequest = requestBuilder.build {
-            parameters = ["a": ["1", "2"], "b": [""]]
+            parameterMap = ["a": ["1", "2"], "b": [""]]
         }
         def slingResponse = responseBuilder.build()
         def request = new DefaultComponentServletRequest(slingRequest, slingResponse)
@@ -87,7 +87,7 @@ class DefaultComponentServletRequestSpec extends AemLibrarySpec {
     def "get request parameters optional"() {
         setup:
         def slingRequest = requestBuilder.build {
-            parameters = ["a": ["1", "2"], "b": ["1"]]
+            parameterMap = ["a": ["1", "2"], "b": ["1"]]
         }
         def slingResponse = responseBuilder.build()
         def request = new DefaultComponentServletRequest(slingRequest, slingResponse)
@@ -105,7 +105,7 @@ class DefaultComponentServletRequestSpec extends AemLibrarySpec {
     def "get request parameters"() {
         setup:
         def slingRequest = requestBuilder.build {
-            parameters = ["a": ["1", "2"], "b": ["1"]]
+            parameterMap = ["a": ["1", "2"], "b": ["1"]]
         }
         def slingResponse = responseBuilder.build()
         def request = new DefaultComponentServletRequest(slingRequest, slingResponse)

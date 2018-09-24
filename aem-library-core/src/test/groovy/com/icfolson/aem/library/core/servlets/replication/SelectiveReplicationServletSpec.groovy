@@ -33,7 +33,7 @@ class SelectiveReplicationServletSpec extends AemLibrarySpec {
         def servlet = new SelectiveReplicationServlet()
 
         def request = requestBuilder.build {
-            parameters = [paths: paths, agentIds: agentIds, action: action]
+            parameterMap = [paths: paths, agentIds: agentIds, action: action]
         }
 
         def response = responseBuilder.build()
@@ -61,7 +61,7 @@ class SelectiveReplicationServletSpec extends AemLibrarySpec {
         def paths = ["/content", "/etc"]
 
         def request = requestBuilder.build {
-            parameters = [paths: paths, agentIds: ["publish"], action: ReplicationActionType.ACTIVATE.name()]
+            parameterMap = [paths: paths, agentIds: ["publish"], action: ReplicationActionType.ACTIVATE.name()]
         }
 
         def response = responseBuilder.build()
@@ -79,6 +79,6 @@ class SelectiveReplicationServletSpec extends AemLibrarySpec {
         2 * replicationService.replicate(*_)
 
         then:
-        response.contentAsString == json
+        response.outputAsString == json
     }
 }

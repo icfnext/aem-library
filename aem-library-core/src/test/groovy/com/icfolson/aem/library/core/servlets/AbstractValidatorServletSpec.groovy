@@ -45,7 +45,7 @@ class AbstractValidatorServletSpec extends AemLibrarySpec {
 
         def request = requestBuilder.build {
             path = "/content/home"
-            parameters = ["value": "foo"]
+            parameterMap = ["value": "foo"]
         }
 
         def response = responseBuilder.build()
@@ -54,6 +54,6 @@ class AbstractValidatorServletSpec extends AemLibrarySpec {
         servlet.doGet(request, response)
 
         then:
-        response.contentAsString == new JsonBuilder([valid: false]).toString()
+        response.outputAsString == new JsonBuilder([valid: false]).toString()
     }
 }

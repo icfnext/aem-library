@@ -33,7 +33,7 @@ class AbstractJsonResponseServletSpec extends AemLibrarySpec {
         servlet.doGet(request, response)
 
         then:
-        response.contentAsString == new JsonBuilder(
+        response.outputAsString == new JsonBuilder(
             [one: "Hello.", two: formatDate(DEFAULT_DATE_FORMAT, Locale.US)]).toString()
     }
 
@@ -54,7 +54,7 @@ class AbstractJsonResponseServletSpec extends AemLibrarySpec {
         servlet.doGet(request, response)
 
         then:
-        response.contentAsString == new JsonBuilder(
+        response.outputAsString == new JsonBuilder(
             [one: "Hello.", two: formatDate("yyyy", Locale.US)]).toString()
     }
 
@@ -75,7 +75,7 @@ class AbstractJsonResponseServletSpec extends AemLibrarySpec {
         servlet.doGet(request, response)
 
         then:
-        response.contentAsString == new JsonBuilder(
+        response.outputAsString == new JsonBuilder(
             [one: "Hello.", two: formatDate("yyyy", Locale.CHINA)]).toString()
     }
 
