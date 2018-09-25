@@ -368,7 +368,7 @@
                     <links>
                         <link>http://docs.oracle.com/javase/8/docs/api/</link>
                         <link>http://docs.oracle.com/javaee/7/api/</link>
-                        <link>http://google.github.io/guava/releases/15.0/api/docs/</link>
+                        <link>http://google.github.io/guava/releases/15.0/api/</link>
                         <link>https://docs.adobe.com/content/docs/en/spec/jsr170/javadocs/jcr-2.0</link>
                         <link>http://sling.apache.org/apidocs/sling8</link>
                         <link>https://helpx.adobe.com/experience-manager/6-4/sites/developing/using/reference-materials/javadoc</link>
