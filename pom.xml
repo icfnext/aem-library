@@ -16,7 +16,7 @@
 
     <organization>
         <name>ICF Olson</name>
-        <url>http://www.icfolson.com</url>
+        <url>http://www.olsondigital.com</url>
     </organization>
 
     <url>http://code.digitalatolson.com/aem-library</url>
@@ -151,7 +151,7 @@
                 <plugin>
                     <groupId>org.apache.felix</groupId>
                     <artifactId>maven-bundle-plugin</artifactId>
-                    <version>3.3.0</version>
+                    <version>4.0.0</version>
                     <extensions>true</extensions>
                     <inherited>true</inherited>
                     <executions>
@@ -165,18 +165,6 @@
                             </configuration>
                         </execution>
                     </executions>
-                    <dependencies>
-                        <dependency>
-                            <groupId>org.apache.felix</groupId>
-                            <artifactId>org.apache.felix.scr.bnd</artifactId>
-                            <version>1.7.2</version>
-                        </dependency>
-                    </dependencies>
-                </plugin>
-                <plugin>
-                    <groupId>org.apache.felix</groupId>
-                    <artifactId>maven-scr-plugin</artifactId>
-                    <version>1.21.0</version>
                 </plugin>
                 <plugin>
                     <artifactId>maven-surefire-plugin</artifactId>
@@ -383,7 +371,7 @@
                         <link>http://google.github.io/guava/releases/15.0/api/docs/</link>
                         <link>https://docs.adobe.com/content/docs/en/spec/jsr170/javadocs/jcr-2.0</link>
                         <link>http://sling.apache.org/apidocs/sling8</link>
-                        <link>https://docs.adobe.com/docs/en/aem/6-2/develop/ref/javadoc</link>
+                        <link>https://helpx.adobe.com/experience-manager/6-4/sites/developing/using/reference-materials/javadoc</link>
                         <link>http://fasterxml.github.io/jackson-databind/javadoc/2.3.0</link>
                     </links>
                     <quiet>true</quiet>
@@ -452,11 +440,6 @@
                 <artifactId>org.osgi.service.metatype.annotations</artifactId>
                 <version>1.4.0</version>
             </dependency>
-            <dependency>
-                <groupId>org.apache.felix</groupId>
-                <artifactId>org.apache.felix.scr.annotations</artifactId>
-                <version>1.12.0</version>
-            </dependency>
 
             <!-- provided -->
             <dependency>
@@ -476,7 +459,7 @@
             <dependency>
                 <groupId>com.icfolson.aem.prosper</groupId>
                 <artifactId>prosper</artifactId>
-                <version>13.0.0-SNAPSHOT</version>
+                <version>13.0.0</version>
                 <scope>test</scope>
             </dependency>
             <dependency>

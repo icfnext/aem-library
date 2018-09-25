@@ -6,17 +6,20 @@ import com.day.cq.replication.ReplicationException
 import com.day.cq.replication.Replicator
 import com.icfolson.aem.library.core.services.SelectiveReplicationService
 import com.icfolson.aem.library.core.servlets.AbstractJsonResponseServlet
-import org.apache.felix.scr.annotations.Reference
-import org.apache.felix.scr.annotations.sling.SlingServlet
 import org.apache.sling.api.SlingHttpServletRequest
 import org.apache.sling.api.SlingHttpServletResponse
+import org.osgi.service.component.annotations.Component
+import org.osgi.service.component.annotations.Reference
 
 import javax.jcr.Session
+import javax.servlet.Servlet
 import javax.servlet.ServletException
 
 import static com.google.common.base.Preconditions.checkArgument
 
-@SlingServlet(paths = "/bin/replicate/selective")
+@Component(service = Servlet, property = [
+    "sling.servlet.paths=/bin/replicate/selective"
+])
 class SelectiveReplicationServlet extends AbstractJsonResponseServlet {
 
     private static final String PARAMETER_ACTION = "action"
