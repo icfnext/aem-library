@@ -451,12 +451,6 @@
 
             <!-- test -->
             <dependency>
-                <groupId>org.spockframework</groupId>
-                <artifactId>spock-core</artifactId>
-                <version>1.2-groovy-2.4</version>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
                 <groupId>com.icfolson.aem.prosper</groupId>
                 <artifactId>prosper</artifactId>
                 <version>13.0.0</version>
