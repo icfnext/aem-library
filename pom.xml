@@ -12,7 +12,7 @@
     <packaging>pom</packaging>
     <version>11.1.0</version>
     <name>AEM Library</name>
-    <description>The AEM Library provides a sturdy foundation for bootstrapping and simplifying AEM (Adobe CQ) projects.</description>
+    <description>The AEM Library provides a sturdy foundation for bootstrapping and simplifying Adobe Experience Manager projects.</description>
 
     <organization>
         <name>ICF Olson</name>
