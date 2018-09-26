@@ -20,19 +20,15 @@ import com.icfolson.aem.library.api.page.enums.TitleType
 import com.icfolson.aem.library.core.link.builders.factory.LinkBuilderFactory
 import com.icfolson.aem.library.core.node.predicates.ComponentNodePropertyExistsPredicate
 import com.icfolson.aem.library.core.node.predicates.ComponentNodePropertyValuePredicate
-
 import org.apache.commons.lang3.builder.EqualsBuilder
 import org.apache.commons.lang3.builder.HashCodeBuilder
 import org.apache.sling.api.resource.Resource
-import org.apache.sling.api.resource.ResourceResolver
 import org.apache.sling.api.resource.ValueMap
 
 import static com.google.common.base.Preconditions.checkNotNull
 import static com.icfolson.aem.library.core.node.impl.NodeFunctions.RESOURCE_TO_COMPONENT_NODE
 
 final class DefaultPageDecorator implements PageDecorator {
-
-    private static final Predicate<PageDecorator> ALL = Predicates.alwaysTrue()
 
     private static final Filter<Page> ALL_PAGES = new Filter<Page>() {
         @Override
@@ -352,12 +348,12 @@ final class DefaultPageDecorator implements PageDecorator {
 
     @Override
     List<PageDecorator> getChildren() {
-        filterChildren(ALL, false)
+        filterChildren(Predicates.alwaysTrue(), false)
     }
 
     @Override
     List<PageDecorator> getChildren(boolean displayableOnly) {
-        displayableOnly ? filterChildren(DISPLAYABLE_ONLY, false) : filterChildren(ALL, false)
+        displayableOnly ? filterChildren(DISPLAYABLE_ONLY, false) : filterChildren(Predicates.alwaysTrue(), false)
     }
 
     @Override
