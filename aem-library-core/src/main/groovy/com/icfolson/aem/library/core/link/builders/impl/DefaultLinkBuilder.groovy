@@ -131,11 +131,11 @@ final class DefaultLinkBuilder implements LinkBuilder {
 
         def extension
 
-        if (path.contains(PathConstants.SELECTOR)) {
-            extension = path.substring(path.indexOf(PathConstants.SELECTOR) + 1)
+        if (isExternal) {
+            extension = ""
         } else {
-            if (isExternal) {
-                extension = ""
+            if (path.contains(PathConstants.SELECTOR)) {
+                extension = path.substring(path.indexOf(PathConstants.SELECTOR) + 1)
             } else {
                 extension = this.extension == null ? PathConstants.EXTENSION_HTML : this.extension
 

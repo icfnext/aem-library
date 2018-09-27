@@ -1,20 +1,20 @@
 package com.icfolson.aem.library.core.servlets.paragraphs;
 
-import com.icfolson.aem.library.api.page.PageDecorator;
-import com.icfolson.aem.library.api.request.ComponentServletRequest;
-import com.icfolson.aem.library.core.servlets.AbstractComponentServlet;
 import com.day.cq.wcm.api.NameConstants;
 import com.day.cq.wcm.api.WCMMode;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
-
+import com.icfolson.aem.library.api.page.PageDecorator;
+import com.icfolson.aem.library.api.request.ComponentServletRequest;
+import com.icfolson.aem.library.core.servlets.AbstractComponentServlet;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.felix.scr.annotations.sling.SlingServlet;
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.SlingHttpServletResponse;
 import org.apache.sling.api.resource.Resource;
+import org.apache.sling.api.servlets.ServletResolverConstants;
 import org.apache.sling.api.wrappers.SlingHttpServletResponseWrapper;
+import org.osgi.service.component.annotations.Component;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -26,11 +26,11 @@ import javax.jcr.query.Query;
 import javax.jcr.query.QueryManager;
 import javax.jcr.query.QueryResult;
 import javax.servlet.RequestDispatcher;
+import javax.servlet.Servlet;
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.WriteListener;
 import javax.servlet.http.HttpServletResponse;
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -54,8 +54,12 @@ import static com.icfolson.aem.library.core.constants.PathConstants.EXTENSION_JS
  * paragraphreference, causing it to pull all components on a page as opposed to
  * the top level components.
  */
-@SlingServlet(resourceTypes = { NameConstants.NT_PAGE }, selectors = { "ctparagraphs" },
-    extensions = { EXTENSION_JSON }, methods = { "GET" })
+@Component(service = Servlet.class, property = {
+    ServletResolverConstants.SLING_SERVLET_RESOURCE_TYPES + "=" + NameConstants.NT_PAGE,
+    ServletResolverConstants.SLING_SERVLET_SELECTORS + "=ctparagraphs",
+    ServletResolverConstants.SLING_SERVLET_EXTENSIONS + "=" + EXTENSION_JSON,
+    ServletResolverConstants.SLING_SERVLET_METHODS + "=GET"
+})
 public final class ParagraphJsonServlet extends AbstractComponentServlet {
 
     private static final long serialVersionUID = 1L;

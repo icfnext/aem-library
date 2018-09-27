@@ -16,7 +16,10 @@ class DefaultLinkBuilderSpec extends AemLibrarySpec {
 
     class MappingResourceResolver implements ResourceResolver {
 
-        static final def MAP = ["/content/us.html": "/content/us/home.html"]
+        static final def MAP = [
+            "/content/us.html": "/content/us/home.html",
+            "/content/about.html": "http://www.olsondigital.com/about.html"
+        ]
 
         @Delegate
         ResourceResolver resourceResolver
@@ -148,6 +151,20 @@ class DefaultLinkBuilderSpec extends AemLibrarySpec {
 
         expect:
         LinkBuilderFactory.forResource(resource).build().path == "/content/global/jcr:content"
+    }
+
+    def "build link for mapped resource"() {
+        setup:
+        def resource = Mock(Resource)
+
+        resource.resourceResolver >> new MappingResourceResolver(resourceResolver)
+        resource.path >> "/content/about"
+
+        def link = LinkBuilderFactory.forResource(resource, true).build()
+
+        expect:
+        link.path == "/content/about"
+        link.href == "http://www.olsondigital.com/about.html"
     }
 
     def "build link for path"() {

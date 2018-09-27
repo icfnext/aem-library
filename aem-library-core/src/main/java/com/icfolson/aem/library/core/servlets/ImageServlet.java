@@ -12,10 +12,11 @@ import com.google.common.io.Closeables;
 import com.google.common.net.HttpHeaders;
 import com.google.common.net.MediaType;
 import com.icfolson.aem.library.core.constants.ComponentConstants;
-import org.apache.felix.scr.annotations.sling.SlingServlet;
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.SlingHttpServletResponse;
 import org.apache.sling.api.resource.Resource;
+import org.apache.sling.api.servlets.ServletResolverConstants;
+import org.osgi.service.component.annotations.Component;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -23,6 +24,7 @@ import javax.jcr.Binary;
 import javax.jcr.Node;
 import javax.jcr.Property;
 import javax.jcr.RepositoryException;
+import javax.servlet.Servlet;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.InputStream;
@@ -32,7 +34,11 @@ import static org.apache.commons.lang3.StringUtils.isNumeric;
 /**
  * Image rendering servlet.
  */
-@SlingServlet(methods = "GET", selectors = "img", resourceTypes = "sling/servlet/default")
+@Component(service = Servlet.class, property = {
+    ServletResolverConstants.SLING_SERVLET_RESOURCE_TYPES + "=sling/servlet/default",
+    ServletResolverConstants.SLING_SERVLET_SELECTORS + "=img",
+    ServletResolverConstants.SLING_SERVLET_METHODS + "=GET"
+})
 public final class ImageServlet extends AbstractImageServlet {
 
     private static final Logger LOG = LoggerFactory.getLogger(ImageServlet.class);

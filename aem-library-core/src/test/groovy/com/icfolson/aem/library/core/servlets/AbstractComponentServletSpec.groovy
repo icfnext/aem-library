@@ -36,6 +36,6 @@ class AbstractComponentServletSpec extends AemLibrarySpec {
         servlet.doGet(slingRequest, slingResponse)
 
         then:
-        slingResponse.contentAsString == new JsonBuilder(MAP).toString()
+        slingResponse.outputAsString == new JsonBuilder(MAP).toString()
     }
 }
