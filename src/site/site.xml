@@ -3,10 +3,10 @@
          xsi:schemaLocation="http://maven.apache.org/DECORATION/1.0.0 http://maven.apache.org/xsd/decoration-1.0.0.xsd">
 
     <skin>
-		<groupId>com.icfolson.maven</groupId>
-		<artifactId>icfolson-maven-skin</artifactId>
-		<version>1.1.0</version>
-	</skin>
+        <groupId>com.icfolson.maven</groupId>
+        <artifactId>icfolson-maven-skin</artifactId>
+        <version>1.1.0</version>
+    </skin>
 
     <bannerRight>
         <name>${project.name}</name>
@@ -30,7 +30,7 @@
                 <href>http://code.digitalatolson.com/aem-library</href>
             </brand>
             <slogan></slogan>
-            <body />
+            <body/>
             <bottomNav>
                 <column>User Guide</column>
                 <column>reports</column>
@@ -40,12 +40,12 @@
 
     <body>
         <links>
-            <item name="GitHub" href="https://github.com/OlsonDigital/aem-library" />
-            <item name="Overview" href="index.html" />
+            <item name="GitHub" href="https://github.com/OlsonDigital/aem-library"/>
+            <item name="Overview" href="index.html"/>
         </links>
         <menu name="User Guide">
             <item name="Adapters" href="adapters.html"/>
-            <item name="Component Framework" href="component-framework.html"/>
+            <item name="Components" href="components.html"/>
             <item name="Constants" href="constants.html"/>
             <item name="Image Rendering" href="image-rendering.html"/>
             <item name="Including in AEM Projects" href="including-in-aem-projects.html"/>

@@ -39,8 +39,6 @@ import static com.google.common.base.Preconditions.checkNotNull
 @Slf4j("LOG")
 final class DefaultBasicNode extends AbstractNode implements BasicNode {
 
-    private static final Predicate<Resource> ALL = Predicates.alwaysTrue()
-
     private static final String IMAGE_SELECTOR = "img"
 
     private final ValueMap properties
@@ -250,7 +248,7 @@ final class DefaultBasicNode extends AbstractNode implements BasicNode {
 
     @Override
     int getIndex() {
-        getIndexForPredicate(ALL)
+        getIndexForPredicate(Predicates.alwaysTrue())
     }
 
     @Override

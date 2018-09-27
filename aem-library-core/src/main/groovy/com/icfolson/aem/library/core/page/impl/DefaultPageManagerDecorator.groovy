@@ -82,10 +82,9 @@ class DefaultPageManagerDecorator implements PageManagerDecorator {
         int count = 0
 
         try {
-            def rows = query.execute().rows
             def paths = [] as Set
 
-            rows.each { Row row ->
+            query.execute().rows.each { Row row ->
                 if (limit == -1 || count < limit) {
                     def path = row.path
 
@@ -130,7 +129,7 @@ class DefaultPageManagerDecorator implements PageManagerDecorator {
 
         def stopwatch = Stopwatch.createStarted()
 
-        def result = page ? page.findDescendants(predicate) : Collections.emptyList()
+        def result = page ? page.findDescendants(predicate) : []
 
         stopwatch.stop()
 

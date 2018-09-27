@@ -29,8 +29,8 @@ class RolloutInheritanceJobConsumer implements JobConsumer {
     private ResourceResolverFactory resourceResolverFactory
 
     @Override
-    JobConsumer.JobResult process(Job job) {
-        def result = JobConsumer.JobResult.FAILED
+    JobResult process(Job job) {
+        def result = JobResult.FAILED
 
         def path = (String) job.getProperty(OffloadingJobProperties.INPUT_PAYLOAD.propertyName())
 
@@ -64,7 +64,7 @@ class RolloutInheritanceJobConsumer implements JobConsumer {
                     addOrRemoveProp(session, pageContentNode, beforeValue, false)
                 }
 
-                result = JobConsumer.JobResult.OK
+                result = JobResult.OK
             }
         } catch (Throwable t) {
             LOG.error("Failed to rollout deep inheritance ${path}", t)
