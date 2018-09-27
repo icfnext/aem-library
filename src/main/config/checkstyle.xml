@@ -5,8 +5,8 @@
     This configuration file was written by the eclipse-cs plugin configuration editor
 -->
 <!--
-    Checkstyle-Configuration: CITYTECH Checks
-    Description: Checkstyle configuration that checks the sun coding conventions, customized for CITYTECH.
+    Checkstyle-Configuration: ICF Olson Checks
+    Description: Checkstyle configuration that checks the sun coding conventions, customized for ICF Olson.
 -->
 <module name="Checker">
     <property name="severity"

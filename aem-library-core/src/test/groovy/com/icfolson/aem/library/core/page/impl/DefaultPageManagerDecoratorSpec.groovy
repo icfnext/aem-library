@@ -10,28 +10,20 @@ import javax.jcr.query.Query
 class DefaultPageManagerDecoratorSpec extends AemLibrarySpec {
 
     def setupSpec() {
-        nodeBuilder.etc {
-            tags {
-                tag1("cq:Tag")
-                tag2("cq:Tag")
-                tag3("cq:Tag")
-            }
-        }
-
         pageBuilder.content {
             citytechinc("CITYTECH, Inc.") {
                 "jcr:content"(otherPagePath: "/content/ales/esb") {
                     component {
-                        one("sling:resourceType": "one", "cq:tags": "/etc/tags/tag3")
+                        one("sling:resourceType": "one", "cq:tags": "/content/cq:tags/tag3")
                         two("sling:resourceType": "two")
                     }
                 }
                 child {
-                    "jcr:content"(hideInNav: true, "cq:template": "template", "cq:tags": "/etc/tags/tag1")
+                    "jcr:content"(hideInNav: true, "cq:template": "template", "cq:tags": "/content/cq:tags/tag1")
                 }
             }
             other {
-                "jcr:content"("cq:template": "template", "cq:tags": ["/etc/tags/tag1", "/etc/tags/tag2"])
+                "jcr:content"("cq:template": "template", "cq:tags": ["/content/cq:tags/tag1", "/content/cq:tags/tag2"])
             }
             hierarchy {
                 one {
@@ -44,8 +36,16 @@ class DefaultPageManagerDecoratorSpec extends AemLibrarySpec {
             }
         }
 
+        nodeBuilder.content {
+            "cq:tags"("sling:Folder") {
+                tag1("cq:Tag")
+                tag2("cq:Tag")
+                tag3("cq:Tag")
+            }
+        }
+
         def taggableNodePaths = ["/content/citytechinc/child/jcr:content", "/content/other/jcr:content",
-            "/content/citytechinc/jcr:content/component/one"]
+                                 "/content/citytechinc/jcr:content/component/one"]
 
         taggableNodePaths.each { path ->
             session.getNode(path).addMixin(TagConstants.NT_TAGGABLE)
@@ -69,17 +69,17 @@ class DefaultPageManagerDecoratorSpec extends AemLibrarySpec {
 
     def "find pages for tag IDs"() {
         expect:
-        pageManager.findPages("/content", ["/etc/tags/tag1"], true).size() == 2
+        pageManager.findPages("/content", ["/content/cq:tags/tag1"], true).size() == 2
     }
 
     def "find pages for tag IDs matching all"() {
         expect:
-        pageManager.findPages("/content", ["/etc/tags/tag1", "/etc/tags/tag2"], false).size() == 1
+        pageManager.findPages("/content", ["/content/cq:tags/tag1", "/content/cq:tags/tag2"], false).size() == 1
     }
 
     def "tagged non-page node is excluded from search results"() {
         expect:
-        !pageManager.findPages("/content", ["/etc/tags/tag3"], true)
+        !pageManager.findPages("/content", ["/content/cq:tags/tag3"], true)
     }
 
     def "search"() {

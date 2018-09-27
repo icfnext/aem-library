@@ -49,8 +49,9 @@ class TagInjectorSpec extends AemLibraryModelSpec {
                 page1 { "jcr:content" { component() } }
             }
         }
-        nodeBuilder.etc {
-            tags {
+
+        nodeBuilder.content {
+            "cq:tags"("sling:Folder") {
                 beers("cq:Tag", "sling:resourceType": "cq/tagging/components/tag", title: "Beers") {
                     lager("cq:Tag", "sling:resourceType": "cq/tagging/components/tag", title: "Lager")
                     stout("cq:Tag", "sling:resourceType": "cq/tagging/components/tag", title: "Stout")
@@ -67,17 +68,17 @@ class TagInjectorSpec extends AemLibraryModelSpec {
         def component = resource.adaptTo(Component)
 
         expect:
-        component.singleTag.path == "/etc/tags/beers/lager"
-        component.singleTagInherit.path == "/etc/tags/beers/porter"
+        component.singleTag.path == "/content/cq:tags/beers/lager"
+        component.singleTagInherit.path == "/content/cq:tags/beers/porter"
         component.tagList.size() == 3
-        component.tagList[0].path == "/etc/tags/beers/lager"
-        component.tagList[1].path == "/etc/tags/beers/stout"
-        component.tagList[2].path == "/etc/tags/beers/ale"
+        component.tagList[0].path == "/content/cq:tags/beers/lager"
+        component.tagList[1].path == "/content/cq:tags/beers/stout"
+        component.tagList[2].path == "/content/cq:tags/beers/ale"
 
         component.tagListInherit.size() == 3
-        component.tagListInherit[0].path == "/etc/tags/beers/ale"
-        component.tagListInherit[1].path == "/etc/tags/beers/porter"
-        component.tagListInherit[2].path == "/etc/tags/beers/lager"
+        component.tagListInherit[0].path == "/content/cq:tags/beers/ale"
+        component.tagListInherit[1].path == "/content/cq:tags/beers/porter"
+        component.tagListInherit[2].path == "/content/cq:tags/beers/lager"
     }
 
     def "all inherited tags populated"() {
@@ -87,12 +88,12 @@ class TagInjectorSpec extends AemLibraryModelSpec {
 
         expect:
         component.singleTag == null
-        component.singleTagInherit.path == "/etc/tags/beers/porter"
+        component.singleTagInherit.path == "/content/cq:tags/beers/porter"
         component.tagList == null
 
         component.tagListInherit.size() == 3
-        component.tagListInherit[0].path == "/etc/tags/beers/ale"
-        component.tagListInherit[1].path == "/etc/tags/beers/porter"
-        component.tagListInherit[2].path == "/etc/tags/beers/lager"
+        component.tagListInherit[0].path == "/content/cq:tags/beers/ale"
+        component.tagListInherit[1].path == "/content/cq:tags/beers/porter"
+        component.tagListInherit[2].path == "/content/cq:tags/beers/lager"
     }
 }

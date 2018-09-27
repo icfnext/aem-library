@@ -40,8 +40,8 @@ class TagDataSourceServletSpec extends AemLibrarySpec {
     }
 
     def setupSpec() {
-        nodeBuilder.etc {
-            tags {
+        nodeBuilder.content {
+            "cq:tags" {
                 beers("cq:Tag", "sling:resourceType": "cq/tagging/components/tag", "jcr:title": "Beers") {
                     lager("cq:Tag", "sling:resourceType": "cq/tagging/components/tag", "jcr:title": "Lager")
                     stout("cq:Tag", "sling:resourceType": "cq/tagging/components/tag", "jcr:title": "Stout")

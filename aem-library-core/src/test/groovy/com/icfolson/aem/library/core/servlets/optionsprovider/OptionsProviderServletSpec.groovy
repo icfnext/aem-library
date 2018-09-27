@@ -61,7 +61,7 @@ class OptionsProviderServletSpec extends AemLibrarySpec {
         servlet.doGet(request, response)
 
         then:
-        response.contentAsString == new JsonBuilder([]).toString()
+        response.outputAsString == new JsonBuilder([]).toString()
     }
 
     def "options with root"() {
@@ -73,7 +73,7 @@ class OptionsProviderServletSpec extends AemLibrarySpec {
         servlet.doGet(request, response)
 
         then:
-        response.contentAsString == new JsonBuilder(["root": LIST]).toString()
+        response.outputAsString == new JsonBuilder(["root": LIST]).toString()
     }
 
     def "options with no root"() {
@@ -85,6 +85,6 @@ class OptionsProviderServletSpec extends AemLibrarySpec {
         servlet.doGet(request, response)
 
         then:
-        response.contentAsString == new JsonBuilder(LIST).toString()
+        response.outputAsString == new JsonBuilder(LIST).toString()
     }
 }

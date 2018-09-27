@@ -35,7 +35,7 @@ class TagInjector extends AbstractComponentNodeInjector implements InjectAnnotat
             def tagManager = componentNode.resource.resourceResolver.adaptTo(TagManager)
             def tagStrings = annotation && annotation.inherit() ? componentNode.getAsListInherited(name,
                 String) : componentNode.getAsList(name, String)
-            def tags = tagStrings.collect { tagManager.resolve(it) }
+            def tags = tagStrings.collect { tagManager.resolve(it) }.findAll()
 
             if (tags) {
                 value = isDeclaredTypeCollection(declaredType) ? tags : tags[0]
