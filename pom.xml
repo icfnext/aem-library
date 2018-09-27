@@ -10,7 +10,7 @@
     <groupId>com.icfolson.aem.library</groupId>
     <artifactId>aem-library</artifactId>
     <packaging>pom</packaging>
-    <version>11.1.0</version>
+    <version>11.1.1-SNAPSHOT</version>
     <name>AEM Library</name>
     <description>The AEM Library provides a sturdy foundation for bootstrapping and simplifying Adobe Experience Manager projects.</description>
 
