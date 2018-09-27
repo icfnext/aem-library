@@ -6,12 +6,6 @@
 
 This class can be extended by implementations of `com.icfolson.aem.library.core.services.cache.CacheService` to expose cache stats and cache variables.
 
-### Abstract Sling Service
-
-`com.icfolson.aem.library.core.services.AbstractSlingService`
-
-The `com.icfolson.aem.library.services.AbstractSlingService` class can be used as a base for OSGi services that require an administrative `Session` and/or `ResourceResolver`.  Usage of this class does not imply any particular service type or implementation details but simply provides methods for acquiring and closing the underlying Sling and JCR administrative resources.
-
 ### Selective Replication Service
 
 `com.icfolson.aem.library.core.services.replication.SelectiveReplicationService`
