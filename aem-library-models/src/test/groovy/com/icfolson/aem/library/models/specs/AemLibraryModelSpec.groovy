@@ -3,14 +3,15 @@ package com.icfolson.aem.library.models.specs
 import com.icfolson.aem.library.core.specs.AemLibrarySpec
 import com.icfolson.aem.library.models.impl.AdaptableInjector
 import com.icfolson.aem.library.models.impl.ComponentInjector
+import com.icfolson.aem.library.models.impl.ContentPolicyInjector
+import com.icfolson.aem.library.models.impl.EnumInjector
+import com.icfolson.aem.library.models.impl.ImageInjector
 import com.icfolson.aem.library.models.impl.InheritInjector
 import com.icfolson.aem.library.models.impl.LinkInjector
 import com.icfolson.aem.library.models.impl.ModelListInjector
 import com.icfolson.aem.library.models.impl.ReferenceInjector
-import com.icfolson.aem.library.models.impl.ValueMapFromRequestInjector
-import com.icfolson.aem.library.models.impl.EnumInjector
-import com.icfolson.aem.library.models.impl.ImageInjector
 import com.icfolson.aem.library.models.impl.TagInjector
+import com.icfolson.aem.library.models.impl.ValueMapFromRequestInjector
 
 /**
  * Specs may extend this class to support injection of AEM Library dependencies in Sling model-based components.
@@ -33,6 +34,7 @@ abstract class AemLibraryModelSpec extends AemLibrarySpec {
         slingContext.with {
             registerInjector(new ComponentInjector(), Integer.MAX_VALUE)
             registerInjector(new AdaptableInjector(), Integer.MIN_VALUE)
+            registerInjector(new ContentPolicyInjector(), Integer.MAX_VALUE)
             registerInjector(new TagInjector(), 800)
             registerInjector(new EnumInjector(), 4000)
             registerInjector(new ImageInjector(), 4000)
