@@ -24,7 +24,7 @@ public abstract class AbstractReplicationListener implements EventHandler {
     public final void handleEvent(final Event event) {
         final ReplicationAction replicationAction = ReplicationAction.fromEvent(event);
 
-        LOG.info("handling replication action = {}", replicationAction);
+        LOG.debug("handling replication action = {}", replicationAction);
 
         final ReplicationActionType type = replicationAction.getType();
 
@@ -35,19 +35,19 @@ public abstract class AbstractReplicationListener implements EventHandler {
 
     private void handleEvent(final ReplicationActionType type, final String path) {
         if (type.equals(ReplicationActionType.ACTIVATE)) {
-            LOG.info("handling activate event for path = {}", path);
+            LOG.debug("handling activate event for path = {}", path);
 
             handleActivate(path);
         } else if (type.equals(ReplicationActionType.DEACTIVATE)) {
-            LOG.info("handling deactivate event for path = {}", path);
+            LOG.debug("handling deactivate event for path = {}", path);
 
             handleDeactivate(path);
         } else if (type.equals(ReplicationActionType.DELETE)) {
-            LOG.info("handling delete event for path = {}", path);
+            LOG.debug("handling delete event for path = {}", path);
 
             handleDelete(path);
         } else {
-            LOG.debug("replication action type = {} not handled for path = {}", type, path);
+            LOG.trace("replication action type = {} not handled for path = {}", type, path);
         }
     }
 
