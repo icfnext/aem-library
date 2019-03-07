@@ -10,7 +10,7 @@
 
     <bannerRight>
         <name>${project.name}</name>
-        <href>http://code.digitalatolson.com/aem-library</href>
+        <href>http://icfnext.github.io/aem-library</href>
     </bannerRight>
 
     <custom>
@@ -27,7 +27,7 @@
             <topNav>User Guide|reports</topNav>
             <brand>
                 <name>${project.name}</name>
-                <href>http://code.digitalatolson.com/aem-library</href>
+                <href>http://icfnext.github.io/aem-library</href>
             </brand>
             <slogan></slogan>
             <body/>
@@ -40,7 +40,7 @@
 
     <body>
         <links>
-            <item name="GitHub" href="https://github.com/OlsonDigital/aem-library"/>
+            <item name="GitHub" href="https://github.com/icfnext/aem-library"/>
             <item name="Overview" href="index.html"/>
         </links>
         <menu name="User Guide">
