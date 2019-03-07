@@ -4,7 +4,7 @@
     <parent>
         <groupId>com.icfolson.aem.library</groupId>
         <artifactId>aem-library</artifactId>
-        <version>11.1.1-SNAPSHOT</version>
+        <version>12.0.0-SNAPSHOT</version>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
@@ -103,7 +103,7 @@
                 <dependency>
                     <groupId>org.slf4j</groupId>
                     <artifactId>slf4j-simple</artifactId>
-                    <version>1.7.5</version>
+                    <version>${slf4j.version}</version>
                 </dependency>
                 <dependency>
                     <groupId>com.icfolson.aem.prosper</groupId>
@@ -122,12 +122,29 @@
     <dependencies>
         <!-- provided -->
         <dependency>
-            <groupId>com.adobe.aem</groupId>
-            <artifactId>uber-jar</artifactId>
-            <classifier>apis</classifier>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
         </dependency>
-
-        <!-- third party -->
+        <dependency>
+            <groupId>javax.inject</groupId>
+            <artifactId>javax.inject</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>javax.jcr</groupId>
+            <artifactId>jcr</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.osgi</groupId>
+            <artifactId>osgi.core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.osgi</groupId>
+            <artifactId>osgi.cmpn</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+        </dependency>
         <dependency>
             <groupId>org.codehaus.groovy</groupId>
             <artifactId>groovy-all</artifactId>
@@ -138,23 +155,33 @@
             <groupId>${project.groupId}</groupId>
             <artifactId>aem-library-api</artifactId>
             <version>${project.version}</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>aem-library-core</artifactId>
             <version>${project.version}</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>aem-library-core</artifactId>
             <version>${project.version}</version>
             <classifier>tests</classifier>
+            <scope>test</scope>
         </dependency>
 
         <!-- test -->
         <dependency>
             <groupId>com.icfolson.aem.prosper</groupId>
             <artifactId>prosper</artifactId>
+        </dependency>
+
+        <!-- uber jar last to allow overrides for newer dependency versions -->
+        <dependency>
+            <groupId>com.adobe.aem</groupId>
+            <artifactId>uber-jar</artifactId>
+            <classifier>apis</classifier>
         </dependency>
     </dependencies>
 </project>

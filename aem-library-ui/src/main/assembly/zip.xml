@@ -30,7 +30,7 @@
             <outputDirectory>jcr_root/apps/aem-library/install</outputDirectory>
             <useProjectArtifact>false</useProjectArtifact>
             <useTransitiveDependencies>false</useTransitiveDependencies>
-            <scope>compile</scope>
+            <scope>provided</scope>
             <useStrictFiltering>true</useStrictFiltering>
         </dependencySet>
     </dependencySets>
