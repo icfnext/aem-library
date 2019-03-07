@@ -1,12 +1,12 @@
 package com.icfolson.aem.library.api.link;
 
-import java.io.Serializable;
-import java.util.List;
-import java.util.Map;
-
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
 import com.fasterxml.jackson.annotation.JsonInclude;
+
+import java.io.Serializable;
+import java.util.List;
+import java.util.Map;
 
 /**
  * A link represents the attributes that compose a URL with additional title and

@@ -1,9 +1,9 @@
 package com.icfolson.aem.library.api.link.builders;
 
+import com.google.common.collect.SetMultimap;
 import com.icfolson.aem.library.api.link.ImageLink;
 import com.icfolson.aem.library.api.link.Link;
 import com.icfolson.aem.library.api.link.NavigationLink;
-import com.google.common.collect.SetMultimap;
 
 import java.util.List;
 import java.util.Map;
@@ -136,6 +136,14 @@ public interface LinkBuilder {
      * @return builder
      */
     LinkBuilder setHost(String host);
+
+    /**
+     * Set the protocol.  If set, the protocol will override the default value of "http" (or "https" if secure=true).
+     *
+     * @param protocol protocol
+     * @return builder
+     */
+    LinkBuilder setProtocol(String protocol);
 
     /**
      * Set an image source.  This only applies to image links returned by calling <code>buildImageLink()</code>.

@@ -173,6 +173,7 @@ class DefaultLinkBuilderSpec extends AemLibrarySpec {
 
         builder.extension = extension
         builder.suffix = suffix
+        builder.protocol = protocol
         builder.host = host
         builder.port = port
         builder.secure = secure
@@ -183,16 +184,18 @@ class DefaultLinkBuilderSpec extends AemLibrarySpec {
         link.href == href
 
         where:
-        extension | suffix    | host        | port | secure | href
-        null      | ""        | "localhost" | 0    | false  | "http://localhost/content.html"
-        null      | "/suffix" | "localhost" | 0    | false  | "http://localhost/content.html/suffix"
-        ""        | ""        | "localhost" | 0    | false  | "http://localhost/content"
-        ""        | "/suffix" | "localhost" | 0    | false  | "http://localhost/content/suffix"
-        "html"    | ""        | "localhost" | 0    | false  | "http://localhost/content.html"
-        "html"    | "/suffix" | "localhost" | 0    | false  | "http://localhost/content.html/suffix"
-        "json"    | ""        | "localhost" | 0    | false  | "http://localhost/content.json"
-        null      | ""        | "localhost" | 4502 | false  | "http://localhost:4502/content.html"
-        null      | ""        | "localhost" | 0    | true   | "https://localhost/content.html"
+        extension | suffix    | protocol | host        | port | secure | href
+        null      | ""        | null     | "localhost" | 0    | false  | "http://localhost/content.html"
+        null      | "/suffix" | null     | "localhost" | 0    | false  | "http://localhost/content.html/suffix"
+        ""        | ""        | null     | "localhost" | 0    | false  | "http://localhost/content"
+        ""        | "/suffix" | null     | "localhost" | 0    | false  | "http://localhost/content/suffix"
+        "html"    | ""        | null     | "localhost" | 0    | false  | "http://localhost/content.html"
+        "html"    | "/suffix" | null     | "localhost" | 0    | false  | "http://localhost/content.html/suffix"
+        "json"    | ""        | null     | "localhost" | 0    | false  | "http://localhost/content.json"
+        null      | ""        | null     | "localhost" | 4502 | false  | "http://localhost:4502/content.html"
+        null      | ""        | null     | "localhost" | 0    | true   | "https://localhost/content.html"
+        null      | ""        | "ftp"    | "localhost" | 0    | false  | "ftp://localhost/content.html"
+        null      | ""        | "ftp"    | "localhost" | 0    | true   | "ftp://localhost/content.html"
     }
 
     def "build link and set external"() {

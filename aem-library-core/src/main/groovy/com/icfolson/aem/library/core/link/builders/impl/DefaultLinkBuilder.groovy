@@ -46,6 +46,8 @@ final class DefaultLinkBuilder implements LinkBuilder {
 
     private String host = null
 
+    private String protocol = null
+
     private String imageSource = ""
 
     private int port = 0
@@ -207,6 +209,13 @@ final class DefaultLinkBuilder implements LinkBuilder {
     }
 
     @Override
+    LinkBuilder setProtocol(String protocol) {
+        this.protocol = protocol
+
+        this
+    }
+
+    @Override
     LinkBuilder setImageSource(String imageSource) {
         this.imageSource = imageSource
 
@@ -252,7 +261,12 @@ final class DefaultLinkBuilder implements LinkBuilder {
         def builder = new StringBuilder()
 
         if (!isExternal && host) {
-            builder.append(secure ? "https" : "http")
+            if (protocol) {
+                builder.append(protocol)
+            } else {
+                builder.append(secure ? "https" : "http")
+            }
+
             builder.append("://")
             builder.append(host)
 
