@@ -265,14 +265,18 @@ final class DefaultLinkBuilder implements LinkBuilder {
                 builder.append(protocol)
             } else {
                 builder.append(secure ? "https" : "http")
+                builder.append("://")
             }
-
-            builder.append("://")
             builder.append(host)
 
             if (port > 0) {
                 builder.append(':')
                 builder.append(port)
+            }
+        }
+        if (isExternal) {
+            if (protocol && !path.startsWith(protocol)) {
+                builder.append(protocol)
             }
         }
 

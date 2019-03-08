@@ -194,8 +194,8 @@ class DefaultLinkBuilderSpec extends AemLibrarySpec {
         "json"    | ""        | null     | "localhost" | 0    | false  | "http://localhost/content.json"
         null      | ""        | null     | "localhost" | 4502 | false  | "http://localhost:4502/content.html"
         null      | ""        | null     | "localhost" | 0    | true   | "https://localhost/content.html"
-        null      | ""        | "ftp"    | "localhost" | 0    | false  | "ftp://localhost/content.html"
-        null      | ""        | "ftp"    | "localhost" | 0    | true   | "ftp://localhost/content.html"
+        null      | ""        | "ftp://" | "localhost" | 0    | false  | "ftp://localhost/content.html"
+        null      | ""        | "ftp://" | "localhost" | 0    | true   | "ftp://localhost/content.html"
     }
 
     def "build link and set external"() {
@@ -228,6 +228,42 @@ class DefaultLinkBuilderSpec extends AemLibrarySpec {
         "/content"              | ["a"]      | "/content.a.html"
         "/content"              | ["a", "b"] | "/content.a.b.html"
         "http://www.reddit.com" | ["a", "b"] | "http://www.reddit.com"
+    }
+
+    def "build link for path with protocol"() {
+        setup:
+        def link = LinkBuilderFactory.forPath(path).setProtocol(protocol).build()
+
+        expect:
+        link.href == href
+
+        where:
+        path                    | protocol     | href
+        "/content"              | "http://"    | "/content.html"
+        "+48957228989"          | "tel:"       | "tel:+48957228989"
+        "http://www.reddit.com" | ""           | "http://www.reddit.com"
+        "http://www.reddit.com" | "http://"    | "http://www.reddit.com"
+        "www.reddit.com"        | "https://"   | "https://www.reddit.com"
+        "https://reddit.com"    | "ftp:"       | "ftp:https://reddit.com"
+        "someone@domain.com"    | "mailto:"    | "mailto:someone@domain.com"
+    }
+
+    def "build link for link and set protocol"() {
+        setup:
+        def link = LinkBuilderFactory.forPath(path).build()
+
+        expect:
+        LinkBuilderFactory.forLink(link).setProtocol(protocol).build().href == href
+
+        where:
+        path                    | protocol     | href
+        "/content"              | "http://"    | "/content.html"
+        "+48957228989"          | "tel:"       | "tel:+48957228989"
+        "http://www.reddit.com" | ""           | "http://www.reddit.com"
+        "http://www.reddit.com" | "http://"    | "http://www.reddit.com"
+        "www.reddit.com"        | "https://"   | "https://www.reddit.com"
+        "https://reddit.com"    | "ftp:"       | "ftp:https://reddit.com"
+        "someone@domain.com"    | "mailto:"    | "mailto:someone@domain.com"
     }
 
     def "build link for path with parameters"() {

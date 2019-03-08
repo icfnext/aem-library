@@ -138,7 +138,8 @@ public interface LinkBuilder {
     LinkBuilder setHost(String host);
 
     /**
-     * Set the protocol.  If set, the protocol will override the default value of "http" (or "https" if secure=true).
+     * Set the protocol (e.g. "ftp://" or "tel:").
+     * If set, the protocol will override the default value of "http://" (or "https://" if secure=true).
      *
      * @param protocol protocol
      * @return builder
