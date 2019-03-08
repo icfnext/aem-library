@@ -12,7 +12,7 @@ See the [project site](http://icfnext.github.io/aem-library) for the User Guide 
 
 AEM Library Version(s) | AEM Version(s)
 ------------ | -------------
-12.x.x. | 6.3, 6.4, 6.5
+12.x.x | 6.3, 6.4, 6.5
 11.1.x | 6.4.1 (SP1)
 11.0.x | 6.4
 10.2.x | 6.3.2.2 (SP2 CFP)

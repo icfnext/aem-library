@@ -3,7 +3,7 @@
     <parent>
         <groupId>com.icfolson.aem</groupId>
         <artifactId>aem-parent-uber-jar</artifactId>
-        <version>7.0.1-SNAPSHOT</version>
+        <version>7.0.1</version>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
@@ -15,8 +15,8 @@
     <description>The AEM Library provides a sturdy foundation for bootstrapping and simplifying Adobe Experience Manager projects.</description>
 
     <organization>
-        <name>ICF Olson</name>
-        <url>http://www.olsondigital.com</url>
+        <name>ICF Next</name>
+        <url>http://www.icfnext.com</url>
     </organization>
 
     <url>http://icfnext.github.io/aem-library</url>
