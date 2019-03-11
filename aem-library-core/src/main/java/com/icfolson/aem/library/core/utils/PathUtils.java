@@ -6,8 +6,8 @@ import org.apache.sling.api.resource.ResourceResolver;
 
 import java.util.regex.Pattern;
 
-import static com.icfolson.aem.library.core.constants.PathConstants.PATH_JCR_CONTENT;
 import static com.google.common.base.Preconditions.checkNotNull;
+import static com.icfolson.aem.library.core.constants.PathConstants.PATH_JCR_CONTENT;
 import static org.apache.sling.api.resource.Resource.RESOURCE_TYPE_NON_EXISTING;
 
 /**

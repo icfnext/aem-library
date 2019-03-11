@@ -138,13 +138,24 @@ public interface LinkBuilder {
     LinkBuilder setHost(String host);
 
     /**
-     * Set the protocol (e.g. "ftp://" or "tel:").
-     * If set, the protocol will override the default value of "http://" (or "https://" if secure=true).
+     * Set the scheme (e.g. "ftp" or "tel").
+     * <p>
+     * If set, the scheme will override the default value of "http" (or "https" if secure=true).
      *
-     * @param protocol protocol
+     * @param scheme scheme
      * @return builder
      */
-    LinkBuilder setProtocol(String protocol);
+    LinkBuilder setScheme(String scheme);
+
+    /**
+     * Set whether the link URI is opaque (an absolute URI whose scheme-specific part does not begin with a slash
+     * character).
+     *
+     * @param isOpaque if true, ":" instead of "://" will be appended to the scheme for external links (e.g. "mailto:"
+     * links)
+     * @return builder
+     */
+    LinkBuilder setOpaque(boolean isOpaque);
 
     /**
      * Set an image source.  This only applies to image links returned by calling <code>buildImageLink()</code>.

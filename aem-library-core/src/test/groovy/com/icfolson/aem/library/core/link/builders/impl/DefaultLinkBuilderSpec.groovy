@@ -173,7 +173,7 @@ class DefaultLinkBuilderSpec extends AemLibrarySpec {
 
         builder.extension = extension
         builder.suffix = suffix
-        builder.protocol = protocol
+        builder.scheme = scheme
         builder.host = host
         builder.port = port
         builder.secure = secure
@@ -184,18 +184,18 @@ class DefaultLinkBuilderSpec extends AemLibrarySpec {
         link.href == href
 
         where:
-        extension | suffix    | protocol | host        | port | secure | href
-        null      | ""        | null     | "localhost" | 0    | false  | "http://localhost/content.html"
-        null      | "/suffix" | null     | "localhost" | 0    | false  | "http://localhost/content.html/suffix"
-        ""        | ""        | null     | "localhost" | 0    | false  | "http://localhost/content"
-        ""        | "/suffix" | null     | "localhost" | 0    | false  | "http://localhost/content/suffix"
-        "html"    | ""        | null     | "localhost" | 0    | false  | "http://localhost/content.html"
-        "html"    | "/suffix" | null     | "localhost" | 0    | false  | "http://localhost/content.html/suffix"
-        "json"    | ""        | null     | "localhost" | 0    | false  | "http://localhost/content.json"
-        null      | ""        | null     | "localhost" | 4502 | false  | "http://localhost:4502/content.html"
-        null      | ""        | null     | "localhost" | 0    | true   | "https://localhost/content.html"
-        null      | ""        | "ftp://" | "localhost" | 0    | false  | "ftp://localhost/content.html"
-        null      | ""        | "ftp://" | "localhost" | 0    | true   | "ftp://localhost/content.html"
+        extension | suffix    | scheme | host        | port | secure | href
+        null      | ""        | null   | "localhost" | 0    | false  | "http://localhost/content.html"
+        null      | "/suffix" | null   | "localhost" | 0    | false  | "http://localhost/content.html/suffix"
+        ""        | ""        | null   | "localhost" | 0    | false  | "http://localhost/content"
+        ""        | "/suffix" | null   | "localhost" | 0    | false  | "http://localhost/content/suffix"
+        "html"    | ""        | null   | "localhost" | 0    | false  | "http://localhost/content.html"
+        "html"    | "/suffix" | null   | "localhost" | 0    | false  | "http://localhost/content.html/suffix"
+        "json"    | ""        | null   | "localhost" | 0    | false  | "http://localhost/content.json"
+        null      | ""        | null   | "localhost" | 4502 | false  | "http://localhost:4502/content.html"
+        null      | ""        | null   | "localhost" | 0    | true   | "https://localhost/content.html"
+        null      | ""        | "ftp"  | "localhost" | 0    | false  | "ftp://localhost/content.html"
+        null      | ""        | "ftp"  | "localhost" | 0    | true   | "ftp://localhost/content.html"
     }
 
     def "build link and set external"() {
@@ -230,22 +230,24 @@ class DefaultLinkBuilderSpec extends AemLibrarySpec {
         "http://www.reddit.com" | ["a", "b"] | "http://www.reddit.com"
     }
 
-    def "build link for path with protocol"() {
+    def "build link for path with scheme"() {
         setup:
-        def link = LinkBuilderFactory.forPath(path).setProtocol(protocol).build()
+        def link = LinkBuilderFactory.forPath(path)
+            .setScheme(scheme)
+            .setOpaque(opaque)
+            .build()
 
         expect:
         link.href == href
 
         where:
-        path                    | protocol     | href
-        "/content"              | "http://"    | "/content.html"
-        "+48957228989"          | "tel:"       | "tel:+48957228989"
-        "http://www.reddit.com" | ""           | "http://www.reddit.com"
-        "http://www.reddit.com" | "http://"    | "http://www.reddit.com"
-        "www.reddit.com"        | "https://"   | "https://www.reddit.com"
-        "https://reddit.com"    | "ftp:"       | "ftp:https://reddit.com"
-        "someone@domain.com"    | "mailto:"    | "mailto:someone@domain.com"
+        path                    | scheme   | opaque | href
+        "/content"              | "http"   | false  | "/content.html"
+        "+48957228989"          | "tel"    | true   | "tel:+48957228989"
+        "http://www.reddit.com" | ""       | false  | "http://www.reddit.com"
+        "http://www.reddit.com" | ""       | true   | "http://www.reddit.com"
+        "https://reddit.com"    | "ftp"    | true   | "ftp:https://reddit.com"
+        "someone@domain.com"    | "mailto" | true   | "mailto:someone@domain.com"
     }
 
     def "build link for link and set protocol"() {
@@ -253,17 +255,16 @@ class DefaultLinkBuilderSpec extends AemLibrarySpec {
         def link = LinkBuilderFactory.forPath(path).build()
 
         expect:
-        LinkBuilderFactory.forLink(link).setProtocol(protocol).build().href == href
+        LinkBuilderFactory.forLink(link).setScheme(scheme).setOpaque(opaque).build().href == href
 
         where:
-        path                    | protocol     | href
-        "/content"              | "http://"    | "/content.html"
-        "+48957228989"          | "tel:"       | "tel:+48957228989"
-        "http://www.reddit.com" | ""           | "http://www.reddit.com"
-        "http://www.reddit.com" | "http://"    | "http://www.reddit.com"
-        "www.reddit.com"        | "https://"   | "https://www.reddit.com"
-        "https://reddit.com"    | "ftp:"       | "ftp:https://reddit.com"
-        "someone@domain.com"    | "mailto:"    | "mailto:someone@domain.com"
+        path                    | scheme   | opaque | href
+        "/content"              | "http"   | false  | "/content.html"
+        "+48957228989"          | "tel"    | true   | "tel:+48957228989"
+        "http://www.reddit.com" | ""       | false  | "http://www.reddit.com"
+        "http://www.reddit.com" | ""       | true   | "http://www.reddit.com"
+        "https://reddit.com"    | "ftp"    | true   | "ftp:https://reddit.com"
+        "someone@domain.com"    | "mailto" | true   | "mailto:someone@domain.com"
     }
 
     def "build link for path with parameters"() {
