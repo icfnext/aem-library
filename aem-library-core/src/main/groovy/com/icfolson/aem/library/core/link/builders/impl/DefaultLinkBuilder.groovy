@@ -269,25 +269,34 @@ final class DefaultLinkBuilder implements LinkBuilder {
     private String buildHost() {
         def builder = new StringBuilder()
 
-        if (opaque && scheme) {
-            builder.append(scheme)
-            builder.append(":")
-        } else if (!isExternal && host) {
+        if (!isExternal && host) {
             if (scheme) {
                 builder.append(scheme)
             } else {
                 builder.append(secure ? "https" : "http")
             }
 
-            builder.append("://")
+            builder.append(":")
 
-            if (host) {
-                builder.append(host)
+            if (!opaque) {
+                builder.append("//")
             }
+
+            builder.append(host)
 
             if (port > 0) {
                 builder.append(':')
                 builder.append(port)
+            }
+        }
+
+        if (isExternal) {
+            if (scheme && !path.startsWith(scheme)) {
+                builder.append(scheme).append(":")
+
+                if (!opaque) {
+                    builder.append("//")
+                }
             }
         }
 
