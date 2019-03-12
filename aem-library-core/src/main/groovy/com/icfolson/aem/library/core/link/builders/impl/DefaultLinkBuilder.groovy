@@ -275,20 +275,25 @@ final class DefaultLinkBuilder implements LinkBuilder {
             } else {
                 builder.append(secure ? "https" : "http")
             }
+
             builder.append(":")
+
             if (!opaque) {
                 builder.append("//")
             }
 
             builder.append(host)
+
             if (port > 0) {
                 builder.append(':')
                 builder.append(port)
             }
         }
+
         if (isExternal) {
             if (scheme && !path.startsWith(scheme)) {
                 builder.append(scheme).append(":")
+
                 if (!opaque) {
                     builder.append("//")
                 }
