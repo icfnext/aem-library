@@ -1,13 +1,15 @@
 package com.icfolson.aem.library.models.impl
 
+import com.day.cq.tagging.Tag
 import com.icfolson.aem.library.models.annotations.TagInject
 import com.icfolson.aem.library.models.specs.AemLibraryModelSpec
-import com.day.cq.tagging.Tag
 import org.apache.sling.api.resource.Resource
 import org.apache.sling.models.annotations.DefaultInjectionStrategy
 import org.apache.sling.models.annotations.Model
 
 import javax.inject.Inject
+
+import static com.day.cq.tagging.TagConstants.NT_TAG
 
 class TagInjectorSpec extends AemLibraryModelSpec {
 
@@ -50,13 +52,13 @@ class TagInjectorSpec extends AemLibraryModelSpec {
             }
         }
 
-        nodeBuilder.content {
-            "cq:tags"("sling:Folder") {
-                beers("cq:Tag", "sling:resourceType": "cq/tagging/components/tag", title: "Beers") {
-                    lager("cq:Tag", "sling:resourceType": "cq/tagging/components/tag", title: "Lager")
-                    stout("cq:Tag", "sling:resourceType": "cq/tagging/components/tag", title: "Stout")
-                    porter("cq:Tag", "sling:resourceType": "cq/tagging/components/tag", title: "Porter")
-                    ale("cq:Tag", "sling:resourceType": "cq/tagging/components/tag", title: "Ale")
+        nodeBuilder.etc {
+            tags {
+                beers(NT_TAG, "sling:resourceType": "cq/tagging/components/tag", title: "Beers") {
+                    lager(NT_TAG, "sling:resourceType": "cq/tagging/components/tag", title: "Lager")
+                    stout(NT_TAG, "sling:resourceType": "cq/tagging/components/tag", title: "Stout")
+                    porter(NT_TAG, "sling:resourceType": "cq/tagging/components/tag", title: "Porter")
+                    ale(NT_TAG, "sling:resourceType": "cq/tagging/components/tag", title: "Ale")
                 }
             }
         }
@@ -68,17 +70,17 @@ class TagInjectorSpec extends AemLibraryModelSpec {
         def component = resource.adaptTo(Component)
 
         expect:
-        component.singleTag.path == "/content/cq:tags/beers/lager"
-        component.singleTagInherit.path == "/content/cq:tags/beers/porter"
+        component.singleTag.path == "/etc/tags/beers/lager"
+        component.singleTagInherit.path == "/etc/tags/beers/porter"
         component.tagList.size() == 3
-        component.tagList[0].path == "/content/cq:tags/beers/lager"
-        component.tagList[1].path == "/content/cq:tags/beers/stout"
-        component.tagList[2].path == "/content/cq:tags/beers/ale"
+        component.tagList[0].path == "/etc/tags/beers/lager"
+        component.tagList[1].path == "/etc/tags/beers/stout"
+        component.tagList[2].path == "/etc/tags/beers/ale"
 
         component.tagListInherit.size() == 3
-        component.tagListInherit[0].path == "/content/cq:tags/beers/ale"
-        component.tagListInherit[1].path == "/content/cq:tags/beers/porter"
-        component.tagListInherit[2].path == "/content/cq:tags/beers/lager"
+        component.tagListInherit[0].path == "/etc/tags/beers/ale"
+        component.tagListInherit[1].path == "/etc/tags/beers/porter"
+        component.tagListInherit[2].path == "/etc/tags/beers/lager"
     }
 
     def "all inherited tags populated"() {
@@ -88,12 +90,12 @@ class TagInjectorSpec extends AemLibraryModelSpec {
 
         expect:
         component.singleTag == null
-        component.singleTagInherit.path == "/content/cq:tags/beers/porter"
+        component.singleTagInherit.path == "/etc/tags/beers/porter"
         component.tagList == null
 
         component.tagListInherit.size() == 3
-        component.tagListInherit[0].path == "/content/cq:tags/beers/ale"
-        component.tagListInherit[1].path == "/content/cq:tags/beers/porter"
-        component.tagListInherit[2].path == "/content/cq:tags/beers/lager"
+        component.tagListInherit[0].path == "/etc/tags/beers/ale"
+        component.tagListInherit[1].path == "/etc/tags/beers/porter"
+        component.tagListInherit[2].path == "/etc/tags/beers/lager"
     }
 }

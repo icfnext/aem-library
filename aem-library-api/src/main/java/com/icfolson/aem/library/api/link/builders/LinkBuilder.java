@@ -1,9 +1,9 @@
 package com.icfolson.aem.library.api.link.builders;
 
+import com.google.common.collect.SetMultimap;
 import com.icfolson.aem.library.api.link.ImageLink;
 import com.icfolson.aem.library.api.link.Link;
 import com.icfolson.aem.library.api.link.NavigationLink;
-import com.google.common.collect.SetMultimap;
 
 import java.util.List;
 import java.util.Map;
@@ -136,6 +136,26 @@ public interface LinkBuilder {
      * @return builder
      */
     LinkBuilder setHost(String host);
+
+    /**
+     * Set the scheme (e.g. "ftp" or "tel").
+     * <p>
+     * If set, the scheme will override the default value of "http" (or "https" if secure=true).
+     *
+     * @param scheme scheme
+     * @return builder
+     */
+    LinkBuilder setScheme(String scheme);
+
+    /**
+     * Set whether the link URI is opaque (an absolute URI whose scheme-specific part does not begin with a slash
+     * character).
+     *
+     * @param isOpaque if true, ":" instead of "://" will be appended to the scheme for external links (e.g. "mailto:"
+     * links)
+     * @return builder
+     */
+    LinkBuilder setOpaque(boolean isOpaque);
 
     /**
      * Set an image source.  This only applies to image links returned by calling <code>buildImageLink()</code>.

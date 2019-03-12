@@ -7,6 +7,8 @@ import com.icfolson.aem.library.core.servlets.optionsprovider.Option
 import com.icfolson.aem.library.core.specs.AemLibrarySpec
 import org.apache.sling.api.SlingHttpServletRequest
 
+import static com.day.cq.tagging.TagConstants.NT_TAG
+
 class TagDataSourceServletSpec extends AemLibrarySpec {
 
     static final def MAP = ["lager": "Lager", "stout": "Stout", "porter": "Porter", "ale": "Ale"]
@@ -40,13 +42,13 @@ class TagDataSourceServletSpec extends AemLibrarySpec {
     }
 
     def setupSpec() {
-        nodeBuilder.content {
-            "cq:tags" {
-                beers("cq:Tag", "sling:resourceType": "cq/tagging/components/tag", "jcr:title": "Beers") {
-                    lager("cq:Tag", "sling:resourceType": "cq/tagging/components/tag", "jcr:title": "Lager")
-                    stout("cq:Tag", "sling:resourceType": "cq/tagging/components/tag", "jcr:title": "Stout")
-                    porter("cq:Tag", "sling:resourceType": "cq/tagging/components/tag", "jcr:title": "Porter")
-                    ale("cq:Tag", "sling:resourceType": "cq/tagging/components/tag", "jcr:title": "Ale")
+        nodeBuilder.etc {
+            tags {
+                beers(NT_TAG, "sling:resourceType": "cq/tagging/components/tag", "jcr:title": "Beers") {
+                    lager(NT_TAG, "sling:resourceType": "cq/tagging/components/tag", "jcr:title": "Lager")
+                    stout(NT_TAG, "sling:resourceType": "cq/tagging/components/tag", "jcr:title": "Stout")
+                    porter(NT_TAG, "sling:resourceType": "cq/tagging/components/tag", "jcr:title": "Porter")
+                    ale(NT_TAG, "sling:resourceType": "cq/tagging/components/tag", "jcr:title": "Ale")
                 }
             }
         }

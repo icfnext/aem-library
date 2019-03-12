@@ -1,17 +1,18 @@
 # AEM Library
 
-[ICF Olson](http://www.olsondigital.com)
+[ICF Next](http://www.icfnext.com)
 
 ## Overview
 
 The AEM Library contains common utilities, decorators, abstract classes, tag libraries, and JavaScript modules for bootstrapping and simplifying AEM (Adobe CQ) projects.
 
-See the [project site](http://code.digitalatolson.com/aem-library) for the User Guide and project details.
+See the [project site](http://icfnext.github.io/aem-library) for the User Guide and project details.
 
 ## Compatibility
 
-AEM Library Version(s) | AEM Version
+AEM Library Version(s) | AEM Version(s)
 ------------ | -------------
+12.x.x | 6.3, 6.4, 6.5
 11.1.x | 6.4.1 (SP1)
 11.0.x | 6.4
 10.2.x | 6.3.2.2 (SP2 CFP)

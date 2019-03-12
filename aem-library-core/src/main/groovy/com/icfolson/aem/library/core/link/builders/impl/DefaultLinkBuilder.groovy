@@ -1,19 +1,19 @@
 package com.icfolson.aem.library.core.link.builders.impl
 
+import com.google.common.base.Charsets
+import com.google.common.collect.LinkedHashMultimap
+import com.google.common.collect.Multimaps
+import com.google.common.collect.SetMultimap
 import com.icfolson.aem.library.api.link.ImageLink
 import com.icfolson.aem.library.api.link.Link
 import com.icfolson.aem.library.api.link.NavigationLink
 import com.icfolson.aem.library.api.link.builders.LinkBuilder
 import com.icfolson.aem.library.api.link.enums.LinkTarget
 import com.icfolson.aem.library.core.constants.PathConstants
-import com.icfolson.aem.library.core.utils.PathUtils
-import com.google.common.base.Charsets
-import com.google.common.collect.LinkedHashMultimap
-import com.google.common.collect.Multimaps
-import com.google.common.collect.SetMultimap
 import com.icfolson.aem.library.core.link.impl.DefaultImageLink
 import com.icfolson.aem.library.core.link.impl.DefaultLink
 import com.icfolson.aem.library.core.link.impl.DefaultNavigationLink
+import com.icfolson.aem.library.core.utils.PathUtils
 import groovy.util.logging.Slf4j
 import org.apache.sling.api.resource.ResourceResolver
 
@@ -45,6 +45,10 @@ final class DefaultLinkBuilder implements LinkBuilder {
     private String extension = null
 
     private String host = null
+
+    private String scheme = null
+
+    private boolean opaque = false
 
     private String imageSource = ""
 
@@ -207,6 +211,20 @@ final class DefaultLinkBuilder implements LinkBuilder {
     }
 
     @Override
+    LinkBuilder setScheme(String scheme) {
+        this.scheme = scheme
+
+        this
+    }
+
+    @Override
+    LinkBuilder setOpaque(boolean isOpaque) {
+        this.opaque = isOpaque
+
+        this
+    }
+
+    @Override
     LinkBuilder setImageSource(String imageSource) {
         this.imageSource = imageSource
 
@@ -251,9 +269,28 @@ final class DefaultLinkBuilder implements LinkBuilder {
     private String buildHost() {
         def builder = new StringBuilder()
 
-        if (!isExternal && host) {
-            builder.append(secure ? "https" : "http")
-            builder.append("://")
+        if (isExternal) {
+            // ex: www.icfnext.com
+            if (scheme && !path.startsWith(scheme)) {
+                builder.append(scheme).append(":")
+
+                if (!opaque) {
+                    builder.append("//")
+                }
+            }
+        } else if (host) {
+            if (scheme) {
+                builder.append(scheme)
+            } else {
+                builder.append(secure ? "https" : "http")
+            }
+
+            builder.append(":")
+
+            if (!opaque) {
+                builder.append("//")
+            }
+
             builder.append(host)
 
             if (port > 0) {
