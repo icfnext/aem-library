@@ -269,7 +269,16 @@ final class DefaultLinkBuilder implements LinkBuilder {
     private String buildHost() {
         def builder = new StringBuilder()
 
-        if (!isExternal && host) {
+        if (isExternal) {
+            // ex: www.icfnext.com
+            if (scheme && !path.startsWith(scheme)) {
+                builder.append(scheme).append(":")
+
+                if (!opaque) {
+                    builder.append("//")
+                }
+            }
+        } else if (host) {
             if (scheme) {
                 builder.append(scheme)
             } else {
@@ -287,16 +296,6 @@ final class DefaultLinkBuilder implements LinkBuilder {
             if (port > 0) {
                 builder.append(':')
                 builder.append(port)
-            }
-        }
-
-        if (isExternal) {
-            if (scheme && !path.startsWith(scheme)) {
-                builder.append(scheme).append(":")
-
-                if (!opaque) {
-                    builder.append("//")
-                }
             }
         }
 
