@@ -1,0 +1,4162 @@
+
+<!DOCTYPE html>
+<html  xml:lang="en" lang="en">
+
+	<head>
+		<meta charset="UTF-8" />
+		<title>Surefire Report | AEM Library</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="description" content="" />
+		<meta http-equiv="content-language" content="en" />
+		
+		<link href="./css/bootstrap.min.css" rel="stylesheet" />
+		<link href="./css/bootstrap-responsive.min.css" rel="stylesheet" />
+		<link href="./css/docs.css" rel="stylesheet" />
+		<link href="./css/reflow-skin.css" rel="stylesheet" />
+		<link href="./css/site.css" rel="stylesheet" />
+		
+		<link href="http://yandex.st/highlightjs/7.3/styles/github.min.css" rel="stylesheet" />
+		
+		<link href="./css/lightbox.css" rel="stylesheet" />
+		
+		<link href="./css/site.css" rel="stylesheet" />
+		<link href="./css/print.css" rel="stylesheet" media="print" />
+		
+		<!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+		<!--[if lt IE 9]>
+			<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
+
+	</head>
+
+	<body class="page-surefire-report project-aem-library" data-spy="scroll" data-offset="60" data-target="#toc-scroll-target">
+
+		<nav class="navbar navbar-default navbar-fixed-top">
+				<div class="container">
+					<div class="navbar-header">
+				      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse" aria-expanded="false">
+				        <span class="sr-only">Toggle navigation</span>
+				        <span class="icon-bar"></span>
+				        <span class="icon-bar"></span>
+				        <span class="icon-bar"></span>
+				      </button>
+				    
+					<a class="navbar-brand" href="./">AEM Library</a>
+					</div>
+					<div class="collapse navbar-collapse">
+						<ul class="nav navbar-nav navbar-right">
+							<li><a href="https://github.com/icfnext/aem-library" title="GitHub" class="externalLink">GitHub </a></li>
+							<li><a href="index.html" title="Overview">Overview </a></li>
+							<li class="dropdown">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown">User Guide <b class="caret"></b></a>
+								<ul class="dropdown-menu">
+									<li><a href="adapters.html" title="Adapters">Adapters </a></li>
+									<li><a href="components.html" title="Components">Components </a></li>
+									<li><a href="constants.html" title="Constants">Constants </a></li>
+									<li><a href="image-rendering.html" title="Image Rendering">Image Rendering </a></li>
+									<li><a href="including-in-aem-projects.html" title="Including in AEM Projects">Including in AEM Projects </a></li>
+									<li><a href="links.html" title="Links">Links </a></li>
+									<li><a href="optionals.html" title="Optionals">Optionals </a></li>
+									<li><a href="predicates.html" title="Predicates">Predicates </a></li>
+									<li><a href="services.html" title="Services">Services </a></li>
+									<li><a href="servlets.html" title="Servlets">Servlets </a></li>
+									<li><a href="injectors.html" title="Sling Models Injectors">Sling Models Injectors </a></li>
+								</ul>
+							</li>
+							<li class="dropdown active">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown">Project Documentation <b class="caret"></b></a>
+								<ul class="dropdown-menu">
+									<li class="dropdown-submenu">
+										<a href="project-info.html" title="Project Information">Project Information </a>
+										<ul class="dropdown-menu">
+											<li><a href="project-summary.html" title="Project Summary">Project Summary </a></li>
+											<li><a href="license.html" title="Project License">Project License </a></li>
+										</ul>
+									</li>
+									<li class="dropdown-submenu">
+										<a href="project-reports.html" title="Project Reports">Project Reports </a>
+										<ul class="dropdown-menu">
+											<li><a href="apidocs/index.html" title="JavaDocs">JavaDocs </a></li>
+											<li class="active"><a href="" title="Surefire Report">Surefire Report </a></li>
+											<li><a href="pmd.html" title="PMD">PMD </a></li>
+											<li><a href="cobertura/index.html" title="Cobertura Test Coverage">Cobertura Test Coverage </a></li>
+										</ul>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div><!--/.nav-collapse -->
+				</div>
+		</nav>
+		
+	<div class="container">
+	
+	<!-- Masthead
+	================================================== -->
+
+	
+	
+	<header class="jumbotron subhead">
+		<div class="row" id="banner">
+			<div class="span12">
+				<div class="pull-left">
+					<a href="http://www.icfolson.com" id="bannerLeft"><img src="images/logo.jpg" alt="ICF Olson"></a>
+				</div>
+				<div class="pull-right">
+										<a href="./" id="bannerRight"><h1>AEM Library</h1></a>
+					<p class="lead"></p>
+				</div>
+			</div>
+		</div>
+
+
+	
+		</header>
+
+	<div class="main-body">
+	<div class="row">
+		<div class="span12">
+			<div class="body-content">
+<script type="text/javascript">
+//<![CDATA[
+function toggleDisplay(elementId) {
+ var elm = document.getElementById(elementId + '-error');
+ if (elm == null) {
+  elm = document.getElementById(elementId + '-failure');
+ }
+ if (elm && typeof elm.style != "undefined") {
+  if (elm.style.display == "none") {
+   elm.style.display = "";
+   document.getElementById(elementId + '-off').style.display = "none";
+   document.getElementById(elementId + '-on').style.display = "inline";
+  } else if (elm.style.display == "") {   elm.style.display = "none";
+   document.getElementById(elementId + '-off').style.display = "inline";
+   document.getElementById(elementId + '-on').style.display = "none";
+  } 
+ } 
+ }
+//]]>
+</script> 
+<div class="section"> 
+ <h2 id="Surefire_Report">Surefire Report</h2> 
+</div> 
+<div class="section"> 
+ <h2 id="Summary">Summary</h2> 
+ <a name="Summary"></a> 
+ <p>[<a href="#Summary">Summary</a>] [<a href="#Package_List">Package List</a>] [<a href="#Test_Cases">Test Cases</a>]</p> 
+ <br /> 
+ <table border="1" class="bodyTable table table-striped table-hover"> 
+  <thead> 
+   <tr class="a"> 
+    <th>Tests</th> 
+    <th>Errors</th> 
+    <th>Failures</th> 
+    <th>Skipped</th> 
+    <th>Success Rate</th> 
+    <th>Time</th> 
+   </tr> 
+  </thead> 
+  <tbody> 
+   <tr class="b"> 
+    <td>496</td> 
+    <td>0</td> 
+    <td>0</td> 
+    <td>0</td> 
+    <td>100%</td> 
+    <td>27.69</td> 
+   </tr> 
+  </tbody> 
+ </table> 
+ <br /> 
+ <p>Note: failures are anticipated and checked for with assertions while errors are unanticipated.</p> 
+ <br /> 
+</div> 
+<div class="section"> 
+ <h2 id="Package_List">Package List</h2> 
+ <a name="Package_List"></a> 
+ <p>[<a href="#Summary">Summary</a>] [<a href="#Package_List">Package List</a>] [<a href="#Test_Cases">Test Cases</a>]</p> 
+ <br /> 
+ <table border="1" class="bodyTable table table-striped table-hover"> 
+  <thead> 
+   <tr class="a"> 
+    <th>Package</th> 
+    <th>Tests</th> 
+    <th>Errors</th> 
+    <th>Failures</th> 
+    <th>Skipped</th> 
+    <th>Success Rate</th> 
+    <th>Time</th> 
+   </tr> 
+  </thead> 
+  <tbody> 
+   <tr class="b"> 
+    <td><a href="#com.icfolson.aem.library.core.services.impl">com.icfolson.aem.library.core.services.impl</a></td> 
+    <td>2</td> 
+    <td>0</td> 
+    <td>0</td> 
+    <td>0</td> 
+    <td>100%</td> 
+    <td>0.413</td> 
+   </tr> 
+   <tr class="a"> 
+    <td><a href="#com.icfolson.aem.library.core.link.builders.impl">com.icfolson.aem.library.core.link.builders.impl</a></td> 
+    <td>53</td> 
+    <td>0</td> 
+    <td>0</td> 
+    <td>0</td> 
+    <td>100%</td> 
+    <td>1.105</td> 
+   </tr> 
+   <tr class="b"> 
+    <td><a href="#com.icfolson.aem.library.core.node.impl">com.icfolson.aem.library.core.node.impl</a></td> 
+    <td>160</td> 
+    <td>0</td> 
+    <td>0</td> 
+    <td>0</td> 
+    <td>100%</td> 
+    <td>1.642</td> 
+   </tr> 
+   <tr class="a"> 
+    <td><a href="#com.icfolson.aem.library.core.link.impl">com.icfolson.aem.library.core.link.impl</a></td> 
+    <td>1</td> 
+    <td>0</td> 
+    <td>0</td> 
+    <td>0</td> 
+    <td>100%</td> 
+    <td>0</td> 
+   </tr> 
+   <tr class="b"> 
+    <td><a href="#com.icfolson.aem.library.core.servlets.replication">com.icfolson.aem.library.core.servlets.replication</a></td> 
+    <td>6</td> 
+    <td>0</td> 
+    <td>0</td> 
+    <td>0</td> 
+    <td>100%</td> 
+    <td>0.567</td> 
+   </tr> 
+   <tr class="a"> 
+    <td><a href="#com.icfolson.aem.library.core.servlets.optionsprovider">com.icfolson.aem.library.core.servlets.optionsprovider</a></td> 
+    <td>5</td> 
+    <td>0</td> 
+    <td>0</td> 
+    <td>0</td> 
+    <td>100%</td> 
+    <td>0.435</td> 
+   </tr> 
+   <tr class="b"> 
+    <td><a href="#com.icfolson.aem.library.core.page.predicates">com.icfolson.aem.library.core.page.predicates</a></td> 
+    <td>3</td> 
+    <td>0</td> 
+    <td>0</td> 
+    <td>0</td> 
+    <td>100%</td> 
+    <td>0.41</td> 
+   </tr> 
+   <tr class="a"> 
+    <td><a href="#com.icfolson.aem.library.core.servlets">com.icfolson.aem.library.core.servlets</a></td> 
+    <td>17</td> 
+    <td>0</td> 
+    <td>0</td> 
+    <td>0</td> 
+    <td>100%</td> 
+    <td>2.783</td> 
+   </tr> 
+   <tr class="b"> 
+    <td><a href="#com.icfolson.aem.library.core.servlets.datasource">com.icfolson.aem.library.core.servlets.datasource</a></td> 
+    <td>4</td> 
+    <td>0</td> 
+    <td>0</td> 
+    <td>0</td> 
+    <td>100%</td> 
+    <td>1.149</td> 
+   </tr> 
+   <tr class="a"> 
+    <td><a href="#com.icfolson.aem.library.core.node">com.icfolson.aem.library.core.node</a></td> 
+    <td>1</td> 
+    <td>0</td> 
+    <td>0</td> 
+    <td>0</td> 
+    <td>100%</td> 
+    <td>0.646</td> 
+   </tr> 
+   <tr class="b"> 
+    <td><a href="#com.icfolson.aem.library.core.replication">com.icfolson.aem.library.core.replication</a></td> 
+    <td>9</td> 
+    <td>0</td> 
+    <td>0</td> 
+    <td>0</td> 
+    <td>100%</td> 
+    <td>1.248</td> 
+   </tr> 
+   <tr class="a"> 
+    <td><a href="#com.icfolson.aem.library.core.page.impl">com.icfolson.aem.library.core.page.impl</a></td> 
+    <td>97</td> 
+    <td>0</td> 
+    <td>0</td> 
+    <td>0</td> 
+    <td>100%</td> 
+    <td>1.143</td> 
+   </tr> 
+   <tr class="b"> 
+    <td><a href="#com.icfolson.aem.library.core.utils">com.icfolson.aem.library.core.utils</a></td> 
+    <td>25</td> 
+    <td>0</td> 
+    <td>0</td> 
+    <td>0</td> 
+    <td>100%</td> 
+    <td>0.78</td> 
+   </tr> 
+   <tr class="a"> 
+    <td><a href="#com.icfolson.aem.library.core.listeners">com.icfolson.aem.library.core.listeners</a></td> 
+    <td>1</td> 
+    <td>0</td> 
+    <td>0</td> 
+    <td>0</td> 
+    <td>100%</td> 
+    <td>0.691</td> 
+   </tr> 
+   <tr class="b"> 
+    <td><a href="#com.icfolson.aem.library.core.request.impl">com.icfolson.aem.library.core.request.impl</a></td> 
+    <td>17</td> 
+    <td>0</td> 
+    <td>0</td> 
+    <td>0</td> 
+    <td>100%</td> 
+    <td>0.534</td> 
+   </tr> 
+   <tr class="a"> 
+    <td><a href="#com.icfolson.aem.library.core.link.enums">com.icfolson.aem.library.core.link.enums</a></td> 
+    <td>6</td> 
+    <td>0</td> 
+    <td>0</td> 
+    <td>0</td> 
+    <td>100%</td> 
+    <td>0.003</td> 
+   </tr> 
+   <tr class="b"> 
+    <td><a href="#com.icfolson.aem.library.core.node.predicates">com.icfolson.aem.library.core.node.predicates</a></td> 
+    <td>13</td> 
+    <td>0</td> 
+    <td>0</td> 
+    <td>0</td> 
+    <td>100%</td> 
+    <td>1.566</td> 
+   </tr> 
+   <tr class="a"> 
+    <td><a href="#com.icfolson.aem.library.core.adapter">com.icfolson.aem.library.core.adapter</a></td> 
+    <td>8</td> 
+    <td>0</td> 
+    <td>0</td> 
+    <td>0</td> 
+    <td>100%</td> 
+    <td>3.359</td> 
+   </tr> 
+   <tr class="b"> 
+    <td><a href="#com.icfolson.aem.library.models.impl">com.icfolson.aem.library.models.impl</a></td> 
+    <td>39</td> 
+    <td>0</td> 
+    <td>0</td> 
+    <td>0</td> 
+    <td>100%</td> 
+    <td>9.059</td> 
+   </tr> 
+   <tr class="a"> 
+    <td><a href="#com.icfolson.aem.library.core.services.cache">com.icfolson.aem.library.core.services.cache</a></td> 
+    <td>10</td> 
+    <td>0</td> 
+    <td>0</td> 
+    <td>0</td> 
+    <td>100%</td> 
+    <td>0.149</td> 
+   </tr> 
+   <tr class="b"> 
+    <td><a href="#com.icfolson.aem.library.core.services">com.icfolson.aem.library.core.services</a></td> 
+    <td>19</td> 
+    <td>0</td> 
+    <td>0</td> 
+    <td>0</td> 
+    <td>100%</td> 
+    <td>0.008</td> 
+   </tr> 
+  </tbody> 
+ </table> 
+ <br /> 
+ <p>Note: package statistics are not computed recursively, they only sum up all of its testsuites numbers.</p> 
+ <div class="section"> 
+  <h3 id="com.icfolson.aem.library.core.services.impl">com.icfolson.aem.library.core.services.impl</h3> 
+  <a name="com.icfolson.aem.library.core.services.impl"></a> 
+  <table border="1" class="bodyTable table table-striped table-hover"> 
+   <thead> 
+    <tr class="a"> 
+     <th></th> 
+     <th>Class</th> 
+     <th>Tests</th> 
+     <th>Errors</th> 
+     <th>Failures</th> 
+     <th>Skipped</th> 
+     <th>Success Rate</th> 
+     <th>Time</th> 
+    </tr> 
+   </thead> 
+   <tbody> 
+    <tr class="b"> 
+     <td><a href="#com.icfolson.aem.library.core.services.impl.DefaultSelectiveReplicationServiceSpec"><i class="icon-ok"></i></a></td> 
+     <td><a href="#com.icfolson.aem.library.core.services.impl.DefaultSelectiveReplicationServiceSpec">DefaultSelectiveReplicationServiceSpec</a></td> 
+     <td>2</td> 
+     <td>0</td> 
+     <td>0</td> 
+     <td>0</td> 
+     <td>100%</td> 
+     <td>0.413</td> 
+    </tr> 
+   </tbody> 
+  </table> 
+ </div> 
+ <div class="section"> 
+  <h3 id="com.icfolson.aem.library.core.link.builders.impl">com.icfolson.aem.library.core.link.builders.impl</h3> 
+  <a name="com.icfolson.aem.library.core.link.builders.impl"></a> 
+  <table border="1" class="bodyTable table table-striped table-hover"> 
+   <thead> 
+    <tr class="a"> 
+     <th></th> 
+     <th>Class</th> 
+     <th>Tests</th> 
+     <th>Errors</th> 
+     <th>Failures</th> 
+     <th>Skipped</th> 
+     <th>Success Rate</th> 
+     <th>Time</th> 
+    </tr> 
+   </thead> 
+   <tbody> 
+    <tr class="b"> 
+     <td><a href="#com.icfolson.aem.library.core.link.builders.impl.DefaultLinkBuilderSpec"><i class="icon-ok"></i></a></td> 
+     <td><a href="#com.icfolson.aem.library.core.link.builders.impl.DefaultLinkBuilderSpec">DefaultLinkBuilderSpec</a></td> 
+     <td>53</td> 
+     <td>0</td> 
+     <td>0</td> 
+     <td>0</td> 
+     <td>100%</td> 
+     <td>1.105</td> 
+    </tr> 
+   </tbody> 
+  </table> 
+ </div> 
+ <div class="section"> 
+  <h3 id="com.icfolson.aem.library.core.node.impl">com.icfolson.aem.library.core.node.impl</h3> 
+  <a name="com.icfolson.aem.library.core.node.impl"></a> 
+  <table border="1" class="bodyTable table table-striped table-hover"> 
+   <thead> 
+    <tr class="a"> 
+     <th></th> 
+     <th>Class</th> 
+     <th>Tests</th> 
+     <th>Errors</th> 
+     <th>Failures</th> 
+     <th>Skipped</th> 
+     <th>Success Rate</th> 
+     <th>Time</th> 
+    </tr> 
+   </thead> 
+   <tbody> 
+    <tr class="b"> 
+     <td><a href="#com.icfolson.aem.library.core.node.impl.DefaultBasicNodeSpec"><i class="icon-ok"></i></a></td> 
+     <td><a href="#com.icfolson.aem.library.core.node.impl.DefaultBasicNodeSpec">DefaultBasicNodeSpec</a></td> 
+     <td>88</td> 
+     <td>0</td> 
+     <td>0</td> 
+     <td>0</td> 
+     <td>100%</td> 
+     <td>0.788</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><a href="#com.icfolson.aem.library.core.node.impl.DefaultComponentNodeSpec"><i class="icon-ok"></i></a></td> 
+     <td><a href="#com.icfolson.aem.library.core.node.impl.DefaultComponentNodeSpec">DefaultComponentNodeSpec</a></td> 
+     <td>72</td> 
+     <td>0</td> 
+     <td>0</td> 
+     <td>0</td> 
+     <td>100%</td> 
+     <td>0.854</td> 
+    </tr> 
+   </tbody> 
+  </table> 
+ </div> 
+ <div class="section"> 
+  <h3 id="com.icfolson.aem.library.core.link.impl">com.icfolson.aem.library.core.link.impl</h3> 
+  <a name="com.icfolson.aem.library.core.link.impl"></a> 
+  <table border="1" class="bodyTable table table-striped table-hover"> 
+   <thead> 
+    <tr class="a"> 
+     <th></th> 
+     <th>Class</th> 
+     <th>Tests</th> 
+     <th>Errors</th> 
+     <th>Failures</th> 
+     <th>Skipped</th> 
+     <th>Success Rate</th> 
+     <th>Time</th> 
+    </tr> 
+   </thead> 
+   <tbody> 
+    <tr class="b"> 
+     <td><a href="#com.icfolson.aem.library.core.link.impl.DefaultLinkSpec"><i class="icon-ok"></i></a></td> 
+     <td><a href="#com.icfolson.aem.library.core.link.impl.DefaultLinkSpec">DefaultLinkSpec</a></td> 
+     <td>1</td> 
+     <td>0</td> 
+     <td>0</td> 
+     <td>0</td> 
+     <td>100%</td> 
+     <td>0</td> 
+    </tr> 
+   </tbody> 
+  </table> 
+ </div> 
+ <div class="section"> 
+  <h3 id="com.icfolson.aem.library.core.servlets.replication">com.icfolson.aem.library.core.servlets.replication</h3> 
+  <a name="com.icfolson.aem.library.core.servlets.replication"></a> 
+  <table border="1" class="bodyTable table table-striped table-hover"> 
+   <thead> 
+    <tr class="a"> 
+     <th></th> 
+     <th>Class</th> 
+     <th>Tests</th> 
+     <th>Errors</th> 
+     <th>Failures</th> 
+     <th>Skipped</th> 
+     <th>Success Rate</th> 
+     <th>Time</th> 
+    </tr> 
+   </thead> 
+   <tbody> 
+    <tr class="b"> 
+     <td><a href="#com.icfolson.aem.library.core.servlets.replication.SelectiveReplicationServletSpec"><i class="icon-ok"></i></a></td> 
+     <td><a href="#com.icfolson.aem.library.core.servlets.replication.SelectiveReplicationServletSpec">SelectiveReplicationServletSpec</a></td> 
+     <td>6</td> 
+     <td>0</td> 
+     <td>0</td> 
+     <td>0</td> 
+     <td>100%</td> 
+     <td>0.567</td> 
+    </tr> 
+   </tbody> 
+  </table> 
+ </div> 
+ <div class="section"> 
+  <h3 id="com.icfolson.aem.library.core.servlets.optionsprovider">com.icfolson.aem.library.core.servlets.optionsprovider</h3> 
+  <a name="com.icfolson.aem.library.core.servlets.optionsprovider"></a> 
+  <table border="1" class="bodyTable table table-striped table-hover"> 
+   <thead> 
+    <tr class="a"> 
+     <th></th> 
+     <th>Class</th> 
+     <th>Tests</th> 
+     <th>Errors</th> 
+     <th>Failures</th> 
+     <th>Skipped</th> 
+     <th>Success Rate</th> 
+     <th>Time</th> 
+    </tr> 
+   </thead> 
+   <tbody> 
+    <tr class="b"> 
+     <td><a href="#com.icfolson.aem.library.core.servlets.optionsprovider.OptionSpec"><i class="icon-ok"></i></a></td> 
+     <td><a href="#com.icfolson.aem.library.core.servlets.optionsprovider.OptionSpec">OptionSpec</a></td> 
+     <td>2</td> 
+     <td>0</td> 
+     <td>0</td> 
+     <td>0</td> 
+     <td>100%</td> 
+     <td>0.004</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><a href="#com.icfolson.aem.library.core.servlets.optionsprovider.OptionsProviderServletSpec"><i class="icon-ok"></i></a></td> 
+     <td><a href="#com.icfolson.aem.library.core.servlets.optionsprovider.OptionsProviderServletSpec">OptionsProviderServletSpec</a></td> 
+     <td>3</td> 
+     <td>0</td> 
+     <td>0</td> 
+     <td>0</td> 
+     <td>100%</td> 
+     <td>0.431</td> 
+    </tr> 
+   </tbody> 
+  </table> 
+ </div> 
+ <div class="section"> 
+  <h3 id="com.icfolson.aem.library.core.page.predicates">com.icfolson.aem.library.core.page.predicates</h3> 
+  <a name="com.icfolson.aem.library.core.page.predicates"></a> 
+  <table border="1" class="bodyTable table table-striped table-hover"> 
+   <thead> 
+    <tr class="a"> 
+     <th></th> 
+     <th>Class</th> 
+     <th>Tests</th> 
+     <th>Errors</th> 
+     <th>Failures</th> 
+     <th>Skipped</th> 
+     <th>Success Rate</th> 
+     <th>Time</th> 
+    </tr> 
+   </thead> 
+   <tbody> 
+    <tr class="b"> 
+     <td><a href="#com.icfolson.aem.library.core.page.predicates.TemplatePredicateSpec"><i class="icon-ok"></i></a></td> 
+     <td><a href="#com.icfolson.aem.library.core.page.predicates.TemplatePredicateSpec">TemplatePredicateSpec</a></td> 
+     <td>3</td> 
+     <td>0</td> 
+     <td>0</td> 
+     <td>0</td> 
+     <td>100%</td> 
+     <td>0.41</td> 
+    </tr> 
+   </tbody> 
+  </table> 
+ </div> 
+ <div class="section"> 
+  <h3 id="com.icfolson.aem.library.core.servlets">com.icfolson.aem.library.core.servlets</h3> 
+  <a name="com.icfolson.aem.library.core.servlets"></a> 
+  <table border="1" class="bodyTable table table-striped table-hover"> 
+   <thead> 
+    <tr class="a"> 
+     <th></th> 
+     <th>Class</th> 
+     <th>Tests</th> 
+     <th>Errors</th> 
+     <th>Failures</th> 
+     <th>Skipped</th> 
+     <th>Success Rate</th> 
+     <th>Time</th> 
+    </tr> 
+   </thead> 
+   <tbody> 
+    <tr class="b"> 
+     <td><a href="#com.icfolson.aem.library.core.servlets.AbstractComponentServletSpec"><i class="icon-ok"></i></a></td> 
+     <td><a href="#com.icfolson.aem.library.core.servlets.AbstractComponentServletSpec">AbstractComponentServletSpec</a></td> 
+     <td>1</td> 
+     <td>0</td> 
+     <td>0</td> 
+     <td>0</td> 
+     <td>100%</td> 
+     <td>0.434</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><a href="#com.icfolson.aem.library.core.servlets.AbstractJsonResponseServletSpec"><i class="icon-ok"></i></a></td> 
+     <td><a href="#com.icfolson.aem.library.core.servlets.AbstractJsonResponseServletSpec">AbstractJsonResponseServletSpec</a></td> 
+     <td>3</td> 
+     <td>0</td> 
+     <td>0</td> 
+     <td>0</td> 
+     <td>100%</td> 
+     <td>0.766</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><a href="#com.icfolson.aem.library.core.servlets.AbstractValidatorServletSpec"><i class="icon-ok"></i></a></td> 
+     <td><a href="#com.icfolson.aem.library.core.servlets.AbstractValidatorServletSpec">AbstractValidatorServletSpec</a></td> 
+     <td>2</td> 
+     <td>0</td> 
+     <td>0</td> 
+     <td>0</td> 
+     <td>100%</td> 
+     <td>0.488</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><a href="#com.icfolson.aem.library.core.servlets.ImageServletSpec"><i class="icon-ok"></i></a></td> 
+     <td><a href="#com.icfolson.aem.library.core.servlets.ImageServletSpec">ImageServletSpec</a></td> 
+     <td>11</td> 
+     <td>0</td> 
+     <td>0</td> 
+     <td>0</td> 
+     <td>100%</td> 
+     <td>1.095</td> 
+    </tr> 
+   </tbody> 
+  </table> 
+ </div> 
+ <div class="section"> 
+  <h3 id="com.icfolson.aem.library.core.servlets.datasource">com.icfolson.aem.library.core.servlets.datasource</h3> 
+  <a name="com.icfolson.aem.library.core.servlets.datasource"></a> 
+  <table border="1" class="bodyTable table table-striped table-hover"> 
+   <thead> 
+    <tr class="a"> 
+     <th></th> 
+     <th>Class</th> 
+     <th>Tests</th> 
+     <th>Errors</th> 
+     <th>Failures</th> 
+     <th>Skipped</th> 
+     <th>Success Rate</th> 
+     <th>Time</th> 
+    </tr> 
+   </thead> 
+   <tbody> 
+    <tr class="b"> 
+     <td><a href="#com.icfolson.aem.library.core.servlets.datasource.OptionsDataSourceServletSpec"><i class="icon-ok"></i></a></td> 
+     <td><a href="#com.icfolson.aem.library.core.servlets.datasource.OptionsDataSourceServletSpec">OptionsDataSourceServletSpec</a></td> 
+     <td>2</td> 
+     <td>0</td> 
+     <td>0</td> 
+     <td>0</td> 
+     <td>100%</td> 
+     <td>0.558</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><a href="#com.icfolson.aem.library.core.servlets.datasource.TagDataSourceServletSpec"><i class="icon-ok"></i></a></td> 
+     <td><a href="#com.icfolson.aem.library.core.servlets.datasource.TagDataSourceServletSpec">TagDataSourceServletSpec</a></td> 
+     <td>2</td> 
+     <td>0</td> 
+     <td>0</td> 
+     <td>0</td> 
+     <td>100%</td> 
+     <td>0.591</td> 
+    </tr> 
+   </tbody> 
+  </table> 
+ </div> 
+ <div class="section"> 
+  <h3 id="com.icfolson.aem.library.core.node">com.icfolson.aem.library.core.node</h3> 
+  <a name="com.icfolson.aem.library.core.node"></a> 
+  <table border="1" class="bodyTable table table-striped table-hover"> 
+   <thead> 
+    <tr class="a"> 
+     <th></th> 
+     <th>Class</th> 
+     <th>Tests</th> 
+     <th>Errors</th> 
+     <th>Failures</th> 
+     <th>Skipped</th> 
+     <th>Success Rate</th> 
+     <th>Time</th> 
+    </tr> 
+   </thead> 
+   <tbody> 
+    <tr class="b"> 
+     <td><a href="#com.icfolson.aem.library.core.node.DelegateComponentNodeSpec"><i class="icon-ok"></i></a></td> 
+     <td><a href="#com.icfolson.aem.library.core.node.DelegateComponentNodeSpec">DelegateComponentNodeSpec</a></td> 
+     <td>1</td> 
+     <td>0</td> 
+     <td>0</td> 
+     <td>0</td> 
+     <td>100%</td> 
+     <td>0.646</td> 
+    </tr> 
+   </tbody> 
+  </table> 
+ </div> 
+ <div class="section"> 
+  <h3 id="com.icfolson.aem.library.core.replication">com.icfolson.aem.library.core.replication</h3> 
+  <a name="com.icfolson.aem.library.core.replication"></a> 
+  <table border="1" class="bodyTable table table-striped table-hover"> 
+   <thead> 
+    <tr class="a"> 
+     <th></th> 
+     <th>Class</th> 
+     <th>Tests</th> 
+     <th>Errors</th> 
+     <th>Failures</th> 
+     <th>Skipped</th> 
+     <th>Success Rate</th> 
+     <th>Time</th> 
+    </tr> 
+   </thead> 
+   <tbody> 
+    <tr class="b"> 
+     <td><a href="#com.icfolson.aem.library.core.replication.AbstractReplicationListenerSpec"><i class="icon-ok"></i></a></td> 
+     <td><a href="#com.icfolson.aem.library.core.replication.AbstractReplicationListenerSpec">AbstractReplicationListenerSpec</a></td> 
+     <td>5</td> 
+     <td>0</td> 
+     <td>0</td> 
+     <td>0</td> 
+     <td>100%</td> 
+     <td>0.575</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><a href="#com.icfolson.aem.library.core.replication.PageReplicationListenerSpec"><i class="icon-ok"></i></a></td> 
+     <td><a href="#com.icfolson.aem.library.core.replication.PageReplicationListenerSpec">PageReplicationListenerSpec</a></td> 
+     <td>4</td> 
+     <td>0</td> 
+     <td>0</td> 
+     <td>0</td> 
+     <td>100%</td> 
+     <td>0.673</td> 
+    </tr> 
+   </tbody> 
+  </table> 
+ </div> 
+ <div class="section"> 
+  <h3 id="com.icfolson.aem.library.core.page.impl">com.icfolson.aem.library.core.page.impl</h3> 
+  <a name="com.icfolson.aem.library.core.page.impl"></a> 
+  <table border="1" class="bodyTable table table-striped table-hover"> 
+   <thead> 
+    <tr class="a"> 
+     <th></th> 
+     <th>Class</th> 
+     <th>Tests</th> 
+     <th>Errors</th> 
+     <th>Failures</th> 
+     <th>Skipped</th> 
+     <th>Success Rate</th> 
+     <th>Time</th> 
+    </tr> 
+   </thead> 
+   <tbody> 
+    <tr class="b"> 
+     <td><a href="#com.icfolson.aem.library.core.page.impl.DefaultPageDecoratorSpec"><i class="icon-ok"></i></a></td> 
+     <td><a href="#com.icfolson.aem.library.core.page.impl.DefaultPageDecoratorSpec">DefaultPageDecoratorSpec</a></td> 
+     <td>88</td> 
+     <td>0</td> 
+     <td>0</td> 
+     <td>0</td> 
+     <td>100%</td> 
+     <td>0.675</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><a href="#com.icfolson.aem.library.core.page.impl.DefaultPageManagerDecoratorSpec"><i class="icon-ok"></i></a></td> 
+     <td><a href="#com.icfolson.aem.library.core.page.impl.DefaultPageManagerDecoratorSpec">DefaultPageManagerDecoratorSpec</a></td> 
+     <td>9</td> 
+     <td>0</td> 
+     <td>0</td> 
+     <td>0</td> 
+     <td>100%</td> 
+     <td>0.468</td> 
+    </tr> 
+   </tbody> 
+  </table> 
+ </div> 
+ <div class="section"> 
+  <h3 id="com.icfolson.aem.library.core.utils">com.icfolson.aem.library.core.utils</h3> 
+  <a name="com.icfolson.aem.library.core.utils"></a> 
+  <table border="1" class="bodyTable table table-striped table-hover"> 
+   <thead> 
+    <tr class="a"> 
+     <th></th> 
+     <th>Class</th> 
+     <th>Tests</th> 
+     <th>Errors</th> 
+     <th>Failures</th> 
+     <th>Skipped</th> 
+     <th>Success Rate</th> 
+     <th>Time</th> 
+    </tr> 
+   </thead> 
+   <tbody> 
+    <tr class="b"> 
+     <td><a href="#com.icfolson.aem.library.core.utils.PathUtilsSpec"><i class="icon-ok"></i></a></td> 
+     <td><a href="#com.icfolson.aem.library.core.utils.PathUtilsSpec">PathUtilsSpec</a></td> 
+     <td>25</td> 
+     <td>0</td> 
+     <td>0</td> 
+     <td>0</td> 
+     <td>100%</td> 
+     <td>0.78</td> 
+    </tr> 
+   </tbody> 
+  </table> 
+ </div> 
+ <div class="section"> 
+  <h3 id="com.icfolson.aem.library.core.listeners">com.icfolson.aem.library.core.listeners</h3> 
+  <a name="com.icfolson.aem.library.core.listeners"></a> 
+  <table border="1" class="bodyTable table table-striped table-hover"> 
+   <thead> 
+    <tr class="a"> 
+     <th></th> 
+     <th>Class</th> 
+     <th>Tests</th> 
+     <th>Errors</th> 
+     <th>Failures</th> 
+     <th>Skipped</th> 
+     <th>Success Rate</th> 
+     <th>Time</th> 
+    </tr> 
+   </thead> 
+   <tbody> 
+    <tr class="b"> 
+     <td><a href="#com.icfolson.aem.library.core.listeners.AbstractPageEventListenerSpec"><i class="icon-ok"></i></a></td> 
+     <td><a href="#com.icfolson.aem.library.core.listeners.AbstractPageEventListenerSpec">AbstractPageEventListenerSpec</a></td> 
+     <td>1</td> 
+     <td>0</td> 
+     <td>0</td> 
+     <td>0</td> 
+     <td>100%</td> 
+     <td>0.691</td> 
+    </tr> 
+   </tbody> 
+  </table> 
+ </div> 
+ <div class="section"> 
+  <h3 id="com.icfolson.aem.library.core.request.impl">com.icfolson.aem.library.core.request.impl</h3> 
+  <a name="com.icfolson.aem.library.core.request.impl"></a> 
+  <table border="1" class="bodyTable table table-striped table-hover"> 
+   <thead> 
+    <tr class="a"> 
+     <th></th> 
+     <th>Class</th> 
+     <th>Tests</th> 
+     <th>Errors</th> 
+     <th>Failures</th> 
+     <th>Skipped</th> 
+     <th>Success Rate</th> 
+     <th>Time</th> 
+    </tr> 
+   </thead> 
+   <tbody> 
+    <tr class="b"> 
+     <td><a href="#com.icfolson.aem.library.core.request.impl.DefaultComponentServletRequestSpec"><i class="icon-ok"></i></a></td> 
+     <td><a href="#com.icfolson.aem.library.core.request.impl.DefaultComponentServletRequestSpec">DefaultComponentServletRequestSpec</a></td> 
+     <td>17</td> 
+     <td>0</td> 
+     <td>0</td> 
+     <td>0</td> 
+     <td>100%</td> 
+     <td>0.534</td> 
+    </tr> 
+   </tbody> 
+  </table> 
+ </div> 
+ <div class="section"> 
+  <h3 id="com.icfolson.aem.library.core.link.enums">com.icfolson.aem.library.core.link.enums</h3> 
+  <a name="com.icfolson.aem.library.core.link.enums"></a> 
+  <table border="1" class="bodyTable table table-striped table-hover"> 
+   <thead> 
+    <tr class="a"> 
+     <th></th> 
+     <th>Class</th> 
+     <th>Tests</th> 
+     <th>Errors</th> 
+     <th>Failures</th> 
+     <th>Skipped</th> 
+     <th>Success Rate</th> 
+     <th>Time</th> 
+    </tr> 
+   </thead> 
+   <tbody> 
+    <tr class="b"> 
+     <td><a href="#com.icfolson.aem.library.core.link.enums.LinkTargetSpec"><i class="icon-ok"></i></a></td> 
+     <td><a href="#com.icfolson.aem.library.core.link.enums.LinkTargetSpec">LinkTargetSpec</a></td> 
+     <td>6</td> 
+     <td>0</td> 
+     <td>0</td> 
+     <td>0</td> 
+     <td>100%</td> 
+     <td>0.003</td> 
+    </tr> 
+   </tbody> 
+  </table> 
+ </div> 
+ <div class="section"> 
+  <h3 id="com.icfolson.aem.library.core.node.predicates">com.icfolson.aem.library.core.node.predicates</h3> 
+  <a name="com.icfolson.aem.library.core.node.predicates"></a> 
+  <table border="1" class="bodyTable table table-striped table-hover"> 
+   <thead> 
+    <tr class="a"> 
+     <th></th> 
+     <th>Class</th> 
+     <th>Tests</th> 
+     <th>Errors</th> 
+     <th>Failures</th> 
+     <th>Skipped</th> 
+     <th>Success Rate</th> 
+     <th>Time</th> 
+    </tr> 
+   </thead> 
+   <tbody> 
+    <tr class="b"> 
+     <td><a href="#com.icfolson.aem.library.core.node.predicates.ComponentNodePropertyExistsPredicateSpec"><i class="icon-ok"></i></a></td> 
+     <td><a href="#com.icfolson.aem.library.core.node.predicates.ComponentNodePropertyExistsPredicateSpec">ComponentNodePropertyExistsPredicateSpec</a></td> 
+     <td>4</td> 
+     <td>0</td> 
+     <td>0</td> 
+     <td>0</td> 
+     <td>100%</td> 
+     <td>0.718</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><a href="#com.icfolson.aem.library.core.node.predicates.ComponentNodeResourceTypePredicateSpec"><i class="icon-ok"></i></a></td> 
+     <td><a href="#com.icfolson.aem.library.core.node.predicates.ComponentNodeResourceTypePredicateSpec">ComponentNodeResourceTypePredicateSpec</a></td> 
+     <td>4</td> 
+     <td>0</td> 
+     <td>0</td> 
+     <td>0</td> 
+     <td>100%</td> 
+     <td>0.387</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><a href="#com.icfolson.aem.library.core.node.predicates.PropertyNamePredicateSpec"><i class="icon-ok"></i></a></td> 
+     <td><a href="#com.icfolson.aem.library.core.node.predicates.PropertyNamePredicateSpec">PropertyNamePredicateSpec</a></td> 
+     <td>3</td> 
+     <td>0</td> 
+     <td>0</td> 
+     <td>0</td> 
+     <td>100%</td> 
+     <td>0.009</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><a href="#com.icfolson.aem.library.core.node.predicates.ResourceTypePredicateSpec"><i class="icon-ok"></i></a></td> 
+     <td><a href="#com.icfolson.aem.library.core.node.predicates.ResourceTypePredicateSpec">ResourceTypePredicateSpec</a></td> 
+     <td>2</td> 
+     <td>0</td> 
+     <td>0</td> 
+     <td>0</td> 
+     <td>100%</td> 
+     <td>0.452</td> 
+    </tr> 
+   </tbody> 
+  </table> 
+ </div> 
+ <div class="section"> 
+  <h3 id="com.icfolson.aem.library.core.adapter">com.icfolson.aem.library.core.adapter</h3> 
+  <a name="com.icfolson.aem.library.core.adapter"></a> 
+  <table border="1" class="bodyTable table table-striped table-hover"> 
+   <thead> 
+    <tr class="a"> 
+     <th></th> 
+     <th>Class</th> 
+     <th>Tests</th> 
+     <th>Errors</th> 
+     <th>Failures</th> 
+     <th>Skipped</th> 
+     <th>Success Rate</th> 
+     <th>Time</th> 
+    </tr> 
+   </thead> 
+   <tbody> 
+    <tr class="b"> 
+     <td><a href="#com.icfolson.aem.library.core.adapter.AemLibraryAdapterFactorySpec"><i class="icon-ok"></i></a></td> 
+     <td><a href="#com.icfolson.aem.library.core.adapter.AemLibraryAdapterFactorySpec">AemLibraryAdapterFactorySpec</a></td> 
+     <td>8</td> 
+     <td>0</td> 
+     <td>0</td> 
+     <td>0</td> 
+     <td>100%</td> 
+     <td>3.359</td> 
+    </tr> 
+   </tbody> 
+  </table> 
+ </div> 
+ <div class="section"> 
+  <h3 id="com.icfolson.aem.library.models.impl">com.icfolson.aem.library.models.impl</h3> 
+  <a name="com.icfolson.aem.library.models.impl"></a> 
+  <table border="1" class="bodyTable table table-striped table-hover"> 
+   <thead> 
+    <tr class="a"> 
+     <th></th> 
+     <th>Class</th> 
+     <th>Tests</th> 
+     <th>Errors</th> 
+     <th>Failures</th> 
+     <th>Skipped</th> 
+     <th>Success Rate</th> 
+     <th>Time</th> 
+    </tr> 
+   </thead> 
+   <tbody> 
+    <tr class="b"> 
+     <td><a href="#com.icfolson.aem.library.models.impl.AdaptableInjectorSpec"><i class="icon-ok"></i></a></td> 
+     <td><a href="#com.icfolson.aem.library.models.impl.AdaptableInjectorSpec">AdaptableInjectorSpec</a></td> 
+     <td>2</td> 
+     <td>0</td> 
+     <td>0</td> 
+     <td>0</td> 
+     <td>100%</td> 
+     <td>2.87</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><a href="#com.icfolson.aem.library.models.impl.AemLibraryModelComponentSpec"><i class="icon-ok"></i></a></td> 
+     <td><a href="#com.icfolson.aem.library.models.impl.AemLibraryModelComponentSpec">AemLibraryModelComponentSpec</a></td> 
+     <td>1</td> 
+     <td>0</td> 
+     <td>0</td> 
+     <td>0</td> 
+     <td>100%</td> 
+     <td>0.893</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><a href="#com.icfolson.aem.library.models.impl.ComponentInjectorSpec"><i class="icon-ok"></i></a></td> 
+     <td><a href="#com.icfolson.aem.library.models.impl.ComponentInjectorSpec">ComponentInjectorSpec</a></td> 
+     <td>10</td> 
+     <td>0</td> 
+     <td>0</td> 
+     <td>0</td> 
+     <td>100%</td> 
+     <td>0.661</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><a href="#com.icfolson.aem.library.models.impl.EnumInjectorSpec"><i class="icon-ok"></i></a></td> 
+     <td><a href="#com.icfolson.aem.library.models.impl.EnumInjectorSpec">EnumInjectorSpec</a></td> 
+     <td>2</td> 
+     <td>0</td> 
+     <td>0</td> 
+     <td>0</td> 
+     <td>100%</td> 
+     <td>0.62</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><a href="#com.icfolson.aem.library.models.impl.InheritInjectorSpec"><i class="icon-ok"></i></a></td> 
+     <td><a href="#com.icfolson.aem.library.models.impl.InheritInjectorSpec">InheritInjectorSpec</a></td> 
+     <td>4</td> 
+     <td>0</td> 
+     <td>0</td> 
+     <td>0</td> 
+     <td>100%</td> 
+     <td>0.731</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><a href="#com.icfolson.aem.library.models.impl.InjectorIntegrationSpec"><i class="icon-ok"></i></a></td> 
+     <td><a href="#com.icfolson.aem.library.models.impl.InjectorIntegrationSpec">InjectorIntegrationSpec</a></td> 
+     <td>1</td> 
+     <td>0</td> 
+     <td>0</td> 
+     <td>0</td> 
+     <td>100%</td> 
+     <td>0.465</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><a href="#com.icfolson.aem.library.models.impl.LinkInjectorSpec"><i class="icon-ok"></i></a></td> 
+     <td><a href="#com.icfolson.aem.library.models.impl.LinkInjectorSpec">LinkInjectorSpec</a></td> 
+     <td>4</td> 
+     <td>0</td> 
+     <td>0</td> 
+     <td>0</td> 
+     <td>100%</td> 
+     <td>0.622</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><a href="#com.icfolson.aem.library.models.impl.ModelListInjectorSpec"><i class="icon-ok"></i></a></td> 
+     <td><a href="#com.icfolson.aem.library.models.impl.ModelListInjectorSpec">ModelListInjectorSpec</a></td> 
+     <td>1</td> 
+     <td>0</td> 
+     <td>0</td> 
+     <td>0</td> 
+     <td>100%</td> 
+     <td>0.646</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><a href="#com.icfolson.aem.library.models.impl.ReferenceInjectorSpec"><i class="icon-ok"></i></a></td> 
+     <td><a href="#com.icfolson.aem.library.models.impl.ReferenceInjectorSpec">ReferenceInjectorSpec</a></td> 
+     <td>11</td> 
+     <td>0</td> 
+     <td>0</td> 
+     <td>0</td> 
+     <td>100%</td> 
+     <td>0.553</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><a href="#com.icfolson.aem.library.models.impl.TagInjectorSpec"><i class="icon-ok"></i></a></td> 
+     <td><a href="#com.icfolson.aem.library.models.impl.TagInjectorSpec">TagInjectorSpec</a></td> 
+     <td>2</td> 
+     <td>0</td> 
+     <td>0</td> 
+     <td>0</td> 
+     <td>100%</td> 
+     <td>0.434</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><a href="#com.icfolson.aem.library.models.impl.ValueMapFromRequestInjectorSpec"><i class="icon-ok"></i></a></td> 
+     <td><a href="#com.icfolson.aem.library.models.impl.ValueMapFromRequestInjectorSpec">ValueMapFromRequestInjectorSpec</a></td> 
+     <td>1</td> 
+     <td>0</td> 
+     <td>0</td> 
+     <td>0</td> 
+     <td>100%</td> 
+     <td>0.564</td> 
+    </tr> 
+   </tbody> 
+  </table> 
+ </div> 
+ <div class="section"> 
+  <h3 id="com.icfolson.aem.library.core.services.cache">com.icfolson.aem.library.core.services.cache</h3> 
+  <a name="com.icfolson.aem.library.core.services.cache"></a> 
+  <table border="1" class="bodyTable table table-striped table-hover"> 
+   <thead> 
+    <tr class="a"> 
+     <th></th> 
+     <th>Class</th> 
+     <th>Tests</th> 
+     <th>Errors</th> 
+     <th>Failures</th> 
+     <th>Skipped</th> 
+     <th>Success Rate</th> 
+     <th>Time</th> 
+    </tr> 
+   </thead> 
+   <tbody> 
+    <tr class="b"> 
+     <td><a href="#com.icfolson.aem.library.core.services.cache.CacheServiceSpec"><i class="icon-ok"></i></a></td> 
+     <td><a href="#com.icfolson.aem.library.core.services.cache.CacheServiceSpec">CacheServiceSpec</a></td> 
+     <td>10</td> 
+     <td>0</td> 
+     <td>0</td> 
+     <td>0</td> 
+     <td>100%</td> 
+     <td>0.149</td> 
+    </tr> 
+   </tbody> 
+  </table> 
+ </div> 
+ <div class="section"> 
+  <h3 id="com.icfolson.aem.library.core.services">com.icfolson.aem.library.core.services</h3> 
+  <a name="com.icfolson.aem.library.core.services"></a> 
+  <table border="1" class="bodyTable table table-striped table-hover"> 
+   <thead> 
+    <tr class="a"> 
+     <th></th> 
+     <th>Class</th> 
+     <th>Tests</th> 
+     <th>Errors</th> 
+     <th>Failures</th> 
+     <th>Skipped</th> 
+     <th>Success Rate</th> 
+     <th>Time</th> 
+    </tr> 
+   </thead> 
+   <tbody> 
+    <tr class="b"> 
+     <td><a href="#com.icfolson.aem.library.core.services.OsgiConfigurationSpec"><i class="icon-ok"></i></a></td> 
+     <td><a href="#com.icfolson.aem.library.core.services.OsgiConfigurationSpec">OsgiConfigurationSpec</a></td> 
+     <td>19</td> 
+     <td>0</td> 
+     <td>0</td> 
+     <td>0</td> 
+     <td>100%</td> 
+     <td>0.008</td> 
+    </tr> 
+   </tbody> 
+  </table> 
+ </div> 
+ <br /> 
+</div> 
+<div class="section"> 
+ <h2 id="Test_Cases">Test Cases</h2> 
+ <a name="Test_Cases"></a> 
+ <p>[<a href="#Summary">Summary</a>] [<a href="#Package_List">Package List</a>] [<a href="#Test_Cases">Test Cases</a>]</p> 
+ <div class="section"> 
+  <h3 id="AemLibraryAdapterFactorySpec">AemLibraryAdapterFactorySpec</h3> 
+  <a name="com.icfolson.aem.library.core.adapter.AemLibraryAdapterFactorySpec"></a> 
+  <table border="1" class="bodyTable table table-striped table-hover"> 
+   <tbody> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.adapter.AemLibraryAdapterFactorySpec.get_resource_adapter_for_node_decorators_returns_non-null0"></a>get resource adapter for node decorators returns non-null[0]</td> 
+     <td>0.066</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.adapter.AemLibraryAdapterFactorySpec.get_resource_adapter_for_node_decorators_returns_non-null1"></a>get resource adapter for node decorators returns non-null[1]</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.adapter.AemLibraryAdapterFactorySpec.resource_adapt_to_page"></a>resource adapt to page</td> 
+     <td>0.071</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.adapter.AemLibraryAdapterFactorySpec.resource_adapt_to_page_returns_null_for_non-page_node"></a>resource adapt to page returns null for non-page node</td> 
+     <td>0.002</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.adapter.AemLibraryAdapterFactorySpec.get_resource_adapter_for_invalid_type_returns_null"></a>get resource adapter for invalid type returns null</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.adapter.AemLibraryAdapterFactorySpec.get_resource_resolver_adapter_for_valid_type_returns_non-null"></a>get resource resolver adapter for valid type returns non-null</td> 
+     <td>0.01</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.adapter.AemLibraryAdapterFactorySpec.get_resource_resolver_adapter_for_invalid_type_returns_null"></a>get resource resolver adapter for invalid type returns null</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.adapter.AemLibraryAdapterFactorySpec.get_invalid_adapter_returns_null"></a>get invalid adapter returns null</td> 
+     <td>0.001</td> 
+    </tr> 
+   </tbody> 
+  </table> 
+ </div> 
+ <div class="section"> 
+  <h3 id="DefaultLinkBuilderSpec">DefaultLinkBuilderSpec</h3> 
+  <a name="com.icfolson.aem.library.core.link.builders.impl.DefaultLinkBuilderSpec"></a> 
+  <table border="1" class="bodyTable table table-striped table-hover"> 
+   <tbody> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.link.builders.impl.DefaultLinkBuilderSpec.build_link_for_existing_link"></a>build link for existing link</td> 
+     <td>0.165</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.link.builders.impl.DefaultLinkBuilderSpec.build_link_for_page"></a>build link for page</td> 
+     <td>0.015</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.link.builders.impl.DefaultLinkBuilderSpec.build_link_for_page_with_no_jcr:content_node"></a>build link for page with no jcr:content node</td> 
+     <td>0.007</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.link.builders.impl.DefaultLinkBuilderSpec.build_link_for_page_with_redirect"></a>build link for page with redirect</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.link.builders.impl.DefaultLinkBuilderSpec.build_link_for_page_with_navigation_title"></a>build link for page with navigation title</td> 
+     <td>0.003</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.link.builders.impl.DefaultLinkBuilderSpec.build_link_for_page_without_navigation_title"></a>build link for page without navigation title</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.link.builders.impl.DefaultLinkBuilderSpec.build_link_for_mapped_page0"></a>build link for mapped page[0]</td> 
+     <td>0.056</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.link.builders.impl.DefaultLinkBuilderSpec.build_link_for_mapped_page1"></a>build link for mapped page[1]</td> 
+     <td>0.002</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.link.builders.impl.DefaultLinkBuilderSpec.build_link_for_mapped_page2"></a>build link for mapped page[2]</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.link.builders.impl.DefaultLinkBuilderSpec.build_link_for_mapped_page3"></a>build link for mapped page[3]</td> 
+     <td>0</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.link.builders.impl.DefaultLinkBuilderSpec.build_link_for_resource"></a>build link for resource</td> 
+     <td>0.002</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.link.builders.impl.DefaultLinkBuilderSpec.build_link_for_mapped_resource"></a>build link for mapped resource</td> 
+     <td>0.003</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.link.builders.impl.DefaultLinkBuilderSpec.build_link_for_path0"></a>build link for path[0]</td> 
+     <td>0.002</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.link.builders.impl.DefaultLinkBuilderSpec.build_link_for_path1"></a>build link for path[1]</td> 
+     <td>0.002</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.link.builders.impl.DefaultLinkBuilderSpec.build_link_for_path2"></a>build link for path[2]</td> 
+     <td>0.002</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.link.builders.impl.DefaultLinkBuilderSpec.build_link_for_path3"></a>build link for path[3]</td> 
+     <td>0</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.link.builders.impl.DefaultLinkBuilderSpec.build_link_for_path4"></a>build link for path[4]</td> 
+     <td>0</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.link.builders.impl.DefaultLinkBuilderSpec.build_link_for_path5"></a>build link for path[5]</td> 
+     <td>0</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.link.builders.impl.DefaultLinkBuilderSpec.build_link_for_path6"></a>build link for path[6]</td> 
+     <td>0</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.link.builders.impl.DefaultLinkBuilderSpec.build_link_for_path7"></a>build link for path[7]</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.link.builders.impl.DefaultLinkBuilderSpec.build_link_for_path8"></a>build link for path[8]</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.link.builders.impl.DefaultLinkBuilderSpec.build_link_for_path9"></a>build link for path[9]</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.link.builders.impl.DefaultLinkBuilderSpec.build_link_for_path10"></a>build link for path[10]</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.link.builders.impl.DefaultLinkBuilderSpec.build_link_and_set_external0"></a>build link and set external[0]</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.link.builders.impl.DefaultLinkBuilderSpec.build_link_and_set_external1"></a>build link and set external[1]</td> 
+     <td>0</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.link.builders.impl.DefaultLinkBuilderSpec.build_link_for_path_with_selectors0"></a>build link for path with selectors[0]</td> 
+     <td>0.004</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.link.builders.impl.DefaultLinkBuilderSpec.build_link_for_path_with_selectors1"></a>build link for path with selectors[1]</td> 
+     <td>0.002</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.link.builders.impl.DefaultLinkBuilderSpec.build_link_for_path_with_selectors2"></a>build link for path with selectors[2]</td> 
+     <td>0</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.link.builders.impl.DefaultLinkBuilderSpec.build_link_for_path_with_selectors3"></a>build link for path with selectors[3]</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.link.builders.impl.DefaultLinkBuilderSpec.build_link_for_path_with_scheme0"></a>build link for path with scheme[0]</td> 
+     <td>0.002</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.link.builders.impl.DefaultLinkBuilderSpec.build_link_for_path_with_scheme1"></a>build link for path with scheme[1]</td> 
+     <td>0.002</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.link.builders.impl.DefaultLinkBuilderSpec.build_link_for_path_with_scheme2"></a>build link for path with scheme[2]</td> 
+     <td>0</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.link.builders.impl.DefaultLinkBuilderSpec.build_link_for_path_with_scheme3"></a>build link for path with scheme[3]</td> 
+     <td>0</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.link.builders.impl.DefaultLinkBuilderSpec.build_link_for_path_with_scheme4"></a>build link for path with scheme[4]</td> 
+     <td>0</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.link.builders.impl.DefaultLinkBuilderSpec.build_link_for_path_with_scheme5"></a>build link for path with scheme[5]</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.link.builders.impl.DefaultLinkBuilderSpec.build_link_for_path_with_scheme6"></a>build link for path with scheme[6]</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.link.builders.impl.DefaultLinkBuilderSpec.build_link_for_link_and_set_protocol0"></a>build link for link and set protocol[0]</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.link.builders.impl.DefaultLinkBuilderSpec.build_link_for_link_and_set_protocol1"></a>build link for link and set protocol[1]</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.link.builders.impl.DefaultLinkBuilderSpec.build_link_for_link_and_set_protocol2"></a>build link for link and set protocol[2]</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.link.builders.impl.DefaultLinkBuilderSpec.build_link_for_link_and_set_protocol3"></a>build link for link and set protocol[3]</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.link.builders.impl.DefaultLinkBuilderSpec.build_link_for_link_and_set_protocol4"></a>build link for link and set protocol[4]</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.link.builders.impl.DefaultLinkBuilderSpec.build_link_for_link_and_set_protocol5"></a>build link for link and set protocol[5]</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.link.builders.impl.DefaultLinkBuilderSpec.build_link_for_link_and_set_protocol6"></a>build link for link and set protocol[6]</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.link.builders.impl.DefaultLinkBuilderSpec.build_link_for_path_with_parameters0"></a>build link for path with parameters[0]</td> 
+     <td>0.034</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.link.builders.impl.DefaultLinkBuilderSpec.build_link_for_path_with_parameters1"></a>build link for path with parameters[1]</td> 
+     <td>0.041</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.link.builders.impl.DefaultLinkBuilderSpec.build_link_for_path_with_parameters2"></a>build link for path with parameters[2]</td> 
+     <td>0</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.link.builders.impl.DefaultLinkBuilderSpec.build_link_for_path_with_same-name_parameters"></a>build link for path with same-name parameters</td> 
+     <td>0.003</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.link.builders.impl.DefaultLinkBuilderSpec.build_image_link0"></a>build image link[0]</td> 
+     <td>0.007</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.link.builders.impl.DefaultLinkBuilderSpec.build_image_link1"></a>build image link[1]</td> 
+     <td>0</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.link.builders.impl.DefaultLinkBuilderSpec.build_navigation_link_without_children"></a>build navigation link without children</td> 
+     <td>0.008</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.link.builders.impl.DefaultLinkBuilderSpec.build_navigation_link_without_children_with_active_state0"></a>build navigation link without children with active state[0]</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.link.builders.impl.DefaultLinkBuilderSpec.build_navigation_link_without_children_with_active_state1"></a>build navigation link without children with active state[1]</td> 
+     <td>0</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.link.builders.impl.DefaultLinkBuilderSpec.build_navigation_link_with_children"></a>build navigation link with children</td> 
+     <td>0.003</td> 
+    </tr> 
+   </tbody> 
+  </table> 
+ </div> 
+ <div class="section"> 
+  <h3 id="LinkTargetSpec">LinkTargetSpec</h3> 
+  <a name="com.icfolson.aem.library.core.link.enums.LinkTargetSpec"></a> 
+  <table border="1" class="bodyTable table table-striped table-hover"> 
+   <tbody> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.link.enums.LinkTargetSpec.for_invalid_target"></a>for invalid target</td> 
+     <td>0</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.link.enums.LinkTargetSpec.for_target0"></a>for target[0]</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.link.enums.LinkTargetSpec.for_target1"></a>for target[1]</td> 
+     <td>0</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.link.enums.LinkTargetSpec.for_target2"></a>for target[2]</td> 
+     <td>0</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.link.enums.LinkTargetSpec.for_target3"></a>for target[3]</td> 
+     <td>0</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.link.enums.LinkTargetSpec.for_target4"></a>for target[4]</td> 
+     <td>0.001</td> 
+    </tr> 
+   </tbody> 
+  </table> 
+ </div> 
+ <div class="section"> 
+  <h3 id="DefaultLinkSpec">DefaultLinkSpec</h3> 
+  <a name="com.icfolson.aem.library.core.link.impl.DefaultLinkSpec"></a> 
+  <table border="1" class="bodyTable table table-striped table-hover"> 
+   <tbody> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.link.impl.DefaultLinkSpec.empty_link_with_null_arguments"></a>empty link with null arguments</td> 
+     <td>0</td> 
+    </tr> 
+   </tbody> 
+  </table> 
+ </div> 
+ <div class="section"> 
+  <h3 id="AbstractPageEventListenerSpec">AbstractPageEventListenerSpec</h3> 
+  <a name="com.icfolson.aem.library.core.listeners.AbstractPageEventListenerSpec"></a> 
+  <table border="1" class="bodyTable table table-striped table-hover"> 
+   <tbody> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.listeners.AbstractPageEventListenerSpec.process_page"></a>process page</td> 
+     <td>0.021</td> 
+    </tr> 
+   </tbody> 
+  </table> 
+ </div> 
+ <div class="section"> 
+  <h3 id="DelegateComponentNodeSpec">DelegateComponentNodeSpec</h3> 
+  <a name="com.icfolson.aem.library.core.node.DelegateComponentNodeSpec"></a> 
+  <table border="1" class="bodyTable table table-striped table-hover"> 
+   <tbody> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.DelegateComponentNodeSpec.delegate"></a>delegate</td> 
+     <td>0.011</td> 
+    </tr> 
+   </tbody> 
+  </table> 
+ </div> 
+ <div class="section"> 
+  <h3 id="DefaultBasicNodeSpec">DefaultBasicNodeSpec</h3> 
+  <a name="com.icfolson.aem.library.core.node.impl.DefaultBasicNodeSpec"></a> 
+  <table border="1" class="bodyTable table table-striped table-hover"> 
+   <tbody> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultBasicNodeSpec.to_string"></a>to string</td> 
+     <td>0.014</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultBasicNodeSpec.get_id0"></a>get id[0]</td> 
+     <td>0.004</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultBasicNodeSpec.get_id1"></a>get id[1]</td> 
+     <td>0</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultBasicNodeSpec.get_id2"></a>get id[2]</td> 
+     <td>0.008</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultBasicNodeSpec.get_id3"></a>get id[3]</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultBasicNodeSpec.as_map"></a>as map</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultBasicNodeSpec.get0"></a>get[0]</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultBasicNodeSpec.get1"></a>get[1]</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultBasicNodeSpec.get_optional0"></a>get optional[0]</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultBasicNodeSpec.get_optional1"></a>get optional[1]</td> 
+     <td>0.002</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultBasicNodeSpec.get_optional2"></a>get optional[2]</td> 
+     <td>0</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultBasicNodeSpec.get_as_list"></a>get as list</td> 
+     <td>0.004</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultBasicNodeSpec.get_as_href0"></a>get as href[0]</td> 
+     <td>0.015</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultBasicNodeSpec.get_as_href1"></a>get as href[1]</td> 
+     <td>0.003</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultBasicNodeSpec.get_as_href_strict0"></a>get as href strict[0]</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultBasicNodeSpec.get_as_href_strict1"></a>get as href strict[1]</td> 
+     <td>0.007</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultBasicNodeSpec.get_as_href_strict2"></a>get as href strict[2]</td> 
+     <td>0.042</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultBasicNodeSpec.get_as_href_returns_absent_where_appropriate0"></a>get as href returns absent where appropriate[0]</td> 
+     <td>0</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultBasicNodeSpec.get_as_href_returns_absent_where_appropriate1"></a>get as href returns absent where appropriate[1]</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultBasicNodeSpec.get_as_mapped_href"></a>get as mapped href</td> 
+     <td>0.003</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultBasicNodeSpec.get_as_mapped_href_strict0"></a>get as mapped href strict[0]</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultBasicNodeSpec.get_as_mapped_href_strict1"></a>get as mapped href strict[1]</td> 
+     <td>0.002</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultBasicNodeSpec.get_as_mapped_href_strict2"></a>get as mapped href strict[2]</td> 
+     <td>0.008</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultBasicNodeSpec.get_as_href_for_null"></a>get as href for null</td> 
+     <td>0.002</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultBasicNodeSpec.get_as_link"></a>get as link</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultBasicNodeSpec.get_as_link_strict"></a>get as link strict</td> 
+     <td>0.003</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultBasicNodeSpec.get_as_mapped_link"></a>get as mapped link</td> 
+     <td>0.003</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultBasicNodeSpec.get_as_mapped_link_strict"></a>get as mapped link strict</td> 
+     <td>0.002</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultBasicNodeSpec.get_as_link_for_null"></a>get as link for null</td> 
+     <td>0</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultBasicNodeSpec.get_as_link_for_non-existent_property"></a>get as link for non-existent property</td> 
+     <td>0</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultBasicNodeSpec.get_as_page"></a>get as page</td> 
+     <td>0.003</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultBasicNodeSpec.get_as_type0"></a>get as type[0]</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultBasicNodeSpec.get_as_type1"></a>get as type[1]</td> 
+     <td>0.01</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultBasicNodeSpec.get_href"></a>get href</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultBasicNodeSpec.get_image_reference0"></a>get image reference[0]</td> 
+     <td>0.011</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultBasicNodeSpec.get_image_reference1"></a>get image reference[1]</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultBasicNodeSpec.get_self_image_reference0"></a>get self image reference[0]</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultBasicNodeSpec.get_self_image_reference1"></a>get self image reference[1]</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultBasicNodeSpec.get_self_image_reference2"></a>get self image reference[2]</td> 
+     <td>0</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultBasicNodeSpec.get_self_image_reference3"></a>get self image reference[3]</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultBasicNodeSpec.get_self_image_reference4"></a>get self image reference[4]</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultBasicNodeSpec.get_self_image_reference5"></a>get self image reference[5]</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultBasicNodeSpec.get_image_source_optional0"></a>get image source optional[0]</td> 
+     <td>0.037</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultBasicNodeSpec.get_image_source_optional1"></a>get image source optional[1]</td> 
+     <td>0.004</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultBasicNodeSpec.get_image_source_optional2"></a>get image source optional[2]</td> 
+     <td>0.002</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultBasicNodeSpec.get_image_source_optional3"></a>get image source optional[3]</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultBasicNodeSpec.get_image_source_optional4"></a>get image source optional[4]</td> 
+     <td>0.004</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultBasicNodeSpec.get_image_source0"></a>get image source[0]</td> 
+     <td>0.004</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultBasicNodeSpec.get_image_source1"></a>get image source[1]</td> 
+     <td>0.003</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultBasicNodeSpec.get_image_source2"></a>get image source[2]</td> 
+     <td>0.003</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultBasicNodeSpec.get_named_image_source0"></a>get named image source[0]</td> 
+     <td>0.002</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultBasicNodeSpec.get_named_image_source1"></a>get named image source[1]</td> 
+     <td>0.003</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultBasicNodeSpec.get_named_image_source2"></a>get named image source[2]</td> 
+     <td>0.002</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultBasicNodeSpec.get_named_image_source3"></a>get named image source[3]</td> 
+     <td>0.002</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultBasicNodeSpec.get_image_source_with_width0"></a>get image source with width[0]</td> 
+     <td>0.004</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultBasicNodeSpec.get_image_source_with_width1"></a>get image source with width[1]</td> 
+     <td>0.003</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultBasicNodeSpec.get_image_source_with_width2"></a>get image source with width[2]</td> 
+     <td>0.002</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultBasicNodeSpec.get_image_source_with_width3"></a>get image source with width[3]</td> 
+     <td>0.002</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultBasicNodeSpec.get_named_image_source_with_width0"></a>get named image source with width[0]</td> 
+     <td>0.002</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultBasicNodeSpec.get_named_image_source_with_width1"></a>get named image source with width[1]</td> 
+     <td>0.002</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultBasicNodeSpec.get_named_image_source_with_width2"></a>get named image source with width[2]</td> 
+     <td>0.002</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultBasicNodeSpec.get_named_image_source_with_width3"></a>get named image source with width[3]</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultBasicNodeSpec.get_named_image_source_with_width4"></a>get named image source with width[4]</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultBasicNodeSpec.get_named_image_source_with_width5"></a>get named image source with width[5]</td> 
+     <td>0.002</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultBasicNodeSpec.get_named_image_source_with_width6"></a>get named image source with width[6]</td> 
+     <td>0.002</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultBasicNodeSpec.get_named_image_source_with_width7"></a>get named image source with width[7]</td> 
+     <td>0.002</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultBasicNodeSpec.get_index"></a>get index</td> 
+     <td>0.012</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultBasicNodeSpec.get_index_for_resource_type"></a>get index for resource type</td> 
+     <td>0.004</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultBasicNodeSpec.get_named_image_reference"></a>get named image reference</td> 
+     <td>0</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultBasicNodeSpec.get_link"></a>get link</td> 
+     <td>0</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultBasicNodeSpec.get_link_builder"></a>get link builder</td> 
+     <td>0</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultBasicNodeSpec.get_node"></a>get node</td> 
+     <td>0</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultBasicNodeSpec.get_path"></a>get path</td> 
+     <td>0</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultBasicNodeSpec.get_properties"></a>get properties</td> 
+     <td>0.01</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultBasicNodeSpec.get_properties_for_null_node_returns_empty_list"></a>get properties for null node returns empty list</td> 
+     <td>0.006</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultBasicNodeSpec.get_resource"></a>get resource</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultBasicNodeSpec.has_image0"></a>has image[0]</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultBasicNodeSpec.has_image1"></a>has image[1]</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultBasicNodeSpec.has_named_image0"></a>has named image[0]</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultBasicNodeSpec.has_named_image1"></a>has named image[1]</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultBasicNodeSpec.has_named_image2"></a>has named image[2]</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultBasicNodeSpec.has_named_image3"></a>has named image[3]</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultBasicNodeSpec.has_named_image4"></a>has named image[4]</td> 
+     <td>0</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultBasicNodeSpec.get_image_rendition_returns_absent"></a>get image rendition returns absent</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultBasicNodeSpec.get_image_rendition"></a>get image rendition</td> 
+     <td>0.009</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultBasicNodeSpec.get_named_image_rendition0"></a>get named image rendition[0]</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultBasicNodeSpec.get_named_image_rendition1"></a>get named image rendition[1]</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultBasicNodeSpec.get_named_image_rendition2"></a>get named image rendition[2]</td> 
+     <td>0.001</td> 
+    </tr> 
+   </tbody> 
+  </table> 
+ </div> 
+ <div class="section"> 
+  <h3 id="DefaultComponentNodeSpec">DefaultComponentNodeSpec</h3> 
+  <a name="com.icfolson.aem.library.core.node.impl.DefaultComponentNodeSpec"></a> 
+  <table border="1" class="bodyTable table table-striped table-hover"> 
+   <tbody> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultComponentNodeSpec.get_parent0"></a>get parent[0]</td> 
+     <td>0.002</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultComponentNodeSpec.get_parent1"></a>get parent[1]</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultComponentNodeSpec.get_parent_returns_null_for_root_node"></a>get parent returns null for root node</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultComponentNodeSpec.find_ancestor_with_property0"></a>find ancestor with property[0]</td> 
+     <td>0.024</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultComponentNodeSpec.find_ancestor_with_property1"></a>find ancestor with property[1]</td> 
+     <td>0.003</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultComponentNodeSpec.find_ancestor_with_property2"></a>find ancestor with property[2]</td> 
+     <td>0.006</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultComponentNodeSpec.find_ancestor_with_property3"></a>find ancestor with property[3]</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultComponentNodeSpec.find_ancestor_with_property4"></a>find ancestor with property[4]</td> 
+     <td>0.002</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultComponentNodeSpec.find_ancestor_with_property_returns_absent_when_current_resource_excluded"></a>find ancestor with property returns absent when current resource excluded</td> 
+     <td>0.002</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultComponentNodeSpec.find_ancestor_returns_absent0"></a>find ancestor returns absent[0]</td> 
+     <td>0.003</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultComponentNodeSpec.find_ancestor_returns_absent1"></a>find ancestor returns absent[1]</td> 
+     <td>0.002</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultComponentNodeSpec.find_ancestor_with_property_value0"></a>find ancestor with property value[0]</td> 
+     <td>0.01</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultComponentNodeSpec.find_ancestor_with_property_value1"></a>find ancestor with property value[1]</td> 
+     <td>0.002</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultComponentNodeSpec.find_ancestor_with_property_value2"></a>find ancestor with property value[2]</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultComponentNodeSpec.find_ancestor_with_property_value_returns_absent"></a>find ancestor with property value returns absent</td> 
+     <td>0.004</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultComponentNodeSpec.find_descendants"></a>find descendants</td> 
+     <td>0.036</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultComponentNodeSpec.get_as_href_inherited0"></a>get as href inherited[0]</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultComponentNodeSpec.get_as_href_inherited1"></a>get as href inherited[1]</td> 
+     <td>0.002</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultComponentNodeSpec.get_as_href_inherited2"></a>get as href inherited[2]</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultComponentNodeSpec.get_as_href_inherited3"></a>get as href inherited[3]</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultComponentNodeSpec.get_as_href_inherited4"></a>get as href inherited[4]</td> 
+     <td>0.002</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultComponentNodeSpec.get_as_href_inherited5"></a>get as href inherited[5]</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultComponentNodeSpec.get_as_href_inherited_returns_absent_where_appropriate0"></a>get as href inherited returns absent where appropriate[0]</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultComponentNodeSpec.get_as_href_inherited_returns_absent_where_appropriate1"></a>get as href inherited returns absent where appropriate[1]</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultComponentNodeSpec.get_as_link_inherited0"></a>get as link inherited[0]</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultComponentNodeSpec.get_as_link_inherited1"></a>get as link inherited[1]</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultComponentNodeSpec.get_as_link_inherited2"></a>get as link inherited[2]</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultComponentNodeSpec.get_as_link_inherited3"></a>get as link inherited[3]</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultComponentNodeSpec.get_as_link_inherited4"></a>get as link inherited[4]</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultComponentNodeSpec.get_as_link_inherited5"></a>get as link inherited[5]</td> 
+     <td>0</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultComponentNodeSpec.get_as_link_inherited_returns_absent_where_appropriate0"></a>get as link inherited returns absent where appropriate[0]</td> 
+     <td>0</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultComponentNodeSpec.get_as_link_inherited_returns_absent_where_appropriate1"></a>get as link inherited returns absent where appropriate[1]</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultComponentNodeSpec.get_as_page_inherited"></a>get as page inherited</td> 
+     <td>0.002</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultComponentNodeSpec.get_component_node_inherited0"></a>get component node inherited[0]</td> 
+     <td>0.013</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultComponentNodeSpec.get_component_node_inherited1"></a>get component node inherited[1]</td> 
+     <td>0.002</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultComponentNodeSpec.get_component_node_inherited_is_absent_when_ancestor_not_found"></a>get component node inherited is absent when ancestor not found</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultComponentNodeSpec.get_component_nodes_inherited0"></a>get component nodes inherited[0]</td> 
+     <td>0.002</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultComponentNodeSpec.get_component_nodes_inherited1"></a>get component nodes inherited[1]</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultComponentNodeSpec.get_component_nodes_inherited2"></a>get component nodes inherited[2]</td> 
+     <td>0.003</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultComponentNodeSpec.get_component_nodes_inherited3"></a>get component nodes inherited[3]</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultComponentNodeSpec.get_image_source_inherited_optional0"></a>get image source inherited optional[0]</td> 
+     <td>0.016</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultComponentNodeSpec.get_image_source_inherited_optional1"></a>get image source inherited optional[1]</td> 
+     <td>0.003</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultComponentNodeSpec.get_image_source_inherited_optional2"></a>get image source inherited optional[2]</td> 
+     <td>0.004</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultComponentNodeSpec.get_image_source_inherited_optional3"></a>get image source inherited optional[3]</td> 
+     <td>0.003</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultComponentNodeSpec.get_image_source_inherited_optional4"></a>get image source inherited optional[4]</td> 
+     <td>0.003</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultComponentNodeSpec.get_image_source_inherited_optional5"></a>get image source inherited optional[5]</td> 
+     <td>0.004</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultComponentNodeSpec.get_image_source_inherited_optional6"></a>get image source inherited optional[6]</td> 
+     <td>0.004</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultComponentNodeSpec.get_image_source_inherited_optional7"></a>get image source inherited optional[7]</td> 
+     <td>0.002</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultComponentNodeSpec.get_image_source_inherited_optional8"></a>get image source inherited optional[8]</td> 
+     <td>0.004</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultComponentNodeSpec.get_image_source_inherited_optional9"></a>get image source inherited optional[9]</td> 
+     <td>0.004</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultComponentNodeSpec.get_image_source_inherited0"></a>get image source inherited[0]</td> 
+     <td>0.004</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultComponentNodeSpec.get_image_source_inherited1"></a>get image source inherited[1]</td> 
+     <td>0.002</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultComponentNodeSpec.get_image_source_inherited2"></a>get image source inherited[2]</td> 
+     <td>0.003</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultComponentNodeSpec.get_image_source_inherited3"></a>get image source inherited[3]</td> 
+     <td>0.003</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultComponentNodeSpec.get_image_source_inherited4"></a>get image source inherited[4]</td> 
+     <td>0.004</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultComponentNodeSpec.get_image_source_inherited5"></a>get image source inherited[5]</td> 
+     <td>0.005</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultComponentNodeSpec.get_image_source_inherited6"></a>get image source inherited[6]</td> 
+     <td>0.002</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultComponentNodeSpec.get_named_image_source_inherited0"></a>get named image source inherited[0]</td> 
+     <td>0.002</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultComponentNodeSpec.get_named_image_source_inherited1"></a>get named image source inherited[1]</td> 
+     <td>0.002</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultComponentNodeSpec.get_inherited0"></a>get inherited[0]</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultComponentNodeSpec.get_inherited1"></a>get inherited[1]</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultComponentNodeSpec.get_inherited2"></a>get inherited[2]</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultComponentNodeSpec.get_inherited_optional"></a>get inherited optional</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultComponentNodeSpec.get_component_node_at_relative_path"></a>get component node at relative path</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultComponentNodeSpec.get_component_nodes0"></a>get component nodes[0]</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultComponentNodeSpec.get_component_nodes1"></a>get component nodes[1]</td> 
+     <td>0</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultComponentNodeSpec.get_component_nodes_for_predicate"></a>get component nodes for predicate</td> 
+     <td>0.008</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultComponentNodeSpec.get_component_nodes_at_relative_path0"></a>get component nodes at relative path[0]</td> 
+     <td>0.002</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultComponentNodeSpec.get_component_nodes_at_relative_path1"></a>get component nodes at relative path[1]</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultComponentNodeSpec.get_component_nodes_at_relative_path_for_resource_type0"></a>get component nodes at relative path for resource type[0]</td> 
+     <td>0.006</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultComponentNodeSpec.get_component_nodes_at_relative_path_for_resource_type1"></a>get component nodes at relative path for resource type[1]</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.impl.DefaultComponentNodeSpec.get_component_nodes_at_relative_path_for_predicate"></a>get component nodes at relative path for predicate</td> 
+     <td>0.005</td> 
+    </tr> 
+   </tbody> 
+  </table> 
+ </div> 
+ <div class="section"> 
+  <h3 id="ComponentNodePropertyExistsPredicateSpec">ComponentNodePropertyExistsPredicateSpec</h3> 
+  <a name="com.icfolson.aem.library.core.node.predicates.ComponentNodePropertyExistsPredicateSpec"></a> 
+  <table border="1" class="bodyTable table table-striped table-hover"> 
+   <tbody> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.predicates.ComponentNodePropertyExistsPredicateSpec.node_where_property_exists_is_included"></a>node where property exists is included</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.predicates.ComponentNodePropertyExistsPredicateSpec.node_where_property_does_not_exist_is_not_included"></a>node where property does not exist is not included</td> 
+     <td>0</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.predicates.ComponentNodePropertyExistsPredicateSpec.node_for_non-existing_resource_is_not_included"></a>node for non-existing resource is not included</td> 
+     <td>0</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.predicates.ComponentNodePropertyExistsPredicateSpec.node_that_throws_exception_is_not_included"></a>node that throws exception is not included</td> 
+     <td>0.034</td> 
+    </tr> 
+   </tbody> 
+  </table> 
+ </div> 
+ <div class="section"> 
+  <h3 id="ComponentNodeResourceTypePredicateSpec">ComponentNodeResourceTypePredicateSpec</h3> 
+  <a name="com.icfolson.aem.library.core.node.predicates.ComponentNodeResourceTypePredicateSpec"></a> 
+  <table border="1" class="bodyTable table table-striped table-hover"> 
+   <tbody> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.predicates.ComponentNodeResourceTypePredicateSpec.exception_thrown_when_resource_type_is_null"></a>exception thrown when resource type is null</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.predicates.ComponentNodeResourceTypePredicateSpec.node_with_matching_resource_type_is_included"></a>node with matching resource type is included</td> 
+     <td>0</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.predicates.ComponentNodeResourceTypePredicateSpec.node_with_non-matching_resource_type_is_not_included"></a>node with non-matching resource type is not included</td> 
+     <td>0</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.predicates.ComponentNodeResourceTypePredicateSpec.node_with_no_resource_type_is_not_included"></a>node with no resource type is not included</td> 
+     <td>0</td> 
+    </tr> 
+   </tbody> 
+  </table> 
+ </div> 
+ <div class="section"> 
+  <h3 id="PropertyNamePredicateSpec">PropertyNamePredicateSpec</h3> 
+  <a name="com.icfolson.aem.library.core.node.predicates.PropertyNamePredicateSpec"></a> 
+  <table border="1" class="bodyTable table table-striped table-hover"> 
+   <tbody> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.predicates.PropertyNamePredicateSpec.predicate_applied_when_property_matches_name0"></a>predicate applied when property matches name[0]</td> 
+     <td>0.005</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.predicates.PropertyNamePredicateSpec.predicate_applied_when_property_matches_name1"></a>predicate applied when property matches name[1]</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.predicates.PropertyNamePredicateSpec.predicate_not_applied_when_property_throws_exception"></a>predicate not applied when property throws exception</td> 
+     <td>0.003</td> 
+    </tr> 
+   </tbody> 
+  </table> 
+ </div> 
+ <div class="section"> 
+  <h3 id="ResourceTypePredicateSpec">ResourceTypePredicateSpec</h3> 
+  <a name="com.icfolson.aem.library.core.node.predicates.ResourceTypePredicateSpec"></a> 
+  <table border="1" class="bodyTable table table-striped table-hover"> 
+   <tbody> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.predicates.ResourceTypePredicateSpec.resource_with_matching_resource_type_is_included0"></a>resource with matching resource type is included[0]</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.node.predicates.ResourceTypePredicateSpec.resource_with_matching_resource_type_is_included1"></a>resource with matching resource type is included[1]</td> 
+     <td>0</td> 
+    </tr> 
+   </tbody> 
+  </table> 
+ </div> 
+ <div class="section"> 
+  <h3 id="DefaultPageDecoratorSpec">DefaultPageDecoratorSpec</h3> 
+  <a name="com.icfolson.aem.library.core.page.impl.DefaultPageDecoratorSpec"></a> 
+  <table border="1" class="bodyTable table table-striped table-hover"> 
+   <tbody> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.page.impl.DefaultPageDecoratorSpec.get_absolute_parent0"></a>get absolute parent[0]</td> 
+     <td>0.01</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.page.impl.DefaultPageDecoratorSpec.get_absolute_parent1"></a>get absolute parent[1]</td> 
+     <td>0</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.page.impl.DefaultPageDecoratorSpec.get_absolute_parent2"></a>get absolute parent[2]</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.page.impl.DefaultPageDecoratorSpec.get_parent0"></a>get parent[0]</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.page.impl.DefaultPageDecoratorSpec.get_parent1"></a>get parent[1]</td> 
+     <td>0</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.page.impl.DefaultPageDecoratorSpec.get_parent2"></a>get parent[2]</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.page.impl.DefaultPageDecoratorSpec.adapt_to0"></a>adapt to[0]</td> 
+     <td>0</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.page.impl.DefaultPageDecoratorSpec.adapt_to1"></a>adapt to[1]</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.page.impl.DefaultPageDecoratorSpec.adapt_to_returns_null0"></a>adapt to returns null[0]</td> 
+     <td>0</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.page.impl.DefaultPageDecoratorSpec.adapt_to_returns_null1"></a>adapt to returns null[1]</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.page.impl.DefaultPageDecoratorSpec.as_map0"></a>as map[0]</td> 
+     <td>0.002</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.page.impl.DefaultPageDecoratorSpec.as_map1"></a>as map[1]</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.page.impl.DefaultPageDecoratorSpec.as_map2"></a>as map[2]</td> 
+     <td>0</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.page.impl.DefaultPageDecoratorSpec.get0"></a>get[0]</td> 
+     <td>0.002</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.page.impl.DefaultPageDecoratorSpec.get1"></a>get[1]</td> 
+     <td>0</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.page.impl.DefaultPageDecoratorSpec.get2"></a>get[2]</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.page.impl.DefaultPageDecoratorSpec.get_optional0"></a>get optional[0]</td> 
+     <td>0.003</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.page.impl.DefaultPageDecoratorSpec.get_optional1"></a>get optional[1]</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.page.impl.DefaultPageDecoratorSpec.get_optional2"></a>get optional[2]</td> 
+     <td>0</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.page.impl.DefaultPageDecoratorSpec.get_as_href0"></a>get as href[0]</td> 
+     <td>0.003</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.page.impl.DefaultPageDecoratorSpec.get_as_href1"></a>get as href[1]</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.page.impl.DefaultPageDecoratorSpec.get_as_href2"></a>get as href[2]</td> 
+     <td>0</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.page.impl.DefaultPageDecoratorSpec.get_as_href_strict0"></a>get as href strict[0]</td> 
+     <td>0.003</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.page.impl.DefaultPageDecoratorSpec.get_as_href_strict1"></a>get as href strict[1]</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.page.impl.DefaultPageDecoratorSpec.get_as_href_strict2"></a>get as href strict[2]</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.page.impl.DefaultPageDecoratorSpec.get_as_mapped_href0"></a>get as mapped href[0]</td> 
+     <td>0.004</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.page.impl.DefaultPageDecoratorSpec.get_as_mapped_href1"></a>get as mapped href[1]</td> 
+     <td>0</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.page.impl.DefaultPageDecoratorSpec.get_as_mapped_href2"></a>get as mapped href[2]</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.page.impl.DefaultPageDecoratorSpec.get_as_mapped_href_strict0"></a>get as mapped href strict[0]</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.page.impl.DefaultPageDecoratorSpec.get_as_mapped_href_strict1"></a>get as mapped href strict[1]</td> 
+     <td>0</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.page.impl.DefaultPageDecoratorSpec.get_as_mapped_href_strict2"></a>get as mapped href strict[2]</td> 
+     <td>0</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.page.impl.DefaultPageDecoratorSpec.get_image_source_optional0"></a>get image source optional[0]</td> 
+     <td>0.003</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.page.impl.DefaultPageDecoratorSpec.get_image_source_optional1"></a>get image source optional[1]</td> 
+     <td>0.003</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.page.impl.DefaultPageDecoratorSpec.get_image_source"></a>get image source</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.page.impl.DefaultPageDecoratorSpec.get_named_image_source0"></a>get named image source[0]</td> 
+     <td>0.003</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.page.impl.DefaultPageDecoratorSpec.get_named_image_source1"></a>get named image source[1]</td> 
+     <td>0.002</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.page.impl.DefaultPageDecoratorSpec.get_image_source_with_width0"></a>get image source with width[0]</td> 
+     <td>0.004</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.page.impl.DefaultPageDecoratorSpec.get_image_source_with_width1"></a>get image source with width[1]</td> 
+     <td>0.002</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.page.impl.DefaultPageDecoratorSpec.get_named_image_source_with_width0"></a>get named image source with width[0]</td> 
+     <td>0.003</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.page.impl.DefaultPageDecoratorSpec.get_named_image_source_with_width1"></a>get named image source with width[1]</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.page.impl.DefaultPageDecoratorSpec.get_named_image_source_with_width2"></a>get named image source with width[2]</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.page.impl.DefaultPageDecoratorSpec.get_named_image_source_with_width3"></a>get named image source with width[3]</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.page.impl.DefaultPageDecoratorSpec.find_ancestor_optional0"></a>find ancestor optional[0]</td> 
+     <td>0.004</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.page.impl.DefaultPageDecoratorSpec.find_ancestor_optional1"></a>find ancestor optional[1]</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.page.impl.DefaultPageDecoratorSpec.find_ancestor_optional2"></a>find ancestor optional[2]</td> 
+     <td>0</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.page.impl.DefaultPageDecoratorSpec.find_ancestor_optional3"></a>find ancestor optional[3]</td> 
+     <td>0</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.page.impl.DefaultPageDecoratorSpec.find_ancestor_optional4"></a>find ancestor optional[4]</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.page.impl.DefaultPageDecoratorSpec.find_ancestor_optional5"></a>find ancestor optional[5]</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.page.impl.DefaultPageDecoratorSpec.find_ancestor_with_property0"></a>find ancestor with property[0]</td> 
+     <td>0</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.page.impl.DefaultPageDecoratorSpec.find_ancestor_with_property1"></a>find ancestor with property[1]</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.page.impl.DefaultPageDecoratorSpec.find_ancestor_with_property2"></a>find ancestor with property[2]</td> 
+     <td>0</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.page.impl.DefaultPageDecoratorSpec.find_ancestor_with_property3"></a>find ancestor with property[3]</td> 
+     <td>0</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.page.impl.DefaultPageDecoratorSpec.find_ancestor_with_property4"></a>find ancestor with property[4]</td> 
+     <td>0</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.page.impl.DefaultPageDecoratorSpec.find_ancestor_returns_absent0"></a>find ancestor returns absent[0]</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.page.impl.DefaultPageDecoratorSpec.find_ancestor_returns_absent1"></a>find ancestor returns absent[1]</td> 
+     <td>0</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.page.impl.DefaultPageDecoratorSpec.find_ancestor_returns_absent2"></a>find ancestor returns absent[2]</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.page.impl.DefaultPageDecoratorSpec.find_ancestor_returns_absent3"></a>find ancestor returns absent[3]</td> 
+     <td>0</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.page.impl.DefaultPageDecoratorSpec.find_ancestor_returns_absent4"></a>find ancestor returns absent[4]</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.page.impl.DefaultPageDecoratorSpec.find_ancestor_returns_absent5"></a>find ancestor returns absent[5]</td> 
+     <td>0</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.page.impl.DefaultPageDecoratorSpec.find_ancestor_with_property_value"></a>find ancestor with property value</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.page.impl.DefaultPageDecoratorSpec.find_ancestor_with_property_value_returns_absent"></a>find ancestor with property value returns absent</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.page.impl.DefaultPageDecoratorSpec.get_template_path0"></a>get template path[0]</td> 
+     <td>0</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.page.impl.DefaultPageDecoratorSpec.get_template_path1"></a>get template path[1]</td> 
+     <td>0</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.page.impl.DefaultPageDecoratorSpec.get_component_node"></a>get component node</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.page.impl.DefaultPageDecoratorSpec.get_component_node_returns_absent_optional_for_page_with_no_jcr:content_node"></a>get component node returns absent optional for page with no jcr:content node</td> 
+     <td>0</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.page.impl.DefaultPageDecoratorSpec.get_component_node_at_relative_path"></a>get component node at relative path</td> 
+     <td>0</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.page.impl.DefaultPageDecoratorSpec.adapt_to_basic_node"></a>adapt to basic node</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.page.impl.DefaultPageDecoratorSpec.adapt_to_component_node"></a>adapt to component node</td> 
+     <td>0</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.page.impl.DefaultPageDecoratorSpec.adapt_to_node_for_page_with_no_jcr:content_node_returns_null"></a>adapt to node for page with no jcr:content node returns null</td> 
+     <td>0</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.page.impl.DefaultPageDecoratorSpec.get_child"></a>get child</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.page.impl.DefaultPageDecoratorSpec.get_children"></a>get children</td> 
+     <td>0.009</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.page.impl.DefaultPageDecoratorSpec.list_children"></a>list children</td> 
+     <td>0.006</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.page.impl.DefaultPageDecoratorSpec.get_displayable_children"></a>get displayable children</td> 
+     <td>0.002</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.page.impl.DefaultPageDecoratorSpec.get_children_filtered_for_predicate"></a>get children filtered for predicate</td> 
+     <td>0.003</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.page.impl.DefaultPageDecoratorSpec.list_children_filtered_for_predicate"></a>list children filtered for predicate</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.page.impl.DefaultPageDecoratorSpec.list_children_recursively_filtered_for_predicate0"></a>list children recursively, filtered for predicate[0]</td> 
+     <td>0.004</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.page.impl.DefaultPageDecoratorSpec.list_children_recursively_filtered_for_predicate1"></a>list children recursively, filtered for predicate[1]</td> 
+     <td>0.002</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.page.impl.DefaultPageDecoratorSpec.find_descendants"></a>find descendants</td> 
+     <td>0.004</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.page.impl.DefaultPageDecoratorSpec.get_properties"></a>get properties</td> 
+     <td>0.003</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.page.impl.DefaultPageDecoratorSpec.get_properties_for_page_with_no_jcr:content_node"></a>get properties for page with no jcr:content node</td> 
+     <td>0</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.page.impl.DefaultPageDecoratorSpec.get_properties_at_relative_path"></a>get properties at relative path</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.page.impl.DefaultPageDecoratorSpec.get_title0"></a>get title[0]</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.page.impl.DefaultPageDecoratorSpec.get_title1"></a>get title[1]</td> 
+     <td>0</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.page.impl.DefaultPageDecoratorSpec.get_title2"></a>get title[2]</td> 
+     <td>0</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.page.impl.DefaultPageDecoratorSpec.get_title_returns_absent_where_appropriate0"></a>get title returns absent where appropriate[0]</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.page.impl.DefaultPageDecoratorSpec.get_title_returns_absent_where_appropriate1"></a>get title returns absent where appropriate[1]</td> 
+     <td>0</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.page.impl.DefaultPageDecoratorSpec.get_image_link"></a>get image link</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.page.impl.DefaultPageDecoratorSpec.get_navigation_link"></a>get navigation link</td> 
+     <td>0.003</td> 
+    </tr> 
+   </tbody> 
+  </table> 
+ </div> 
+ <div class="section"> 
+  <h3 id="DefaultPageManagerDecoratorSpec">DefaultPageManagerDecoratorSpec</h3> 
+  <a name="com.icfolson.aem.library.core.page.impl.DefaultPageManagerDecoratorSpec"></a> 
+  <table border="1" class="bodyTable table table-striped table-hover"> 
+   <tbody> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.page.impl.DefaultPageManagerDecoratorSpec.find_pages_for_predicate"></a>find pages for predicate</td> 
+     <td>0.007</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.page.impl.DefaultPageManagerDecoratorSpec.find_pages_for_tag_IDs"></a>find pages for tag IDs</td> 
+     <td>0.022</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.page.impl.DefaultPageManagerDecoratorSpec.find_pages_for_tag_IDs_matching_all"></a>find pages for tag IDs matching all</td> 
+     <td>0.002</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.page.impl.DefaultPageManagerDecoratorSpec.tagged_non-page_node_is_excluded_from_search_results"></a>tagged non-page node is excluded from search results</td> 
+     <td>0.002</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.page.impl.DefaultPageManagerDecoratorSpec.search"></a>search</td> 
+     <td>0.028</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.page.impl.DefaultPageManagerDecoratorSpec.search_with_limit"></a>search with limit</td> 
+     <td>0.002</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.page.impl.DefaultPageManagerDecoratorSpec.find_pages_for_template"></a>find pages for template</td> 
+     <td>0.002</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.page.impl.DefaultPageManagerDecoratorSpec.find_pages_for_non-existing_template"></a>find pages for non-existing template</td> 
+     <td>0.003</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.page.impl.DefaultPageManagerDecoratorSpec.find_pages_for_template_with_invalid_starting_path"></a>find pages for template with invalid starting path</td> 
+     <td>0</td> 
+    </tr> 
+   </tbody> 
+  </table> 
+ </div> 
+ <div class="section"> 
+  <h3 id="TemplatePredicateSpec">TemplatePredicateSpec</h3> 
+  <a name="com.icfolson.aem.library.core.page.predicates.TemplatePredicateSpec"></a> 
+  <table border="1" class="bodyTable table table-striped table-hover"> 
+   <tbody> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.page.predicates.TemplatePredicateSpec.page_has_no_template_property"></a>page has no template property</td> 
+     <td>0</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.page.predicates.TemplatePredicateSpec.template_matches_page_template"></a>template matches page template</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.page.predicates.TemplatePredicateSpec.template_does_not_match_page_template"></a>template does not match page template</td> 
+     <td>0</td> 
+    </tr> 
+   </tbody> 
+  </table> 
+ </div> 
+ <div class="section"> 
+  <h3 id="AbstractReplicationListenerSpec">AbstractReplicationListenerSpec</h3> 
+  <a name="com.icfolson.aem.library.core.replication.AbstractReplicationListenerSpec"></a> 
+  <table border="1" class="bodyTable table table-striped table-hover"> 
+   <tbody> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.replication.AbstractReplicationListenerSpec.handle_event_for_different_replication_action_types0"></a>handle event for different replication action types[0]</td> 
+     <td>0.19</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.replication.AbstractReplicationListenerSpec.handle_event_for_different_replication_action_types1"></a>handle event for different replication action types[1]</td> 
+     <td>0</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.replication.AbstractReplicationListenerSpec.handle_event_for_different_replication_action_types2"></a>handle event for different replication action types[2]</td> 
+     <td>0</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.replication.AbstractReplicationListenerSpec.handle_event_for_different_replication_action_types3"></a>handle event for different replication action types[3]</td> 
+     <td>0</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.replication.AbstractReplicationListenerSpec.handle_event_for_different_replication_action_types4"></a>handle event for different replication action types[4]</td> 
+     <td>0.005</td> 
+    </tr> 
+   </tbody> 
+  </table> 
+ </div> 
+ <div class="section"> 
+  <h3 id="PageReplicationListenerSpec">PageReplicationListenerSpec</h3> 
+  <a name="com.icfolson.aem.library.core.replication.PageReplicationListenerSpec"></a> 
+  <table border="1" class="bodyTable table table-striped table-hover"> 
+   <tbody> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.replication.PageReplicationListenerSpec.handle_activate_for_invalid_path_does_nothing"></a>handle activate for invalid path does nothing</td> 
+     <td>0.019</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.replication.PageReplicationListenerSpec.handle_activate_for_non-page_path_does_nothing"></a>handle activate for non-page path does nothing</td> 
+     <td>0.003</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.replication.PageReplicationListenerSpec.handle_activate_for_page_path_activates_ancestor_pages"></a>handle activate for page path activates ancestor pages</td> 
+     <td>0.009</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.replication.PageReplicationListenerSpec.handle_activate_for_page_path_ignores_already_activated_ancestor_pages"></a>handle activate for page path ignores already activated ancestor pages</td> 
+     <td>0.004</td> 
+    </tr> 
+   </tbody> 
+  </table> 
+ </div> 
+ <div class="section"> 
+  <h3 id="DefaultComponentServletRequestSpec">DefaultComponentServletRequestSpec</h3> 
+  <a name="com.icfolson.aem.library.core.request.impl.DefaultComponentServletRequestSpec"></a> 
+  <table border="1" class="bodyTable table table-striped table-hover"> 
+   <tbody> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.request.impl.DefaultComponentServletRequestSpec.get_selectors0"></a>get selectors[0]</td> 
+     <td>0.029</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.request.impl.DefaultComponentServletRequestSpec.get_selectors1"></a>get selectors[1]</td> 
+     <td>0</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.request.impl.DefaultComponentServletRequestSpec.get_selectors2"></a>get selectors[2]</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.request.impl.DefaultComponentServletRequestSpec.get_request_parameter_optional0"></a>get request parameter optional[0]</td> 
+     <td>0.004</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.request.impl.DefaultComponentServletRequestSpec.get_request_parameter_optional1"></a>get request parameter optional[1]</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.request.impl.DefaultComponentServletRequestSpec.get_request_parameter_optional2"></a>get request parameter optional[2]</td> 
+     <td>0</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.request.impl.DefaultComponentServletRequestSpec.get_request_parameter0"></a>get request parameter[0]</td> 
+     <td>0.002</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.request.impl.DefaultComponentServletRequestSpec.get_request_parameter1"></a>get request parameter[1]</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.request.impl.DefaultComponentServletRequestSpec.get_request_parameter_with_default_value0"></a>get request parameter with default value[0]</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.request.impl.DefaultComponentServletRequestSpec.get_request_parameter_with_default_value1"></a>get request parameter with default value[1]</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.request.impl.DefaultComponentServletRequestSpec.get_request_parameter_with_default_value2"></a>get request parameter with default value[2]</td> 
+     <td>0</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.request.impl.DefaultComponentServletRequestSpec.get_request_parameters_optional0"></a>get request parameters optional[0]</td> 
+     <td>0.005</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.request.impl.DefaultComponentServletRequestSpec.get_request_parameters_optional1"></a>get request parameters optional[1]</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.request.impl.DefaultComponentServletRequestSpec.get_request_parameters_optional2"></a>get request parameters optional[2]</td> 
+     <td>0</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.request.impl.DefaultComponentServletRequestSpec.get_request_parameters0"></a>get request parameters[0]</td> 
+     <td>0.002</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.request.impl.DefaultComponentServletRequestSpec.get_request_parameters1"></a>get request parameters[1]</td> 
+     <td>0.002</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.request.impl.DefaultComponentServletRequestSpec.getters_return_non-null_values"></a>getters return non-null values</td> 
+     <td>0.002</td> 
+    </tr> 
+   </tbody> 
+  </table> 
+ </div> 
+ <div class="section"> 
+  <h3 id="CacheServiceSpec">CacheServiceSpec</h3> 
+  <a name="com.icfolson.aem.library.core.services.cache.CacheServiceSpec"></a> 
+  <table border="1" class="bodyTable table table-striped table-hover"> 
+   <tbody> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.services.cache.CacheServiceSpec.clear_all_caches0"></a>clear all caches[0]</td> 
+     <td>0.107</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.services.cache.CacheServiceSpec.clear_all_caches1"></a>clear all caches[1]</td> 
+     <td>0.002</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.services.cache.CacheServiceSpec.clear_specific_cache0"></a>clear specific cache[0]</td> 
+     <td>0.008</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.services.cache.CacheServiceSpec.clear_specific_cache1"></a>clear specific cache[1]</td> 
+     <td>0.002</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.services.cache.CacheServiceSpec.get_cache_size0"></a>get cache size[0]</td> 
+     <td>0.005</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.services.cache.CacheServiceSpec.get_cache_size1"></a>get cache size[1]</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.services.cache.CacheServiceSpec.get_cache_stats0"></a>get cache stats[0]</td> 
+     <td>0.007</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.services.cache.CacheServiceSpec.get_cache_stats1"></a>get cache stats[1]</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.services.cache.CacheServiceSpec.list_caches0"></a>list caches[0]</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.services.cache.CacheServiceSpec.list_caches1"></a>list caches[1]</td> 
+     <td>0</td> 
+    </tr> 
+   </tbody> 
+  </table> 
+ </div> 
+ <div class="section"> 
+  <h3 id="DefaultSelectiveReplicationServiceSpec">DefaultSelectiveReplicationServiceSpec</h3> 
+  <a name="com.icfolson.aem.library.core.services.impl.DefaultSelectiveReplicationServiceSpec"></a> 
+  <table border="1" class="bodyTable table table-striped table-hover"> 
+   <tbody> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.services.impl.DefaultSelectiveReplicationServiceSpec.valid_replication_request"></a>valid replication request</td> 
+     <td>0.022</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.services.impl.DefaultSelectiveReplicationServiceSpec.valid_replication_request_with_additional_options"></a>valid replication request with additional options</td> 
+     <td>0.001</td> 
+    </tr> 
+   </tbody> 
+  </table> 
+ </div> 
+ <div class="section"> 
+  <h3 id="OsgiConfigurationSpec">OsgiConfigurationSpec</h3> 
+  <a name="com.icfolson.aem.library.core.services.OsgiConfigurationSpec"></a> 
+  <table border="1" class="bodyTable table table-striped table-hover"> 
+   <tbody> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.services.OsgiConfigurationSpec.to_map0"></a>to map[0]</td> 
+     <td>0</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.services.OsgiConfigurationSpec.to_map1"></a>to map[1]</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.services.OsgiConfigurationSpec.to_map_with_default_value0"></a>to map with default value[0]</td> 
+     <td>0</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.services.OsgiConfigurationSpec.to_map_with_default_value1"></a>to map with default value[1]</td> 
+     <td>0</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.services.OsgiConfigurationSpec.get_as_double0"></a>get as double[0]</td> 
+     <td>0.003</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.services.OsgiConfigurationSpec.get_as_double1"></a>get as double[1]</td> 
+     <td>0</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.services.OsgiConfigurationSpec.get_as_long0"></a>get as long[0]</td> 
+     <td>0</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.services.OsgiConfigurationSpec.get_as_long1"></a>get as long[1]</td> 
+     <td>0</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.services.OsgiConfigurationSpec.get_as_boolean0"></a>get as boolean[0]</td> 
+     <td>0</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.services.OsgiConfigurationSpec.get_as_boolean1"></a>get as boolean[1]</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.services.OsgiConfigurationSpec.get_as_integer0"></a>get as integer[0]</td> 
+     <td>0</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.services.OsgiConfigurationSpec.get_as_integer1"></a>get as integer[1]</td> 
+     <td>0</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.services.OsgiConfigurationSpec.get_as_string0"></a>get as string[0]</td> 
+     <td>0</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.services.OsgiConfigurationSpec.get_as_string1"></a>get as string[1]</td> 
+     <td>0</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.services.OsgiConfigurationSpec.get_as_list0"></a>get as list[0]</td> 
+     <td>0</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.services.OsgiConfigurationSpec.get_as_list1"></a>get as list[1]</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.services.OsgiConfigurationSpec.get_as_list2"></a>get as list[2]</td> 
+     <td>0</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.services.OsgiConfigurationSpec.get_as_list_with_default_value0"></a>get as list with default value[0]</td> 
+     <td>0</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.services.OsgiConfigurationSpec.get_as_list_with_default_value1"></a>get as list with default value[1]</td> 
+     <td>0</td> 
+    </tr> 
+   </tbody> 
+  </table> 
+ </div> 
+ <div class="section"> 
+  <h3 id="AbstractComponentServletSpec">AbstractComponentServletSpec</h3> 
+  <a name="com.icfolson.aem.library.core.servlets.AbstractComponentServletSpec"></a> 
+  <table border="1" class="bodyTable table table-striped table-hover"> 
+   <tbody> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.servlets.AbstractComponentServletSpec.process_get"></a>process get</td> 
+     <td>0.075</td> 
+    </tr> 
+   </tbody> 
+  </table> 
+ </div> 
+ <div class="section"> 
+  <h3 id="AbstractJsonResponseServletSpec">AbstractJsonResponseServletSpec</h3> 
+  <a name="com.icfolson.aem.library.core.servlets.AbstractJsonResponseServletSpec"></a> 
+  <table border="1" class="bodyTable table table-striped table-hover"> 
+   <tbody> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.servlets.AbstractJsonResponseServletSpec.write_json_response"></a>write json response</td> 
+     <td>0.21</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.servlets.AbstractJsonResponseServletSpec.write_json_response_with_date_format"></a>write json response with date format</td> 
+     <td>0.003</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.servlets.AbstractJsonResponseServletSpec.write_json_response_with_date_format_and_locale"></a>write json response with date format and locale</td> 
+     <td>0.008</td> 
+    </tr> 
+   </tbody> 
+  </table> 
+ </div> 
+ <div class="section"> 
+  <h3 id="AbstractValidatorServletSpec">AbstractValidatorServletSpec</h3> 
+  <a name="com.icfolson.aem.library.core.servlets.AbstractValidatorServletSpec"></a> 
+  <table border="1" class="bodyTable table table-striped table-hover"> 
+   <tbody> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.servlets.AbstractValidatorServletSpec.exception_thrown_when_value_parameter_is_null"></a>exception thrown when value parameter is null</td> 
+     <td>0.007</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.servlets.AbstractValidatorServletSpec.validate_method_called_with_correct_arguments"></a>validate method called with correct arguments</td> 
+     <td>0.046</td> 
+    </tr> 
+   </tbody> 
+  </table> 
+ </div> 
+ <div class="section"> 
+  <h3 id="OptionsDataSourceServletSpec">OptionsDataSourceServletSpec</h3> 
+  <a name="com.icfolson.aem.library.core.servlets.datasource.OptionsDataSourceServletSpec"></a> 
+  <table border="1" class="bodyTable table table-striped table-hover"> 
+   <tbody> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.servlets.datasource.OptionsDataSourceServletSpec.no_options"></a>no options</td> 
+     <td>0.056</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.servlets.datasource.OptionsDataSourceServletSpec.options"></a>options</td> 
+     <td>0.011</td> 
+    </tr> 
+   </tbody> 
+  </table> 
+ </div> 
+ <div class="section"> 
+  <h3 id="TagDataSourceServletSpec">TagDataSourceServletSpec</h3> 
+  <a name="com.icfolson.aem.library.core.servlets.datasource.TagDataSourceServletSpec"></a> 
+  <table border="1" class="bodyTable table table-striped table-hover"> 
+   <tbody> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.servlets.datasource.TagDataSourceServletSpec.all_tags_options"></a>all tags options</td> 
+     <td>0.021</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.servlets.datasource.TagDataSourceServletSpec.filtered_tags_options"></a>filtered tags options</td> 
+     <td>0.008</td> 
+    </tr> 
+   </tbody> 
+  </table> 
+ </div> 
+ <div class="section"> 
+  <h3 id="ImageServletSpec">ImageServletSpec</h3> 
+  <a name="com.icfolson.aem.library.core.servlets.ImageServletSpec"></a> 
+  <table border="1" class="bodyTable table table-striped table-hover"> 
+   <tbody> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.servlets.ImageServletSpec.create_layer_returns_null"></a>create layer returns null</td> 
+     <td>0.009</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.servlets.ImageServletSpec.image_wrapper0"></a>image wrapper[0]</td> 
+     <td>0.008</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.servlets.ImageServletSpec.image_wrapper1"></a>image wrapper[1]</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.servlets.ImageServletSpec.image_wrapper2"></a>image wrapper[2]</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.servlets.ImageServletSpec.image_wrapper3"></a>image wrapper[3]</td> 
+     <td>0</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.servlets.ImageServletSpec.image_wrapper4"></a>image wrapper[4]</td> 
+     <td>0.002</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.servlets.ImageServletSpec.image_wrapper5"></a>image wrapper[5]</td> 
+     <td>0</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.servlets.ImageServletSpec.image_wrapper6"></a>image wrapper[6]</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.servlets.ImageServletSpec.write_layer_for_page_no_selectors0"></a>write layer for page, no selectors[0]</td> 
+     <td>0.549</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.servlets.ImageServletSpec.write_layer_for_page_no_selectors1"></a>write layer for page, no selectors[1]</td> 
+     <td>0</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.servlets.ImageServletSpec.write_layer_for_page_no_selectors2"></a>write layer for page, no selectors[2]</td> 
+     <td>0.001</td> 
+    </tr> 
+   </tbody> 
+  </table> 
+ </div> 
+ <div class="section"> 
+  <h3 id="OptionSpec">OptionSpec</h3> 
+  <a name="com.icfolson.aem.library.core.servlets.optionsprovider.OptionSpec"></a> 
+  <table border="1" class="bodyTable table table-striped table-hover"> 
+   <tbody> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.servlets.optionsprovider.OptionSpec.sort_options0"></a>sort options[0]</td> 
+     <td>0.003</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.servlets.optionsprovider.OptionSpec.sort_options1"></a>sort options[1]</td> 
+     <td>0.001</td> 
+    </tr> 
+   </tbody> 
+  </table> 
+ </div> 
+ <div class="section"> 
+  <h3 id="OptionsProviderServletSpec">OptionsProviderServletSpec</h3> 
+  <a name="com.icfolson.aem.library.core.servlets.optionsprovider.OptionsProviderServletSpec"></a> 
+  <table border="1" class="bodyTable table table-striped table-hover"> 
+   <tbody> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.servlets.optionsprovider.OptionsProviderServletSpec.no_options"></a>no options</td> 
+     <td>0.012</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.servlets.optionsprovider.OptionsProviderServletSpec.options_with_root"></a>options with root</td> 
+     <td>0.021</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.servlets.optionsprovider.OptionsProviderServletSpec.options_with_no_root"></a>options with no root</td> 
+     <td>0.008</td> 
+    </tr> 
+   </tbody> 
+  </table> 
+ </div> 
+ <div class="section"> 
+  <h3 id="SelectiveReplicationServletSpec">SelectiveReplicationServletSpec</h3> 
+  <a name="com.icfolson.aem.library.core.servlets.replication.SelectiveReplicationServletSpec"></a> 
+  <table border="1" class="bodyTable table table-striped table-hover"> 
+   <tbody> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.servlets.replication.SelectiveReplicationServletSpec.null_parameters_throw_exception"></a>null parameters throw exception</td> 
+     <td>0.017</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.servlets.replication.SelectiveReplicationServletSpec.invalid_parameters_throw_exception0"></a>invalid parameters throw exception[0]</td> 
+     <td>0.003</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.servlets.replication.SelectiveReplicationServletSpec.invalid_parameters_throw_exception1"></a>invalid parameters throw exception[1]</td> 
+     <td>0.003</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.servlets.replication.SelectiveReplicationServletSpec.invalid_parameters_throw_exception2"></a>invalid parameters throw exception[2]</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.servlets.replication.SelectiveReplicationServletSpec.invalid_parameters_throw_exception3"></a>invalid parameters throw exception[3]</td> 
+     <td>0</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.servlets.replication.SelectiveReplicationServletSpec.valid_parameters"></a>valid parameters</td> 
+     <td>0.011</td> 
+    </tr> 
+   </tbody> 
+  </table> 
+ </div> 
+ <div class="section"> 
+  <h3 id="PathUtilsSpec">PathUtilsSpec</h3> 
+  <a name="com.icfolson.aem.library.core.utils.PathUtilsSpec"></a> 
+  <table border="1" class="bodyTable table table-striped table-hover"> 
+   <tbody> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.utils.PathUtilsSpec.is_content0"></a>is content[0]</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.utils.PathUtilsSpec.is_content1"></a>is content[1]</td> 
+     <td>0</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.utils.PathUtilsSpec.is_content2"></a>is content[2]</td> 
+     <td>0</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.utils.PathUtilsSpec.is_content3"></a>is content[3]</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.utils.PathUtilsSpec.is_content4"></a>is content[4]</td> 
+     <td>0</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.utils.PathUtilsSpec.is_content5"></a>is content[5]</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.utils.PathUtilsSpec.is_content6"></a>is content[6]</td> 
+     <td>0</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.utils.PathUtilsSpec.is_external0"></a>is external[0]</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.utils.PathUtilsSpec.is_external1"></a>is external[1]</td> 
+     <td>0</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.utils.PathUtilsSpec.is_external2"></a>is external[2]</td> 
+     <td>0</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.utils.PathUtilsSpec.is_external3"></a>is external[3]</td> 
+     <td>0</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.utils.PathUtilsSpec.is_external4"></a>is external[4]</td> 
+     <td>0</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.utils.PathUtilsSpec.is_external5"></a>is external[5]</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.utils.PathUtilsSpec.is_external_strict0"></a>is external strict[0]</td> 
+     <td>0.009</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.utils.PathUtilsSpec.is_external_strict1"></a>is external strict[1]</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.utils.PathUtilsSpec.is_external_strict2"></a>is external strict[2]</td> 
+     <td>0</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.utils.PathUtilsSpec.is_external_strict3"></a>is external strict[3]</td> 
+     <td>0</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.utils.PathUtilsSpec.get_page_path_for_string0"></a>get page path for string[0]</td> 
+     <td>0</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.utils.PathUtilsSpec.get_page_path_for_string1"></a>get page path for string[1]</td> 
+     <td>0</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.utils.PathUtilsSpec.get_page_path_for_string2"></a>get page path for string[2]</td> 
+     <td>0</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.utils.PathUtilsSpec.get_page_path_for_string3"></a>get page path for string[3]</td> 
+     <td>0</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.utils.PathUtilsSpec.get_page_path_for_request0"></a>get page path for request[0]</td> 
+     <td>0.008</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.utils.PathUtilsSpec.get_page_path_for_request1"></a>get page path for request[1]</td> 
+     <td>0</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.utils.PathUtilsSpec.get_page_path_for_request2"></a>get page path for request[2]</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.core.utils.PathUtilsSpec.get_page_path_for_request3"></a>get page path for request[3]</td> 
+     <td>0</td> 
+    </tr> 
+   </tbody> 
+  </table> 
+ </div> 
+ <div class="section"> 
+  <h3 id="AdaptableInjectorSpec">AdaptableInjectorSpec</h3> 
+  <a name="com.icfolson.aem.library.models.impl.AdaptableInjectorSpec"></a> 
+  <table border="1" class="bodyTable table table-striped table-hover"> 
+   <tbody> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.models.impl.AdaptableInjectorSpec.get_value_returns_null_for_invalid_adapter_type"></a>get value returns null for invalid adapter type</td> 
+     <td>0.067</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.models.impl.AdaptableInjectorSpec.get_value_returns_non-null_for_valid_adapter_type"></a>get value returns non-null for valid adapter type</td> 
+     <td>0.001</td> 
+    </tr> 
+   </tbody> 
+  </table> 
+ </div> 
+ <div class="section"> 
+  <h3 id="AemLibraryModelComponentSpec">AemLibraryModelComponentSpec</h3> 
+  <a name="com.icfolson.aem.library.models.impl.AemLibraryModelComponentSpec"></a> 
+  <table border="1" class="bodyTable table table-striped table-hover"> 
+   <tbody> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.models.impl.AemLibraryModelComponentSpec.get_title_from_component"></a>get title from component</td> 
+     <td>0.072</td> 
+    </tr> 
+   </tbody> 
+  </table> 
+ </div> 
+ <div class="section"> 
+  <h3 id="ComponentInjectorSpec">ComponentInjectorSpec</h3> 
+  <a name="com.icfolson.aem.library.models.impl.ComponentInjectorSpec"></a> 
+  <table border="1" class="bodyTable table table-striped table-hover"> 
+   <tbody> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.models.impl.ComponentInjectorSpec.get_value_from_resource_for_valid_type_returns_non-null_value0"></a>get value from resource for valid type returns non-null value[0]</td> 
+     <td>0.003</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.models.impl.ComponentInjectorSpec.get_value_from_resource_for_valid_type_returns_non-null_value1"></a>get value from resource for valid type returns non-null value[1]</td> 
+     <td>0.002</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.models.impl.ComponentInjectorSpec.get_value_from_resource_for_valid_type_returns_non-null_value2"></a>get value from resource for valid type returns non-null value[2]</td> 
+     <td>0.003</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.models.impl.ComponentInjectorSpec.get_value_from_resource_for_valid_type_returns_non-null_value3"></a>get value from resource for valid type returns non-null value[3]</td> 
+     <td>0</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.models.impl.ComponentInjectorSpec.get_value_from_resource_for_valid_type_returns_non-null_value4"></a>get value from resource for valid type returns non-null value[4]</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.models.impl.ComponentInjectorSpec.get_value_from_resource_for_valid_type_returns_non-null_value5"></a>get value from resource for valid type returns non-null value[5]</td> 
+     <td>0.002</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.models.impl.ComponentInjectorSpec.get_value_from_resource_for_valid_type_returns_non-null_value6"></a>get value from resource for valid type returns non-null value[6]</td> 
+     <td>0.001</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.models.impl.ComponentInjectorSpec.get_value_from_resource_for_valid_type_returns_non-null_value7"></a>get value from resource for valid type returns non-null value[7]</td> 
+     <td>0.033</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.models.impl.ComponentInjectorSpec.get_value_from_resource_for_valid_type_returns_non-null_value8"></a>get value from resource for valid type returns non-null value[8]</td> 
+     <td>0</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.models.impl.ComponentInjectorSpec.get_value_from_resource_for_invalid_type_returns_null_value"></a>get value from resource for invalid type returns null value</td> 
+     <td>0.001</td> 
+    </tr> 
+   </tbody> 
+  </table> 
+ </div> 
+ <div class="section"> 
+  <h3 id="EnumInjectorSpec">EnumInjectorSpec</h3> 
+  <a name="com.icfolson.aem.library.models.impl.EnumInjectorSpec"></a> 
+  <table border="1" class="bodyTable table table-striped table-hover"> 
+   <tbody> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.models.impl.EnumInjectorSpec.enum_is_injected_when_component_property_value_is_valid"></a>enum is injected when component property value is valid</td> 
+     <td>0.045</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.models.impl.EnumInjectorSpec.enum_is_null_when_component_property_does_not_exist"></a>enum is null when component property does not exist</td> 
+     <td>0.005</td> 
+    </tr> 
+   </tbody> 
+  </table> 
+ </div> 
+ <div class="section"> 
+  <h3 id="InheritInjectorSpec">InheritInjectorSpec</h3> 
+  <a name="com.icfolson.aem.library.models.impl.InheritInjectorSpec"></a> 
+  <table border="1" class="bodyTable table table-striped table-hover"> 
+   <tbody> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.models.impl.InheritInjectorSpec.basic_inheritance"></a>basic inheritance</td> 
+     <td>0.142</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.models.impl.InheritInjectorSpec.enum_inheritance"></a>enum inheritance</td> 
+     <td>0.041</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.models.impl.InheritInjectorSpec.model_list_inheritance"></a>model list inheritance</td> 
+     <td>0.032</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.models.impl.InheritInjectorSpec.model_child_resource_inheritance"></a>model child resource inheritance</td> 
+     <td>0.027</td> 
+    </tr> 
+   </tbody> 
+  </table> 
+ </div> 
+ <div class="section"> 
+  <h3 id="InjectorIntegrationSpec">InjectorIntegrationSpec</h3> 
+  <a name="com.icfolson.aem.library.models.impl.InjectorIntegrationSpec"></a> 
+  <table border="1" class="bodyTable table table-striped table-hover"> 
+   <tbody> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.models.impl.InjectorIntegrationSpec.injected_values_from_multiple_injectors_are_correct_types"></a>injected values from multiple injectors are correct types</td> 
+     <td>0.014</td> 
+    </tr> 
+   </tbody> 
+  </table> 
+ </div> 
+ <div class="section"> 
+  <h3 id="LinkInjectorSpec">LinkInjectorSpec</h3> 
+  <a name="com.icfolson.aem.library.models.impl.LinkInjectorSpec"></a> 
+  <table border="1" class="bodyTable table table-striped table-hover"> 
+   <tbody> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.models.impl.LinkInjectorSpec.link_is_null_if_component_node_is_null"></a>link is null if component node is null</td> 
+     <td>0.017</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.models.impl.LinkInjectorSpec.link_has_correct_path_value"></a>link has correct path value</td> 
+     <td>0.06</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.models.impl.LinkInjectorSpec.link_has_correct_path_value_and_title"></a>link has correct path value and title</td> 
+     <td>0.002</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.models.impl.LinkInjectorSpec.inherited_link_has_correct_path_value"></a>inherited link has correct path value</td> 
+     <td>0.002</td> 
+    </tr> 
+   </tbody> 
+  </table> 
+ </div> 
+ <div class="section"> 
+  <h3 id="ModelListInjectorSpec">ModelListInjectorSpec</h3> 
+  <a name="com.icfolson.aem.library.models.impl.ModelListInjectorSpec"></a> 
+  <table border="1" class="bodyTable table table-striped table-hover"> 
+   <tbody> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.models.impl.ModelListInjectorSpec.inject_list_of_models"></a>inject list of models</td> 
+     <td>0.015</td> 
+    </tr> 
+   </tbody> 
+  </table> 
+ </div> 
+ <div class="section"> 
+  <h3 id="ReferenceInjectorSpec">ReferenceInjectorSpec</h3> 
+  <a name="com.icfolson.aem.library.models.impl.ReferenceInjectorSpec"></a> 
+  <table border="1" class="bodyTable table table-striped table-hover"> 
+   <tbody> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.models.impl.ReferenceInjectorSpec.all_properties_should_be_null_if_component_is_unconfigured"></a>all properties should be null if component is unconfigured</td> 
+     <td>0.018</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.models.impl.ReferenceInjectorSpec.component_has_a_single_Resource_configured"></a>component has a single Resource configured</td> 
+     <td>0.014</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.models.impl.ReferenceInjectorSpec.component_has_a_single_PageDecorator_configured"></a>component has a single PageDecorator configured</td> 
+     <td>0.007</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.models.impl.ReferenceInjectorSpec.component_has_multiple_Resources_configured"></a>component has multiple Resources configured</td> 
+     <td>0.005</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.models.impl.ReferenceInjectorSpec.component_has_multiple_PageDecorators_configured"></a>component has multiple PageDecorators configured</td> 
+     <td>0.006</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.models.impl.ReferenceInjectorSpec.component_has_a_single_inherited_Resource_configured"></a>component has a single inherited Resource configured</td> 
+     <td>0.003</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.models.impl.ReferenceInjectorSpec.component_has_a_single_inherited_PageDecorator_configured"></a>component has a single inherited PageDecorator configured</td> 
+     <td>0.004</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.models.impl.ReferenceInjectorSpec.component_has_multiple_inherited_Resources_configured"></a>component has multiple inherited Resources configured</td> 
+     <td>0.004</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.models.impl.ReferenceInjectorSpec.component_has_multiple_inherited_PageDecorators_configured"></a>component has multiple inherited PageDecorators configured</td> 
+     <td>0.005</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.models.impl.ReferenceInjectorSpec.component_has_a_named_single_Resource_configured"></a>component has a named single Resource configured</td> 
+     <td>0.003</td> 
+    </tr> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.models.impl.ReferenceInjectorSpec.component_has_a_named_single_inherited_Resource_configured"></a>component has a named single inherited Resource configured</td> 
+     <td>0.004</td> 
+    </tr> 
+   </tbody> 
+  </table> 
+ </div> 
+ <div class="section"> 
+  <h3 id="TagInjectorSpec">TagInjectorSpec</h3> 
+  <a name="com.icfolson.aem.library.models.impl.TagInjectorSpec"></a> 
+  <table border="1" class="bodyTable table table-striped table-hover"> 
+   <tbody> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.models.impl.TagInjectorSpec.all_tags_populated_from_root"></a>all tags populated from root</td> 
+     <td>0.018</td> 
+    </tr> 
+    <tr class="b"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.models.impl.TagInjectorSpec.all_inherited_tags_populated"></a>all inherited tags populated</td> 
+     <td>0.002</td> 
+    </tr> 
+   </tbody> 
+  </table> 
+ </div> 
+ <div class="section"> 
+  <h3 id="ValueMapFromRequestInjectorSpec">ValueMapFromRequestInjectorSpec</h3> 
+  <a name="com.icfolson.aem.library.models.impl.ValueMapFromRequestInjectorSpec"></a> 
+  <table border="1" class="bodyTable table table-striped table-hover"> 
+   <tbody> 
+    <tr class="a"> 
+     <td><i class="icon-ok"></i></td> 
+     <td><a name="TC_com.icfolson.aem.library.models.impl.ValueMapFromRequestInjectorSpec.inject_values_for_component"></a>inject values for component</td> 
+     <td>0.004</td> 
+    </tr> 
+   </tbody> 
+  </table> 
+ </div> 
+ <br /> 
+</div>
+			</div>
+		</div>
+	</div>
+	</div>
+
+	</div><!-- /container -->
+	
+	<!-- Footer
+	================================================== -->
+	<footer class="well">
+		<div class="container">
+			<div class="row">
+				<div class="span4 bottom-nav">
+					<ul class="nav nav-list">
+						<li class="nav-header">User Guide</li>
+						<li>
+							<a href="adapters.html" title="Adapters">Adapters </a>
+						</li>
+						<li>
+							<a href="components.html" title="Components">Components </a>
+						</li>
+						<li>
+							<a href="constants.html" title="Constants">Constants </a>
+						</li>
+						<li>
+							<a href="image-rendering.html" title="Image Rendering">Image Rendering </a>
+						</li>
+						<li>
+							<a href="including-in-aem-projects.html" title="Including in AEM Projects">Including in AEM Projects </a>
+						</li>
+						<li>
+							<a href="links.html" title="Links">Links </a>
+						</li>
+						<li>
+							<a href="optionals.html" title="Optionals">Optionals </a>
+						</li>
+						<li>
+							<a href="predicates.html" title="Predicates">Predicates </a>
+						</li>
+						<li>
+							<a href="services.html" title="Services">Services </a>
+						</li>
+						<li>
+							<a href="servlets.html" title="Servlets">Servlets </a>
+						</li>
+						<li>
+							<a href="injectors.html" title="Sling Models Injectors">Sling Models Injectors </a>
+						</li>
+					</ul>
+				</div>
+				<div class="span5 bottom-nav">
+					<ul class="nav nav-list">
+						<li class="nav-header">Project Documentation</li>
+						<li>
+							<a href="project-info.html" title="Project Information">Project Information <i class="icon-chevron-right"></i></a>
+						</li>
+						<li>
+							<a href="project-reports.html" title="Project Reports">Project Reports <i class="icon-chevron-down"></i></a>
+							<ul class="nav nav-list">
+						<li>
+							<a href="apidocs/index.html" title="JavaDocs">JavaDocs </a>
+						</li>
+						<li class="active">
+							<a href="#" title="Surefire Report">Surefire Report </a>
+						</li>
+						<li>
+							<a href="pmd.html" title="PMD">PMD </a>
+						</li>
+						<li>
+							<a href="cobertura/index.html" title="Cobertura Test Coverage">Cobertura Test Coverage </a>
+						</li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</footer>
+		
+	<div class="container subfooter">
+		<div class="row">
+			<div class="span12">
+				<p class="pull-right"><a href="#">Back to top</a></p>
+				<p class="copyright">Copyright &copy;2019 <a href="http://www.icfnext.com">ICF Next</a>. All Rights Reserved.</p>
+			</div>
+		</div>
+	</div>
+
+	<!-- Le javascript
+	================================================== -->
+	<!-- Placed at the end of the document so the pages load faster -->
+
+	<!-- Fallback jQuery loading from Google CDN:
+	     http://stackoverflow.com/questions/1014203/best-way-to-use-googles-hosted-jquery-but-fall-back-to-my-hosted-library-on-go -->
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+	<script type="text/javascript">
+		if (typeof jQuery == 'undefined')
+		{
+			document.write(unescape("%3Cscript src='./js/jquery-1.8.3.min.js' type='text/javascript'%3E%3C/script%3E"));
+		}
+	</script>
+	
+	<script src="./js/bootstrap.min.js"></script>
+	<script src="./js/lightbox.js"></script>
+	<script src="./js/jquery.smooth-scroll.min.js"></script>
+	<!-- back button support for smooth scroll -->
+	<script src="./js/jquery.ba-bbq.min.js"></script>
+	<script src="http://yandex.st/highlightjs/7.3/highlight.min.js"></script>
+
+	<script src="./js/reflow-skin.js"></script>
+	<script src="https://use.typekit.net/rya5bvi.js"></script><script>try{Typekit.load({ async: true });}catch(e){}</script>
+	
+	</body>
+</html>
