@@ -1,8 +1,8 @@
 package com.icfolson.aem.library.api;
 
+import com.google.common.base.Optional;
 import com.icfolson.aem.library.api.link.Link;
 import com.icfolson.aem.library.api.page.PageDecorator;
-import com.google.common.base.Optional;
 
 import java.util.List;
 
@@ -123,6 +123,7 @@ public interface Inheritable {
     <AdapterType> Optional<AdapterType> getAsTypeInherited(String propertyName, Class<AdapterType> type);
 
     /**
+     * @param isSelf if true, component will attempt to find the image reference property on the current resource
      * @return <code>Optional</code> inherited image reference
      */
     Optional<String> getImageReferenceInherited(boolean isSelf);
