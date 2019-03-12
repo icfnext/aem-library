@@ -247,6 +247,7 @@ class DefaultLinkBuilderSpec extends AemLibrarySpec {
         "http://www.reddit.com" | ""       | false  | "http://www.reddit.com"
         "http://www.reddit.com" | ""       | true   | "http://www.reddit.com"
         "https://reddit.com"    | "ftp"    | true   | "ftp:https://reddit.com"
+        "https://reddit.com"    | "ftp"    | false  | "ftp://https://reddit.com"
         "someone@domain.com"    | "mailto" | true   | "mailto:someone@domain.com"
     }
 
@@ -263,6 +264,7 @@ class DefaultLinkBuilderSpec extends AemLibrarySpec {
         "+48957228989"          | "tel"    | true   | "tel:+48957228989"
         "http://www.reddit.com" | ""       | false  | "http://www.reddit.com"
         "http://www.reddit.com" | ""       | true   | "http://www.reddit.com"
+        "www.reddit.com"        | "https"  | false  | "https://www.reddit.com"
         "https://reddit.com"    | "ftp"    | true   | "ftp:https://reddit.com"
         "someone@domain.com"    | "mailto" | true   | "mailto:someone@domain.com"
     }
