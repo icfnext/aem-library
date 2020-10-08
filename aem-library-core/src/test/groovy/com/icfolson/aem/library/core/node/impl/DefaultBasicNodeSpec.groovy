@@ -186,12 +186,13 @@ class DefaultBasicNodeSpec extends AemLibrarySpec {
         propertyName << ["beer", ""]
     }
 
+
     def "get as mapped href"() {
         setup:
         def node = getBasicNode("/content/citytechinc/jcr:content")
 
         expect:
-        node.getAsHref("otherPagePath", false, true).get() == "/ales/esb.html"
+        node.getAsHref("otherPagePath", false, true).get() == "/content/ales/esb.html"
     }
 
     def "get as mapped href strict"() {
@@ -203,8 +204,8 @@ class DefaultBasicNodeSpec extends AemLibrarySpec {
 
         where:
         propertyName          | href
-        "otherPagePath"       | "/ales/esb.html"
-        "nonExistentPagePath" | "/home"
+        "otherPagePath"       | "/content/ales/esb.html"
+        "nonExistentPagePath" | "/content/home"
         "externalPath"        | "http://www.reddit.com"
     }
 
@@ -240,7 +241,7 @@ class DefaultBasicNodeSpec extends AemLibrarySpec {
 
         expect:
         link.path == "/content/ales/esb"
-        link.href == "/ales/esb.html"
+        link.href == "/content/ales/esb.html"
     }
 
     def "get as mapped link strict"() {
@@ -248,7 +249,7 @@ class DefaultBasicNodeSpec extends AemLibrarySpec {
         def link = getBasicNode("/content/citytechinc/jcr:content").getAsLink("nonExistentPagePath", true, true).get()
 
         expect:
-        link.path == "/home"
+        link.path == "/content/home"
         link.external
         link.extension == ""
     }

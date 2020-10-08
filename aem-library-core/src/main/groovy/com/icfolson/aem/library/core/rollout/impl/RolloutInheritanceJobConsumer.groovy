@@ -1,6 +1,5 @@
 package com.icfolson.aem.library.core.rollout.impl
 
-import com.adobe.granite.offloading.api.OffloadingJobProperties
 import com.day.cq.commons.jcr.JcrUtil
 import groovy.util.logging.Slf4j
 import org.apache.sling.api.resource.ResourceResolverFactory
@@ -18,6 +17,7 @@ import javax.jcr.util.TraversingItemVisitor
 import static com.day.cq.commons.jcr.JcrConstants.NT_UNSTRUCTURED
 import static com.icfolson.aem.library.core.rollout.impl.RolloutInheritanceEventListener.EVENT_AFTER_VALUE
 import static com.icfolson.aem.library.core.rollout.impl.RolloutInheritanceEventListener.EVENT_BEFORE_VALUE
+import static com.icfolson.aem.library.core.rollout.impl.RolloutInheritanceEventListener.EVENT_INPUT_IDENTIFIER
 
 @Component(service = JobConsumer, property = [
     "job.topics=com/icfolson/aem/library/core/services/job"
@@ -32,7 +32,7 @@ class RolloutInheritanceJobConsumer implements JobConsumer {
     JobResult process(Job job) {
         def result = JobResult.FAILED
 
-        def path = (String) job.getProperty(OffloadingJobProperties.INPUT_PAYLOAD.propertyName())
+        def path = (String) job.getProperty(EVENT_INPUT_IDENTIFIER)
 
         def resourceResolver = null
         def session = null

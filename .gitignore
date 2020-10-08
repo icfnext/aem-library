@@ -6,3 +6,4 @@
 *.iml
 .settings/
 target/
+.bash_profile
