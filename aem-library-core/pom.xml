@@ -49,14 +49,7 @@
                                 com.icfolson.aem.library.core.adapter.*,
                                 com.icfolson.aem.library.core.bindings.*
                             </excludePackageNames>
-                            <links>
-                                <link>http://docs.oracle.com/javase/7/docs/api/</link>
-                                <link>http://docs.oracle.com/javaee/7/api/</link>
-                                <link>http://google.github.io/guava/releases/15.0/api/docs/</link>
-                                <link>http://www.day.com/maven/jsr170/javadocs/jcr-2.0/</link>
-                                <link>http://sling.apache.org/apidocs/sling7</link>
-                                <link>https://docs.adobe.com/docs/en/aem/6-2/develop/ref/javadoc</link>
-                            </links>
+                            <failOnError>false</failOnError>
                         </configuration>
                     </execution>
                 </executions>

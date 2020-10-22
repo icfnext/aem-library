@@ -165,7 +165,7 @@
                 </plugin>
                 <plugin>
                     <artifactId>maven-javadoc-plugin</artifactId>
-                    <version>2.10.3</version>
+                    <version>3.2.0</version>
                 </plugin>
                 <plugin>
                     <artifactId>maven-source-plugin</artifactId>
@@ -299,6 +299,7 @@
             <plugin>
                 <artifactId>maven-javadoc-plugin</artifactId>
                 <configuration>
+                    <source>8</source>
                     <excludePackageNames>
                         *.impl,
                         *.predicates,
@@ -306,11 +307,9 @@
                         com.icfolson.aem.library.core.bindings.*
                     </excludePackageNames>
                     <links>
-                        <link>http://docs.oracle.com/javase/8/docs/api/</link>
-                        <link>http://docs.oracle.com/javaee/7/api/</link>
                         <link>http://google.github.io/guava/releases/15.0/api/</link>
                         <link>https://docs.adobe.com/content/docs/en/spec/jsr170/javadocs/jcr-2.0</link>
-                        <link>http://sling.apache.org/apidocs/sling8</link>
+                        <link>http://sling.apache.org/apidocs/sling11</link>
                         <link>https://helpx.adobe.com/experience-manager/6-4/sites/developing/using/reference-materials/javadoc</link>
                         <link>http://fasterxml.github.io/jackson-databind/javadoc/2.3.0</link>
                     </links>
