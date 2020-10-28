@@ -2,12 +2,9 @@ package com.icfolson.aem.library.api.page;
 
 import com.day.cq.wcm.api.Page;
 import com.day.cq.wcm.api.PageManager;
-import com.day.cq.wcm.api.WCMException;
 import com.google.common.base.Predicate;
 import org.apache.sling.api.resource.Resource;
-
 import javax.jcr.query.Query;
-import java.util.Calendar;
 import java.util.Collection;
 import java.util.List;
 
@@ -15,68 +12,14 @@ import java.util.List;
  * Decorates the CQ <code>PageManager</code> interface with additional methods for finding pages using queries, tags,
  * and template paths.
  */
-public interface PageManagerDecorator extends PageManager {
+public interface PageManagerDecorator {
 
     /**
-     * Copies the given page to the new destination and automatically saves the modifications
+     * Get the underlying WCM page manager.
      *
-     * @param page the page to copy
-     * @param destination the destination
-     * @param beforeName the name of the next page. if <code>null</code> the page is ordered at the end.
-     * @param shallow if <code>true</code> a non-recursive copy is performed.
-     * @param resolveConflict if <code>true</code> resolves name conflict if destination already exists.
-     * @return the copied page
-     * @throws WCMException if an error during this operation occurs.
+     * @return page manager
      */
-    @Override
-    PageDecorator copy(Page page, String destination, String beforeName, boolean shallow, boolean resolveConflict)
-        throws WCMException;
-
-    /**
-     * Copies the given page to the new destination
-     *
-     * @param page the page to copy
-     * @param destination the destination
-     * @param beforeName the name of the next page. if <code>null</code> the page is ordered at the end.
-     * @param shallow if <code>true</code> a non-recursive copy is performed.
-     * @param resolveConflict if <code>true</code> resolves name conflict if destination already exists.
-     * @param autoSave if <code>true</code> saves the modifications.
-     * @return the copied page
-     * @throws WCMException if an error during this operation occurs.
-     */
-    @Override
-    PageDecorator copy(Page page, String destination, String beforeName, boolean shallow, boolean resolveConflict,
-        boolean autoSave) throws WCMException;
-
-    /**
-     * Creates a new page at the given path using the provided template as content template. If a no pageName is given
-     * but a title, then the title is used as hint for the name of the new page.
-     *
-     * @param parentPath the path of the parent page
-     * @param pageName the name of the new page
-     * @param template the template for the new page
-     * @param title the title of the new page
-     * @return the page that was created
-     * @throws WCMException if an error during this operation occurs.
-     */
-    @Override
-    PageDecorator create(String parentPath, String pageName, String template, String title) throws WCMException;
-
-    /**
-     * Creates a new page at the given path using the provided template as content template. If a no pageName is given
-     * but a title, then the title is used as hint for the name of the new page.
-     *
-     * @param parentPath the path of the parent page
-     * @param pageName the name of the new page
-     * @param template the template for the new page
-     * @param title the title of the new page
-     * @param autoSave if <code>true</code> saves the modifications.
-     * @return the page that was created
-     * @throws WCMException if an error during this operation occurs.
-     */
-    @Override
-    PageDecorator create(String parentPath, String pageName, String template, String title, boolean autoSave)
-        throws WCMException;
+    PageManager getPageManager();
 
     /**
      * Find all descendant pages of the given path containing the specified tags.
@@ -113,8 +56,7 @@ public interface PageManagerDecorator extends PageManager {
      * @param resource resource to find the page for
      * @return page or <code>null</code> if not found.
      */
-    @Override
-    PageDecorator getContainingPage(Resource resource);
+    Page getContainingPage(Resource resource);
 
     /**
      * Returns the page that contains the resource at the given path. If the path addresses a page, that page is
@@ -123,8 +65,7 @@ public interface PageManagerDecorator extends PageManager {
      * @param path path to find the page for
      * @return page or <code>null</code> if not found.
      */
-    @Override
-    PageDecorator getContainingPage(String path);
+    Page getContainingPage(String path);
 
     /**
      * Decorate the given page.
@@ -141,63 +82,8 @@ public interface PageManagerDecorator extends PageManager {
      * @param path path of the page
      * @return page or <code>null</code>
      */
-    @Override
-    PageDecorator getPage(String path);
 
-    /**
-     * Moves the given page to the new destination. If source and destination are equals the page is just ordered.
-     *
-     * @param page the page to move
-     * @param destination the path of the new destination
-     * @param beforeName the name of the next page. if <code>null</code> the page is ordered at the end.
-     * @param shallow if <code>true</code> only the page content is moved
-     * @param resolveConflict if <code>true</code> resolves name conflict if destination already exists.
-     * @param adjustRefs list of paths to pages that refer to the moved one. those references will be adjusted.
-     * @return the new page at the new location
-     * @throws WCMException if an error during this operation occurs.
-     */
-    @Override
-    PageDecorator move(Page page, String destination, String beforeName, boolean shallow, boolean resolveConflict,
-        String[] adjustRefs) throws WCMException;
-
-    /**
-     * Moves the given page to the new destination. If source and destination are equals the page is just ordered.
-     *
-     * @param page the page to move
-     * @param destination the path of the new destination
-     * @param beforeName the name of the next page. if <code>null</code> the page is ordered at the end.
-     * @param shallow if <code>true</code> only the page content is moved
-     * @param resolveConflict if <code>true</code> resolves name conflict if destination already exists.
-     * @param adjustRefs list of paths to pages that refer to the moved one. those references will be adjusted.
-     * @param publishRefs list of paths to publish in addition to the moved page
-     * @return the new page at the new location
-     * @throws WCMException if an error during this operation occurs.
-     */
-    @Override
-    PageDecorator move(Page page, String destination, String beforeName, boolean shallow, boolean resolveConflict,
-        String[] adjustRefs, String[] publishRefs) throws WCMException;
-
-    /**
-     * Restore a revision of some page.
-     *
-     * @param path path to the page or to the parent page
-     * @param revisionId revision id to restore
-     * @return the page that was restored
-     * @throws WCMException if an error during this operation occurs.
-     */
-    @Override
-    PageDecorator restore(String path, String revisionId) throws WCMException;
-
-    /**
-     * Restore a tree. Restores this page and its subtree to the versions of the given date.
-     *
-     * @param path path to page
-     * @param date calendar date to restore to
-     * @return the page that was restored
-     * @throws WCMException if an error during this operation occurs.
-     */
-    @Override
-    PageDecorator restoreTree(String path, Calendar date) throws WCMException;
+    Page getPage(String path);
 
     /**
      * Search for pages using a query.

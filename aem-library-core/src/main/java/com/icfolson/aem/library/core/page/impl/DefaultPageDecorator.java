@@ -1,72 +1,32 @@
-package com.icfolson.aem.library.core.page.impl
+package com.icfolson.aem.library.core.page.impl;
 
-import com.day.cq.commons.Filter
-import com.day.cq.replication.ReplicationStatus
-import com.day.cq.wcm.api.NameConstants
-import com.day.cq.wcm.api.Page
-import com.day.cq.wcm.api.PageManager
-import com.day.cq.wcm.commons.DeepResourceIterator
-import com.google.common.base.Objects
-import com.google.common.base.Optional
-import com.google.common.base.Predicate
-import com.google.common.base.Predicates
-import com.icfolson.aem.library.api.link.ImageLink
-import com.icfolson.aem.library.api.link.Link
-import com.icfolson.aem.library.api.link.NavigationLink
-import com.icfolson.aem.library.api.link.builders.LinkBuilder
-import com.icfolson.aem.library.api.node.BasicNode
-import com.icfolson.aem.library.api.node.ComponentNode
-import com.icfolson.aem.library.api.page.PageDecorator
-import com.icfolson.aem.library.api.page.PageManagerDecorator
-import com.icfolson.aem.library.api.page.enums.TitleType
-import com.icfolson.aem.library.core.link.builders.factory.LinkBuilderFactory
-import com.icfolson.aem.library.core.node.predicates.ComponentNodePropertyExistsPredicate
-import com.icfolson.aem.library.core.node.predicates.ComponentNodePropertyValuePredicate
-import org.apache.commons.lang3.builder.EqualsBuilder
-import org.apache.commons.lang3.builder.HashCodeBuilder
-import org.apache.sling.api.resource.Resource
-import org.apache.sling.api.resource.ValueMap
+/*
+import com.day.cq.commons.Filter;
+import com.day.cq.wcm.api.Page;
+import com.google.common.base.Objects;
+import com.icfolson.aem.library.api.node.ComponentNode;
+import com.icfolson.aem.library.api.page.PageDecorator;
+import com.icfolson.aem.library.api.resource.ResourceDecorator;
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 
-import static com.google.common.base.Preconditions.checkNotNull
-import static com.icfolson.aem.library.core.node.impl.NodeFunctions.RESOURCE_TO_COMPONENT_NODE
+import java.util.Optional;
+import java.util.function.Predicate;
 
+import static com.icfolson.aem.library.core.node.impl.NodeFunctions.RESOURCE_TO_COMPONENT_NODE;
 
-final class DefaultPageDecorator implements PageDecorator {
+public final class DefaultPageDecorator implements PageDecorator {
 
-    private static final Filter<Page> ALL_PAGES = new Filter<Page>() {
-        @Override
-        boolean includes(Page page) {
-            true
-        }
-    }
+    private static final Filter<Page> ALL_PAGES = page -> true;
 
-    private static final Predicate<PageDecorator> DISPLAYABLE_ONLY = new Predicate<PageDecorator>() {
-        @Override
-        boolean apply(PageDecorator page) {
-            page.contentResource && !page.hideInNav
-        }
-    }
+    private final Page delegate;
 
-    @Delegate
-    private final Page delegate
-
-    private final Optional<ComponentNode> componentNodeOptional
+    private final Optional<ComponentNode> componentNodeOptional;
 
     DefaultPageDecorator(Page page) {
-        this.delegate = page
+        this.delegate = page;
 
         componentNodeOptional = Optional.fromNullable(page.contentResource).transform(RESOURCE_TO_COMPONENT_NODE)
-    }
-
-
-    @Override
-    ReplicationStatus getReplicationStatus() {
-        return delegate.adaptTo(ReplicationStatus.class);
-    }
-
-    @Override
-    Page getPage() {
-        return delegate;
     }
 
     @Override
@@ -188,18 +148,22 @@ final class DefaultPageDecorator implements PageDecorator {
         getInternal({ componentNode -> componentNode.getImageRendition(name, renditionName) }, Optional.absent())
     }
 
+    @Override
     Optional<String> getImageSource() {
         getInternal({ componentNode -> componentNode.imageSource }, Optional.absent())
     }
 
+    @Override
     Optional<String> getImageSource(int width) {
         getInternal({ componentNode -> componentNode.getImageSource(width) }, Optional.absent())
     }
 
+    @Override
     Optional<String> getImageSource(String name) {
         getInternal({ componentNode -> componentNode.getImageSource(name) }, Optional.absent())
     }
 
+    @Override
     Optional<String> getImageSource(String name, int width) {
         getInternal({ componentNode -> componentNode.getImageSource(name, width) }, Optional.absent())
     }
@@ -346,7 +310,7 @@ final class DefaultPageDecorator implements PageDecorator {
         def pageManager = this.pageManager
 
         delegate.listChildren(ALL_PAGES, true).each { child ->
-            PageDecorator page = pageManager.getPage(child)
+                PageDecorator page = pageManager.getPage(child)
 
             if (predicate.apply(page)) {
                 pages.add(page)
@@ -425,10 +389,12 @@ final class DefaultPageDecorator implements PageDecorator {
         LinkBuilderFactory.forPage(this).setImageSource(checkNotNull(imageSource)).buildImageLink()
     }
 
+    @Override
     boolean isHasImage() {
         getInternal({ ComponentNode componentNode -> componentNode.hasImage }, false)
     }
 
+    @Override
     boolean isHasImage(String name) {
         getInternal({ componentNode -> componentNode.isHasImage(name) }, false)
     }
@@ -491,22 +457,22 @@ final class DefaultPageDecorator implements PageDecorator {
     // overrides
 
     @Override
-    Page getAbsoluteParent(int level) {
+    PageDecorator getAbsoluteParent(int level) {
         pageManager.getPage(delegate.getAbsoluteParent(level))
     }
 
     @Override
-    PageManager getPageManager() {
-        delegate.adaptTo(Resource).resourceResolver.adaptTo(PageManager)
+    PageManagerDecorator getPageManager() {
+        delegate.adaptTo(Resource).resourceResolver.adaptTo(PageManagerDecorator)
     }
 
     @Override
-    Page getParent() {
+    PageDecorator getParent() {
         pageManager.getPage(delegate.parent)
     }
 
     @Override
-    Page getParent(int level) {
+    PageDecorator getParent(int level) {
         pageManager.getPage(delegate.getParent(level))
     }
 
@@ -555,7 +521,7 @@ final class DefaultPageDecorator implements PageDecorator {
         def pageManager = this.pageManager
 
         delegate.listChildren(ALL_PAGES, deep).each { child ->
-            def page = pageManager.getPage(child)
+                def page = pageManager.getPage(child)
 
             if (page && predicate.apply(page)) {
                 pages.add(page)
@@ -567,3 +533,4 @@ final class DefaultPageDecorator implements PageDecorator {
 }
 
 
+ */

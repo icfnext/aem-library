@@ -128,7 +128,7 @@ public final class ParagraphJsonServlet extends AbstractComponentServlet {
         }
 
         // Request the page's content node
-        final Resource pageContentResource = currentPage.getContentResource();
+        final Resource pageContentResource = currentPage.getPage().getContentResource();
 
         if (pageContentResource == null) {
             LOG.info("The requested resource does not have a child content resource");

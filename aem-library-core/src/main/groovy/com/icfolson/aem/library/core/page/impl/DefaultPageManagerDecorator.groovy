@@ -1,6 +1,7 @@
 package com.icfolson.aem.library.core.page.impl
 
 import com.day.cq.commons.jcr.JcrConstants
+import com.day.cq.replication.ReplicationStatus
 import com.day.cq.tagging.TagManager
 import com.day.cq.wcm.api.Page
 import com.day.cq.wcm.api.PageManager
@@ -34,6 +35,11 @@ class DefaultPageManagerDecorator implements PageManagerDecorator {
         this.resourceResolver = resourceResolver
 
         pageManager = resourceResolver.adaptTo(PageManager)
+    }
+
+    @Override
+    PageManager getPageManager() {
+        return pageManager;
     }
 
     @Override
@@ -139,78 +145,40 @@ class DefaultPageManagerDecorator implements PageManagerDecorator {
     }
 
     @Override
-    PageDecorator copy(Page page, String destination, String beforeName, boolean shallow,
-        boolean resolveConflict) throws WCMException {
-        decorate(pageManager.copy(page, destination, beforeName, shallow, resolveConflict))
+    Page getContainingPage(Resource resource) {
+        //decorate(pageManager.getContainingPage(resource))
+        null
     }
 
     @Override
-    PageDecorator copy(Page page, String destination, String beforeName, boolean shallow,
-        boolean resolveConflict, boolean autoSave) throws WCMException {
-        decorate(pageManager.copy(page, destination, beforeName, shallow, resolveConflict, autoSave))
-    }
-
-    @Override
-    PageDecorator create(String parentPath, String pageName, String template,
-        String title) throws WCMException {
-        decorate(pageManager.create(parentPath, pageName, template, title))
-    }
-
-    @Override
-    PageDecorator create(String parentPath, String pageName, String template,
-        String title, boolean autoSave) throws WCMException {
-        decorate(pageManager.create(parentPath, pageName, template, title, autoSave))
-    }
-
-    @Override
-    PageDecorator getContainingPage(Resource resource) {
-        decorate(pageManager.getContainingPage(resource))
-    }
-
-    @Override
-    PageDecorator getContainingPage(String path) {
-        decorate(pageManager.getContainingPage(path))
+    Page getContainingPage(String path) {
+        //decorate(pageManager.getContainingPage(path))
+        null
     }
 
     @Override
     PageDecorator getPage(Page page) {
-        decorate(page)
+        page.adaptTo(Resource).resourceResolver.adaptTo(PageDecorator)
+        return Optional.ofNullable(page)
+                .map(p -> p.adaptTo(PageDecorator.class))
+                .orElse(null);
+        //decorate(page)
+
+
     }
 
     @Override
-    PageDecorator getPage(String path) {
-        getPageDecorator(checkNotNull(path))
-    }
-
-    @Override
-    PageDecorator move(Page page, String destination, String beforeName, boolean shallow,
-        boolean resolveConflict, String[] adjustRefs) throws WCMException {
-        decorate(pageManager.move(page, destination, beforeName, shallow, resolveConflict, adjustRefs))
-    }
-
-    @Override
-    PageDecorator move(Page page, String destination, String beforeName, boolean shallow,
-        boolean resolveConflict, String[] adjustRefs, String[] publishRefs) throws WCMException {
-        decorate(pageManager.move(page, destination, beforeName, shallow, resolveConflict, adjustRefs, publishRefs))
-    }
-
-    @Override
-    PageDecorator restore(String path, String revisionId) throws WCMException {
-        decorate(pageManager.restore(path, revisionId))
-    }
-
-    @Override
-    PageDecorator restoreTree(String path, Calendar date) throws WCMException {
-        decorate(pageManager.restoreTree(path, date))
+    Page getPage(String path) {
+        //getPageDecorator(checkNotNull(path))
+        null
     }
 
     // internals
-
-    private PageDecorator getPageDecorator(String path) {
+    PageDecorator getPageDecorator(String path) {
         decorate(pageManager.getPage(path))
     }
 
     private static PageDecorator decorate(Page page) {
-        page ? new DefaultPageDecorator(page) : null
+        return new DefaultPageDecorator(page)
     }
 }

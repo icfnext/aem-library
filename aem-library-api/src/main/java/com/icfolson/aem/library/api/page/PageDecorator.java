@@ -1,29 +1,42 @@
 package com.icfolson.aem.library.api.page;
 
+import com.day.cq.commons.Filter;
+import com.day.cq.tagging.Tag;
 import com.day.cq.wcm.api.Page;
+import com.day.cq.wcm.api.PageManager;
+import com.day.cq.wcm.api.Template;
+import com.day.cq.wcm.api.WCMException;
 import com.google.common.base.Optional;
 import com.google.common.base.Predicate;
-import com.icfolson.aem.library.api.Accessible;
-import com.icfolson.aem.library.api.ImageSource;
-import com.icfolson.aem.library.api.Inheritable;
-import com.icfolson.aem.library.api.Linkable;
-import com.icfolson.aem.library.api.Traversable;
+import com.icfolson.aem.library.api.*;
 import com.icfolson.aem.library.api.link.ImageLink;
 import com.icfolson.aem.library.api.link.Link;
 import com.icfolson.aem.library.api.link.NavigationLink;
 import com.icfolson.aem.library.api.link.builders.LinkBuilder;
 import com.icfolson.aem.library.api.node.ComponentNode;
 import com.icfolson.aem.library.api.page.enums.TitleType;
+import org.apache.sling.api.adapter.Adaptable;
+import org.apache.sling.api.resource.Resource;
+import org.apache.sling.api.resource.ValueMap;
 
+import java.util.Calendar;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Decorates the CQ <code>Page</code> interface with additional convenience
  * methods for traversing the content hierarchy and getters for AEM Library
  * classes.
  */
-public interface PageDecorator extends Page, Accessible, Inheritable, Linkable, ImageSource, Traversable<PageDecorator> {
+public interface PageDecorator extends Accessible, Inheritable, Linkable, Traversable<PageDecorator>, Adaptable,
+        Labelable, Replicable {
+    /**
+     * Get the underlying WCM page.
+     *
+     * @return page
+     */
+    Page getPage();
 
     /**
      * Get the child pages of the current page.
@@ -102,14 +115,6 @@ public interface PageDecorator extends Page, Accessible, Inheritable, Linkable, 
     Optional<ComponentNode> getComponentNode(String relativePath);
 
     /**
-     * Get a link for this page with an attached image source.
-     *
-     * @param imageSource image source to set on the returned image link
-     * @return image link with the provided image source
-     */
-    ImageLink getImageLink(String imageSource);
-
-    /**
      * Get a link with a specified title type for this item.
      *
      * @param titleType type of title to set on link
@@ -180,6 +185,14 @@ public interface PageDecorator extends Page, Accessible, Inheritable, Linkable, 
     NavigationLink getNavigationLink(boolean isActive, boolean mapped);
 
     /**
+     * Get a link for this page with an attached image source.
+     *
+     * @param imageSource image source to set on the returned image link
+     * @return image link with the provided image source
+     */
+    ImageLink getImageLink(String imageSource);
+
+    /**
      * Get the template path for this page. This method is preferred over
      * getTemplate().getPath(), which is dependent on access to /apps and will
      * therefore fail in publish mode.
@@ -217,24 +230,24 @@ public interface PageDecorator extends Page, Accessible, Inheritable, Linkable, 
      * @param level hierarchy level of the parent page to retrieve
      * @return the respective parent page or <code>null</code>
      */
-    @Override
-    PageDecorator getAbsoluteParent(int level);
+
+    Page getAbsoluteParent(int level);
 
     /**
      * Convenience method that returns the manager of this page.
      *
      * @return the page manager
      */
-    @Override
-    PageManagerDecorator getPageManager();
+
+    PageManager getPageManager();
 
     /**
      * Returns the parent page if it's resource adapts to page.
      *
      * @return the parent page or <code>null</code>
      */
-    @Override
-    PageDecorator getParent();
+
+    Page getParent();
 
     /**
      * Returns the relative parent page. If no page exists at that level,
@@ -254,6 +267,75 @@ public interface PageDecorator extends Page, Accessible, Inheritable, Linkable, 
      * @param level hierarchy level of the parent page to retrieve
      * @return the respective parent page or <code>null</code>
      */
-    @Override
-    PageDecorator getParent(int level);
+
+    Page getParent(int level);
+
+    /**
+     * Returns the properties of the page. Added this to match the com.day.cq.wcm.api.Page implementation
+
+     * @return the ValueMap of Page Properties
+     */
+    ValueMap getProperties();
+
+    ValueMap getProperties(String var1);
+
+    String getPath();
+
+    Resource getContentResource();
+
+    Resource getContentResource(String var1);
+
+    Iterator<Page> listChildren();
+
+    Iterator<Page> listChildren(Filter<Page> var1);
+
+    Iterator<Page> listChildren(Filter<Page> var1, boolean var2);
+
+    boolean hasChild(String var1);
+
+    int getDepth();
+
+    String getPageTitle();
+
+    String getNavigationTitle();
+
+    boolean isHideInNav();
+
+    boolean hasContent();
+
+    boolean isValid();
+
+    long timeUntilValid();
+
+    Calendar getOnTime();
+
+    Calendar getOffTime();
+
+    Calendar getDeleted();
+
+    String getDeletedBy();
+
+    String getLastModifiedBy();
+
+    Calendar getLastModified();
+
+    String getVanityUrl();
+
+    Tag[] getTags();
+
+    void lock() throws WCMException;
+
+    boolean isLocked();
+
+    String getLockOwner();
+
+    boolean canUnlock();
+
+    void unlock() throws WCMException;
+
+    Template getTemplate();
+
+    Locale getLanguage(boolean var1);
+
+    Locale getLanguage();
 }
