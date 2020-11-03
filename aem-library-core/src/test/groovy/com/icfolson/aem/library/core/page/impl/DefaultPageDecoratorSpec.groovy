@@ -71,7 +71,7 @@ class DefaultPageDecoratorSpec extends AemLibrarySpec {
 
     def "get absolute parent"() {
         setup:
-        def page = getPage("/content/citytechinc/child1")
+        def page = getPageDecorator("/content/citytechinc/child1")
 
         expect:
         page.getAbsoluteParent(level).path == absoluteParentPath
@@ -85,7 +85,7 @@ class DefaultPageDecoratorSpec extends AemLibrarySpec {
 
     def "get parent"() {
         setup:
-        def page = getPage("/content/citytechinc/child1")
+        def page = getPageDecorator("/content/citytechinc/child1")
 
         expect:
         page.getParent(level).path == parentPath
@@ -99,7 +99,7 @@ class DefaultPageDecoratorSpec extends AemLibrarySpec {
 
     def "adapt to"() {
         setup:
-        def page = getPage("/content/citytechinc")
+        def page = getPageDecorator("/content/citytechinc")
 
         expect:
         page.adaptTo(type).path == "/content/citytechinc/jcr:content"
@@ -110,7 +110,7 @@ class DefaultPageDecoratorSpec extends AemLibrarySpec {
 
     def "adapt to returns null"() {
         setup:
-        def page = getPage("/content/citytechinc/empty")
+        def page = getPageDecorator("/content/citytechinc/empty")
 
         expect:
         !page.adaptTo(type)
@@ -121,7 +121,7 @@ class DefaultPageDecoratorSpec extends AemLibrarySpec {
 
     def "as map"() {
         setup:
-        def page = getPage(path)
+        def page = getPageDecorator(path)
 
         expect:
         page.asMap().containsKey(propertyName) == result
@@ -135,7 +135,7 @@ class DefaultPageDecoratorSpec extends AemLibrarySpec {
 
     def "get"() {
         setup:
-        def page = getPage(path)
+        def page = getPageDecorator(path)
 
         expect:
         page.get(propertyName, defaultValue) == result
@@ -149,7 +149,7 @@ class DefaultPageDecoratorSpec extends AemLibrarySpec {
 
     def "get optional"() {
         setup:
-        def page = getPage(path)
+        def page = getPageDecorator(path)
 
         expect:
         page.get(propertyName, String).present == result
@@ -163,7 +163,7 @@ class DefaultPageDecoratorSpec extends AemLibrarySpec {
 
     def "get as href"() {
         setup:
-        def page = getPage(path)
+        def page = getPageDecorator(path)
 
         expect:
         page.getAsHref(propertyName).present == result
@@ -177,7 +177,7 @@ class DefaultPageDecoratorSpec extends AemLibrarySpec {
 
     def "get as href strict"() {
         setup:
-        def page = getPage(path)
+        def page = getPageDecorator(path)
 
         expect:
         page.getAsHref(propertyName, true).present == result
@@ -191,7 +191,7 @@ class DefaultPageDecoratorSpec extends AemLibrarySpec {
 
     def "get as mapped href"() {
         setup:
-        def page = getPage(path)
+        def page = getPageDecorator(path)
 
         expect:
         page.getAsHref(propertyName, false, true).present == result
@@ -205,7 +205,7 @@ class DefaultPageDecoratorSpec extends AemLibrarySpec {
 
     def "get as mapped href strict"() {
         setup:
-        def page = getPage(path)
+        def page = getPageDecorator(path)
 
         expect:
         page.getAsHref(propertyName, true, true).present == result
@@ -219,7 +219,7 @@ class DefaultPageDecoratorSpec extends AemLibrarySpec {
 
     def "get image source optional"() {
         setup:
-        def page = getPage(path)
+        def page = getPageDecorator(path)
 
         expect:
         page.imageSource.present == isPresent
@@ -232,7 +232,7 @@ class DefaultPageDecoratorSpec extends AemLibrarySpec {
 
     def "get image source"() {
         setup:
-        def page = getPage("/content/citytechinc/child2")
+        def page = getPageDecorator("/content/citytechinc/child2")
 
         expect:
         page.imageSource.get() == "/content/citytechinc/child2.img.png"
@@ -240,7 +240,7 @@ class DefaultPageDecoratorSpec extends AemLibrarySpec {
 
     def "get named image source"() {
         setup:
-        def page = getPage("/content/citytechinc/child2")
+        def page = getPageDecorator("/content/citytechinc/child2")
 
         expect:
         page.getImageSource(name).get() == imageSource
@@ -253,7 +253,7 @@ class DefaultPageDecoratorSpec extends AemLibrarySpec {
 
     def "get image source with width"() {
         setup:
-        def page = getPage("/content/citytechinc/child2")
+        def page = getPageDecorator("/content/citytechinc/child2")
 
         expect:
         page.getImageSource(width).get() == imageSource
@@ -266,7 +266,7 @@ class DefaultPageDecoratorSpec extends AemLibrarySpec {
 
     def "get named image source with width"() {
         setup:
-        def page = getPage("/content/citytechinc/child2")
+        def page = getPageDecorator("/content/citytechinc/child2")
 
         expect:
         page.getImageSource(name, width).get() == imageSource
@@ -281,7 +281,7 @@ class DefaultPageDecoratorSpec extends AemLibrarySpec {
 
     def "find ancestor optional"() {
         setup:
-        def page = getPage(path)
+        def page = getPageDecorator(path)
         def predicate = new Predicate<PageDecorator>() {
             @Override
             boolean apply(PageDecorator input) {
@@ -304,7 +304,7 @@ class DefaultPageDecoratorSpec extends AemLibrarySpec {
 
     def "find ancestor with property"() {
         setup:
-        def page = getPage(path)
+        def page = getPageDecorator(path)
         def ancestorPageOptional = page.findAncestorWithProperty("jcr:title", excludeCurrentResource)
 
         expect:
@@ -321,7 +321,7 @@ class DefaultPageDecoratorSpec extends AemLibrarySpec {
 
     def "find ancestor returns absent"() {
         setup:
-        def page = getPage(path)
+        def page = getPageDecorator(path)
         def ancestorPageOptional = page.findAncestorWithProperty("jcr:description", excludeCurrentResource)
 
         expect:
@@ -339,7 +339,7 @@ class DefaultPageDecoratorSpec extends AemLibrarySpec {
 
     def "find ancestor with property value"() {
         setup:
-        def page = getPage("/content/inheritance/child/sub")
+        def page = getPageDecorator("/content/inheritance/child/sub")
 
         expect:
         page.findAncestorWithPropertyValue("jcr:title", "Inheritance").get().path == "/content/inheritance"
@@ -350,7 +350,7 @@ class DefaultPageDecoratorSpec extends AemLibrarySpec {
 
     def "find ancestor with property value returns absent"() {
         setup:
-        def page = getPage("/content/inheritance/child/sub")
+        def page = getPageDecorator("/content/inheritance/child/sub")
         def ancestorPageOptional = page.findAncestorWithPropertyValue("jcr:title", "Foo")
 
         expect:
@@ -359,7 +359,7 @@ class DefaultPageDecoratorSpec extends AemLibrarySpec {
 
     def "get template path"() {
         setup:
-        def page = getPage(path)
+        def page = getPageDecorator(path)
 
         expect:
         page.templatePath == templatePath
@@ -372,7 +372,7 @@ class DefaultPageDecoratorSpec extends AemLibrarySpec {
 
     def "get component node"() {
         setup:
-        def page = getPage("/content/citytechinc")
+        def page = getPageDecorator("/content/citytechinc")
 
         expect:
         page.componentNode.get().path == "/content/citytechinc/jcr:content"
@@ -380,7 +380,7 @@ class DefaultPageDecoratorSpec extends AemLibrarySpec {
 
     def "get component node returns absent optional for page with no jcr:content node"() {
         setup:
-        def page = getPage("/content/citytechinc/empty")
+        def page = getPageDecorator("/content/citytechinc/empty")
 
         expect:
         !page.componentNode.present
@@ -388,7 +388,7 @@ class DefaultPageDecoratorSpec extends AemLibrarySpec {
 
     def "get component node at relative path"() {
         setup:
-        def page = getPage("/content/citytechinc")
+        def page = getPageDecorator("/content/citytechinc")
 
         expect:
         page.getComponentNode("component/one").get().path == "/content/citytechinc/jcr:content/component/one"
@@ -396,7 +396,7 @@ class DefaultPageDecoratorSpec extends AemLibrarySpec {
 
     def "adapt to basic node"() {
         setup:
-        def page = getPage("/content/citytechinc")
+        def page = getPageDecorator("/content/citytechinc")
 
         expect:
         page.adaptTo(BasicNode).path == "/content/citytechinc/jcr:content"
@@ -404,7 +404,7 @@ class DefaultPageDecoratorSpec extends AemLibrarySpec {
 
     def "adapt to component node"() {
         setup:
-        def page = getPage("/content/citytechinc")
+        def page = getPageDecorator("/content/citytechinc")
 
         expect:
         page.adaptTo(ComponentNode).path == "/content/citytechinc/jcr:content"
@@ -412,7 +412,7 @@ class DefaultPageDecoratorSpec extends AemLibrarySpec {
 
     def "adapt to node for page with no jcr:content node returns null"() {
         setup:
-        def page = getPage("/content/citytechinc/empty")
+        def page = getPageDecorator("/content/citytechinc/empty")
 
         expect:
         !page.adaptTo(ComponentNode)
@@ -420,7 +420,7 @@ class DefaultPageDecoratorSpec extends AemLibrarySpec {
 
     def "get child"() {
         setup:
-        def page = getPage("/content/citytechinc")
+        def page = getPageDecorator("/content/citytechinc")
 
         expect:
         page.getChild("child2").get().title == "Also Child 2"
@@ -428,7 +428,7 @@ class DefaultPageDecoratorSpec extends AemLibrarySpec {
 
     def "get children"() {
         setup:
-        def page = getPage("/content/citytechinc")
+        def page = getPageDecorator("/content/citytechinc")
 
         expect:
         page.children.size() == 3
@@ -436,7 +436,7 @@ class DefaultPageDecoratorSpec extends AemLibrarySpec {
 
     def "list children"() {
         setup:
-        def page = getPage("/content/citytechinc")
+        def page = getPageDecorator("/content/citytechinc")
 
         expect:
         page.listChildPages().size() == 3
@@ -444,7 +444,7 @@ class DefaultPageDecoratorSpec extends AemLibrarySpec {
 
     def "get displayable children"() {
         setup:
-        def page = getPage("/content/citytechinc")
+        def page = getPageDecorator("/content/citytechinc")
 
         expect:
         page.getChildren(true).size() == 1
@@ -452,7 +452,7 @@ class DefaultPageDecoratorSpec extends AemLibrarySpec {
 
     def "get children filtered for predicate"() {
         setup:
-        def page = getPage("/content/citytechinc")
+        def page = getPageDecorator("/content/citytechinc")
         def predicate = new TemplatePredicate("template")
 
         expect:
@@ -461,7 +461,7 @@ class DefaultPageDecoratorSpec extends AemLibrarySpec {
 
     def "list children filtered for predicate"() {
         setup:
-        def page = getPage("/content/citytechinc")
+        def page = getPageDecorator("/content/citytechinc")
         def predicate = new TemplatePredicate("template")
 
         expect:
@@ -470,7 +470,7 @@ class DefaultPageDecoratorSpec extends AemLibrarySpec {
 
     def "list children recursively, filtered for predicate"() {
         setup:
-        def page = getPage("/content/citytechinc")
+        def page = getPageDecorator("/content/citytechinc")
 
         expect:
         page.listChildPages(predicate, true).size() == size
@@ -483,7 +483,7 @@ class DefaultPageDecoratorSpec extends AemLibrarySpec {
 
     def "find descendants"() {
         setup:
-        def page = getPage("/content/citytechinc")
+        def page = getPageDecorator("/content/citytechinc")
         def predicate = Predicates.alwaysTrue()
 
         expect:
@@ -492,7 +492,7 @@ class DefaultPageDecoratorSpec extends AemLibrarySpec {
 
     def "get properties"() {
         setup:
-        def page = getPage("/content/citytechinc")
+        def page = getPageDecorator("/content/citytechinc")
 
         expect:
         page.properties.keySet().containsAll(["jcr:title", "otherPagePath"])
@@ -500,7 +500,7 @@ class DefaultPageDecoratorSpec extends AemLibrarySpec {
 
     def "get properties for page with no jcr:content node"() {
         setup:
-        def page = getPage("/content/citytechinc/empty")
+        def page = getPageDecorator("/content/citytechinc/empty")
 
         expect:
         page.properties.isEmpty()
@@ -508,7 +508,7 @@ class DefaultPageDecoratorSpec extends AemLibrarySpec {
 
     def "get properties at relative path"() {
         setup:
-        def page = getPage("/content/citytechinc")
+        def page = getPageDecorator("/content/citytechinc")
 
         expect:
         page.getProperties("component/one").containsKey("sling:resourceType")
@@ -516,7 +516,7 @@ class DefaultPageDecoratorSpec extends AemLibrarySpec {
 
     def "get title"() {
         setup:
-        def page = getPage("/content/citytechinc")
+        def page = getPageDecorator("/content/citytechinc")
 
         expect:
         page.getTitle(titleType).get() == title
@@ -530,7 +530,7 @@ class DefaultPageDecoratorSpec extends AemLibrarySpec {
 
     def "get title returns absent where appropriate"() {
         setup:
-        def page = getPage("/content/citytechinc/child1")
+        def page = getPageDecorator("/content/citytechinc/child1")
 
         expect:
         !page.getTitle(titleType).present
@@ -544,7 +544,7 @@ class DefaultPageDecoratorSpec extends AemLibrarySpec {
 
     def "get image link"() {
         setup:
-        def page = getPage("/content/citytechinc")
+        def page = getPageDecorator("/content/citytechinc")
         def imageLink = page.getImageLink("/image")
 
         expect:
@@ -554,7 +554,7 @@ class DefaultPageDecoratorSpec extends AemLibrarySpec {
 
     def "get navigation link"() {
         setup:
-        def page = getPage("/content/citytechinc")
+        def page = getPageDecorator("/content/citytechinc")
         def navigationLink = page.navigationLink
 
         expect:

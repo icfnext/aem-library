@@ -18,7 +18,7 @@ class TemplatePredicateSpec extends AemLibrarySpec {
 
     def "page has no template property"() {
         setup:
-        def page = getPage("/content/citytechinc/child2")
+        def page = getPageDecorator("/content/citytechinc/child2")
         def predicate = new TemplatePredicate("template")
 
         expect:
@@ -27,7 +27,7 @@ class TemplatePredicateSpec extends AemLibrarySpec {
 
     def "template matches page template"() {
         setup:
-        def page = getPage("/content/citytechinc/child1")
+        def page = getPageDecorator("/content/citytechinc/child1")
         def predicate = new TemplatePredicate("template")
         def predicateForPage = new TemplatePredicate(page)
 
@@ -37,7 +37,7 @@ class TemplatePredicateSpec extends AemLibrarySpec {
 
     def "template does not match page template"() {
         setup:
-        def page = getPage("/content/citytechinc")
+        def page = getPageDecorator("/content/citytechinc")
         def predicate = new TemplatePredicate("template")
 
         expect:

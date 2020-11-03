@@ -1,7 +1,5 @@
 package com.icfolson.aem.library.core.specs
 
-import com.day.cq.wcm.api.Page
-import com.day.cq.wcm.api.PageManager
 import com.icfolson.aem.library.api.node.ComponentNode
 import com.icfolson.aem.library.api.page.PageDecorator
 import com.icfolson.aem.library.api.page.PageManagerDecorator
@@ -21,13 +19,11 @@ abstract class AemLibrarySpec extends ProsperSpec {
         resourceResolver.getResource(path).adaptTo(ComponentNode)
     }
 
-    @Override
-    Page getPage(String path) {
-        pageManager.getPage(path)
+    PageDecorator getPageDecorator(String path) {
+        pageManagerDecorator.getPage(path)
     }
 
-    @Override
-    PageManager getPageManager() {
+    PageManagerDecorator getPageManagerDecorator() {
         resourceResolver.adaptTo(PageManagerDecorator)
     }
 }

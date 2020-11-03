@@ -2,9 +2,11 @@ package com.icfolson.aem.library.core.page.impl
 
 import com.day.cq.commons.Filter
 import com.day.cq.replication.ReplicationStatus
+import com.day.cq.tagging.Tag
 import com.day.cq.wcm.api.NameConstants
 import com.day.cq.wcm.api.Page
-import com.day.cq.wcm.api.PageManager
+import com.day.cq.wcm.api.Template
+import com.day.cq.wcm.api.WCMException
 import com.day.cq.wcm.commons.DeepResourceIterator
 import com.google.common.base.Objects
 import com.google.common.base.Optional
@@ -47,10 +49,10 @@ final class DefaultPageDecorator implements PageDecorator {
         }
     }
 
-    @Delegate
     private final Page delegate
 
     private final Optional<ComponentNode> componentNodeOptional
+
 
     DefaultPageDecorator(Page page) {
         this.delegate = page
@@ -188,18 +190,22 @@ final class DefaultPageDecorator implements PageDecorator {
         getInternal({ componentNode -> componentNode.getImageRendition(name, renditionName) }, Optional.absent())
     }
 
+    @Override
     Optional<String> getImageSource() {
         getInternal({ componentNode -> componentNode.imageSource }, Optional.absent())
     }
 
+    @Override
     Optional<String> getImageSource(int width) {
         getInternal({ componentNode -> componentNode.getImageSource(width) }, Optional.absent())
     }
 
+    @Override
     Optional<String> getImageSource(String name) {
         getInternal({ componentNode -> componentNode.getImageSource(name) }, Optional.absent())
     }
 
+    @Override
     Optional<String> getImageSource(String name, int width) {
         getInternal({ componentNode -> componentNode.getImageSource(name, width) }, Optional.absent())
     }
@@ -303,6 +309,7 @@ final class DefaultPageDecorator implements PageDecorator {
 
     @Override
     Optional<PageDecorator> findAncestor(Predicate<PageDecorator> predicate, boolean excludeCurrentResource) {
+
         PageDecorator page = excludeCurrentResource ? parent : this
         PageDecorator ancestorPage = null
 
@@ -343,10 +350,10 @@ final class DefaultPageDecorator implements PageDecorator {
     @Override
     List<PageDecorator> findDescendants(Predicate<PageDecorator> predicate) {
         def pages = []
-        def pageManager = this.pageManager
+        def pageManagerDecorator = this.pageManager
 
         delegate.listChildren(ALL_PAGES, true).each { child ->
-            PageDecorator page = pageManager.getPage(child)
+            PageDecorator page = pageManagerDecorator.getPage(child)
 
             if (predicate.apply(page)) {
                 pages.add(page)
@@ -422,13 +429,15 @@ final class DefaultPageDecorator implements PageDecorator {
 
     @Override
     ImageLink getImageLink(String imageSource) {
-        LinkBuilderFactory.forPage(this).setImageSource(checkNotNull(imageSource)).buildImageLink()
+        LinkBuilderFactory.forPage(this.getPage()).setImageSource(checkNotNull(imageSource)).buildImageLink()
     }
 
+    @Override
     boolean isHasImage() {
         getInternal({ ComponentNode componentNode -> componentNode.hasImage }, false)
     }
 
+    @Override
     boolean isHasImage(String name) {
         getInternal({ componentNode -> componentNode.isHasImage(name) }, false)
     }
@@ -485,28 +494,28 @@ final class DefaultPageDecorator implements PageDecorator {
 
     @Override
     NavigationLink getNavigationLink(boolean isActive, boolean mapped) {
-        LinkBuilderFactory.forPage(this, mapped, TitleType.NAVIGATION_TITLE).setActive(isActive).buildNavigationLink()
+        LinkBuilderFactory.forPage(this.getPage(), mapped, TitleType.NAVIGATION_TITLE).setActive(isActive).buildNavigationLink()
     }
 
     // overrides
 
     @Override
-    Page getAbsoluteParent(int level) {
+    PageDecorator getAbsoluteParent(int level) {
         pageManager.getPage(delegate.getAbsoluteParent(level))
     }
 
     @Override
-    PageManager getPageManager() {
-        delegate.adaptTo(Resource).resourceResolver.adaptTo(PageManager)
+    PageManagerDecorator getPageManager() {
+        delegate.adaptTo(Resource).resourceResolver.adaptTo(PageManagerDecorator)
     }
 
     @Override
-    Page getParent() {
+    PageDecorator getParent() {
         pageManager.getPage(delegate.parent)
     }
 
     @Override
-    Page getParent(int level) {
+    PageDecorator getParent(int level) {
         pageManager.getPage(delegate.getParent(level))
     }
 
@@ -525,6 +534,149 @@ final class DefaultPageDecorator implements PageDecorator {
         properties.get(NameConstants.PN_TITLE, "")
     }
 
+    @Override
+    String getDescription() {
+        page.getDescription()
+    }
+
+/* Pass through methods for backwards compatibility */
+    @Override
+    String getPath(){
+        page.getPath()
+    }
+    @Override
+    Resource getContentResource(){
+        page.getContentResource()
+    }
+    @Override
+    Resource getContentResource(String var1){
+        page.getContentResource(var1)
+    }
+    @Override
+    Iterator<Page> listChildren(){
+        page.listChildren()
+    }
+    @Override
+    Iterator<Page> listChildren(Filter<Page> var1){
+        page.listChildren(var1)
+    }
+    @Override
+    Iterator<Page> listChildren(Filter<Page> var1, boolean var2){
+        page.listChildren(var1,var2)
+    }
+    @Override
+    boolean hasChild(String var1){
+        page.hasChild(var1)
+    }
+    @Override
+    int getDepth(){
+        page.getDepth()
+    }
+    @Override
+    ValueMap getProperties(){
+        page.getProperties()
+    };
+    @Override
+    ValueMap getProperties(String var1){
+        page.getProperties(var1)
+    };
+    @Override
+    String getName(){
+        page.getName()
+    }
+    @Override
+    String getPageTitle(){
+        page.getPageTitle()
+    }
+    @Override
+    String getNavigationTitle(){
+        page.getNavigationTitle()
+    }
+    @Override
+    boolean isHideInNav(){
+        page.isHideInNav()
+    }
+    @Override
+    boolean hasContent(){
+        page.hasContent()
+    }
+    @Override
+    boolean isValid(){
+        page.isValid()
+    }
+    @Override
+    long timeUntilValid(){
+        page.timeUntilValid()
+    }
+    @Override
+    Calendar getOnTime(){
+        page.getOnTime()
+    }
+    @Override
+    Calendar getOffTime(){
+        page.getOffTime()
+    }
+    @Override
+    Calendar getDeleted(){
+        page.getDeleted()
+    }
+    @Override
+    String getDeletedBy(){
+        page.getDeletedBy()
+    }
+    @Override
+    String getLastModifiedBy(){
+        page.getLastModifiedBy()
+    }
+    @Override
+    Calendar getLastModified(){
+        page.getLastModified()
+    }
+    @Override
+    String getVanityUrl(){
+        page.getVanityUrl()
+    }
+    @Override
+    Tag[] getTags(){
+        page.getTags()
+    }
+    @Override
+    boolean isLocked(){
+        page.isLocked()
+    }
+    @Override
+    String getLockOwner(){
+        page.getLockOwner()
+    }
+    @Override
+    boolean canUnlock(){
+        page.canUnlock()
+    }
+    @Override
+    Template getTemplate(){
+        page.getTemplate()
+    }
+    @Override
+    Locale getLanguage(boolean var1){
+        page.getLanguage(var1)
+    }
+    @Override
+    Locale getLanguage(){
+        page.getLanguage()
+    }
+
+    @Override
+    void lock() throws WCMException
+    {
+        page.lock()
+    }
+
+    @Override
+    void unlock() throws WCMException
+    {
+        page.unlock()
+    }
+
     // internals
 
     private <T> T getInternal(Closure<T> closure, T defaultValue) {
@@ -535,6 +687,7 @@ final class DefaultPageDecorator implements PageDecorator {
                                                              boolean excludeCurrentResource) {
         PageDecorator page = excludeCurrentResource ? parent : this
         PageDecorator ancestorPage = null
+
 
         while (page) {
             Optional<ComponentNode> optionalComponentNode = page.componentNode
@@ -552,10 +705,10 @@ final class DefaultPageDecorator implements PageDecorator {
 
     private List<PageDecorator> filterChildren(Predicate<PageDecorator> predicate, boolean deep) {
         def pages = []
-        def pageManager = this.pageManager
+        def pageManagerDecorator = this.pageManager
 
         delegate.listChildren(ALL_PAGES, deep).each { child ->
-            def page = pageManager.getPage(child)
+            def page = pageManagerDecorator.getPage(child)
 
             if (page && predicate.apply(page)) {
                 pages.add(page)

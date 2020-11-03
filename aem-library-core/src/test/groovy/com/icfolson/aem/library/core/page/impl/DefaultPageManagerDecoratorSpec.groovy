@@ -69,22 +69,22 @@ class DefaultPageManagerDecoratorSpec extends AemLibrarySpec {
         }
 
         expect:
-        pageManager.findPages("/content/hierarchy", predicate).size() == 3
+        pageManagerDecorator.findPages("/content/hierarchy", predicate).size() == 3
     }
 
     def "find pages for tag IDs"() {
         expect:
-        pageManager.findPages("/content", ["/etc/tags/tag1"], true).size() == 2
+        pageManagerDecorator.findPages("/content", ["/etc/tags/tag1"], true).size() == 2
     }
 
     def "find pages for tag IDs matching all"() {
         expect:
-        pageManager.findPages("/content", ["/etc/tags/tag1", "/etc/tags/tag2"], false).size() == 1
+        pageManagerDecorator.findPages("/content", ["/etc/tags/tag1", "/etc/tags/tag2"], false).size() == 1
     }
 
     def "tagged non-page node is excluded from search results"() {
         expect:
-        !pageManager.findPages("/content", ["/etc/tags/tag3"], true)
+        !pageManagerDecorator.findPages("/content", ["/etc/tags/tag3"], true)
     }
 
     def "search"() {
@@ -93,7 +93,7 @@ class DefaultPageManagerDecoratorSpec extends AemLibrarySpec {
         def query = session.workspace.queryManager.createQuery(statement, Query.XPATH)
 
         expect:
-        pageManager.search(query).size() == 10
+        pageManagerDecorator.search(query).size() == 10
     }
 
     def "search with limit"() {
@@ -102,21 +102,21 @@ class DefaultPageManagerDecoratorSpec extends AemLibrarySpec {
         def query = session.workspace.queryManager.createQuery(statement, Query.XPATH)
 
         expect:
-        pageManager.search(query, 1).size() == 1
+        pageManagerDecorator.search(query, 1).size() == 1
     }
 
     def "find pages for template"() {
         expect:
-        pageManager.findPages("/content", "template").size() == 2
+        pageManagerDecorator.findPages("/content", "template").size() == 2
     }
 
     def "find pages for non-existing template"() {
         expect:
-        !pageManager.findPages("/content", "ghost")
+        !pageManagerDecorator.findPages("/content", "ghost")
     }
 
     def "find pages for template with invalid starting path"() {
         expect:
-        !pageManager.findPages("/etc", "template")
+        !pageManagerDecorator.findPages("/etc", "template")
     }
 }

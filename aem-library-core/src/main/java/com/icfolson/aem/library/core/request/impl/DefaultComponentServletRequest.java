@@ -64,8 +64,7 @@ public final class DefaultComponentServletRequest implements ComponentServletReq
         currentNode = resource.adaptTo(Node.class);
         componentNode = resource.adaptTo(ComponentNode.class);
         pageManager = resourceResolver.adaptTo(PageManagerDecorator.class);
-        //currentPage = pageManager.getContainingPage(resource);
-        currentPage = resource.adaptTo(PageDecorator.class);
+        currentPage = pageManager.getContainingPage(resource);
         pageProperties = currentPage != null ? currentPage.getPage().getProperties() : EMPTY;
     }
 

@@ -62,7 +62,7 @@ class DefaultLinkBuilderSpec extends AemLibrarySpec {
     def "build link for page"() {
         setup:
         def page = resourceResolver.adaptTo(PageManagerDecorator).getPage("/content/global")
-        def link = LinkBuilderFactory.forPage(page).build()
+        def link = LinkBuilderFactory.forPage(page.page).build()
 
         expect:
         link.path == "/content/global"
@@ -74,19 +74,18 @@ class DefaultLinkBuilderSpec extends AemLibrarySpec {
     def "build link for page with no jcr:content node"() {
         setup:
         def page = resourceResolver.adaptTo(PageManagerDecorator).getPage("/content/se")
-        def link = LinkBuilderFactory.forPage(page).build()
+        def link = LinkBuilderFactory.forPage(page.page).build()
 
         expect:
         link.path == "/content/se"
         link.href == "/content/se.html"
         link.extension == "html"
-        link.title == ""
     }
 
     def "build link for page with redirect"() {
         setup:
         def page = resourceResolver.adaptTo(PageManagerDecorator).getPage("/content/de")
-        def link = LinkBuilderFactory.forPage(page).build()
+        def link = LinkBuilderFactory.forPage(page.page).build()
 
         expect:
         link.path == "/content/global"
@@ -98,7 +97,7 @@ class DefaultLinkBuilderSpec extends AemLibrarySpec {
     def "build link for page with navigation title"() {
         setup:
         def page = resourceResolver.adaptTo(PageManagerDecorator).getPage("/content/global")
-        def link = LinkBuilderFactory.forPage(page, TitleType.NAVIGATION_TITLE).build()
+        def link = LinkBuilderFactory.forPage(page.page, TitleType.NAVIGATION_TITLE).build()
 
         expect:
         link.path == "/content/global"
@@ -110,7 +109,7 @@ class DefaultLinkBuilderSpec extends AemLibrarySpec {
     def "build link for page without navigation title"() {
         setup:
         def page = resourceResolver.adaptTo(PageManagerDecorator).getPage("/content/us")
-        def link = LinkBuilderFactory.forPage(page, TitleType.NAVIGATION_TITLE).build()
+        def link = LinkBuilderFactory.forPage(page.page, TitleType.NAVIGATION_TITLE).build()
 
         expect:
         link.path == "/content/us"

@@ -56,7 +56,7 @@ public interface PageManagerDecorator {
      * @param resource resource to find the page for
      * @return page or <code>null</code> if not found.
      */
-    Page getContainingPage(Resource resource);
+    PageDecorator getContainingPage(Resource resource);
 
     /**
      * Returns the page that contains the resource at the given path. If the path addresses a page, that page is
@@ -65,7 +65,7 @@ public interface PageManagerDecorator {
      * @param path path to find the page for
      * @return page or <code>null</code> if not found.
      */
-    Page getContainingPage(String path);
+    PageDecorator getContainingPage(String path);
 
     /**
      * Decorate the given page.
@@ -83,7 +83,7 @@ public interface PageManagerDecorator {
      * @return page or <code>null</code>
      */
 
-    Page getPage(String path);
+    PageDecorator getPage(String path);
 
     /**
      * Search for pages using a query.
